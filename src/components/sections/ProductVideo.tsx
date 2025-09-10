@@ -5,7 +5,7 @@ const ProductVideo = () => {
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            See AI-linc in Action
+            See Ai Linc in Action
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Watch our 90-second explainer video to understand how we transform
@@ -29,7 +29,7 @@ const ProductVideo = () => {
                     <div className="w-0 h-0 border-l-[20px] border-l-white border-t-[12px] border-t-transparent border-b-[12px] border-b-transparent ml-1"></div>
                   </div>
                   <h3 className="text-2xl font-bold mb-2">
-                    AI-linc Product Demo
+                    Ai Linc Product Demo
                   </h3>
                   <p className="text-blue-200">90 seconds • Full HD</p>
                 </div>
@@ -58,7 +58,7 @@ const ProductVideo = () => {
                 </li>
                 <li className="flex items-start">
                   <span className="text-blue-500 mr-2">•</span>
-                  AI-linc as the complete solution
+                  Ai Linc as the complete solution
                 </li>
                 <li className="flex items-start">
                   <span className="text-blue-500 mr-2">•</span>

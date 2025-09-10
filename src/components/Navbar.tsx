@@ -26,7 +26,7 @@ const Navbar = () => {
                 setIsMenuOpen(false);
               }}
             >
-              AI-linc
+              Ai Linc
             </h1>
           </div>
 

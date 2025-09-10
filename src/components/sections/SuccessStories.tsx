@@ -10,7 +10,7 @@ const SuccessStories = () => {
       description:
         "Increased NAC score by 0.6 in 1 year, 2,000+ students certified, 35% placement growth.",
       testimonial:
-        "AI-linc transformed our institution completely. The improvement in our NAC score and student placements has been remarkable.",
+        "Ai Linc transformed our institution completely. The improvement in our NAC score and student placements has been remarkable.",
       person: "Dr. Rajesh Kumar",
       designation: "Vice Chancellor",
       image: "👨‍💼",
@@ -59,7 +59,7 @@ const SuccessStories = () => {
             Success Stories
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Real transformations from institutions that partnered with AI-linc
+            Real transformations from institutions that partnered with Ai Linc
           </p>
           <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-indigo-600 mx-auto mt-6"></div>
         </div>
