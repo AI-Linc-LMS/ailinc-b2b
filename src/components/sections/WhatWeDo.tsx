@@ -18,7 +18,7 @@ const WhatWeDo = () => {
       icon: "🏢",
       title: "Institutional Transformation",
       description:
-        "From digitalization to branding, NAC accreditation improvement, faculty training, and placement assistance — we uplift the entire ecosystem.",
+        "From digitalization to branding, NAAC accreditation improvement, faculty training, and placement assistance — we uplift the entire ecosystem.",
       gradient: "from-green-500 to-teal-500",
     },
   ];

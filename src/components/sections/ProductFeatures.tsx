@@ -51,7 +51,7 @@ const ProductFeatures = () => {
       icon: "✨",
       title: "College Branding Boost",
       description:
-        "Improve visibility, NAC accreditation, student intake, and overall brand value.",
+        "Improve visibility, NAAC accreditation, student intake, and overall brand value.",
       color: "from-pink-500 to-rose-500",
     },
   ];

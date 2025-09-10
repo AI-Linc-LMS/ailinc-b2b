@@ -162,3 +162,21 @@ html {
 .animate-scroll-down:hover {
   animation-play-state: paused;
 }
+
+/* Horizontal scrolling animation for trainers */
+@keyframes scrollHorizontal {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-25%);
+  }
+}
+
+.animate-scroll-horizontal {
+  animation: scrollHorizontal 10s linear infinite;
+}
+
+.animate-scroll-horizontal:hover {
+  animation-play-state: paused;
+}

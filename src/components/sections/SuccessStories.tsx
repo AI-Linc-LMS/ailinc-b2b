@@ -1,52 +1,36 @@
 const SuccessStories = () => {
   const stories = [
     {
-      title: "XYZ University",
+      title: "Osmania University",
       metrics: {
-        nacScore: "0.6",
-        students: "2,000+",
-        growth: "35%",
+        NAAC: "A+",
+        Students: "300,000+",
+        Adoption: "85%",
       },
       description:
-        "Increased NAC score by 0.6 in 1 year, 2,000+ students certified, 35% placement growth.",
+        "Achieved NAAC A+ accreditation, 300,000+ students impacted, and 85% digital adoption across the university.",
       testimonial:
-        "Ai Linc transformed our institution completely. The improvement in our NAC score and student placements has been remarkable.",
-      person: "Dr. Rajesh Kumar",
+        "Ai Linc's platform enabled us to reach new heights in digital transformation and student engagement.",
+      person: "Dr. S. Ramachandran",
       designation: "Vice Chancellor",
-      image: "👨‍💼",
+      image: "🎓",
       bgColor: "from-blue-500 to-cyan-500",
     },
     {
-      title: "ABC Institute",
+      title: "Kakatia University",
       metrics: {
-        courses: "3rd-year",
-        students: "1,200+",
-        certs: "AWS + Google",
+        Adoption: "90%",
+        Certs: "Microsoft + AWS",
+        Engagement: "High",
       },
       description:
-        "Integrated AI courses into 3rd-year electives; 1,200 students certified with AWS + Google credentials.",
+        "90% student adoption, certifications from Microsoft & AWS, and high student engagement in digital learning.",
       testimonial:
-        "The seamless integration of AI courses into our curriculum has enhanced our students' employability significantly.",
-      person: "Prof. Priya Sharma",
-      designation: "Head of Department",
-      image: "👩‍🏫",
+        "The integration of industry certifications and high engagement has set a new benchmark for our university.",
+      person: "Prof. Anitha Rao",
+      designation: "Dean of Academics",
+      image: "🎓",
       bgColor: "from-green-500 to-teal-500",
-    },
-    {
-      title: "DEF Engineering College",
-      metrics: {
-        adoption: "85%",
-        timeframe: "3 months",
-        engagement: "High",
-      },
-      description:
-        "White-labeled app adoption with 85% student usage within 3 months.",
-      testimonial:
-        "The white-labeled app has revolutionized how our students interact with course content and placement opportunities.",
-      person: "Mr. Amit Patel",
-      designation: "Principal",
-      image: "👨‍💻",
-      bgColor: "from-purple-500 to-pink-500",
     },
   ];
 
@@ -65,7 +49,7 @@ const SuccessStories = () => {
         </div>
 
         {/* Success Stories Grid */}
-        <div className="grid lg:grid-cols-3 gap-8">
+        <div className="grid lg:grid-cols-2 gap-8">
           {stories.map((story, index) => (
             <div
               key={index}

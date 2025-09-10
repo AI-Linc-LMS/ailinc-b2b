@@ -75,7 +75,7 @@ const ProductVideo = () => {
               <ul className="space-y-2 text-gray-600">
                 <li className="flex items-start">
                   <span className="text-green-500 mr-2">✓</span>
-                  NAC score improvement
+                  NAAC score improvement
                 </li>
                 <li className="flex items-start">
                   <span className="text-green-500 mr-2">✓</span>
