@@ -2,8 +2,8 @@ const ProductFeatures = () => {
   const features = [
     {
       icon: "📱",
-      title: "White-Labeled College App",
-      description: "College-branded app powered by AI-linc.",
+      title: "White Labelled App",
+      description: "AI Powered Digital Learning & Training Platform.",
       color: "from-blue-500 to-cyan-500",
     },
     {
@@ -51,7 +51,7 @@ const ProductFeatures = () => {
       icon: "✨",
       title: "College Branding Boost",
       description:
-        "Improve visibility, NAC accreditation, student intake, and overall brand value.",
+        "Improve visibility, NAAC accreditation, student intake, and overall brand value.",
       color: "from-pink-500 to-rose-500",
     },
   ];
@@ -62,7 +62,7 @@ const ProductFeatures = () => {
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Features of AI-linc
+            Features of Ai Linc
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Comprehensive solutions designed to transform your institution into

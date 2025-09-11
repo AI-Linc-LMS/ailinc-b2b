@@ -53,7 +53,7 @@ const StatsSection = () => {
     {
       value: Math.floor(counters.colleges),
       suffix: "+",
-      label: "Colleges Empowered",
+      label: "Institutions Empowered",
       icon: "🏫",
       color: "from-blue-500 to-cyan-500",
     },

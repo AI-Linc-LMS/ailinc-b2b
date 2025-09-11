@@ -18,7 +18,7 @@ const WhatWeDo = () => {
       icon: "🏢",
       title: "Institutional Transformation",
       description:
-        "From digitalization to branding, NAC accreditation improvement, faculty training, and placement assistance — we uplift the entire ecosystem.",
+        "From digitalization to branding, NAAC accreditation improvement, faculty training, and placement assistance — we uplift the entire ecosystem.",
       gradient: "from-green-500 to-teal-500",
     },
   ];
@@ -29,7 +29,7 @@ const WhatWeDo = () => {
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            What We Do at AI-linc
+            What We Do at Ai Linc
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-indigo-600 mx-auto"></div>
         </div>

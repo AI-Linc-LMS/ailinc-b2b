@@ -20,7 +20,7 @@ const Footer = () => {
     },
     {
       title: "Company",
-      links: ["About AI-linc", "Our Team", "Careers", "News & Updates"],
+      links: ["About Ai Linc", "Our Team", "Careers", "News & Updates"],
     },
     {
       title: "Support",
@@ -50,7 +50,7 @@ const Footer = () => {
             <div className="lg:col-span-2">
               <div className="mb-6">
                 <h3 className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent">
-                  AI-linc
+                  Ai Linc
                 </h3>
                 <p className="text-gray-400 mt-2">
                   Empowering Organisations. Enabling AI Futures.
@@ -130,7 +130,7 @@ const Footer = () => {
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="text-gray-400 text-sm mb-4 md:mb-0">
-              © 2025 AI-linc. All rights reserved. | Privacy Policy | Terms of
+              © 2025 Ai Linc. All rights reserved. | Privacy Policy | Terms of
               Service
             </div>
             <div className="flex items-center space-x-4 text-sm text-gray-400">
