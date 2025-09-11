@@ -6,6 +6,7 @@ import StatsSection from "../components/sections/StatsSection";
 import ProductVideo from "../components/sections/ProductVideo";
 import NewsSection from "../components/sections/NewsSection";
 import ProductFeatures from "../components/sections/ProductFeatures";
+import IntegrationModels from "../components/sections/IntegrationModels";
 import TrainersSection from "../components/sections/TrainersSection";
 import SuccessStories from "../components/sections/SuccessStories";
 import OtherServices from "../components/sections/OtherServices";
@@ -60,6 +61,10 @@ const LandingPage = () => {
 
       <section id="features" className="scroll-mt-16">
         <ProductFeatures />
+      </section>
+
+      <section id="integration-models" className="scroll-mt-16">
+        <IntegrationModels />
       </section>
 
       <section id="trainers" className="scroll-mt-16">
