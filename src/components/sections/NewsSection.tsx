@@ -1,72 +1,17 @@
+import osmaniaNews from "../../assets/news/osmania-news.jpg";
+
 const newsItems = [
   {
     title:
-      "Pursuing A Vision To Build A More Equitable & Democratic Educational System",
+      "OU’s UCE partners with AI LINC to upskill students in AI, ML, and data analytics",
     description:
-      "Exploring innovative approaches to make quality education accessible to all students worldwide.",
-    publication: "CEO Insights",
-    category: "ARTICLE",
-    image:
-      "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400&h=250&fit=crop",
-    readTime: "5 min read",
-    featured: false,
-  },
-  {
-    title:
-      "Tutorac: Revolutionizing Global IT Education, A Journey Of Innovation With Mr. Vinay Ratnapu",
-    description:
-      "A deep dive into how AI-powered education platforms are transforming the learning landscape.",
-    publication: "Prime Insights",
-    category: "ARTICLE",
-    image:
-      "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=400&h=250&fit=crop",
-    readTime: "7 min read",
+      "Osmania University’s College of Engineering (UCE) has signed an MoA with AI LINC Technologies to upskill students in Artificial Intelligence, Machine Learning, and Data Analytics. The partnership aims to bridge the gap between academia and industry, providing students with practical skills and certifications.",
+    publication: "The Hans India",
+    category: "NEWS",
+    image: osmaniaNews,
+    readTime: "3 min read",
     featured: true,
-  },
-  {
-    title:
-      "Democratizing IT Education: Vinay Ratnapu's Vision For Tutorac's Global Marketplace",
-    description:
-      "How technology is breaking down barriers and making professional IT training accessible globally.",
-    publication: "Global Leaders",
-    category: "ARTICLE",
-    image:
-      "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400&h=250&fit=crop",
-    readTime: "6 min read",
-    featured: true,
-  },
-  {
-    title: "Navigating the waves of remarkable changes in the IT Education",
-    description:
-      "Understanding the latest trends and developments shaping the future of IT education.",
-    publication: "Business Connect",
-    category: "ARTICLE",
-    image:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=250&fit=crop",
-    readTime: "4 min read",
-    featured: false,
-  },
-  {
-    title: "AI-Powered Learning Platforms: The Future is Here",
-    description:
-      "Discover how artificial intelligence is revolutionizing personalized learning experiences.",
-    publication: "Tech Today",
-    category: "FEATURED",
-    image:
-      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=250&fit=crop",
-    readTime: "8 min read",
-    featured: true,
-  },
-  {
-    title: "Building Tomorrow's IT Workforce Through Innovative Training",
-    description:
-      "Strategies for preparing students with industry-relevant skills and certifications.",
-    publication: "Education Weekly",
-    category: "ARTICLE",
-    image:
-      "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=400&h=250&fit=crop",
-    readTime: "6 min read",
-    featured: false,
+    link: "https://www.thehansindia.com/amp/telangana/ous-uce-partners-with-ai-linc-to-upskill-students-in-ai-ml-and-data-analytics-1004680",
   },
 ];
 
@@ -76,7 +21,7 @@ const NewsSection = () => {
       <div className="max-w-7xl mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Tutorac in <span className="italic font-serif">News</span>
+            Ai linc in <span className="italic font-serif">News</span>
           </h2>
           <p className="text-gray-600 text-center uppercase tracking-widest text-xs font-semibold">
             Latest Updates & Featured Stories
@@ -85,18 +30,19 @@ const NewsSection = () => {
 
         <div className="relative py-4">
           {/* Left blur gradient */}
-          <div className="absolute left-0 top-0 bottom-0 w-10 sm:w-20 bg-gradient-to-r from-gray-50 to-transparent z-10 pointer-events-none" />
+          {/* <div className="absolute left-0 top-0 bottom-0 w-5 sm:w-20 bg-gradient-to-r from-gray-50 to-transparent z-10 pointer-events-none" /> */}
 
           {/* Right blur gradient */}
-          <div className="absolute right-0 top-0 bottom-0 w-10 sm:w-20 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+          {/* <div className="absolute right-0 top-0 bottom-0 w-10 sm:w-20 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" /> */}
 
           <div
             className="overflow-x-auto scrollbar-hide"
             style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           >
-            <div className="flex gap-6 animate-scroll-horizontal-smooth">
+            {/* {animate-scroll-horizontal-smooth} */}
+            <div className="flex gap-6 ">
               {/* Create enough duplicates for seamless infinite scroll */}
-              {[...newsItems, ...newsItems, ...newsItems].map((news, idx) => (
+              {[...newsItems].map((news, idx) => (
                 <div
                   key={idx}
                   className="min-w-[350px] max-w-[380px] bg-white rounded-2xl shadow-lg border border-gray-200 flex-shrink-0 transition-all duration-300 hover:scale-105 hover:shadow-2xl transform-gpu overflow-hidden"
@@ -165,7 +111,10 @@ const NewsSection = () => {
                         {news.readTime}
                       </span>
 
-                      <button
+                      <a
+                        href={news.link || "#"}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className={`px-4 py-2 text-sm font-semibold rounded-full transition-all duration-300 flex items-center gap-2 ${
                           news.featured
                             ? "bg-green-600 hover:bg-green-700 text-white"
@@ -186,7 +135,7 @@ const NewsSection = () => {
                             d="M13 7l5 5m0 0l-5 5m5-5H6"
                           />
                         </svg>
-                      </button>
+                      </a>
                     </div>
                   </div>
                 </div>

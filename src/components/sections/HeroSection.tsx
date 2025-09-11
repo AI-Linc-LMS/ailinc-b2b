@@ -26,7 +26,10 @@ const HeroSection = () => {
                   Institutions & Organisations
                 </span>
               </h1>
-
+              {/* Micro tagline */}
+              <div className="text-xs lg:text-sm font-semibold text-blue-700/80 tracking-wide mb-1 mt-2">
+                Trusted by 1000+ Colleges | 1M+ Students
+              </div>
               <p className="text-base lg:text-lg text-gray-600 leading-relaxed">
                 We help colleges and organizations with a 100% white-labeled AI
                 app, integrated AI courses, and complete institutional support
@@ -45,21 +48,53 @@ const HeroSection = () => {
               >
                 Get started
               </button>
+              {/* Animated glowing CTA button */}
               <button
                 onClick={() => {
                   handleNavClick("#contact");
                 }}
-                className="px-6 py-3 border-2 border-gray-300 text-gray-700 hover:border-gray-400 hover:bg-gray-50 font-semibold rounded-lg transition-all duration-300"
+                className="px-6 py-3 relative font-semibold rounded-lg overflow-hidden group border-2 border-blue-400 text-blue-700 bg-white shadow-md"
               >
-                Book a demo
+                <span className="relative z-10">Book a demo</span>
+                {/* Glowing edge effect */}
+                <span className="absolute inset-0 rounded-lg pointer-events-none animate-glow-edges bg-gradient-to-r from-blue-400 via-indigo-400 to-blue-400 opacity-60 blur-sm group-hover:opacity-90 transition-all duration-300"></span>
               </button>
             </div>
 
-            <div className="flex items-center gap-3 pt-2 justify-center lg:justify-start">
-              <span className="text-lg font-medium">
-                Powered by{" "}
-                <span className="text-blue-600 font-semibold">Microsoft</span>
-              </span>
+            {/* Powered by Microsoft for Startups badge */}
+            <div className="flex items-center justify-center lg:justify-start mt-4">
+              <div className="flex items-center bg-[#181F2A] px-6 py-2 rounded-full shadow-md gap-2">
+                <span className="text-white text-base font-medium">
+                  Powered by
+                </span>
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg"
+                  alt="Microsoft"
+                  className="h-6 w-auto mx-1"
+                />
+                <span className="text-white text-base font-medium">
+                  for Startups
+                </span>
+              </div>
+            </div>
+
+            {/* Partner logos (colorful, after buttons) */}
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-5 mt-7">
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg"
+                alt="AWS"
+                className="h-7 w-auto"
+              />
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg"
+                alt="Google"
+                className="h-7 w-auto"
+              />
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg"
+                alt="IBM"
+                className="h-7 w-auto"
+              />
             </div>
           </div>
 
