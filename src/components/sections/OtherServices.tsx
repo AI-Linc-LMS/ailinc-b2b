@@ -68,12 +68,22 @@ const OtherServices = () => {
           <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-indigo-600 mx-auto mt-6"></div>
         </div>
 
-        {/* Hero Image/Illustration */}
+        {/* Hero Video: Bill Gates on navigating an AI future */}
         <div className="text-center mb-16">
-          <div className="inline-block p-8 bg-white bg-opacity-80 backdrop-blur-lg rounded-3xl border border-blue-200 shadow-xl">
-            <div className="text-6xl mb-4">🏢</div>
-            <p className="text-lg text-gray-700 font-medium">
-              Young students working in labs & startup-style environments
+          <div className="inline-block bg-white bg-opacity-80 backdrop-blur-lg rounded-3xl border border-blue-200 shadow-xl p-0 w-full max-w-3xl">
+            <div className="relative w-full pt-[56.25%] rounded-3xl overflow-hidden">
+              <iframe
+                src="https://www.youtube.com/embed/Ny-qhl4N9dY?autoplay=1&mute=1&loop=1&playlist=Ny-qhl4N9dY"
+                title="Bill Gates on navigating an AI future"
+                frameBorder="0"
+                allow="autoplay; encrypted-media; picture-in-picture"
+                allowFullScreen
+                className="absolute top-0 left-0 w-full h-full"
+              ></iframe>
+            </div>
+            <p className="text-xs text-gray-500 mt-2 mb-2">
+              Bill Gates on navigating an AI future &mdash;{" "}
+              <span className="italic">Credits: CNN</span>
             </p>
           </div>
         </div>

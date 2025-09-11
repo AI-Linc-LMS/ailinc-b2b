@@ -14,7 +14,7 @@ const HeroSection = () => {
   ];
 
   return (
-    <section className="relative mt-[15px] h-full bg-white flex items-center justify-center overflow-hidden">
+    <section className="relative mt-[60px] md:mt-[15px] h-full bg-white flex items-center justify-center overflow-hidden">
       <div className="max-w-6xl mx-auto px-4 py-6">
         <div className="grid lg:grid-cols-2 gap-8 items-center">
           {/* Left Content Section */}
