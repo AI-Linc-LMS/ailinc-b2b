@@ -71,7 +71,7 @@ const SuccessStories = () => {
                   ([key, value], metricIndex) => (
                     <div key={metricIndex} className="text-center">
                       <div
-                        className={`text-2xl font-bold bg-gradient-to-r ${story.bgColor} bg-clip-text text-transparent`}
+                        className={`text-lg md:text-2xl font-bold bg-gradient-to-r ${story.bgColor} bg-clip-text text-transparent`}
                       >
                         {value}
                       </div>

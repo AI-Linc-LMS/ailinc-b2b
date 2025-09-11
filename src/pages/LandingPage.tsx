@@ -7,7 +7,6 @@ import ProductVideo from "../components/sections/ProductVideo";
 import ProductFeatures from "../components/sections/ProductFeatures";
 import TrainersSection from "../components/sections/TrainersSection";
 import SuccessStories from "../components/sections/SuccessStories";
-import CollaborationProcess from "../components/sections/CollaborationProcess";
 import OtherServices from "../components/sections/OtherServices";
 import Gallery from "../components/sections/Gallery";
 import ContactSection from "../components/sections/ContactSection";
@@ -66,9 +65,9 @@ const LandingPage = () => {
         <SuccessStories />
       </section>
 
-      <section id="collaboration" className="scroll-mt-16">
+      {/* <section id="collaboration" className="scroll-mt-16">
         <CollaborationProcess />
-      </section>
+      </section> */}
 
       <section id="incubation" className="scroll-mt-16">
         <OtherServices />
