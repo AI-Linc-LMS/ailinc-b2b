@@ -54,6 +54,8 @@ const ServiceCard = ({ service, onLearnMore }: ServiceCardProps) => {
   const handleTagLeave = () => {
     setHoveredTag(null);
   };
+
+  console.log(hoveredTag);
   return (
     <>
       <motion.div
