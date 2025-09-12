@@ -140,7 +140,7 @@ const OtherServices = () => {
 
           <div className="grid md:grid-cols-3 gap-8">
             <div className="group hover:scale-105 transition-transform duration-300">
-              <div className="text-4xl mb-4">🎯</div>
+              <div className="text-4xl mb-4"></div>
               <h4 className="text-xl font-semibold mb-2 text-gray-900">
                 Expert Guidance
               </h4>
@@ -149,7 +149,7 @@ const OtherServices = () => {
               </p>
             </div>
             <div className="group hover:scale-105 transition-transform duration-300">
-              <div className="text-4xl mb-4">🔬</div>
+              <div className="text-4xl mb-4"></div>
               <h4 className="text-xl font-semibold mb-2 text-gray-900">
                 AI-Powered Tools
               </h4>
@@ -158,7 +158,7 @@ const OtherServices = () => {
               </p>
             </div>
             <div className="group hover:scale-105 transition-transform duration-300">
-              <div className="text-4xl mb-4">🌐</div>
+              <div className="text-4xl mb-4"></div>
               <h4 className="text-xl font-semibold mb-2 text-gray-900">
                 Network Access
               </h4>
