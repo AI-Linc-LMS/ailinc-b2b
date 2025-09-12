@@ -1,3 +1,22 @@
+/* Glowing edge animation for CTA button */
+@keyframes glow-edges {
+  0% {
+    filter: blur(6px) brightness(1.1);
+    opacity: 0.6;
+  }
+  50% {
+    filter: blur(10px) brightness(1.6);
+    opacity: 1;
+  }
+  100% {
+    filter: blur(6px) brightness(1.1);
+    opacity: 0.6;
+  }
+}
+
+.animate-glow-edges {
+  animation: glow-edges 2s linear infinite;
+}
 @import "tailwindcss";
 
 /* Smooth scrolling */

@@ -19,28 +19,17 @@ const ProductVideo = () => {
           <div className="relative bg-gradient-to-r from-gray-100 to-gray-200 rounded-3xl p-8 shadow-2xl hover:shadow-3xl transition-shadow duration-300">
             {/* Laptop Mockup */}
             <div className="bg-gray-300 rounded-2xl p-4">
-              <div className="bg-black rounded-xl aspect-video flex items-center justify-center relative overflow-hidden cursor-pointer group">
-                {/* Placeholder for video */}
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-indigo-600 opacity-90 group-hover:opacity-95 transition-opacity duration-300"></div>
-
-                {/* Video placeholder content */}
-                <div className="relative z-10 text-center text-white">
-                  <div className="w-20 h-20 bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-4 mx-auto hover:bg-opacity-30 transition-all duration-300 cursor-pointer transform hover:scale-110">
-                    <div className="w-0 h-0 border-l-[20px] border-l-white border-t-[12px] border-t-transparent border-b-[12px] border-b-transparent ml-1"></div>
-                  </div>
-                  <h3 className="text-2xl font-bold mb-2">
-                    Ai Linc Product Demo
-                  </h3>
-                  <p className="text-blue-200">90 seconds • Full HD</p>
-                </div>
-
-                {/* Animated elements */}
-                <div className="absolute top-4 left-4 w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
-                <div className="absolute top-4 left-10 w-3 h-3 bg-yellow-500 rounded-full animate-pulse delay-300"></div>
-                <div className="absolute top-4 left-16 w-3 h-3 bg-green-500 rounded-full animate-pulse delay-600"></div>
+              <div className="bg-black rounded-xl aspect-video flex items-center justify-center relative overflow-hidden group">
+                <iframe
+                  className="absolute inset-0 w-full h-full rounded-xl"
+                  src="https://www.youtube.com/embed/enYDlLwAF5I?autoplay=1&rel=0&mute=1"
+                  title="AI Linc Explainer Video"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
               </div>
             </div>
-
             {/* Keyboard */}
             <div className="bg-gray-300 rounded-b-xl h-3 mx-4"></div>
           </div>

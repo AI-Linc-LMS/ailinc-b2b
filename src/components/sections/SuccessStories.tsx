@@ -3,34 +3,47 @@ const SuccessStories = () => {
     {
       title: "Osmania University",
       metrics: {
-        NAAC: "A+",
-        Students: "300,000+",
-        Adoption: "85%",
+        Certified: "3,000+",
+        "Placement Growth": "40%",
       },
       description:
-        "Achieved NAAC A+ accreditation, 300,000+ students impacted, and 85% digital adoption across the university.",
+        "3,000+ students certified in AI/ML/Data Analytics, 40% placement growth after AI-Linc integration.",
       testimonial:
-        "Ai Linc's platform enabled us to reach new heights in digital transformation and student engagement.",
-      person: "Dr. S. Ramachandran",
-      designation: "Vice Chancellor",
+        "AI-linc gave our students confidence for placements with real AI projects.",
+      person: "Training & Placement Officer",
+      designation: "Osmania University",
       image: "🎓",
       bgColor: "from-blue-500 to-cyan-500",
     },
     {
-      title: "Kakatia University",
+      title: "Kakatiya University",
       metrics: {
-        Adoption: "90%",
-        Certs: "Microsoft + AWS",
-        Engagement: "High",
+        Certified: "2,200+",
+        "NAAC Uplift": "0.5",
       },
       description:
-        "90% student adoption, certifications from Microsoft & AWS, and high student engagement in digital learning.",
+        "2,200+ students certified, 0.5 NAAC score uplift through credit-based AI electives.",
       testimonial:
-        "The integration of industry certifications and high engagement has set a new benchmark for our university.",
-      person: "Prof. Anitha Rao",
-      designation: "Dean of Academics",
+        "The credit-based AI electives helped us improve both NAAC scores and student skills.",
+      person: "Dean, Academics",
+      designation: "Kakatiya University",
       image: "🎓",
       bgColor: "from-green-500 to-teal-500",
+    },
+    {
+      title: "Career Bridge",
+      metrics: {
+        Upskilled: "1,000+",
+        Placed: "70%",
+      },
+      description:
+        "1,000+ candidates upskilled, 70% placed with hiring partners via AI-Linc programs.",
+      testimonial:
+        "Through AI-linc, we could deliver industry-ready candidates to our hiring partners.",
+      person: "Director, Career Bridge",
+      designation: "Career Bridge",
+      image: "🎓",
+      bgColor: "from-purple-500 to-pink-500",
     },
   ];
 
@@ -49,7 +62,7 @@ const SuccessStories = () => {
         </div>
 
         {/* Success Stories Grid */}
-        <div className="grid lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-3 gap-8">
           {stories.map((story, index) => (
             <div
               key={index}
