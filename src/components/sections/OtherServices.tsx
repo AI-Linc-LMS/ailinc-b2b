@@ -4,7 +4,7 @@ const OtherServices = () => {
       title: "Student Entrepreneurship Programs",
       description:
         "Comprehensive programs to nurture student entrepreneurial skills and mindset",
-      icon: "🚀",
+      icon: "",
       color: "from-blue-500 to-cyan-500",
       features: [
         "Startup ideation workshops",
@@ -97,11 +97,7 @@ const OtherServices = () => {
             >
               {/* Icon and Title */}
               <div className="flex items-center mb-6">
-                <div
-                  className={`w-14 h-14 bg-gradient-to-r ${service.color} rounded-full flex items-center justify-center text-2xl mr-4 shadow-lg`}
-                >
-                  {service.icon}
-                </div>
+                
                 <h3 className="text-2xl font-bold text-gray-900">
                   {service.title}
                 </h3>
@@ -140,7 +136,7 @@ const OtherServices = () => {
 
           <div className="grid md:grid-cols-3 gap-8">
             <div className="group hover:scale-105 transition-transform duration-300">
-              <div className="text-4xl mb-4">🎯</div>
+              <div className="text-4xl mb-4"></div>
               <h4 className="text-xl font-semibold mb-2 text-gray-900">
                 Expert Guidance
               </h4>
@@ -149,7 +145,7 @@ const OtherServices = () => {
               </p>
             </div>
             <div className="group hover:scale-105 transition-transform duration-300">
-              <div className="text-4xl mb-4">🔬</div>
+              <div className="text-4xl mb-4"></div>
               <h4 className="text-xl font-semibold mb-2 text-gray-900">
                 AI-Powered Tools
               </h4>
@@ -158,7 +154,7 @@ const OtherServices = () => {
               </p>
             </div>
             <div className="group hover:scale-105 transition-transform duration-300">
-              <div className="text-4xl mb-4">🌐</div>
+              <div className="text-4xl mb-4"></div>
               <h4 className="text-xl font-semibold mb-2 text-gray-900">
                 Network Access
               </h4>
