@@ -62,7 +62,7 @@ const SuccessStories = () => {
         </div>
 
         {/* Success Stories Grid */}
-        <div className="grid grid-cols-3 gap-8">
+        <div className="grid grid-cols-1  md:grid-cols-3 gap-8">
           {stories.map((story, index) => (
             <div
               key={index}
