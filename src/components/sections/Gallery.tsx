@@ -1,5 +1,16 @@
 import { useState } from "react";
 
+// Add custom CSS for scrollbar hiding
+const galleryStyles = `
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+`;
+
 interface Video {
   title: string;
   description: string;
@@ -17,11 +28,11 @@ const Gallery = () => {
   const [activeTab, setActiveTab] = useState("workshop-videos");
 
   const tabs = [
-    { id: "all", label: "All", icon: "🗂️" },
-    { id: "workshop-videos", label: "Workshop Videos", icon: "🎬" },
-    { id: "images", label: "Images", icon: "📷" },
-    { id: "app-screenshots", label: "App Screenshots", icon: "📱" },
-    { id: "certifications", label: "Certifications", icon: "🏆" },
+    { id: "all", label: "All" },
+    { id: "workshop-videos", label: "Workshop Videos" },
+    { id: "images", label: "Images" },
+    { id: "app-screenshots", label: "App Screenshots" },
+    { id: "certifications", label: "Certifications" },
   ];
 
   const workshopVideos = [
@@ -131,11 +142,7 @@ const Gallery = () => {
       case "certifications":
         return certifications;
       case "all":
-        return [
-          ...images,
-          ...appScreenshots,
-          ...certifications,
-        ];
+        return [...images, ...appScreenshots, ...certifications];
       default:
         return [];
     }
@@ -144,46 +151,66 @@ const Gallery = () => {
   const renderVideoContent = (video: Video, index: number) => (
     <div
       key={index}
-      className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
+      className="group relative bg-white rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 border border-gray-100"
     >
-      <div className="relative aspect-video overflow-hidden bg-gray-100">
-        <iframe
-          src={`https://www.youtube.com/embed/${
-            video.youtubeUrl.split("/").pop()?.split("?")[0]
-          }`}
-          title={video.title}
-          className="w-full h-full"
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowFullScreen
-        ></iframe>
-        <div className="absolute bottom-4 right-4 px-3 py-1 bg-white bg-opacity-90 backdrop-blur-sm rounded-full shadow-lg">
-          <span className="text-gray-800 text-sm font-semibold">
-            {video.duration}
-          </span>
+      {/* Video Container with Modern Border */}
+      <div className="relative">
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-indigo-600/10 rounded-t-3xl"></div>
+        <div className="relative aspect-video overflow-hidden bg-gray-900 rounded-t-3xl m-3">
+          <iframe
+            src={`https://www.youtube.com/embed/${
+              video.youtubeUrl.split("/").pop()?.split("?")[0]
+            }`}
+            title={video.title}
+            className="w-full h-full rounded-xl"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+          ></iframe>
+          {/* Duration Badge with Glow Effect */}
+          <div className="absolute bottom-3 right-3">
+            <div className="px-3 py-1 bg-black/80 backdrop-blur-md rounded-full border border-white/20 shadow-lg">
+              <span className="text-white text-sm font-semibold flex items-center gap-1">
+                <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
+                {video.duration}
+              </span>
+            </div>
+          </div>
         </div>
       </div>
-      <div className="p-6">
-        <h4 className="text-xl font-bold text-gray-900 mb-3 leading-tight">
+
+      {/* Content Area */}
+      <div className="p-6 pt-2">
+        <h4 className="text-xl font-bold text-gray-900 mb-3 leading-tight group-hover:text-blue-600 transition-colors duration-300">
           {video.title}
         </h4>
-        <p className="text-gray-600 leading-relaxed mb-4">
+        <p className="text-gray-600 leading-relaxed mb-6 text-sm">
           {video.description}
         </p>
-        <div className="flex gap-3">
+
+        {/* Action Buttons with Modern Design */}
+        <div className="flex flex-col sm:flex-row gap-3">
           <a
             href={video.youtubeUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex-1 px-4 py-2 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-all duration-300 text-center"
+            className="flex-1 group/btn relative overflow-hidden px-5 py-3 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-semibold rounded-xl transition-all duration-300 text-center shadow-lg hover:shadow-red-200"
           >
-            Watch on YouTube
+            <span className="relative z-10 flex items-center justify-center gap-2">
+              Watch on YouTube
+            </span>
+            <div className="absolute inset-0 bg-white/20 translate-y-full group-hover/btn:translate-y-0 transition-transform duration-300"></div>
           </a>
-          <button className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-all duration-300">
-            Book your slot
+          <button className="px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-semibold rounded-xl transition-all duration-300 shadow-lg hover:shadow-blue-200 hover:scale-105">
+            <span className="flex items-center justify-center gap-2">
+              Book Slot
+            </span>
           </button>
         </div>
       </div>
+
+      {/* Subtle Corner Decoration */}
+      <div className="absolute top-6 right-6 w-12 h-12 bg-gradient-to-br from-blue-500/10 to-transparent rounded-full group-hover:scale-110 transition-transform duration-300"></div>
     </div>
   );
 
@@ -201,7 +228,7 @@ const Gallery = () => {
         <div className="absolute inset-0 bg-white bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center">
           <div className="text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             <div className="w-12 h-12 bg-white bg-opacity-90 backdrop-blur-sm border-2 border-blue-600 rounded-full flex items-center justify-center shadow-lg">
-              <span className="text-xl">👁️</span>
+              <span className="text-xl">View</span>
             </div>
           </div>
         </div>
@@ -217,68 +244,93 @@ const Gallery = () => {
   );
 
   return (
-    <section className="py-20 bg-gradient-to-b from-white to-gray-50">
-      <div className="max-w-7xl mx-auto px-4">
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Gallery
-          </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Capturing moments of transformation, learning, and success across
-            our partner institutions
-          </p>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-indigo-600 mx-auto mt-6"></div>
-        </div>
+    <>
+      <style dangerouslySetInnerHTML={{ __html: galleryStyles }} />
+      <section className="py-20 bg-gradient-to-b from-white to-gray-50">
+        <div className="max-w-7xl mx-auto px-4">
+          {/* Section Header */}
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+              Gallery
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Capturing moments of transformation, learning, and success across
+              our partner institutions
+            </p>
+            <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-indigo-600 mx-auto mt-6"></div>
+          </div>
 
-        {/* Tab Navigation */}
-        <div className="flex flex-wrap justify-center gap-4 mb-12">
-          {tabs.map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 flex items-center gap-2 ${
-                activeTab === tab.id
-                  ? "bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg transform hover:scale-105"
-                  : "bg-white text-gray-700 hover:bg-gray-100 border border-gray-300 hover:border-blue-300 shadow-md hover:shadow-lg transform hover:scale-105"
-              }`}
-            >
-              <span>{tab.icon}</span>
-              {tab.label}
+          {/* Responsive Tab Navigation */}
+          <div className="mb-8">
+            {/* Mobile: Horizontal Scrollable Buttons */}
+            <div className="md:hidden">
+              <div className="flex gap-3 overflow-x-auto pb-4 px-4 -mx-4 scrollbar-hide">
+                {tabs.map((tab) => (
+                  <button
+                    key={tab.id}
+                    onClick={() => setActiveTab(tab.id)}
+                    className={`flex-shrink-0 px-6 py-3 rounded-full font-semibold text-sm whitespace-nowrap transition-all duration-300 ${
+                      activeTab === tab.id
+                        ? "bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-lg"
+                        : "bg-white text-gray-700 hover:bg-gray-50 border border-gray-300 hover:border-blue-300"
+                    }`}
+                    style={{ minWidth: "120px" }}
+                  >
+                    {tab.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Desktop: Horizontal Navigation */}
+            <div className="hidden md:flex justify-center flex-wrap gap-2">
+              {tabs.map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`px-8 py-3 rounded-full font-semibold transition-all duration-300 whitespace-nowrap ${
+                    activeTab === tab.id
+                      ? "bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-lg transform scale-105"
+                      : "bg-white text-gray-700 hover:bg-gray-50 border border-gray-300 hover:border-blue-300 shadow-sm hover:shadow-md"
+                  }`}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Content Area */}
+          <div className="min-h-[400px]">
+            {activeTab === "workshop-videos" && (
+              <div className="grid md:grid-cols-2 gap-8">
+                {workshopVideos.map((video, index) =>
+                  renderVideoContent(video, index)
+                )}
+              </div>
+            )}
+
+            {(activeTab === "images" ||
+              activeTab === "app-screenshots" ||
+              activeTab === "certifications" ||
+              activeTab === "all") && (
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
+                {getCurrentTabContent().map((item, index) =>
+                  renderImageContent(item, index)
+                )}
+              </div>
+            )}
+          </div>
+
+          {/* View More Button */}
+          <div className="text-center mt-16">
+            <button className="px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+              View More Gallery
             </button>
-          ))}
+          </div>
         </div>
-
-        {/* Content Area */}
-        <div className="min-h-[400px]">
-          {activeTab === "workshop-videos" && (
-            <div className="grid md:grid-cols-2 gap-8">
-              {workshopVideos.map((video, index) =>
-                renderVideoContent(video, index)
-              )}
-            </div>
-          )}
-
-          {(activeTab === "images" ||
-            activeTab === "app-screenshots" ||
-            activeTab === "certifications" ||
-            activeTab === "all") && (
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {getCurrentTabContent().map((item, index) =>
-                renderImageContent(item, index)
-              )}
-            </div>
-          )}
-        </div>
-
-        {/* View More Button */}
-        <div className="text-center mt-16">
-          <button className="px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
-            View More Gallery
-          </button>
-        </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 };
 
