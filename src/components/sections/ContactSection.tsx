@@ -49,22 +49,13 @@ const ContactSection = () => {
       url: "https://www.linkedin.com/company/ailinc",
     },
     {
-      name: "Twitter",
-      icon: (
-        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
-        </svg>
-      ),
-      url: "https://twitter.com/ailinc",
-    },
-    {
       name: "Instagram",
+      url: "https://www.instagram.com/ai_lincc",
       icon: (
-        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 6.62 5.367 11.987 11.988 11.987 6.62 0 11.987-5.367 11.987-11.987C24.014 5.367 18.637.001 12.017.001zM8.449 16.988c-1.297 0-2.448-.596-3.205-1.529L7.31 13.39c.48.675 1.271 1.117 2.139 1.117.344 0 .684-.067 1.006-.201l1.312 2.068c-.605.381-1.325.614-2.318.614zm7.518 0c-.993 0-1.713-.233-2.318-.614l1.312-2.068c.322.134.662.201 1.006.201.868 0 1.659-.442 2.139-1.117l2.066 2.069c-.757.933-1.908 1.529-3.205 1.529zM12 15.156c-1.742 0-3.156-1.414-3.156-3.156S10.258 8.844 12 8.844s3.156 1.414 3.156 3.156-1.414 3.156-3.156 3.156z" />
+        <svg fill="currentColor" viewBox="0 0 24 24" className="w-5 h-5">
+          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.332 3.608 1.308.975.976 1.246 2.243 1.308 3.608.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.332 2.633-1.308 3.608-.976.975-2.243 1.246-3.608 1.308-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.332-3.608-1.308-.975-.976-1.246-2.243-1.308-3.608-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.85c.062-1.366.332-2.633 1.308-3.608.976-.975 2.243-1.246 3.608-1.308 1.266-.058 1.646-.07 4.85-.07zm0-2.163c-3.259 0-3.667.012-4.947.072-1.276.06-2.687.334-3.678 1.325-.991.991-1.265 2.402-1.325 3.678-.06 1.28-.072 1.688-.072 4.947s.012 3.667.072 4.947c.06 1.276.334 2.687 1.325 3.678.991.991 2.402 1.265 3.678 1.325 1.28.06 1.688.072 4.947.072s3.667-.012 4.947-.072c1.276-.06 2.687-.334 3.678-1.325.991-.991 1.265-2.402 1.325-3.678.06-1.28.072-1.688.072-4.947s-.012-3.667-.072-4.947c-.06-1.276-.334-2.687-1.325-3.678-.991-.991-2.402-1.265-3.678-1.325-1.28-.06-1.688-.072-4.947-.072zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zm0 10.162a3.999 3.999 0 1 1 0-7.998 3.999 3.999 0 0 1 0 7.998zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" />
         </svg>
       ),
-      url: "https://instagram.com/ailinc",
     },
     {
       name: "YouTube",
@@ -73,7 +64,7 @@ const ContactSection = () => {
           <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
         </svg>
       ),
-      url: "https://youtube.com/@ailinc",
+      url: "https://youtube.com/@ailinc772?si=HG4U3rAyVtpAOzBR",
     },
   ];
 
@@ -163,7 +154,7 @@ const ContactSection = () => {
               </button>
             </form>
 
-            {/* Chatbot Notice */}
+            {/* Chatbot Notice
             <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-xl">
               <div className="flex items-center">
                 <span className="text-2xl mr-3">🤖</span>
@@ -172,7 +163,7 @@ const ContactSection = () => {
                   queries.
                 </p>
               </div>
-            </div>
+            </div> */}
           </div>
 
           {/* Contact Information */}
@@ -241,23 +232,17 @@ const ContactSection = () => {
               <h4 className="text-xl font-bold mb-4 text-gray-900">
                 Our Location
               </h4>
-              <div className="aspect-video bg-gradient-to-r from-blue-500 to-indigo-600 rounded-xl overflow-hidden">
-                <a
-                  href="https://share.google/1Z7C0F1eesIGrbjYo"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full h-full flex items-center justify-center hover:opacity-90 transition-opacity duration-300"
-                >
-                  <div className="text-center">
-                    <div className="text-4xl mb-2">🗺️</div>
-                    <p className="text-white font-semibold">
-                      View on Google Maps
-                    </p>
-                    <p className="text-blue-200 text-sm">
-                      Hyderabad Office Location
-                    </p>
-                  </div>
-                </a>
+              <div className="aspect-video rounded-xl overflow-hidden border border-blue-200 shadow">
+                <iframe
+                  title="AILinc Office Map"
+                  src="https://www.google.com/maps?q=AI+Linc&hl=en&ll=17.2048409,78.3466611&z=17&output=embed"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen={true}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                ></iframe>
               </div>
             </div>
           </div>
