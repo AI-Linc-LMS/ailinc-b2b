@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import Navbar from "../components/Navbar";
 import HeroSection from "../components/sections/HeroSection";
-import WhatWeDo from "../components/sections/WhatWeDo";
+import WhatWeDo from "../components/what-we-do/WhatWeDo";
 import StatsSection from "../components/sections/StatsSection";
 import ProductVideo from "../components/sections/ProductVideo";
 import NewsSection from "../components/sections/NewsSection";
