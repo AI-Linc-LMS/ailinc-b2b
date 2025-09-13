@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from "react";
+import { motion } from "framer-motion";
 
 const StatsSection = () => {
   const [counters, setCounters] = useState({
-    colleges: 0,
+    institutions: 0,
     students: 0,
     faculty: 0,
     engagement: 0,
@@ -12,8 +13,8 @@ const StatsSection = () => {
 
   useEffect(() => {
     const finalStats = {
-      colleges: 1000,
-      students: 100000,
+      institutions: 1000,
+      students: 1000000,
       faculty: 1000,
       engagement: 90,
     };
@@ -28,9 +29,9 @@ const StatsSection = () => {
 
       timer = setInterval(() => {
         setCounters((prev) => ({
-          colleges: Math.min(
-            prev.colleges + finalStats.colleges / steps,
-            finalStats.colleges
+          institutions: Math.min(
+            prev.institutions + finalStats.institutions / steps,
+            finalStats.institutions
           ),
           students: Math.min(
             prev.students + finalStats.students / steps,
@@ -82,80 +83,37 @@ const StatsSection = () => {
 
   const stats = [
     {
-      value: Math.floor(counters.colleges),
-      suffix: "+",
-      label: "Organisations",
-      icon: (
-        <svg
-          className="w-10 h-10 mx-auto text-blue-500"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          viewBox="0 0 24 24"
-        >
-          <rect x="4" y="10" width="16" height="8" rx="2" strokeWidth="2" />
-          <path d="M12 4v6" strokeWidth="2" />
-          <path d="M8 10V8a4 4 0 018 0v2" strokeWidth="2" />
-        </svg>
-      ),
-      color: "from-blue-500 to-cyan-500",
+      value:
+        Math.floor(counters.institutions) >= 1000
+          ? "1000+"
+          : `${Math.floor(counters.institutions)}`,
+      label: "Institutions Served",
+      color: "text-blue-600",
     },
     {
-      value: Math.floor(counters.students),
-      suffix: "+",
-      label: "Students",
-      icon: (
-        <svg
-          className="w-10 h-10 mx-auto text-green-500"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          viewBox="0 0 24 24"
-        >
-          <path
-            d="M12 14c2.5 0 7 1.25 7 3.75V20H5v-2.25C5 15.25 9.5 14 12 14z"
-            strokeWidth="2"
-          />
-          <circle cx="12" cy="8" r="4" strokeWidth="2" />
-        </svg>
-      ),
-      color: "from-green-500 to-teal-500",
+      value:
+        Math.floor(counters.students) >= 1000000
+          ? "1M+"
+          : `${Math.floor(counters.students)}${
+              counters.students >= 1000 ? "+" : ""
+            }`,
+      label: "Students Empowered",
+      color: "text-purple-600",
     },
     {
-      value: Math.floor(counters.faculty),
-      suffix: "+",
+      value:
+        Math.floor(counters.faculty) >= 1000
+          ? "1000+"
+          : `${Math.floor(counters.faculty)}${
+              counters.faculty >= 100 ? "+" : ""
+            }`,
       label: "Faculty Trained",
-      icon: (
-        <svg
-          className="w-10 h-10 mx-auto text-pink-500"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          viewBox="0 0 24 24"
-        >
-          <circle cx="12" cy="7" r="4" strokeWidth="2" />
-          <path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2" strokeWidth="2" />
-          <path d="M16 11V9a4 4 0 00-8 0v2" strokeWidth="2" />
-        </svg>
-      ),
-      color: "from-purple-500 to-pink-500",
+      color: "text-green-600",
     },
     {
-      value: Math.floor(counters.engagement),
-      suffix: "%",
+      value: `${Math.floor(counters.engagement)}%`,
       label: "Student Engagement Rates",
-      icon: (
-        <svg
-          className="w-10 h-10 mx-auto text-orange-500"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          viewBox="0 0 24 24"
-        >
-          <polyline points="4 17 10 11 14 15 20 9" strokeWidth="2" />
-        </svg>
-      ),
-      color: "from-orange-500 to-red-500",
+      color: "text-indigo-600",
     },
   ];
 
@@ -195,69 +153,192 @@ const StatsSection = () => {
   return (
     <section
       ref={sectionRef}
-      className="py-20 bg-gradient-to-br from-blue-50 to-indigo-100"
+      className="py-20 bg-white relative overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto px-4">
+      {/* Animated background elements */}
+      <motion.div
+        className="absolute top-10 left-10 w-32 h-32 bg-gradient-to-br from-blue-100 to-cyan-100 rounded-full opacity-20"
+        animate={{
+          x: [0, 30, 0],
+          y: [0, -20, 0],
+          scale: [1, 1.1, 1],
+        }}
+        transition={{
+          duration: 6,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+      <motion.div
+        className="absolute top-40 right-20 w-24 h-24 bg-gradient-to-br from-purple-100 to-pink-100 rounded-full opacity-20"
+        animate={{
+          x: [0, -25, 0],
+          y: [0, 15, 0],
+          scale: [1, 1.2, 1],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 2,
+        }}
+      />
+      <motion.div
+        className="absolute bottom-20 left-1/4 w-16 h-16 bg-gradient-to-br from-green-100 to-teal-100 rounded-full opacity-20"
+        animate={{
+          x: [0, 20, 0],
+          y: [0, -10, 0],
+          scale: [1, 1.15, 1],
+        }}
+        transition={{
+          duration: 7,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 1,
+        }}
+      />
+
+      <div className="max-w-7xl mx-auto px-4 relative z-10">
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
             Our Impact in Numbers
           </h2>
+          <p className="text-xl text-gray-600 mb-6 max-w-3xl mx-auto">
+            Transforming education through measurable impact and innovative
+            solutions
+          </p>
           <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-indigo-600 mx-auto"></div>
-        </div>
+        </motion.div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-16 text-center">
+        <motion.div
+          className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.5, staggerChildren: 0.1 }}
+        >
           {stats.map((stat, index) => (
-            <div
+            <motion.div
               key={index}
-              className="flex flex-col items-center justify-center p-8 bg-white bg-opacity-80 backdrop-blur-lg rounded-2xl border border-blue-200 hover:bg-opacity-90 hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+              className="text-center group cursor-pointer"
+              initial={{ opacity: 0, scale: 0.5, y: 30 }}
+              whileInView={{ opacity: 1, scale: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{
+                duration: 0.6,
+                delay: index * 0.15,
+                type: "spring",
+                stiffness: 200,
+                damping: 10,
+              }}
+              whileHover={{
+                scale: 1.1,
+                y: -5,
+                transition: { duration: 0.2 },
+              }}
             >
-              <div className="mb-4">{stat.icon}</div>
-              <div
-                className={`text-5xl md:text-6xl font-extrabold mb-2 bg-gradient-to-r ${stat.color} bg-clip-text text-transparent tracking-tight`}
-                style={{
-                  minHeight: "64px",
-                  display: "flex",
-                  alignItems: "center",
+              <motion.div
+                className={`text-3xl font-bold ${stat.color} mb-2`}
+                initial={{ scale: 0 }}
+                whileInView={{ scale: 1 }}
+                viewport={{ once: true }}
+                transition={{
+                  duration: 0.5,
+                  delay: 1 + index * 0.1,
+                  type: "spring",
+                  stiffness: 300,
+                  damping: 15,
+                }}
+                whileHover={{
+                  scale: 1.2,
+                  textShadow: "0 0 20px currentColor",
+                  transition: { duration: 0.2 },
                 }}
               >
-                {stat.label === "Students" && stat.value >= 100000
-                  ? `1M+`
-                  : stat.label === "Organisations" && stat.value >= 1000
-                  ? `1000+`
-                  : stat.label === "Faculty Trained" && stat.value >= 1000
-                  ? `1,000+`
-                  : stat.label === "Student Engagement Rates"
-                  ? `${stat.value}%`
-                  : `${stat.value}${stat.suffix}`}
-              </div>
-              <div className="text-gray-700 text-lg font-semibold mt-2">
+                {stat.value}
+              </motion.div>
+              <motion.div
+                className="text-gray-600"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 1.2 + index * 0.1 }}
+              >
                 {stat.label}
-              </div>
-            </div>
+              </motion.div>
+
+              {/* Animated underline */}
+              <motion.div
+                className={`h-1 bg-gradient-to-r from-transparent via-current to-transparent mt-2 mx-auto rounded-full opacity-0 group-hover:opacity-100`}
+                style={{
+                  color:
+                    stat.color.replace("text-", "") === "blue-600"
+                      ? "#2563eb"
+                      : stat.color.replace("text-", "") === "purple-600"
+                      ? "#9333ea"
+                      : stat.color.replace("text-", "") === "green-600"
+                      ? "#16a34a"
+                      : "#4f46e5",
+                }}
+                initial={{ scaleX: 0, width: 0 }}
+                whileHover={{ scaleX: 1, width: "60px" }}
+                transition={{ duration: 0.3 }}
+              />
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {/* Accreditations */}
-        <div className="text-center">
-          <h3 className="text-2xl font-semibold mb-8 text-gray-800">
-            Accreditations with Industry Leaders
-          </h3>
-          <div className="flex justify-center items-center space-x-12">
+        <motion.div
+          className="mt-16 text-center"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+        >
+          
+          <motion.div
+            className="flex justify-center items-center space-x-12"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, staggerChildren: 0.2 }}
+          >
             {accreditations.map((acc, index) => (
-              <div
+              <motion.div
                 key={index}
-                className="flex flex-col items-center p-4 bg-white bg-opacity-80 backdrop-blur-lg rounded-xl border border-blue-200 hover:bg-opacity-90 hover:shadow-lg transition-all duration-300 transform hover:scale-110"
+                className="flex flex-col items-center p-4 bg-white bg-opacity-80 backdrop-blur-lg rounded-xl border border-blue-200 hover:bg-opacity-90 hover:shadow-lg transition-all duration-300"
+                initial={{ opacity: 0, scale: 0.8, y: 20 }}
+                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{
+                  duration: 0.5,
+                  delay: 0.5 + index * 0.1,
+                  type: "spring",
+                  stiffness: 200,
+                  damping: 15,
+                }}
+                whileHover={{
+                  scale: 1.05,
+                  y: -2,
+                  transition: { duration: 0.2 },
+                }}
               >
                 <div className="mb-2 flex items-center justify-center">
                   {acc.logo}
                 </div>
-                {/* <div className="text-gray-800 font-semibold">{acc.name}</div> */}
-              </div>
+              </motion.div>
             ))}
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );

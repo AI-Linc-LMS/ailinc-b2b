@@ -62,7 +62,7 @@ const ServiceModal = ({ service, onClose }: ServiceModalProps) => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 z-50 flex items-center justify-center p-4"
+        className="fixed inset-0 z-50 flex items-center justify-center p-4 scrollbar-hide"
         onClick={onClose}
       >
         {/* Background Overlay */}
@@ -75,7 +75,7 @@ const ServiceModal = ({ service, onClose }: ServiceModalProps) => {
 
         {/* Modal Content */}
         <motion.div
-          className="relative bg-white rounded-3xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-hidden"
+          className="relative bg-white rounded-3xl shadow-2xl max-w-2xl w-full max-h-[90vh] sm:max-h-[95vh] overflow-hidden mx-2 sm:mx-4"
           onClick={(e) => e.stopPropagation()}
           initial={{ scale: 0.9, opacity: 0, y: 50 }}
           animate={{ scale: 1, opacity: 1, y: 0 }}
@@ -96,31 +96,31 @@ const ServiceModal = ({ service, onClose }: ServiceModalProps) => {
           </button>
 
           {/* Scrollable Content */}
-          <div className="overflow-y-auto max-h-[90vh]">
+          <div className="overflow-y-auto max-h-[90vh] sm:max-h-[95vh] scrollbar-hide">
             {/* Header */}
-            <div className="relative p-8 pb-6">
-              <div className="flex items-start justify-between mb-6">
+            <div className="relative p-4 sm:p-8 pb-4 sm:pb-6">
+              <div className="flex items-start justify-between mb-4 sm:mb-6">
                 {/* Icon and Title */}
-                <div className="flex items-center space-x-4">
+                <div className="flex flex-col sm:flex-row sm:items-center space-y-3 sm:space-y-0 sm:space-x-4">
                   <div
-                    className={`w-16 h-16 bg-gradient-to-r ${service.gradient} rounded-2xl flex items-center justify-center text-3xl shadow-lg`}
+                    className={`w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r ${service.gradient} rounded-2xl flex items-center justify-center text-2xl sm:text-3xl shadow-lg`}
                   >
                     {service.icon}
                   </div>
                   <div>
-                    <h2 className="text-3xl font-bold text-gray-900 mb-2">
+                    <h2 className="text-xl sm:text-3xl font-bold text-gray-900 mb-2">
                       {service.title}
                     </h2>
-                    <div className="flex space-x-4">
+                    <div className="flex flex-wrap gap-2 sm:gap-4">
                       {service.stats.map((stat, index) => (
                         <div
                           key={index}
-                          className="bg-gray-50 rounded-lg p-3 text-center"
+                          className="bg-gray-50 rounded-lg p-2 sm:p-3 text-center min-w-[60px]"
                         >
-                          <div className="text-lg font-bold text-gray-900">
+                          <div className="text-sm sm:text-lg font-bold text-gray-900">
                             {stat.value}
                           </div>
-                          <div className="text-sm text-gray-500">
+                          <div className="text-xs sm:text-sm text-gray-500">
                             {stat.label}
                           </div>
                         </div>
@@ -131,11 +131,11 @@ const ServiceModal = ({ service, onClose }: ServiceModalProps) => {
               </div>
 
               {/* Tags */}
-              <div className="flex flex-wrap gap-2 mb-6">
+              <div className="flex flex-wrap gap-2 mb-4 sm:mb-6">
                 {service.tags.map((tag, index) => (
                   <motion.span
                     key={index}
-                    className={`${tag.color} border px-4 py-2 rounded-full text-sm font-medium shadow-sm flex items-center space-x-2`}
+                    className={`${tag.color} border px-3 py-1 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-medium shadow-sm flex items-center space-x-2`}
                     initial={{ opacity: 0, scale: 0 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.3, delay: index * 0.1 }}
@@ -148,23 +148,23 @@ const ServiceModal = ({ service, onClose }: ServiceModalProps) => {
             </div>
 
             {/* Content */}
-            <div className="px-8 pb-8">
+            <div className="px-4 sm:px-8 pb-4 sm:pb-8">
               {/* Long Description */}
-              <div className="mb-8">
-                <h3 className="text-xl font-semibold text-gray-900 mb-4">
+              <div className="mb-6 sm:mb-8">
+                <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-3 sm:mb-4">
                   About This Service
                 </h3>
-                <p className="text-gray-600 leading-relaxed text-lg">
+                <p className="text-gray-600 leading-relaxed text-sm sm:text-lg">
                   {service.modalContent.longDescription}
                 </p>
               </div>
 
               {/* Features */}
-              <div className="mb-8">
-                <h3 className="text-xl font-semibold text-gray-900 mb-4">
+              <div className="mb-6 sm:mb-8">
+                <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-3 sm:mb-4">
                   Key Features
                 </h3>
-                <div className="grid md:grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {service.modalContent.features.map((feature, index) => (
                     <motion.div
                       key={index}
@@ -173,61 +173,29 @@ const ServiceModal = ({ service, onClose }: ServiceModalProps) => {
                       transition={{ delay: index * 0.1 }}
                       className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg"
                     >
-                      <Check className="w-5 h-5 text-green-600 flex-shrink-0" />
-                      <span className="text-gray-700">{feature}</span>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Trusted By Section */}
-              <div className="mb-8">
-                <h3 className="text-xl font-semibold text-gray-900 mb-4">
-                  Trusted By
-                </h3>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                  {service.trustedBy.map((company, index) => (
-                    <motion.div
-                      key={index}
-                      className="bg-gray-50 hover:bg-white p-4 rounded-lg text-center border border-gray-100 hover:border-gray-200 transition-all duration-300 hover:shadow-md"
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.3, delay: index * 0.1 }}
-                      whileHover={{ scale: 1.02, y: -2 }}
-                    >
-                      <img
-                        src={company.logo}
-                        alt={company.name}
-                        className="h-8 w-auto mx-auto mb-2 object-contain"
-                        onError={(e) => {
-                          // Fallback if logo fails to load
-                          const target = e.target as HTMLImageElement;
-                          target.style.display = "none";
-                          target.nextElementSibling!.textContent = company.name;
-                        }}
-                      />
-                      <div className="text-xs text-gray-600 font-medium hidden">
-                        {company.name}
-                      </div>
+                      <Check className="w-4 h-4 sm:w-5 sm:h-5 text-green-600 flex-shrink-0" />
+                      <span className="text-gray-700 text-sm sm:text-base">
+                        {feature}
+                      </span>
                     </motion.div>
                   ))}
                 </div>
               </div>
 
               {/* CTA Section */}
-              <div className="bg-gradient-to-r from-gray-50 to-gray-100 rounded-2xl p-6">
+              <div className="bg-gradient-to-r from-gray-50 to-gray-100 rounded-2xl p-4 sm:p-6">
                 <div className="text-center">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                  <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2 sm:mb-3">
                     Ready to Get Started?
                   </h3>
-                  <p className="text-gray-600 mb-6">
+                  <p className="text-gray-600 mb-4 sm:mb-6 text-sm sm:text-base">
                     {service.modalContent.cta}
                   </p>
-                  <div className="flex justify-center space-x-4">
+                  <div className="flex flex-col sm:flex-row justify-center space-y-3 sm:space-y-0 sm:space-x-4">
                     <motion.button
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className={`bg-gradient-to-r ${service.gradient} text-white px-8 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-shadow duration-300 flex items-center space-x-2`}
+                      className={`bg-gradient-to-r ${service.gradient} text-white px-6 py-2 sm:px-8 sm:py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-shadow duration-300 flex items-center justify-center space-x-2 text-sm sm:text-base`}
                     >
                       <span>Get Started</span>
                       <ArrowRight className="w-4 h-4" />
@@ -235,7 +203,7 @@ const ServiceModal = ({ service, onClose }: ServiceModalProps) => {
                     <motion.button
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className="bg-white text-gray-700 px-8 py-3 rounded-xl font-semibold border border-gray-300 hover:border-gray-400 transition-colors duration-300"
+                      className="bg-white text-gray-700 px-6 py-2 sm:px-8 sm:py-3 rounded-xl font-semibold border border-gray-300 hover:border-gray-400 transition-colors duration-300 text-sm sm:text-base"
                     >
                       Schedule Demo
                     </motion.button>
@@ -246,6 +214,17 @@ const ServiceModal = ({ service, onClose }: ServiceModalProps) => {
           </div>
         </motion.div>
       </motion.div>
+
+      {/* Custom Scrollbar Styles */}
+      <style>{`
+        .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+        }
+      `}</style>
     </AnimatePresence>
   );
 };

@@ -32,36 +32,36 @@ export const servicesData: ServiceData[] = [
     id: "white-labeled-app",
     icon: "📱",
     title: "White-Labeled AI App",
-    description: "We provide colleges & organizations with a 100% white-labeled AI-powered app, fully customized to their brand.",
+    description: "Trusted by 1000+ Colleges with 1M+ students empowered. Zero Setup Cost – fully ready in less than 7 days.",
     gradient: "from-blue-500 to-cyan-500",
     stats: [
-      { value: "500+", label: "Orgs" },
-      { value: "24/7", label: "Support" },
-      { value: "99%", label: "Uptime" }
+      { value: "1000+", label: "Colleges" },
+      { value: "1M+", label: "Students" },
+      { value: "7 Days", label: "Setup" }
     ],
     tags: [
       { 
-        name: "Custom Branding", 
-        description: "Complete brand customization with your colors, logos, and unique identity across all touchpoints",
-        image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=300&h=200&fit=crop&crop=center",
+        name: "Course Builder", 
+        description: "All Features in a creative card when hovered with creative screenshot of the features - Course Builder, Student Dashboard, Community, Job Board, AI Generated Placement Report, Automated Report, Live Classes, Bulk Email Communication",
+        image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=300&h=200&fit=crop&crop=center",
         color: "bg-blue-100 text-blue-700 border-blue-200"
       },
       { 
-        name: "Mobile & Web", 
-        description: "Cross-platform applications that work seamlessly on iOS, Android, and web browsers",
-        image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=300&h=200&fit=crop&crop=center",
+        name: "Student Dashboard", 
+        description: "Comprehensive student dashboard with AI-powered personalized learning paths and progress tracking",
+        image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=300&h=200&fit=crop&crop=center",
         color: "bg-cyan-100 text-cyan-700 border-cyan-200"
       },
       { 
-        name: "API Integration", 
-        description: "Seamless integration with your existing systems, databases, and third-party services",
-        image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=300&h=200&fit=crop&crop=center",
+        name: "Community & Job Board", 
+        description: "Interactive community platform with integrated job board and placement opportunities",
+        image: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=300&h=200&fit=crop&crop=center",
         color: "bg-indigo-100 text-indigo-700 border-indigo-200"
       },
       { 
-        name: "Analytics Dashboard", 
-        description: "Real-time insights and comprehensive reporting to track performance and user engagement",
-        image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=300&h=200&fit=crop&crop=center",
+        name: "AI Reports & Live Classes", 
+        description: "AI Generated Placement Reports, Automated Reporting, Live Classes, and Bulk Email Communication",
+        image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=300&h=200&fit=crop&crop=center",
         color: "bg-purple-100 text-purple-700 border-purple-200"
       }
     ],
@@ -74,118 +74,118 @@ export const servicesData: ServiceData[] = [
       { name: "SRM Institute", logo: "https://www.srmist.edu.in/wp-content/uploads/2020/07/SRM-logo-200x200.png" }
     ],
     modalContent: {
-      longDescription: "Transform your educational institution with our comprehensive white-labeled AI application. Our platform provides a complete digital ecosystem that seamlessly integrates with your existing infrastructure while maintaining your unique brand identity. From student engagement to administrative efficiency, our AI-powered solution adapts to your specific needs and scales with your growth.",
+      longDescription: "100% custom branding with your institution's name, logo, and colors. Data privacy & security ensured with ISO-grade encryption. Scalable to support 10–100,000+ students without performance issues. Our comprehensive white-labeled AI application provides a complete digital ecosystem that seamlessly integrates with your existing infrastructure.",
       features: [
-        "Complete brand customization with your logo, colors, and themes",
-        "Multi-platform deployment (iOS, Android, Web)",
-        "Advanced AI tutoring and personalized learning paths",
-        "Integrated LMS with smart content recommendations",
-        "Real-time analytics and performance tracking",
-        "Student engagement tools and gamification",
-        "Faculty management and collaboration tools",
-        "Secure payment gateway integration",
-        "Multi-language support for diverse student bodies",
-        "24/7 technical support and maintenance"
+        "Zero Setup Cost – fully ready in less than 7 days",
+        "100% custom branding with your institution's identity",
+        "Data privacy & security with ISO-grade encryption",
+        "Scalable to support 10–100,000+ students",
+        "Course Builder with AI-powered content creation",
+        "Comprehensive Student Dashboard with analytics",
+        "Interactive Community and Job Board integration",
+        "AI Generated Placement Reports and analytics",
+        "Live Classes with automated scheduling",
+        "Bulk Email Communication system"
       ],
-      cta: "Join 500+ institutions already transforming education with our AI-powered platform."
+      cta: "Join 1000+ colleges already transforming education with our AI-powered platform."
     }
   },
   {
     id: "ai-skill-development",
     icon: "🎓",
     title: "AI Skill Development",
-    description: "Free & premium AI courses for students and faculty, with integration as electives/credit-based learning in the curriculum.",
+    description: "200+ Hours of free foundational AI courses. Premium certifications from Microsoft, AWS, Google. Integrated into university curriculum as credit-based electives.",
     gradient: "from-purple-500 to-pink-500",
     stats: [
-      { value: "50k+", label: "Students" },
-      { value: "200+", label: "Courses" },
-      { value: "95%", label: "Success" }
+      { value: "200+", label: "Hours Free" },
+      { value: "90%", label: "Engagement" },
+      { value: "CPD", label: "Points" }
     ],
     tags: [
       { 
-        name: "Industry Certified", 
-        description: "Globally recognized certifications that enhance career prospects and industry credibility",
+        name: "Certified by Microsoft, Google & AWS", 
+        description: "Premium certifications from Microsoft, AWS, Google with industry recognition and career advancement opportunities",
         image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=300&h=200&fit=crop&crop=center",
         color: "bg-purple-100 text-purple-700 border-purple-200"
       },
       { 
-        name: "Hands-on Projects", 
-        description: "Real-world projects using actual datasets and industry-standard tools and frameworks",
-        image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=300&h=200&fit=crop&crop=center",
+        name: "Curriculum-Ready Content", 
+        description: "Integrated into university curriculum as credit-based electives with comprehensive learning paths",
+        image: "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=300&h=200&fit=crop&crop=center",
         color: "bg-pink-100 text-pink-700 border-pink-200"
       },
       { 
-        name: "Career Support", 
-        description: "Comprehensive placement assistance including resume building, interview prep, and job matching",
-        image: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=300&h=200&fit=crop&crop=center",
+        name: "Faculty & Student Tracks", 
+        description: "Dedicated tracks for both faculty training workshops & student skill development with CPD points",
+        image: "https://images.unsplash.com/photo-1544717297-fa95b6ee9643?w=300&h=200&fit=crop&crop=center",
         color: "bg-rose-100 text-rose-700 border-rose-200"
       },
       { 
-        name: "Faculty Training", 
-        description: "Professional development programs to upskill educators with latest AI teaching methodologies",
-        image: "https://images.unsplash.com/photo-1544717297-fa95b6ee9643?w=300&h=200&fit=crop&crop=center",
+        name: "90% Engagement Rate", 
+        description: "Proven 90% student engagement rate across partnered institutions with interactive learning modules",
+        image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=300&h=200&fit=crop&crop=center",
         color: "bg-violet-100 text-violet-700 border-violet-200"
       }
     ],
     trustedBy: [
       { name: "Google", logo: "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" },
       { name: "Microsoft", logo: "https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE1Mu3b?ver=5c31" },
+      { name: "AWS", logo: "https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" },
       { name: "IBM", logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" },
       { name: "NVIDIA", logo: "https://upload.wikimedia.org/wikipedia/sco/thumb/2/21/Nvidia_logo.svg/1280px-Nvidia_logo.svg.png" },
-      { name: "AWS", logo: "https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" },
       { name: "Meta", logo: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Meta_Platforms_Inc._logo.svg" }
     ],
     modalContent: {
-      longDescription: "Empower your students and faculty with cutting-edge AI skills through our comprehensive curriculum designed by industry experts. Our courses bridge the gap between academic theory and practical industry applications, ensuring graduates are job-ready with in-demand AI competencies. Whether you're looking to integrate AI as electives or build a complete specialization program, we provide the complete educational framework.",
+      longDescription: "200+ Hours of free foundational AI courses with premium certifications from Microsoft, AWS, Google. Faculty get access to exclusive training workshops & CPD points. Our comprehensive curriculum is designed to bridge the gap between academic theory and industry applications, ensuring both students and faculty are equipped with cutting-edge AI skills.",
       features: [
-        "Industry-aligned curriculum designed with top tech companies",
-        "Hands-on projects using real-world datasets and scenarios",
-        "Professional certification recognized by leading employers",
-        "Live mentorship sessions with AI industry professionals",
+        "200+ Hours of free foundational AI courses",
+        "Premium certifications from Microsoft, AWS, Google",
+        "Integrated into university curriculum as credit-based electives",
+        "90% student engagement rate across partnered institutions",
+        "Faculty access to exclusive training workshops",
+        "CPD points for professional development",
+        "Industry-aligned curriculum with real-world projects",
+        "Live mentorship sessions with AI professionals",
         "Career placement assistance and interview preparation",
-        "Faculty development programs and training workshops",
-        "Flexible delivery modes: online, hybrid, and in-person",
-        "Progress tracking and competency assessment tools",
-        "Integration with existing academic management systems",
         "Continuous curriculum updates based on industry trends"
       ],
-      cta: "Prepare your students for the AI-driven future with skills that matter in today's job market."
+      cta: "Prepare your students and faculty for the AI-driven future with industry-certified skills."
     }
   },
   {
     id: "institutional-transformation",
     icon: "🏢",
     title: "Institutional Transformation",
-    description: "From digitalization to branding, NAAC accreditation improvement, faculty training, and placement assistance — we uplift the entire ecosystem.",
+    description: "Improved NAAC score by up to 0.6 in partner universities. 35% average growth in student placements within a year. Government-recognized (Startup India) partner.",
     gradient: "from-green-500 to-teal-500",
     stats: [
-      { value: "300+", label: "Colleges" },
-      { value: "A++", label: "NAAC" },
-      { value: "85%", label: "Placement" }
+      { value: "+0.6", label: "NAAC Score" },
+      { value: "35%", label: "Placement ↗" },
+      { value: "1000+", label: "Faculty" }
     ],
     tags: [
       { 
-        name: "Digital Transformation", 
-        description: "Complete modernization of academic and administrative processes using cutting-edge technology",
+        name: "Campus Digitalization", 
+        description: "Complete digital transformation flow: Campus Digitalization → Accreditation Boost → Placement Success",
         image: "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?w=300&h=200&fit=crop&crop=center",
         color: "bg-green-100 text-green-700 border-green-200"
       },
       { 
-        name: "NAAC Support", 
-        description: "Expert guidance and documentation support for achieving higher NAAC grades and accreditation",
+        name: "Accreditation Boost", 
+        description: "Expert NAAC support with improved scores up to 0.6 points and digitized 100% faculty training records",
         image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=200&fit=crop&crop=center",
         color: "bg-teal-100 text-teal-700 border-teal-200"
       },
       { 
-        name: "Brand Building", 
-        description: "Strategic brand development to enhance institutional reputation and market positioning",
-        image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=300&h=200&fit=crop&crop=center",
+        name: "Placement Success", 
+        description: "35% average growth in student placements with digitized placement reports and upskilling programs",
+        image: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=300&h=200&fit=crop&crop=center",
         color: "bg-emerald-100 text-emerald-700 border-emerald-200"
       },
       { 
-        name: "Placement Cell", 
-        description: "Establishment and optimization of placement cells to maximize student career opportunities",
-        image: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=300&h=200&fit=crop&crop=center",
+        name: "Government Recognition", 
+        description: "Government-recognized (Startup India) with official partnerships with global tech giants",
+        image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=300&h=200&fit=crop&crop=center",
         color: "bg-lime-100 text-lime-700 border-lime-200"
       }
     ],
@@ -194,24 +194,24 @@ export const servicesData: ServiceData[] = [
       { name: "AICTE", logo: "https://www.aicte-india.org/sites/default/files/AICTE%20Official%20Logo.png" },
       { name: "NAAC", logo: "https://www.naac.gov.in/images/naac-logo.png" },
       { name: "NIRF", logo: "https://www.nirfindia.org/nirflogo.png" },
-      { name: "QS Rankings", logo: "https://www.qs.com/wp-content/uploads/2019/03/QS_Logo_Horizontal_RGB_Positive.png" },
+      { name: "Startup India", logo: "https://www.startupindia.gov.in/content/sih/en/reources/startup-india-logo.png" },
       { name: "Times Higher Ed", logo: "https://www.timeshighereducation.com/themes/custom/times/images/the-logo-white.png" }
     ],
     modalContent: {
-      longDescription: "Transform your institution into a future-ready educational powerhouse with our comprehensive ecosystem development approach. We don't just digitize—we revolutionize every aspect of your institution, from academic excellence to market positioning. Our holistic transformation strategy ensures sustainable growth, improved rankings, and enhanced stakeholder satisfaction across all dimensions of institutional performance.",
+      longDescription: "Improved NAAC score by up to 0.6 in partner universities. 35% average growth in student placements within a year. Digitized 100% of faculty training records & placement reports. Supported 1,000+ faculty members with upskilling programs. Government-recognized (Startup India) + official partner with global tech giants.",
       features: [
-        "Complete digital infrastructure setup and migration",
-        "NAAC accreditation consulting and documentation support",
-        "Brand identity development and marketing strategy",
-        "Faculty recruitment, training, and development programs",
-        "Industry partnership facilitation and collaboration setup",
-        "Placement cell establishment and corporate relations",
-        "Academic process optimization and automation",
-        "Student experience enhancement and engagement programs",
+        "Improved NAAC score by up to 0.6 points",
+        "35% average growth in student placements within a year",
+        "Digitized 100% of faculty training records & placement reports",
+        "Supported 1,000+ faculty members with upskilling programs",
+        "Government-recognized (Startup India) status",
+        "Official partnerships with global tech giants",
+        "Complete campus digitalization infrastructure",
+        "Brand identity development and market positioning",
         "Quality assurance and continuous improvement frameworks",
-        "Financial planning and revenue optimization strategies"
+        "Academic process optimization and automation"
       ],
-      cta: "Transform your institution into a leading educational brand that attracts top students and faculty."
+      cta: "Transform your institution with proven results: better NAAC scores, higher placements, and complete digitalization."
     }
   }
 ];

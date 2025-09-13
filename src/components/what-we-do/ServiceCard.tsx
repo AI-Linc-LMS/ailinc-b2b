@@ -43,6 +43,7 @@ const ServiceCard = ({ service, onLearnMore }: ServiceCardProps) => {
   const cardRef = useRef<HTMLDivElement>(null);
 
   const handleTagHover = (tag: TagData, event: React.MouseEvent) => {
+    console.log("Tag hovered:", tag.name);
     const rect = event.currentTarget.getBoundingClientRect();
     setTooltipPosition({
       x: rect.left + rect.width / 2,
@@ -52,19 +53,17 @@ const ServiceCard = ({ service, onLearnMore }: ServiceCardProps) => {
   };
 
   const handleTagLeave = () => {
+    console.log("Tag leave");
     setHoveredTag(null);
   };
 
-  console.log(hoveredTag);
+  console.log("Current hoveredTag:", hoveredTag?.name || "none");
+
   return (
     <>
       <motion.div
         ref={cardRef}
-        className="group bg-white border border-gray-200 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 cursor-pointer relative overflow-hidden"
-        whileHover={{
-          y: -8,
-          boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
-        }}
+        className="group bg-white border border-gray-200 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer relative overflow-hidden"
         initial={{ opacity: 0, y: 50, rotateX: 15 }}
         animate={{ opacity: 1, y: 0, rotateX: 0 }}
         transition={{
@@ -199,21 +198,17 @@ const ServiceCard = ({ service, onLearnMore }: ServiceCardProps) => {
         </div>
 
         {/* Tags */}
-        <div className="flex flex-wrap gap-2 mb-6">
+        <div className="flex flex-wrap gap-2 mb-6 relative z-20">
           {service.tags.map((tag, index) => (
-            <motion.span
+            <span
               key={index}
-              className={`${tag.color} border px-3 py-1 rounded-full text-xs font-medium transition-all duration-300 cursor-pointer hover:shadow-md`}
+              className={`${tag.color} border px-3 py-1 rounded-full text-xs font-medium transition-all duration-300 cursor-pointer hover:shadow-md relative`}
               onMouseEnter={(e) => handleTagHover(tag, e)}
               onMouseLeave={handleTagLeave}
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: index * 0.1 }}
+              style={{ zIndex: 50 }}
             >
               {tag.name}
-            </motion.span>
+            </span>
           ))}
         </div>
 
