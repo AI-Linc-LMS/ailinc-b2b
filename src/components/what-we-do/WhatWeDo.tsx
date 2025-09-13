@@ -251,7 +251,7 @@ const WhatWeDo = () => {
                 transition={{ duration: 0.6, delay: 0.5 }}
               >
                 {/* Mobile App Mockup */}
-                <motion.div
+                {/* <motion.div
                   className="relative"
                   whileHover={{
                     scale: 1.1,
@@ -270,7 +270,7 @@ const WhatWeDo = () => {
                     whileHover={{ opacity: 1 }}
                     transition={{ duration: 0.3 }}
                   />
-                </motion.div>
+                </motion.div> */}
     
                 {/* Course Dashboard Mockup */}
                 <motion.div
