@@ -232,7 +232,8 @@ const NewsVideo = () => {
                       <Image
                         src={item.imageSrc}
                         alt={item.title}
-                        fill
+                        width={500}
+                        height={500}
                         className="w-full h-48 object-cover"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
