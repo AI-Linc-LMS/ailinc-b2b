@@ -47,15 +47,24 @@ const categories = [
 // --- Wave Background Component (Simplified) ---
 function WaveBackground() {
   return (
-    <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none opacity-20">
-      <svg
-        className="absolute bottom-0 left-0 w-full h-32"
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      <motion.svg
+        className="absolute bottom-0 left-0 w-full h-64"
         viewBox="0 0 1440 320"
         xmlns="http://www.w3.org/2000/svg"
         preserveAspectRatio="none"
       >
-        <path fill="#e0f2fe" d="M0,160L1440,128L1440,320L0,320Z" />
-      </svg>
+        <motion.path
+          fill="#6235f7"
+          animate={{
+            d: [
+              "M0,128L80,144C160,160,320,192,480,186.7C640,181,800,139,960,122.7C1120,107,1280,117,1360,122.7L1440,128L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z",
+              "M0,160L80,154.7C160,149,320,139,480,154.7C640,171,800,213,960,213.3C1120,213,1280,171,1360,149.3L1440,128L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z",
+            ],
+          }}
+          transition={{ duration: 7, repeat: Infinity, repeatType: "mirror" }}
+        />
+      </motion.svg>
     </div>
   );
 }
@@ -225,7 +234,7 @@ function SimplifiedGallery() {
   }, [activeCategory]);
 
   return (
-    <section className="py-16 bg-gradient-to-br from-gray-50 to-blue-50/30 relative overflow-hidden">
+    <section className="py-16 bg-gradient-to-br from-gray-200 to-blue-60/30 relative overflow-hidden">
       <WaveBackground />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

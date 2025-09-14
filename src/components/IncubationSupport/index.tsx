@@ -59,7 +59,7 @@ const IncubationSupport = () => {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.5 }}
           whileHover={{ scale: 1 }}
-          style={{ filter: "hue-rotate(45deg)" }}
+          style={{ filter: "hue-rotate(0deg)" }}
         >
           <Image
             src="/images/studentIcon.jpg" // remove 'public' prefix
@@ -90,7 +90,7 @@ const IncubationSupport = () => {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.5 }}
           whileHover={{ scale: 1 }}
-          style={{ filter: "hue-rotate(45deg)" }}
+          style={{ filter: "hue-rotate(0deg)" }}
         >
           <Image
             src="/images/mentorIcon.jpg" // remove 'public' prefix
@@ -121,7 +121,7 @@ const IncubationSupport = () => {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.5 }}
           whileHover={{ scale: 1 }}
-          style={{ filter: "hue-rotate(90deg)" }}
+          style={{ filter: "hue-rotate(0deg)" }}
         >
           <Image
             src="/images/investor.jpg" // remove 'public' prefix
@@ -152,7 +152,7 @@ const IncubationSupport = () => {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.5 }}
           whileHover={{ scale: 1 }}
-          style={{ filter: "hue-rotate(135deg)" }}
+          style={{ filter: "hue-rotate(0deg)" }}
         >
           <Image
             src="/images/pitchdeck.jpg" // remove 'public' prefix
