@@ -17,6 +17,14 @@ const jakarta = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   title: "AI Linc",
   description: "No code development using Agentic AI",
+  keywords: [
+    "ai",
+    "edtech",
+    "learning",
+    "upscalling",
+    "ai-linc",
+    "partnership",
+  ],
 };
 
 export default function RootLayout({
