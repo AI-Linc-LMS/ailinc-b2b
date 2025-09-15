@@ -1,9 +1,9 @@
 // components/SuccessStories.tsx
-import { useRef } from "react";
-import { motion, useInView, Variants } from "framer-motion";
+import { useRef, useState, useEffect } from "react";
+import { motion, useInView, Variants, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
-// Success stories data array
+// Success stories data array (keeping your existing data)
 const successStories = [
   {
     id: 1,
@@ -73,7 +73,201 @@ const successStories = [
   },
 ];
 
-// Optimized Animated Progress Bar Component
+// Navigation Button Component
+const CarouselButton = ({
+  direction,
+  onClick,
+  disabled,
+}: {
+  direction: "prev" | "next";
+  onClick: () => void;
+  disabled: boolean;
+}) => (
+  <motion.button
+    onClick={onClick}
+    disabled={disabled}
+    className={`absolute top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center text-gray-600 hover:text-blue-600 disabled:opacity-50 disabled:cursor-not-allowed ${
+      direction === "prev" ? "-left-6 md:-left-8" : "-right-6 md:-right-8"
+    }`}
+    whileHover={{ scale: disabled ? 1 : 1.05 }}
+    whileTap={{ scale: disabled ? 1 : 0.95 }}
+  >
+    <svg
+      className="w-6 h-6"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+    >
+      {direction === "prev" ? (
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          d="M15 19l-7-7 7-7"
+        />
+      ) : (
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          d="M9 5l7 7-7 7"
+        />
+      )}
+    </svg>
+  </motion.button>
+);
+
+// Carousel Indicators
+const CarouselIndicators = ({
+  total,
+  current,
+  onSelect,
+}: {
+  total: number;
+  current: number;
+  onSelect: (index: number) => void;
+}) => (
+  <div className="flex justify-center space-x-2 mt-8">
+    {Array.from({ length: total }).map((_, index) => (
+      <motion.button
+        key={index}
+        onClick={() => onSelect(index)}
+        className={`w-3 h-3 rounded-full transition-all duration-200 ${
+          index === current
+            ? "bg-blue-600 scale-110"
+            : "bg-gray-300 hover:bg-gray-400"
+        }`}
+        whileHover={{ scale: 1.2 }}
+        whileTap={{ scale: 0.9 }}
+      />
+    ))}
+  </div>
+);
+
+// Single Story Card Component - Fixed sizing
+const StoryCard = ({ story, index }: { story: any; index: number }) => (
+  <motion.div
+    whileHover={{
+      y: -4,
+      scale: 1.01,
+      transition: { duration: 0.2, ease: "easeOut" },
+    }}
+    className="bg-white rounded-2xl p-5 md:p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-200 flex flex-col group will-change-transform max-w-md mx-auto"
+    style={{
+      backfaceVisibility: "hidden",
+      WebkitBackfaceVisibility: "hidden",
+      height: "520px", // Fixed height for consistency
+    }}
+  >
+    {/* Card Header - Reduced spacing */}
+    <div className="flex items-center mb-4">
+      <div className="relative w-12 h-12 rounded-xl overflow-hidden mr-3 shadow-sm group-hover:shadow-md transition-shadow duration-200 flex-shrink-0">
+        {typeof story.icon !== "string" && (
+          <div
+            className={`absolute inset-0 bg-gradient-to-r ${story.bgGradient} opacity-20`}
+          />
+        )}
+        {typeof story.icon === "string" ? (
+          <div
+            className={`w-full h-full bg-gradient-to-r ${story.bgGradient} flex items-center justify-center text-xl rounded-xl`}
+          >
+            {story.icon}
+          </div>
+        ) : (
+          <div className="w-full h-full relative">{story.icon}</div>
+        )}
+      </div>
+      <div className="min-w-0 flex-1">
+        <h3 className="text-lg font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-200 line-clamp-1">
+          {story.organization}
+        </h3>
+        <p className="text-sm text-gray-500 line-clamp-1">{story.author}</p>
+      </div>
+    </div>
+
+    {/* Quote - Fixed height */}
+    <div className="mb-4" style={{ height: "120px" }}>
+      <blockquote className="text-gray-700 text-base leading-relaxed italic group-hover:text-gray-800 transition-colors duration-200 line-clamp-4">
+        &quot;{story.quote}&quot;
+      </blockquote>
+    </div>
+
+    {/* Statistics - Compact spacing */}
+    <div className="grid grid-cols-2 gap-4 pt-4 border-t border-gray-100 flex-grow">
+      <div className="text-center space-y-2">
+        <motion.div
+          className="text-2xl font-bold text-gray-900"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5 + index * 0.1 }}
+        >
+          {story.certified.toLocaleString()}+
+        </motion.div>
+        <div className="text-xs text-gray-500 uppercase tracking-wide">
+          {story.certifiedLabel}
+        </div>
+        <AnimatedProgressBar
+          value={story.certified}
+          maxValue={story.certifiedMax}
+          color={story.bgGradient}
+          delay={0.8 + index * 0.1}
+        />
+      </div>
+
+      <div className="text-center space-y-2">
+        <motion.div
+          className="text-2xl font-bold text-gray-900"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.7 + index * 0.1 }}
+        >
+          {story.growth}
+          {story.growthLabel.includes("NAAC") ? "" : "%"}
+        </motion.div>
+        <div className="text-xs text-gray-500 uppercase tracking-wide">
+          {story.growthLabel}
+        </div>
+        <div className="flex justify-center">
+          <AnimatedCircularProgress
+            value={story.growth}
+            maxValue={story.growthMax}
+            color={story.bgGradient}
+            delay={1 + index * 0.1}
+          />
+        </div>
+      </div>
+    </div>
+
+    {/* Bar Chart - Compact */}
+    <div className="mt-4 pt-3 border-t border-gray-50">
+      <div className="text-center text-xs text-gray-400 mb-2">
+        Performance Overview
+      </div>
+      <div className="grid grid-cols-2 gap-3">
+        <div className="text-center">
+          <AnimatedBarChart
+            value={story.certified}
+            maxValue={story.certifiedMax}
+            color="from-blue-400 to-blue-600"
+            delay={1.2 + index * 0.1}
+          />
+          <div className="text-xs text-gray-400 mt-1">Students</div>
+        </div>
+        <div className="text-center">
+          <AnimatedBarChart
+            value={story.growth}
+            maxValue={story.growthMax}
+            color="from-green-400 to-green-600"
+            delay={1.4 + index * 0.1}
+          />
+          <div className="text-xs text-gray-400 mt-1">Growth</div>
+        </div>
+      </div>
+    </div>
+  </motion.div>
+);
+
+// Animated components with smaller sizes
 const AnimatedProgressBar = ({
   value,
   maxValue,
@@ -89,7 +283,7 @@ const AnimatedProgressBar = ({
 
   return (
     <div className="w-full">
-      <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+      <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
         <motion.div
           className={`h-full bg-gradient-to-r ${color} rounded-full will-change-transform`}
           initial={{ width: 0 }}
@@ -109,11 +303,9 @@ const AnimatedProgressBar = ({
   );
 };
 
-// Optimized Animated Circular Progress Component
 const AnimatedCircularProgress = ({
   value,
   maxValue,
-  //eslint-disable-next-line
   color,
   delay = 0,
 }: {
@@ -123,28 +315,26 @@ const AnimatedCircularProgress = ({
   delay?: number;
 }) => {
   const percentage = (value / maxValue) * 100;
-  const circumference = 2 * Math.PI * 20;
+  const circumference = 2 * Math.PI * 16;
   const strokeDashoffset = circumference - (percentage / 100) * circumference;
 
   return (
-    <div className="relative w-16 h-16">
-      <svg className="w-16 h-16 transform -rotate-90" viewBox="0 0 50 50">
-        {/* Background circle */}
+    <div className="relative w-12 h-12">
+      <svg className="w-full h-full transform -rotate-90" viewBox="0 0 40 40">
         <circle
-          cx="25"
-          cy="25"
-          r="20"
+          cx="20"
+          cy="20"
+          r="16"
           stroke="#e5e7eb"
-          strokeWidth="4"
+          strokeWidth="3"
           fill="none"
         />
-        {/* Progress circle */}
         <motion.circle
-          cx="25"
-          cy="25"
-          r="20"
+          cx="20"
+          cy="20"
+          r="16"
           stroke="url(#gradient)"
-          strokeWidth="4"
+          strokeWidth="3"
           fill="none"
           strokeLinecap="round"
           strokeDasharray={circumference}
@@ -177,7 +367,6 @@ const AnimatedCircularProgress = ({
   );
 };
 
-// Optimized Animated Bar Chart Component
 const AnimatedBarChart = ({
   value,
   maxValue,
@@ -192,7 +381,7 @@ const AnimatedBarChart = ({
   const percentage = (value / maxValue) * 100;
 
   return (
-    <div className="flex items-end justify-center h-16 w-full">
+    <div className="flex items-end justify-center h-10 w-full">
       <motion.div
         className={`bg-gradient-to-t ${color} rounded-t-lg`}
         style={{ width: "40%" }}
@@ -212,7 +401,62 @@ const SuccessStories = () => {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
-  // Optimized variants with smoother transitions
+  // Carousel state
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAutoPlay, setIsAutoPlay] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect screen size
+  useEffect(() => {
+    const checkIsMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkIsMobile();
+    window.addEventListener("resize", checkIsMobile);
+
+    return () => window.removeEventListener("resize", checkIsMobile);
+  }, []);
+
+  // Calculate cards per view and total pages
+  const cardsPerView = isMobile ? 1 : 2;
+  const totalPages = Math.ceil(successStories.length / cardsPerView);
+
+  // Auto-play functionality
+  useEffect(() => {
+    if (!isAutoPlay) return;
+
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % totalPages);
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [isAutoPlay, totalPages]);
+
+  // Navigation functions
+  const goToNext = () => {
+    setCurrentIndex((prev) => (prev + 1) % totalPages);
+  };
+
+  const goToPrev = () => {
+    setCurrentIndex((prev) => (prev - 1 + totalPages) % totalPages);
+  };
+
+  const goToSlide = (index: number) => {
+    setCurrentIndex(index);
+  };
+
+  // Pause auto-play on hover
+  const handleMouseEnter = () => setIsAutoPlay(false);
+  const handleMouseLeave = () => setIsAutoPlay(true);
+
+  // Get current cards to display
+  const getCurrentCards = () => {
+    const startIndex = currentIndex * cardsPerView;
+    return successStories.slice(startIndex, startIndex + cardsPerView);
+  };
+
+  // Animation variants
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
@@ -237,14 +481,34 @@ const SuccessStories = () => {
     },
   };
 
-  const cardVariants: Variants = {
-    hidden: { opacity: 0, scale: 0.95, y: 40 },
+  const cardsContainerVariants: Variants = {
+    hidden: { opacity: 0, x: 100 },
     visible: {
       opacity: 1,
-      scale: 1,
-      y: 0,
+      x: 0,
       transition: {
         duration: 0.6,
+        ease: "easeOut",
+        staggerChildren: 0.1,
+      },
+    },
+    exit: {
+      opacity: 0,
+      x: -100,
+      transition: {
+        duration: 0.4,
+        ease: "easeIn",
+      },
+    },
+  };
+
+  const cardItemVariants: Variants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.4,
         ease: "easeOut",
       },
     },
@@ -276,138 +540,59 @@ const SuccessStories = () => {
             </p>
           </motion.div>
 
-          {/* Success Stories Cards - Optimized Hover */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {successStories.map((story, index) => (
-              <motion.div
-                key={story.id}
-                variants={cardVariants}
-                whileHover={{
-                  y: -8,
-                  scale: 1.02,
-                  transition: { duration: 0.2, ease: "easeOut" },
-                }}
-                className="bg-white rounded-2xl p-8 shadow-md border border-gray-100 hover:shadow-lg transition-shadow duration-200 flex flex-col h-full group will-change-transform"
-                style={{
-                  backfaceVisibility: "hidden",
-                  WebkitBackfaceVisibility: "hidden",
-                }}
-              >
-                {/* Card Header - Fixed Icon Container */}
-                <div className="flex items-center mb-6">
-                  <div className="relative w-14 h-14 rounded-xl overflow-hidden mr-4 shadow-sm group-hover:shadow-md transition-shadow duration-200">
-                    {/* Background gradient for image icons */}
-                    {typeof story.icon !== "string" && (
-                      <div
-                        className={`absolute inset-0 bg-gradient-to-r ${story.bgGradient} opacity-20`}
-                      />
-                    )}
-
-                    {/* Icon content - either image or emoji */}
-                    {typeof story.icon === "string" ? (
-                      <div
-                        className={`w-full h-full bg-gradient-to-r ${story.bgGradient} flex items-center justify-center text-2xl rounded-xl`}
+          {/* Carousel Container */}
+          <div
+            className="relative max-w-4xl mx-auto"
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          >
+            {/* Carousel Wrapper - Fixed container size */}
+            <div className="overflow-hidden rounded-2xl px-8 md:px-16">
+              <div className="relative" style={{ height: "540px" }}>
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={currentIndex}
+                    variants={cardsContainerVariants}
+                    initial="hidden"
+                    animate="visible"
+                    exit="exit"
+                    className="grid grid-cols-1 md:grid-cols-2 gap-6 h-full"
+                  >
+                    {getCurrentCards().map((story, index) => (
+                      <motion.div
+                        key={story.id}
+                        variants={cardItemVariants}
+                        className="flex items-center justify-center"
                       >
-                        {story.icon}
-                      </div>
-                    ) : (
-                      <div className="w-full h-full relative">{story.icon}</div>
-                    )}
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-200">
-                      {story.organization}
-                    </h3>
-                    <p className="text-sm text-gray-500">{story.author}</p>
-                  </div>
-                </div>
+                        <StoryCard story={story} index={index} />
+                      </motion.div>
+                    ))}
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+            </div>
 
-                {/* Quote */}
-                <div className="flex-grow mb-6">
-                  <blockquote className="text-gray-700 text-lg leading-relaxed italic group-hover:text-gray-800 transition-colors duration-200">
-                    &quot;{story.quote}&quot;
-                  </blockquote>
-                </div>
-
-                {/* Statistics - Simplified Animation */}
-                <div className="grid grid-cols-2 gap-6 pt-6 border-t border-gray-100">
-                  {/* Certified Students */}
-                  <div className="text-center space-y-3">
-                    <motion.div
-                      className="text-3xl font-bold text-gray-900 mb-1"
-                      initial={{ opacity: 0 }}
-                      animate={isInView ? { opacity: 1 } : {}}
-                      transition={{ delay: 0.5 + index * 0.1 }}
-                    >
-                      {story.certified.toLocaleString()}+
-                    </motion.div>
-                    <div className="text-sm text-gray-500 uppercase tracking-wide mb-2">
-                      {story.certifiedLabel}
-                    </div>
-                    <AnimatedProgressBar
-                      value={story.certified}
-                      maxValue={story.certifiedMax}
-                      color={story.bgGradient}
-                      delay={0.8 + index * 0.1}
-                    />
-                  </div>
-
-                  {/* Growth/Placement */}
-                  <div className="text-center space-y-3">
-                    <motion.div
-                      className="text-3xl font-bold text-gray-900 mb-1"
-                      initial={{ opacity: 0 }}
-                      animate={isInView ? { opacity: 1 } : {}}
-                      transition={{ delay: 0.7 + index * 0.1 }}
-                    >
-                      {story.growth}
-                      {story.growthLabel.includes("NAAC") ? "" : "%"}
-                    </motion.div>
-                    <div className="text-sm text-gray-500 uppercase tracking-wide mb-2">
-                      {story.growthLabel}
-                    </div>
-                    <div className="flex justify-center">
-                      <AnimatedCircularProgress
-                        value={story.growth}
-                        maxValue={story.growthMax}
-                        color={story.bgGradient}
-                        delay={1 + index * 0.1}
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Simplified Bar Chart */}
-                <div className="mt-6 pt-4 border-t border-gray-50">
-                  <div className="text-center text-xs text-gray-400 mb-2">
-                    Performance Overview
-                  </div>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="text-center">
-                      <AnimatedBarChart
-                        value={story.certified}
-                        maxValue={story.certifiedMax}
-                        color="from-blue-400 to-blue-600"
-                        delay={1.2 + index * 0.1}
-                      />
-                      <div className="text-xs text-gray-400 mt-1">Students</div>
-                    </div>
-                    <div className="text-center">
-                      <AnimatedBarChart
-                        value={story.growth}
-                        maxValue={story.growthMax}
-                        color="from-green-400 to-green-600"
-                        delay={1.4 + index * 0.1}
-                      />
-                      <div className="text-xs text-gray-400 mt-1">Growth</div>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+            {/* Navigation Buttons */}
+            <CarouselButton
+              direction="prev"
+              onClick={goToPrev}
+              disabled={false}
+            />
+            <CarouselButton
+              direction="next"
+              onClick={goToNext}
+              disabled={false}
+            />
           </div>
 
-          {/* Overall Stats - Simplified */}
+          {/* Carousel Indicators */}
+          <CarouselIndicators
+            total={totalPages}
+            current={currentIndex}
+            onSelect={goToSlide}
+          />
+
+          {/* Overall Stats - keeping your existing section */}
           <motion.div
             variants={itemVariants}
             className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-3xl p-8 md:p-12 hover:from-blue-100 hover:to-purple-100 transition-all duration-300"
