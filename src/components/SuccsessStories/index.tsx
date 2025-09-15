@@ -1,8 +1,22 @@
 // components/SuccessStories.tsx
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, ReactNode } from "react";
 import { motion, useInView, Variants, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
+type Story = {
+  id: number;
+  organization: string;
+  quote: string;
+  author: string;
+  certified: number;
+  certifiedLabel: string;
+  growth: number;
+  growthLabel: string;
+  icon: ReactNode; // Assuming it's a function that returns a React element
+  bgGradient: string;
+  certifiedMax: number;
+  growthMax: number;
+};
 // Success stories data array (keeping your existing data)
 const successStories = [
   {
@@ -145,7 +159,7 @@ const CarouselIndicators = ({
 );
 
 // Single Story Card Component - Fixed sizing
-const StoryCard = ({ story, index }: { story: any; index: number }) => (
+const StoryCard = ({ story, index }: { story: Story; index: number }) => (
   <motion.div
     whileHover={{
       y: -4,
