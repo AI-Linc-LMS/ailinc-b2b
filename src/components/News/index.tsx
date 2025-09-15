@@ -333,12 +333,12 @@ const NewsVideo = () => {
               <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 leading-tight">
                 See{" "}
                 <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                  Ai Linc{" "}
+                  AI Linc{" "}
                 </span>
                 in Action
               </h3>
               <p className="text-gray-600 text-lg">
-                Watch our comprehensive product demo to understand how Ai Linc
+                Watch our comprehensive product demo to understand how AI Linc
                 transforms educational institutions with cutting-edge AI and ML
                 solutions.
               </p>
@@ -385,7 +385,7 @@ const NewsVideo = () => {
                 <div className="space-y-3">
                   {[
                     "The problem colleges face with AI adoption",
-                    "Ai Linc as the complete solution",
+                    "AI Linc as the complete solution",
                     "White-label app demo (student & admin side)",
                     "Courses, certifications & placement assistance",
                   ].map((item, index) => (

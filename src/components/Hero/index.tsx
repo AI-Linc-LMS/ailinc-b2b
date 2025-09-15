@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, Variants } from "framer-motion";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { AWSLogo } from "../../../public/icons/AWSLogo";
 import { GoogleLogo } from "../../../public/icons/GoogleLogo";
 import { IBMLogo } from "../../../public/icons/IBMLogo";
@@ -83,6 +83,7 @@ const buttonVariants: Variants = {
 
 function Hero() {
   const [isHoveringHeading, setIsHoveringHeading] = useState(false);
+  const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [isHoveringDescription, setIsHoveringDescription] = useState(false);
   const [isHoveringTrust, setIsHoveringTrust] = useState(false);
 
@@ -95,6 +96,26 @@ function Hero() {
     y: "50%",
   });
   const [trustMousePos, setTrustMousePos] = useState({ x: "50%", y: "50%" });
+
+  const rotatingWords = [
+    "Education",
+    "Enterprises",
+    "Creators",
+    "Startups",
+    "Institutions",
+    "Organizations",
+  ];
+
+  // Rotate words every 2 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentWordIndex(
+        (prevIndex) => (prevIndex + 1) % rotatingWords.length
+      );
+    }, 2000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   const headingRef = useRef<HTMLHeadingElement>(null);
   const descriptionRef = useRef<HTMLParagraphElement>(null);
@@ -123,6 +144,38 @@ function Hero() {
     const y = e.clientY - rect.top;
     setTrustMousePos({ x: `${x}px`, y: `${y}px` });
   };
+
+  const wordRotateVariants: Variants = {
+    enter: {
+      opacity: 0,
+      y: 20,
+      rotateX: -90,
+    },
+    center: {
+      opacity: 1,
+      y: 0,
+      rotateX: 0,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut",
+      },
+    },
+    exit: {
+      opacity: 0,
+      y: -20,
+      rotateX: 90,
+      transition: {
+        duration: 0.3,
+        ease: "easeIn",
+      },
+    },
+  };
+
+  const partnerLogos = [
+    { Logo: MicrosoftLogo, name: "Microsoft" },
+    { Logo: AWSLogo, name: "AWS" },
+    { Logo: GoogleLogo, name: "Google" },
+  ];
 
   return (
     <motion.div
@@ -260,8 +313,17 @@ function Hero() {
               <span className="block w-full text-center">
                 AI-Powered Platform for
               </span>
-              <span className="block w-full text-center bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                Institutions & Organizations
+              <span className="block w-full text-center relative min-h-[1.2em]">
+                <motion.span
+                  key={currentWordIndex}
+                  variants={wordRotateVariants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  className="absolute left-0 right-0 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+                >
+                  {rotatingWords[currentWordIndex]}
+                </motion.span>
               </span>
             </motion.h1>
           </motion.div>
@@ -321,36 +383,58 @@ function Hero() {
           </motion.div>
 
           {/* Partner Logos */}
+          {/* Partner Logos */}
           <motion.div
-            className="flex flex-wrap justify-center items-center gap-6 md:gap-8"
+            className="inline-flex flex-wrap items-center justify-center gap-4 md:gap-6 px-6 py-4 bg-gray-50 rounded-2xl shadow-sm border border-gray-100"
             variants={fadeInUpVariants}
+            whileHover={{
+              scale: 1.02,
+              y: -2,
+              transition: {
+                type: "spring",
+                bounce: 0.4,
+                duration: 0.3,
+              },
+            }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.6 }}
           >
-            {[
-              { Logo: MicrosoftLogo, name: "Microsoft" },
-              { Logo: AWSLogo, name: "AWS" },
-              { Logo: GoogleLogo, name: "Google" },
-              { Logo: IBMLogo, name: "IBM" },
-              { Logo: OracleLogo, name: "Oracle" },
-            ].map(({ Logo, name }, index) => (
+            {/* Static label */}
+            <span className="text-sm font-semibold text-gray-600">
+              Powered by
+            </span>
+
+            {/* Animated logos */}
+            {partnerLogos.map(({ Logo, name }, index) => (
               <motion.div
                 key={name}
-                className="flex items-center px-3 py-2 opacity-70 hover:opacity-100 transition-opacity cursor-pointer"
+                className="flex items-center px-2 py-1 opacity-70 hover:opacity-100 transition-opacity cursor-pointer"
                 variants={logoVariants}
                 whileHover={{
                   scale: 1.1,
-                  y: -5,
-                  transition: { duration: 0.2, ease: "easeOut" },
+                  y: -3,
+                  transition: {
+                    type: "spring",
+                    bounce: 0.6,
+                    duration: 0.2,
+                  },
                 }}
                 initial="hidden"
                 animate="visible"
                 transition={{ delay: 1 + index * 0.1 }}
               >
-                <Logo className="h-6 w-6" />
+                <Logo className="h-5 w-5" />
                 <span className="ml-2 text-sm font-semibold text-gray-700">
                   {name}
                 </span>
               </motion.div>
             ))}
+
+            {/* "for startups" text */}
+            <span className="text-sm font-semibold text-gray-600">
+              for startups
+            </span>
           </motion.div>
 
           {/* CTA Button */}

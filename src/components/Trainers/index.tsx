@@ -1,94 +1,61 @@
 // components/TopTrainers.tsx
 import { useRef, useEffect, useState } from "react";
 import { motion, useInView, Variants } from "framer-motion";
+import Image from "next/image";
 
 // Trainers data array (same as before)
 const trainers = [
   {
     id: 1,
-    name: "Rajesh Kumar",
-    title: "Senior AI/ML Engineer",
-    experience: "12 years",
-    photo: "/assets/trainer1.jpg",
-    companies: ["Microsoft", "Google", "Accenture"],
-    certifications: [
-      "AWS Solutions Architect",
-      "Azure AI Engineer",
-      "Google Cloud ML",
-    ],
-    specialization: "Machine Learning & Data Science",
+    name: "Shubham Lal",
+    title: "SDE-2",
+    experience: "8 years",
+    photo: "/trainers/shubham_lal.jpg",
+    companies: ["Microsoft"],
+    specialization: "AI Product Developer",
     studentsmentored: 1200,
     rating: 4.9,
     location: "Hyderabad, India",
+    linkedin: "https://www.linkedin.com/in/shubhamlal/",
   },
   {
     id: 2,
-    name: "Sarah Johnson",
-    title: "Cloud Solutions Architect",
-    experience: "15 years",
-    photo: "/assets/trainer2.jpg",
-    companies: ["Amazon", "Salesforce", "Wipro"],
-    certifications: ["AWS Certified", "Salesforce Admin", "Azure Expert"],
-    specialization: "Cloud Computing & DevOps",
+    name: "Yamini Bandi",
+    title: "SDE-2",
+    experience: "5 years",
+    photo: "/trainers/yamini_bandi.jpg",
+    companies: ["Amazon"],
+    specialization: "ML Engineer",
     studentsmentored: 980,
     rating: 4.8,
-    location: "Seattle, USA",
+    location: "Hyderabad, India",
+    linkedin: "https://www.linkedin.com/in/yaminibandi/",
   },
   {
     id: 3,
-    name: "Priya Sharma",
-    title: "Data Science Lead",
-    experience: "10 years",
-    photo: "/assets/trainer3.jpg",
-    companies: ["Oracle", "Cognizant", "TCS"],
-    certifications: [
-      "Data Science Professional",
-      "Python Expert",
-      "R Analytics",
-    ],
-    specialization: "Big Data & Analytics",
-    studentsmentored: 1500,
-    rating: 4.9,
-    location: "Mumbai, India",
+    name: "Divyansh Dubey",
+    title: "Gen AI",
+    experience: "7 years",
+    photo: "/trainers/Divyansh_dubey.jpg",
+    companies: ["Google"],
+    specialization: "Prompt & GenAI Expert",
+    studentsmentored: 850,
+    rating: 4.7,
+    linkedin: "https://www.linkedin.com/in/divyansh-dubey/",
+    location: "Bengaluru, Karnataka",
   },
   {
     id: 4,
-    name: "David Chen",
-    title: "Full Stack Developer",
-    experience: "8 years",
-    photo: "/assets/trainer4.jpg",
-    companies: ["Meta", "Netflix", "Infosys"],
-    certifications: ["React Expert", "Node.js Professional", "AWS Developer"],
-    specialization: "Web Development & Mobile Apps",
-    studentsmentored: 850,
-    rating: 4.7,
-    location: "London, UK",
-  },
-  {
-    id: 5,
-    name: "Ahmed Al-Rashid",
-    title: "Cybersecurity Expert",
-    experience: "14 years",
-    photo: "/assets/trainer5.jpg",
-    companies: ["IBM", "Cisco", "HCL"],
-    certifications: ["CISSP", "CEH", "AWS Security"],
-    specialization: "Cybersecurity & Ethical Hacking",
-    studentsmentored: 750,
-    rating: 4.8,
-    location: "Dubai, UAE",
-  },
-  {
-    id: 6,
-    name: "Emily Rodriguez",
-    title: "AI Research Scientist",
-    experience: "11 years",
-    photo: "/assets/trainer6.jpg",
-    companies: ["Apple", "Tesla", "Capgemini"],
-    certifications: ["TensorFlow Expert", "PyTorch Professional", "AI Ethics"],
-    specialization: "Artificial Intelligence & NLP",
-    studentsmentored: 1100,
+    name: "Abirami Sukumari",
+    title: "Staff Developer Advocate",
+    experience: "22 years",
+    photo: "/trainers/Abirami_sukumari.jpg",
+    companies: ["Google"],
+    specialization: "Cloud AI and Databases",
+    studentsmentored: 5000,
     rating: 4.9,
-    location: "San Francisco, USA",
+    linkedin: "https://www.linkedin.com/in/abiramisukumaran/",
+    location: "Bengaluru, Karnataka",
   },
 ];
 
@@ -462,7 +429,7 @@ const TopTrainers = () => {
                       transition={{ delay: index * 0.05 }}
                       whileHover={{
                         scale: 1.02,
-                        y: -4,
+                        y: -5,
                         transition: { duration: 0.2 },
                       }}
                       className="flex-shrink-0 w-64 bg-white/90 backdrop-blur-sm rounded-xl shadow-md border border-white/30 p-4 relative overflow-hidden group cursor-pointer will-change-transform"
@@ -476,24 +443,14 @@ const TopTrainers = () => {
                         {/* Trainer Photo & Video Play Button */}
                         <div className="relative mb-4">
                           <div className="w-16 h-16 mx-auto rounded-full bg-gradient-to-r from-blue-600 to-purple-600 p-1 shadow-lg">
-                            <div className="w-full h-full rounded-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center text-sm font-bold text-gray-700 shadow-inner">
-                              {trainer.name
-                                .split(" ")
-                                .map((n) => n[0])
-                                .join("")}
-                            </div>
-                          </div>
-
-                          {/* Video Play Button Overlay */}
-                          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                            <div className="w-6 h-6 bg-gradient-to-r from-red-500 to-red-600 rounded-full flex items-center justify-center shadow-md cursor-pointer">
-                              <svg
-                                className="w-3 h-3 text-white ml-0.5"
-                                fill="currentColor"
-                                viewBox="0 0 24 24"
-                              >
-                                <path d="M8 5v14l11-7z" />
-                              </svg>
+                            <div className="w-full h-full rounded-full overflow-hidden">
+                              <Image
+                                src={trainer.photo}
+                                alt={trainer.name}
+                                width={64}
+                                height={64}
+                                className="w-full h-full object-cover rounded-full"
+                              />
                             </div>
                           </div>
 
@@ -533,6 +490,26 @@ const TopTrainers = () => {
                             </svg>
                             {trainer.location}
                           </p>
+
+                          {/* LinkedIn Link */}
+                          <div className="mb-3">
+                            <a
+                              href={trainer.linkedin}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center justify-center w-8 h-8 bg-gradient-to-r from-blue-600 to-blue-700 rounded-full hover:from-blue-700 hover:to-blue-800 transition-all duration-200 shadow-md hover:shadow-lg"
+                              title="View LinkedIn Profile"
+                            >
+                              <svg
+                                className="w-4 h-4 text-white"
+                                fill="currentColor"
+                                viewBox="0 0 24 24"
+                              >
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                              </svg>
+                            </a>
+                          </div>
+
                           <div className="text-xs text-gray-600 mb-3">
                             <span className="bg-gradient-to-r from-blue-100 to-purple-100 text-blue-800 px-2 py-1 rounded-full text-xs font-medium">
                               {trainer.specialization}
@@ -541,9 +518,9 @@ const TopTrainers = () => {
                         </div>
 
                         {/* Companies */}
-                        <div className="mb-3">
-                          <p className="text-xs text-gray-500 mb-1 text-center font-semibold tracking-wide">
-                            WORKED AT
+                        <div className="mb-4">
+                          <p className="text-xs text-gray-500 mb-2 text-center font-semibold tracking-wide">
+                            WORKING AT
                           </p>
                           <div className="flex flex-wrap justify-center gap-1">
                             {trainer.companies.map((company, idx) => (
@@ -554,30 +531,6 @@ const TopTrainers = () => {
                                 {company}
                               </div>
                             ))}
-                          </div>
-                        </div>
-
-                        {/* Certifications */}
-                        <div className="mb-3">
-                          <p className="text-xs text-gray-500 mb-1 text-center font-semibold tracking-wide">
-                            CERTIFICATIONS
-                          </p>
-                          <div className="space-y-1">
-                            {trainer.certifications
-                              .slice(0, 2)
-                              .map((cert, idx) => (
-                                <div
-                                  key={idx}
-                                  className="text-xs bg-gradient-to-r from-blue-50 to-purple-50 text-blue-700 px-2 py-1 rounded-md text-center border border-blue-100 font-medium"
-                                >
-                                  {cert}
-                                </div>
-                              ))}
-                            {trainer.certifications.length > 2 && (
-                              <div className="text-xs text-gray-400 text-center font-medium">
-                                +{trainer.certifications.length - 2} more
-                              </div>
-                            )}
                           </div>
                         </div>
 
