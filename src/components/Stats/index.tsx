@@ -196,82 +196,10 @@ const stats: StatItem[] = [
   },
 ];
 
-const accreditationEmployees: Record<string, AccreditationEmployee[]> = {
-  Microsoft: [
-    {
-      name: "Rajesh Kumar",
-      role: "Senior Cloud Architect",
-      experience: "12+ years at Microsoft",
-      avatar: "/images/employees/rajesh-ms.jpg",
-      specialization: "Azure AI & Machine Learning",
-    },
-    {
-      name: "Sarah Chen",
-      role: "Principal Program Manager",
-      experience: "15+ years at Microsoft",
-      avatar: "/images/employees/sarah-ms.jpg",
-      specialization: "Microsoft Cognitive Services",
-    },
-    {
-      name: "David Williams",
-      role: "Senior Data Scientist",
-      experience: "10+ years at Microsoft",
-      avatar: "/images/employees/david-ms.jpg",
-      specialization: "Power BI & Analytics",
-    },
-  ],
-  AWS: [
-    {
-      name: "Priya Sharma",
-      role: "Solutions Architect",
-      experience: "14+ years at AWS",
-      avatar: "/images/employees/priya-aws.jpg",
-      specialization: "AWS SageMaker & AI Services",
-    },
-    {
-      name: "Michael Rodriguez",
-      role: "Technical Evangelist",
-      experience: "11+ years at AWS",
-      avatar: "/images/employees/michael-aws.jpg",
-      specialization: "Cloud Infrastructure & ML",
-    },
-    {
-      name: "Lisa Zhang",
-      role: "Senior Developer Advocate",
-      experience: "9+ years at AWS",
-      avatar: "/images/employees/lisa-aws.jpg",
-      specialization: "Serverless & AI Integration",
-    },
-  ],
-  Google: [
-    {
-      name: "Ahmed Al-Rashid",
-      role: "Staff Software Engineer",
-      experience: "13+ years at Google",
-      avatar: "/images/employees/ahmed-google.jpg",
-      specialization: "TensorFlow & Deep Learning",
-    },
-    {
-      name: "Emily Johnson",
-      role: "Product Manager",
-      experience: "8+ years at Google",
-      avatar: "/images/employees/emily-google.jpg",
-      specialization: "Google Cloud AI Platform",
-    },
-    {
-      name: "Carlos Martinez",
-      role: "Research Scientist",
-      experience: "16+ years at Google",
-      avatar: "/images/employees/carlos-google.jpg",
-      specialization: "Natural Language Processing",
-    },
-  ],
-};
-
 const accreditations = [
-  { name: "Microsoft", logo: <MicrosoftLogo className="h-8 w-8" /> },
-  { name: "AWS", logo: <AWSLogo className="h-8 w-8" /> },
-  { name: "Google", logo: <GoogleLogo className="h-8 w-8" /> },
+  { name: "Microsoft", logo: <MicrosoftLogo className="h-6 w-6" /> },
+  { name: "AWS", logo: <AWSLogo className="h-6 w-6" /> },
+  { name: "Google", logo: <GoogleLogo className="h-6 w-6" /> },
 ];
 
 // Scrollable Overlay Components
@@ -359,100 +287,6 @@ const StatHoverOverlay = ({
     </motion.div>
   </motion.div>
 );
-
-const AccreditationHoverOverlay = ({
-  accreditationName,
-  onClose,
-}: {
-  accreditationName: string;
-  onClose: () => void;
-}) => {
-  const employees = accreditationEmployees[accreditationName] || [];
-
-  return (
-    <motion.div
-      className="fixed inset-0 z-[9999] flex items-start justify-center pt-16 pb-8 px-4 bg-black/30 backdrop-blur-sm"
-      style={{ overflowY: "auto", WebkitOverflowScrolling: "touch" }}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.2 }}
-      onClick={onClose}
-    >
-      <motion.div
-        className="w-full max-w-md bg-white rounded-xl shadow-2xl border border-gray-100 my-8"
-        initial={{ scale: 0.9, opacity: 0, y: 20 }}
-        animate={{ scale: 1, opacity: 1, y: 0 }}
-        exit={{ scale: 0.9, opacity: 0, y: 20 }}
-        transition={{ duration: 0.2, ease: "easeOut" }}
-        onClick={(e) => e.stopPropagation()}
-      >
-        <div className="p-6 border-b border-gray-100">
-          <div className="flex items-center justify-between mb-2">
-            <h3 className="text-lg font-bold text-gray-900">
-              {accreditationName} Experts
-            </h3>
-            <button
-              onClick={onClose}
-              className="p-1 hover:bg-gray-100 rounded-full transition-colors duration-200"
-            >
-              <svg
-                className="w-5 h-5 text-gray-500"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            </button>
-          </div>
-          <div className="w-12 h-0.5 bg-gradient-to-r from-blue-600 to-purple-600"></div>
-        </div>
-
-        <div
-          className="max-h-96 overflow-y-auto p-6"
-          style={{ WebkitOverflowScrolling: "touch" }}
-        >
-          <div className="space-y-3">
-            {employees.map((employee, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: index * 0.1, duration: 0.2 }}
-                className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200"
-              >
-                <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-purple-600 rounded-full flex items-center justify-center text-white font-bold shadow-sm flex-shrink-0">
-                  {employee.name
-                    .split(" ")
-                    .map((n) => n[0])
-                    .join("")}
-                </div>
-                <div className="flex-1 min-w-0">
-                  <h4 className="text-sm font-semibold text-gray-900">
-                    {employee.name}
-                  </h4>
-                  <p className="text-xs text-blue-600 font-medium">
-                    {employee.role}
-                  </p>
-                  <p className="text-xs text-gray-500">{employee.experience}</p>
-                  <p className="text-xs text-gray-400 mt-1">
-                    {employee.specialization}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </motion.div>
-    </motion.div>
-  );
-};
 
 // Variants
 const containerVariants: Variants = {
@@ -794,98 +628,60 @@ function Stats() {
             ))}
           </motion.div>
 
-          {/* New Certifications Heading */}
-          <motion.div
-            className="text-center mb-12"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 30 }}
-            transition={{ delay: 0.6, duration: 0.7, ease: "easeOut" }}
-          >
-            <h3 className="text-3xl md:text-4xl font-semibold text-gray-900 mb-2 tracking-tight">
-              Get Industry Certifications from{" "}
-              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                Microsoft Google Amazon
-              </span>
-            </h3>
-          </motion.div>
-
-          {/* Accreditations Section */}
+          {/* Simplified Certifications Section - Single Line */}
           <motion.div
             className="text-center"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 30 }}
             transition={{ delay: 0.8, duration: 0.7, ease: "easeOut" }}
           >
-            <h4 className="text-xl font-medium text-gray-700 mb-2 tracking-wide">
-              Accreditations with Industry Leaders
-            </h4>
-            <p className="text-sm text-blue-600 font-medium mb-8 flex items-center justify-center gap-2">
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-                />
-              </svg>
-              Click to meet our expert team members
-            </p>
             <motion.div
-              className="flex flex-wrap justify-center items-center gap-8 md:gap-12"
-              variants={containerVariants}
-              initial="hidden"
-              animate={isVisible ? "visible" : "hidden"}
+              className="inline-flex flex-wrap items-center justify-center gap-3 md:gap-4 px-6 py-4 bg-white/80 backdrop-blur-sm rounded-2xl border border-white/30 shadow-lg hover:shadow-xl transition-all duration-300"
+              whileHover={{
+                scale: 1.02,
+                y: -2,
+                transition: {
+                  type: "spring",
+                  bounce: 0.4,
+                  duration: 0.3,
+                },
+              }}
             >
+              <span className="text-lg md:text-xl font-semibold text-gray-800 tracking-wide">
+                Get{" "}
+                <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                  industry certifications{" "}
+                </span>
+                from
+              </span>
+
               {accreditations.map((accreditation, index) => (
                 <motion.div
                   key={index}
+                  className="flex items-center gap-2 px-3 py-2 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200"
                   variants={accreditationVariants}
                   whileHover={{
-                    scale: 1.1,
-                    y: -5,
-                    boxShadow: "0 15px 30px rgba(0, 0, 0, 0.1)",
-                    transition: { duration: 0.2, ease: "easeOut" },
+                    scale: 1.05,
+                    y: -2,
+                    transition: {
+                      type: "spring",
+                      bounce: 0.6,
+                      duration: 0.2,
+                    },
                   }}
                   whileTap={{ scale: 0.98 }}
-                  className="relative flex items-center px-6 py-4 bg-white/80 backdrop-blur-sm rounded-xl border border-white/30 shadow-md hover:shadow-lg hover:border-blue-200 transition-all duration-300 cursor-pointer select-none group"
-                  onClick={() =>
-                    hoveredAccreditation === accreditation.name
-                      ? setHoveredAccreditation(null)
-                      : setHoveredAccreditation(accreditation.name)
-                  }
+                  initial="hidden"
+                  animate={isVisible ? "visible" : "hidden"}
+                  transition={{ delay: 1 + index * 0.1 }}
                 >
-                  {/* Team Icon Indicator */}
-                  <div className="absolute -top-2 -right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                    <div className="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center">
-                      <svg
-                        className="w-3 h-3 text-green-600"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-
                   <motion.div
-                    className="mr-3 text-gray-700 group-hover:text-blue-600 transition-colors duration-300"
+                    className="text-gray-700 group-hover:text-blue-600 transition-colors duration-300"
                     whileHover={{ rotate: [0, -5, 5, 0] }}
                     transition={{ duration: 0.5 }}
                   >
                     {accreditation.logo}
                   </motion.div>
-                  <span className="text-lg font-semibold text-gray-800 tracking-wide group-hover:text-blue-700 transition-colors duration-300">
+                  <span className="text-base md:text-lg font-semibold text-gray-800 tracking-wide hover:text-blue-700 transition-colors duration-300">
                     {accreditation.name}
                   </span>
                 </motion.div>
@@ -1080,15 +876,6 @@ function Stats() {
           <StatHoverOverlay
             stat={stats[hoveredStat]}
             onClose={() => setHoveredStat(null)}
-          />
-        )}
-      </AnimatePresence>
-
-      <AnimatePresence>
-        {hoveredAccreditation && (
-          <AccreditationHoverOverlay
-            accreditationName={hoveredAccreditation}
-            onClose={() => setHoveredAccreditation(null)}
           />
         )}
       </AnimatePresence>

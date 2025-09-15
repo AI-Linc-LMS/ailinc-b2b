@@ -4,6 +4,7 @@ import { motion, AnimatePresence, Variants } from "framer-motion";
 import { GoogleLogo } from "../../../public/icons/GoogleLogo";
 import { AWSLogo } from "../../../public/icons/AWSLogo";
 import { MicrosoftLogo } from "../../../public/icons/MicrosoftLogo";
+import Link from "next/link";
 
 type Item = {
   title: string;
@@ -1387,22 +1388,23 @@ export default function Services() {
                 )}
               </motion.div>
             ))}
-
-            <motion.button
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.8 }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={handleButtonClick}
-              onTouchStart={handleHoverStart}
-              onTouchEnd={handleHoverEnd}
-              onMouseEnter={handleHoverStart}
-              onMouseLeave={handleHoverEnd}
-              className="mt-6 md:mt-8 w-full sm:w-auto rounded-md bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-3 font-semibold text-white hover:shadow-lg transition-all duration-300 cursor-pointer text-sm md:text-base"
-            >
-              {currentTab.cta}
-            </motion.button>
+            <Link href="/#contact" passHref>
+              <motion.button
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.8 }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={handleButtonClick}
+                onTouchStart={handleHoverStart}
+                onTouchEnd={handleHoverEnd}
+                onMouseEnter={handleHoverStart}
+                onMouseLeave={handleHoverEnd}
+                className="mt-6 md:mt-8 w-full sm:w-auto rounded-md bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-3 font-semibold text-white hover:shadow-lg transition-all duration-300 cursor-pointer text-sm md:text-base"
+              >
+                {currentTab.cta}
+              </motion.button>
+            </Link>
           </div>
 
           {/* RIGHT â€“ 3D Mockups */}

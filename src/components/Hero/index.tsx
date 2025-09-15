@@ -382,10 +382,9 @@ function Hero() {
             </motion.p>
           </motion.div>
 
-          {/* Partner Logos */}
-          {/* Partner Logos */}
+          {/* Partner Logos - Updated for single line on mobile */}
           <motion.div
-            className="inline-flex flex-wrap items-center justify-center gap-4 md:gap-6 px-6 py-4 bg-gray-50 rounded-2xl shadow-sm border border-gray-100"
+            className="inline-flex flex-nowrap items-center justify-center gap-2 sm:gap-3 md:gap-4 lg:gap-6 px-3 sm:px-4 md:px-6 py-3 md:py-4 bg-gray-50 rounded-2xl shadow-sm border border-gray-100 overflow-hidden"
             variants={fadeInUpVariants}
             whileHover={{
               scale: 1.02,
@@ -401,7 +400,7 @@ function Hero() {
             transition={{ delay: 0.5, duration: 0.6 }}
           >
             {/* Static label */}
-            <span className="text-sm font-semibold text-gray-600">
+            <span className="text-xs sm:text-sm font-semibold text-gray-600 whitespace-nowrap">
               Powered by
             </span>
 
@@ -409,7 +408,7 @@ function Hero() {
             {partnerLogos.map(({ Logo, name }, index) => (
               <motion.div
                 key={name}
-                className="flex items-center px-2 py-1 opacity-70 hover:opacity-100 transition-opacity cursor-pointer"
+                className="flex items-center px-1 sm:px-2 py-1 opacity-70 hover:opacity-100 transition-opacity cursor-pointer"
                 variants={logoVariants}
                 whileHover={{
                   scale: 1.1,
@@ -424,15 +423,15 @@ function Hero() {
                 animate="visible"
                 transition={{ delay: 1 + index * 0.1 }}
               >
-                <Logo className="h-5 w-5" />
-                <span className="ml-2 text-sm font-semibold text-gray-700">
+                <Logo className="h-4 w-4 sm:h-5 sm:w-5" />
+                <span className="ml-1 sm:ml-2 text-xs sm:text-sm font-semibold text-gray-700 whitespace-nowrap">
                   {name}
                 </span>
               </motion.div>
             ))}
 
             {/* "for startups" text */}
-            <span className="text-sm font-semibold text-gray-600">
+            <span className="text-xs sm:text-sm font-semibold text-gray-600 whitespace-nowrap">
               for startups
             </span>
           </motion.div>

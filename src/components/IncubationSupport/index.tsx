@@ -79,7 +79,7 @@ const IncubationSupport = () => {
         "Transform student ideas into viable startups with comprehensive entrepreneurship programs, mentorship, and AI-powered business development tools.",
       illustration: (
         <motion.div
-          className="w-full h-full"
+          className="w-full h-full "
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.5 }}
@@ -472,7 +472,7 @@ const IncubationSupport = () => {
                       animate={{ opacity: 1, scale: 1, rotateY: 0 }}
                       transition={{ delay: 1.0, duration: 1.5 }}
                     >
-                      <div className="w-full max-w-md h-80 bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
+                      <div className="w-full max-w-md h-80 bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100 hidden sm:block">
                         {pitchSlides[activeSlide].illustration}
                       </div>
                     </motion.div>
