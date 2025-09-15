@@ -1,6 +1,7 @@
 // components/PartnerCollaboration.tsx
 import { useRef } from "react";
 import { motion, useInView, Variants } from "framer-motion";
+import Link from "next/link";
 
 const PartnerCollaboration = () => {
   const sectionRef = useRef(null);
@@ -453,24 +454,26 @@ const PartnerCollaboration = () => {
                       whileHover={{ x: "100%" }}
                       transition={{ duration: 0.6 }}
                     />
-                    <span className="relative flex items-center justify-center">
-                      {model.cta}
-                      <motion.svg
-                        className="w-4 h-4 ml-2"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        whileHover={{ x: 3 }}
-                        transition={{ duration: 0.2 }}
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M13 7l5 5m0 0l-5 5m5-5H6"
-                        />
-                      </motion.svg>
-                    </span>
+                    <Link href="/#contact" passHref>
+                      <span className="relative flex items-center justify-center">
+                        {model.cta}
+                        <motion.svg
+                          className="w-4 h-4 ml-2"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          whileHover={{ x: 3 }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M13 7l5 5m0 0l-5 5m5-5H6"
+                          />
+                        </motion.svg>
+                      </span>
+                    </Link>
                   </motion.button>
                 </div>
               </motion.div>
@@ -643,31 +646,33 @@ const PartnerCollaboration = () => {
               </motion.p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <motion.button
-                  whileHover={{
-                    scale: 1.05,
-                    boxShadow: "0 10px 30px rgba(255, 255, 255, 0.2)",
-                  }}
-                  whileTap={{ scale: 0.95 }}
-                  className="px-8 py-4 bg-white text-indigo-600 rounded-xl font-bold text-base shadow-lg hover:shadow-xl transition-all duration-300 inline-flex items-center justify-center group"
-                >
-                  <span>Schedule a Partnership Call</span>
-                  <motion.svg
-                    className="w-5 h-5 ml-2"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    whileHover={{ x: 3 }}
-                    transition={{ duration: 0.2 }}
+                <Link href="/#contact" passHref>
+                  <motion.button
+                    whileHover={{
+                      scale: 1.05,
+                      boxShadow: "0 10px 30px rgba(255, 255, 255, 0.2)",
+                    }}
+                    whileTap={{ scale: 0.95 }}
+                    className="px-8 py-4 bg-white text-indigo-600 rounded-xl font-bold text-base shadow-lg hover:shadow-xl transition-all duration-300 inline-flex items-center justify-center group"
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
-                    />
-                  </motion.svg>
-                </motion.button>
+                    <span>Schedule a Partnership Call</span>
+                    <motion.svg
+                      className="w-5 h-5 ml-2"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      whileHover={{ x: 3 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+                      />
+                    </motion.svg>
+                  </motion.button>
+                </Link>
 
                 <motion.button
                   whileHover={{

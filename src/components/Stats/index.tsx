@@ -32,7 +32,7 @@ interface AccreditationEmployee {
 const stats: StatItem[] = [
   {
     number: 1000,
-    suffix: "K+",
+    suffix: "+",
     label: "Organisations",
     description: "Trusted by leading institutions",
     hoverData: {
@@ -114,7 +114,7 @@ const stats: StatItem[] = [
   },
   {
     number: 1000,
-    suffix: "K+",
+    suffix: "+",
     label: "Faculty Trained",
     description: "Upskilled educators",
     hoverData: {
@@ -274,7 +274,7 @@ const accreditations = [
   { name: "Google", logo: <GoogleLogo className="h-8 w-8" /> },
 ];
 
-// Scrollable Overlay Components (same as before)
+// Scrollable Overlay Components
 const StatHoverOverlay = ({
   stat,
   onClose,
@@ -454,7 +454,7 @@ const AccreditationHoverOverlay = ({
   );
 };
 
-// Variants (same as before)
+// Variants
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
@@ -718,9 +718,9 @@ function Stats() {
             </motion.p>
           </motion.div>
 
-          {/* Stats Grid with Enhanced Clickability */}
+          {/* Stats Grid - Single Line Layout */}
           <motion.div
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-16"
+            className="flex flex-wrap justify-center items-stretch gap-4 md:gap-6 lg:gap-8 mb-16"
             variants={containerVariants}
           >
             {stats.map((stat, index) => (
@@ -734,7 +734,7 @@ function Stats() {
                   transition: { duration: 0.2, ease: "easeOut" },
                 }}
                 whileTap={{ scale: 0.98 }}
-                className="relative text-center p-4 md:p-6 bg-white/70 backdrop-blur-sm rounded-2xl border border-white/30 shadow-lg hover:shadow-xl hover:border-blue-200 transition-all duration-300 min-h-[180px] flex flex-col justify-center cursor-pointer select-none group"
+                className="relative text-center p-4 md:p-6 bg-white/70 backdrop-blur-sm rounded-2xl border border-white/30 shadow-lg hover:shadow-xl hover:border-blue-200 transition-all duration-300 min-h-[180px] w-full max-w-[200px] md:max-w-[220px] lg:max-w-[240px] flex flex-col justify-center cursor-pointer select-none group"
                 onClick={() =>
                   hoveredStat === index
                     ? setHoveredStat(null)
@@ -790,22 +790,35 @@ function Stats() {
                 >
                   {stat.description}
                 </motion.p>
-
-                {/* Subtle Click Hint */}
               </motion.div>
             ))}
           </motion.div>
 
-          {/* Accreditations Section with Enhanced Clickability */}
+          {/* New Certifications Heading */}
+          <motion.div
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 30 }}
+            transition={{ delay: 0.6, duration: 0.7, ease: "easeOut" }}
+          >
+            <h3 className="text-3xl md:text-4xl font-semibold text-gray-900 mb-2 tracking-tight">
+              Get Industry Certifications from{" "}
+              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                Microsoft Google Amazon
+              </span>
+            </h3>
+          </motion.div>
+
+          {/* Accreditations Section */}
           <motion.div
             className="text-center"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 30 }}
             transition={{ delay: 0.8, duration: 0.7, ease: "easeOut" }}
           >
-            <h3 className="text-2xl font-semibold text-gray-900 mb-2 tracking-wide">
+            <h4 className="text-xl font-medium text-gray-700 mb-2 tracking-wide">
               Accreditations with Industry Leaders
-            </h3>
+            </h4>
             <p className="text-sm text-blue-600 font-medium mb-8 flex items-center justify-center gap-2">
               <svg
                 className="w-4 h-4"
@@ -880,7 +893,7 @@ function Stats() {
             </motion.div>
           </motion.div>
 
-          {/* Thunder Effect Impact Statement (same as before) */}
+          {/* Thunder Effect Impact Statement */}
           <motion.div
             className="mt-16 text-center"
             initial={{ opacity: 0, scale: 0.9 }}
@@ -898,7 +911,7 @@ function Stats() {
               }}
               transition={{ duration: 0.3 }}
             >
-              {/* Thunder Effect (keeping all the lightning animations) */}
+              {/* Thunder Effect */}
               <motion.div className="relative mr-3">
                 <motion.div
                   className="absolute inset-0 w-8 h-8 bg-blue-400 rounded-full blur-md opacity-30 -top-1 -left-1"

@@ -59,7 +59,14 @@ const successStories = [
     certifiedLabel: "upskilled",
     growth: 70,
     growthLabel: "placed",
-    icon: "🚀",
+    icon: (
+      <Image
+        src="/images/careerbridge.png"
+        alt="Career Bridge"
+        fill
+        className="object-cover rounded-lg"
+      />
+    ),
     bgGradient: "from-green-500 to-green-600",
     certifiedMax: 1500,
     growthMax: 100,

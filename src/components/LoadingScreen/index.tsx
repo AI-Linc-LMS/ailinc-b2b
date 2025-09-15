@@ -165,7 +165,7 @@ export default function LoadingScreen({ onFinish }: LoadingScreenProps) {
         exit="exit"
       >
         <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-4">
-          Ai Linc
+          AI Linc
         </h1>
       </motion.div>
 
@@ -176,7 +176,7 @@ export default function LoadingScreen({ onFinish }: LoadingScreenProps) {
         initial="hidden"
         animate="visible"
       >
-        <span className="text-gray-600 text-lg">Initializing Ai Linc</span>
+        <span className="text-gray-600 text-lg">Initializing AI Linc</span>
         <div className="flex space-x-1">
           {[0, 1, 2].map((index) => (
             <motion.span

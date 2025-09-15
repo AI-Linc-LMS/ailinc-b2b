@@ -2,11 +2,13 @@
 import { useRef, useState, useEffect } from "react";
 import { motion, useInView, AnimatePresence, Variants } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 
 const IncubationSupport = () => {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
   const [activeSlide, setActiveSlide] = useState(0);
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -31,7 +33,7 @@ const IncubationSupport = () => {
       opacity: 1,
       scale: 1,
       transition: {
-        duration: 1.8, // Slower slide transition
+        duration: 1.8,
         ease: [0.25, 0.46, 0.45, 0.94],
       },
     },
@@ -43,6 +45,29 @@ const IncubationSupport = () => {
         duration: 1.2,
       },
     },
+  };
+
+  const videoVariants: Variants = {
+    hidden: { opacity: 0, scale: 0.8, rotateY: -15 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      rotateY: 0,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut",
+        delay: 0.4,
+      },
+    },
+  };
+
+  // Video data
+  const featuredVideo = {
+    title: "Bill Gates on navigating an AI future",
+    credits: "Credits - CNN",
+    youtubeUrl: "https://youtu.be/Ny-qhl4N9dY?si=q267VRCxsx8-sVRA",
+    embedUrl: "https://www.youtube.com/embed/Ny-qhl4N9dY",
+    videoId: "Ny-qhl4N9dY",
   };
 
   const pitchSlides = [
@@ -62,7 +87,7 @@ const IncubationSupport = () => {
           style={{ filter: "hue-rotate(0deg)" }}
         >
           <Image
-            src="/images/studentIcon.jpg" // remove 'public' prefix
+            src="/images/studentIcon.jpg"
             alt="funding"
             fill
             className="object-cover"
@@ -93,7 +118,7 @@ const IncubationSupport = () => {
           style={{ filter: "hue-rotate(0deg)" }}
         >
           <Image
-            src="/images/mentorIcon.jpg" // remove 'public' prefix
+            src="/images/mentorIcon.jpg"
             alt="funding"
             fill
             className="object-cover"
@@ -124,7 +149,7 @@ const IncubationSupport = () => {
           style={{ filter: "hue-rotate(0deg)" }}
         >
           <Image
-            src="/images/investor.jpg" // remove 'public' prefix
+            src="/images/investor.jpg"
             alt="funding"
             fill
             className="object-cover"
@@ -155,7 +180,7 @@ const IncubationSupport = () => {
           style={{ filter: "hue-rotate(0deg)" }}
         >
           <Image
-            src="/images/pitchdeck.jpg" // remove 'public' prefix
+            src="/images/pitchdeck.jpg"
             alt="funding"
             fill
             className="object-cover"
@@ -172,7 +197,6 @@ const IncubationSupport = () => {
     },
   ];
 
-  // Slower auto-advance - 8 seconds per slide
   useEffect(() => {
     if (isInView) {
       const interval = setInterval(() => {
@@ -270,7 +294,80 @@ const IncubationSupport = () => {
             </motion.p>
           </motion.div>
 
-          {/* Light Theme Pitch Deck Slide */}
+          {/* Featured Video Section - INLINE PLAYBACK */}
+          <motion.div
+            variants={videoVariants}
+            className="relative max-w-2xl mx-auto"
+          >
+            <div className="relative bg-gradient-to-r from-gray-100 to-gray-200 rounded-2xl p-4 shadow-xl hover:shadow-2xl transition-shadow duration-300">
+              <div className="bg-gray-300 rounded-xl p-2">
+                <div className="bg-black rounded-lg aspect-video flex items-center justify-center relative overflow-hidden group">
+                  <iframe
+                    className="absolute inset-0 w-full h-full rounded-lg"
+                    src={featuredVideo.embedUrl}
+                    title={featuredVideo.title}
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                </div>
+              </div>
+              <div className="bg-gray-300 rounded-b-lg h-2 mx-2"></div>
+            </div>
+
+            {/* Floating Elements */}
+            <motion.div
+              animate={{ y: [0, -8, 0] }}
+              transition={{ duration: 3, repeat: Infinity }}
+              className="absolute -top-2 -right-2 w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl shadow-lg flex items-center justify-center"
+            >
+              <svg
+                className="w-5 h-5 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
+                />
+              </svg>
+            </motion.div>
+
+            <motion.div
+              animate={{ x: [0, 8, 0] }}
+              transition={{ duration: 2.5, repeat: Infinity }}
+              className="absolute -bottom-4 -left-4 w-8 h-8 bg-gradient-to-br from-green-500 to-teal-600 rounded-full shadow-lg flex items-center justify-center"
+            >
+              <svg
+                className="w-4 h-4 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M13 10V3L4 14h7v7l9-11h-7z"
+                />
+              </svg>
+            </motion.div>
+
+            {/* Video Credits Badge */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 1, duration: 0.4 }}
+              className="absolute top-2 left-2 bg-black bg-opacity-70 text-white px-2 py-0.5 rounded-full text-[10px] font-medium"
+            >
+              {featuredVideo.credits}
+            </motion.div>
+          </motion.div>
+
+          {/* Rest of your existing pitch deck slides code... */}
           <div className="relative">
             <div className="bg-white backdrop-blur-xl rounded-3xl border border-gray-200 shadow-2xl overflow-hidden">
               {/* Light Slide Header */}
@@ -291,7 +388,7 @@ const IncubationSupport = () => {
                 </div>
               </div>
 
-              {/* Light Slide Content - WITH SLOWER TIMING */}
+              {/* Light Slide Content */}
               <div className="min-h-[600px] p-8 bg-gradient-to-br from-gray-50 to-blue-50/30">
                 <AnimatePresence mode="wait">
                   <motion.div
@@ -302,12 +399,12 @@ const IncubationSupport = () => {
                     exit="exit"
                     className="grid lg:grid-cols-2 gap-12 items-center h-full"
                   >
-                    {/* Left Side - Content with SLOWER timing */}
+                    {/* Left Side - Content */}
                     <div className="space-y-8">
                       <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.8, duration: 1.2 }} // MUCH SLOWER
+                        transition={{ delay: 0.8, duration: 1.2 }}
                       >
                         <div
                           className={`inline-block px-4 py-2 bg-gradient-to-r ${pitchSlides[activeSlide].color} rounded-lg text-white text-sm font-bold mb-4`}
@@ -327,11 +424,11 @@ const IncubationSupport = () => {
                         </p>
                       </motion.div>
 
-                      {/* Features with SLOWER timing */}
+                      {/* Features */}
                       <motion.div
                         initial={{ opacity: 0, y: 40 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 1.4, duration: 1.0 }} // MUCH SLOWER
+                        transition={{ delay: 1.4, duration: 1.0 }}
                       >
                         <h4 className="text-gray-900 font-bold text-lg mb-4">
                           Key Features:
@@ -345,7 +442,7 @@ const IncubationSupport = () => {
                                 initial={{ opacity: 0, x: -30 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{
-                                  delay: 1.8 + idx * 0.3, // MUCH SLOWER stagger
+                                  delay: 1.8 + idx * 0.3,
                                   duration: 0.9,
                                 }}
                               >
@@ -353,7 +450,7 @@ const IncubationSupport = () => {
                                   className={`w-3 h-3 rounded-full bg-gradient-to-r ${pitchSlides[activeSlide].color}`}
                                   animate={{ scale: [1, 1.2, 1] }}
                                   transition={{
-                                    duration: 4, // SLOWER pulse
+                                    duration: 4,
                                     repeat: Infinity,
                                     delay: idx * 0.5,
                                   }}
@@ -368,12 +465,12 @@ const IncubationSupport = () => {
                       </motion.div>
                     </div>
 
-                    {/* Right Side - Your Original Illustration with SLOWER timing */}
+                    {/* Right Side - Illustration */}
                     <motion.div
                       className="flex justify-center items-center"
                       initial={{ opacity: 0, scale: 0.7, rotateY: 20 }}
                       animate={{ opacity: 1, scale: 1, rotateY: 0 }}
-                      transition={{ delay: 1.0, duration: 1.5 }} // SLOWER illustration entrance
+                      transition={{ delay: 1.0, duration: 1.5 }}
                     >
                       <div className="w-full max-w-md h-80 bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
                         {pitchSlides[activeSlide].illustration}
@@ -452,44 +549,46 @@ const IncubationSupport = () => {
               </div>
             </div>
 
-            {/* Auto-play Progress Bar - SLOWER */}
+            {/* Auto-play Progress Bar */}
             <motion.div
               className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"
               initial={{ width: "0%" }}
               animate={{ width: "100%" }}
-              transition={{ duration: 8, repeat: Infinity }} // Match 8 second timing
+              transition={{ duration: 8, repeat: Infinity }}
               key={activeSlide}
             />
           </div>
 
           {/* Light Theme CTA */}
-          <motion.div className="text-center mt-16">
-            <motion.button
-              whileHover={{
-                scale: 1.05,
-                boxShadow: "0 20px 40px rgba(59, 130, 246, 0.3)",
-              }}
-              whileTap={{ scale: 0.95 }}
-              className="px-12 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-bold text-lg shadow-xl transition-all duration-300 inline-flex items-center space-x-3"
-            >
-              <span>Launch Your Incubation Program</span>
-              <motion.svg
-                className="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                whileHover={{ x: 3 }}
-                transition={{ duration: 0.2 }}
+          <Link href="/#contact" passHref>
+            <motion.div className="text-center mt-16">
+              <motion.button
+                whileHover={{
+                  scale: 1.05,
+                  boxShadow: "0 20px 40px rgba(59, 130, 246, 0.3)",
+                }}
+                whileTap={{ scale: 0.95 }}
+                className="px-12 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-bold text-lg shadow-xl transition-all duration-300 inline-flex items-center space-x-3 cursor-pointer"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M13 7l5 5m0 0l-5 5m5-5H6"
-                />
-              </motion.svg>
-            </motion.button>
-          </motion.div>
+                <span>Launch Your Incubation Program</span>
+                <motion.svg
+                  className="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  whileHover={{ x: 3 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M13 7l5 5m0 0l-5 5m5-5H6"
+                  />
+                </motion.svg>
+              </motion.button>
+            </motion.div>
+          </Link>
         </motion.div>
       </div>
     </section>

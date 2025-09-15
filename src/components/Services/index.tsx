@@ -1096,7 +1096,7 @@ export default function Services() {
       <h2 className="mb-8 md:mb-14 text-center text-2xl sm:text-3xl md:text-4xl font-bold">
         What We Do{" "}
         <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent italic">
-          at Ai Linc
+          at AI Linc
         </span>
       </h2>
 
@@ -1496,7 +1496,7 @@ export default function Services() {
               </motion.span>
             </motion.span>
             <span className="bg-gradient-to-r from-gray-700 to-gray-900 bg-clip-text text-transparent font-medium">
-              Ai Linc is the only platform that combines AI-powered apps, skill
+              AI Linc is the only platform that combines AI-powered apps, skill
               development, and institutional transformation under one
               white-labeled solution — built for higher education.
             </span>

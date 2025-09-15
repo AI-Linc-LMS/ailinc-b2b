@@ -29,6 +29,7 @@ body {
 
 .animate-scroll-horizontal-smooth {
   animation: scrollHorizontalSmooth 40s linear infinite;
+  
 }
 .animate-scroll-horizontal-smooth:hover {
   animation-play-state: paused;
