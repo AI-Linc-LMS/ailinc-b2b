@@ -136,7 +136,14 @@ const TopTrainers = () => {
   };
 
   // Helper function to render company logo
-  const renderCompanyLogo = (company: any, size: string = "w-4 h-4") => {
+  const renderCompanyLogo = (
+    company: {
+      name: string;
+      Logo?: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+      logo?: string;
+    },
+    size: string = "w-4 h-4"
+  ) => {
     if (company.Logo) {
       // SVG Component
       const LogoComponent = company.Logo;
