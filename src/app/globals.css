@@ -18,7 +18,7 @@ body {
 }
 
 /* Horizontal scroll animation (if used elsewhere) */
-@keyframes scrollHorizontalSmooth {
+/* @keyframes scrollHorizontalSmooth {
   0% {
     transform: translateX(0);
   }
@@ -30,10 +30,63 @@ body {
 .animate-scroll-horizontal-smooth {
   animation: scrollHorizontalSmooth 40s linear infinite;
   
-}
-.animate-scroll-horizontal-smooth:hover {
+} */
+/* .animate-scroll-horizontal-smooth:hover {
   animation-play-state: paused;
+} */
+
+/* Add to your globals.css or component styles */
+/* Add to globals.css */
+.globe-container {
+  position: relative;
 }
+
+.globe-sphere {
+  width: 280px;
+  height: 280px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 50%, #1e3a8a 100%);
+  border-radius: 50%;
+  animation: globeRotate 20s linear infinite;
+  background-image: 
+    radial-gradient(circle at 30% 30%, rgba(255,255,255,0.3) 2px, transparent 2px),
+    radial-gradient(circle at 70% 20%, rgba(255,255,255,0.2) 1px, transparent 1px),
+    radial-gradient(circle at 20% 70%, rgba(255,255,255,0.2) 1px, transparent 1px),
+    radial-gradient(circle at 80% 80%, rgba(255,255,255,0.3) 2px, transparent 2px);
+  background-size: 40px 40px, 60px 60px, 50px 50px, 70px 70px;
+  box-shadow: 
+    inset -20px -20px 40px rgba(0,0,0,0.4),
+    inset 20px 20px 40px rgba(255,255,255,0.1),
+    0 0 50px rgba(59, 130, 246, 0.5);
+}
+
+@keyframes globeRotate {
+  from {
+    transform: translate(-50%, -50%) rotateY(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotateY(360deg);
+  }
+}
+
+.globe-sphere::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  background: radial-gradient(ellipse at center, 
+    rgba(59, 130, 246, 0.1) 0%, 
+    rgba(59, 130, 246, 0.2) 60%, 
+    rgba(30, 58, 138, 0.4) 100%);
+  border-radius: 50%;
+  z-index: -1;
+}
+
 
 /* Hide scrollbars */
 .scrollbar-hide {

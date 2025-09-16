@@ -599,7 +599,7 @@ function HandsOnLearningSection() {
                   {[
                     { number: "50+", label: "Premium Courses" },
                     { number: "1:1", label: "Mentorship" },
-                    { number: "100%", label: "Placement Support" },
+                    { number: "100+", label: "Industry Projects" },
                     { number: "10K+", label: "Success Stories" },
                   ].map((stat, index) => (
                     <motion.div

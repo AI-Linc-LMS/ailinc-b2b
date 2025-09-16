@@ -1,8 +1,11 @@
-import React, { useState, useRef, useMemo } from "react";
+"use client";
+
+import React, { useState, useRef, useMemo, useEffect } from "react";
 import { motion, AnimatePresence, useInView, Variants } from "framer-motion";
 import Image from "next/image";
+import { chunkArray } from "@/chunkArray";
 
-// --- Data Structure (Only Image Strings) ---
+// ---------- Data ----------
 const galleryData = {
   Events: ["/gallery/22.png", "/gallery/15.png", "/gallery/20.png"],
   "Guest Lectures": ["/gallery/6.png", "/gallery/23.png", "/gallery/27.png"],
@@ -31,7 +34,7 @@ const galleryData = {
   ],
 };
 
-// --- Categories for Filter ---
+// ---------- Categories ----------
 const categories = [
   "All",
   "Events",
@@ -44,7 +47,7 @@ const categories = [
   "College Seminars",
 ];
 
-// --- Wave Background Component (Simplified) ---
+// ---------- Wave Background ----------
 function WaveBackground() {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -69,7 +72,7 @@ function WaveBackground() {
   );
 }
 
-// --- Optimized Individual Card Component ---
+// ---------- Image Card ----------
 function ImageCard({
   imageSrc,
   index,
@@ -85,12 +88,7 @@ function ImageCard({
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
 
-  // Fixed useInView - only animate once when entering viewport
-  const isInView = useInView(ref, {
-    once: true,
-    margin: "-20px",
-    amount: 0.3,
-  });
+  const isInView = useInView(ref, { once: true, margin: "-20px", amount: 0.3 });
 
   return (
     <motion.div
@@ -99,34 +97,24 @@ function ImageCard({
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
       transition={{
         duration: 0.4,
-        delay: Math.min(index * 0.05, 0.8), // Cap max delay
-        ease: [0.25, 0.4, 0.25, 1], // Custom cubic-bezier for smoothness
+        delay: Math.min(index * 0.05, 0.8),
+        ease: [0.25, 0.4, 0.25, 1],
       }}
       className="group relative rounded-lg overflow-hidden cursor-pointer bg-white shadow-md hover:shadow-lg transition-shadow duration-200 will-change-transform"
       onClick={onClick}
-      style={{
-        backfaceVisibility: "hidden",
-        WebkitBackfaceVisibility: "hidden",
-        transform: "translateZ(0)",
-        WebkitTransform: "translateZ(0)",
-      }}
+      style={{ transform: "translateZ(0)", backfaceVisibility: "hidden" }}
     >
-      {/* Simplified hover effect */}
-      <div
-        className="absolute inset-0 bg-gradient-to-t from-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200 rounded-lg"
-        style={{ willChange: "opacity" }}
-      />
+      {/* subtle hover tint */}
+      <div className="absolute inset-0 bg-gradient-to-t from-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200 rounded-lg" />
 
-      {/* Fixed Aspect Ratio Container */}
+      {/* aspect-square container */}
       <div className="aspect-square overflow-hidden rounded-lg bg-gray-100 relative">
-        {/* Loading Placeholder */}
         {!imageLoaded && !imageError && (
           <div className="absolute inset-0 bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
-            <div className="w-6 h-6 border-2 border-gray-400 border-t-transparent rounded-full animate-spin"></div>
+            <div className="w-6 h-6 border-2 border-gray-400 border-t-transparent rounded-full animate-spin" />
           </div>
         )}
 
-        {/* Error State */}
         {imageError && (
           <div className="absolute inset-0 bg-gray-200 flex items-center justify-center">
             <svg
@@ -145,7 +133,6 @@ function ImageCard({
           </div>
         )}
 
-        {/* Optimized Image */}
         <Image
           src={imageSrc}
           alt={`${activeCategory} ${index + 1}`}
@@ -155,23 +142,12 @@ function ImageCard({
           loading="lazy"
           fill
           decoding="async"
-          onLoad={() => {
-            setImageLoaded(true);
-            setImageError(false);
-          }}
-          onError={() => {
-            setImageError(true);
-            setImageLoaded(false);
-          }}
-          style={{
-            display: "block",
-            backfaceVisibility: "hidden",
-            WebkitBackfaceVisibility: "hidden",
-            willChange: "transform",
-          }}
+          onLoad={() => (setImageLoaded(true), setImageError(false))}
+          onError={() => (setImageError(true), setImageLoaded(false))}
+          style={{ willChange: "transform" }}
         />
 
-        {/* Simplified Hover Overlay */}
+        {/* magnifier icon on hover */}
         <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center">
           <div className="bg-white/90 rounded-full p-2 transform group-hover:scale-110 transition-transform duration-200">
             <svg
@@ -194,15 +170,12 @@ function ImageCard({
   );
 }
 
-// --- Simplified Animation Variants ---
+// ---------- Animation Variants ----------
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.1,
-    },
+    transition: { staggerChildren: 0.1, delayChildren: 0.1 },
   },
 };
 
@@ -211,34 +184,48 @@ const titleVariants: Variants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: {
-      duration: 0.5,
-      ease: "easeOut",
-    },
+    transition: { duration: 0.5, ease: "easeOut" },
   },
 };
 
-// --- Main Gallery Component ---
+// ---------- Main Component ----------
 function SimplifiedGallery() {
-  const [activeCategory, setActiveCategory] = useState("Events");
+  const [activeCategory, setActiveCategory] = useState("All");
   const [selectedImg, setSelectedImg] = useState<string | null>(null);
+  const [page, setPage] = useState(0);
 
-  // Memoize filtered images to prevent unnecessary recalculations
+  // all images for current category
   const filteredImages = useMemo(() => {
-    if (activeCategory === "All") {
-      return Object.values(galleryData).flat();
-    }
-    const categoryData =
-      galleryData[activeCategory as keyof typeof galleryData];
-    return categoryData || [];
+    if (activeCategory === "All") return Object.values(galleryData).flat();
+    return galleryData[activeCategory as keyof typeof galleryData] ?? [];
   }, [activeCategory]);
+
+  // chunked into pages of 5
+  const pages = useMemo(() => chunkArray(filteredImages, 5), [filteredImages]);
+
+  // reset to first slide when category changes
+  useEffect(() => setPage(0), [activeCategory]);
+
+  const totalPages = pages.length;
+  const nextPage = () => setPage((p) => (p + 1) % totalPages);
+  const prevPage = () => setPage((p) => (p - 1 + totalPages) % totalPages);
+
+  // keyboard arrows
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "ArrowRight") nextPage();
+      if (e.key === "ArrowLeft") prevPage();
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [totalPages]);
 
   return (
     <section className="py-16 bg-gradient-to-br from-gray-200 to-blue-60/30 relative overflow-hidden">
       <WaveBackground />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Simplified Animated Title */}
+        {/* title */}
         <motion.div
           variants={titleVariants}
           initial="hidden"
@@ -255,70 +242,95 @@ function SimplifiedGallery() {
           </p>
         </motion.div>
 
-        {/* Optimized Filter Header */}
+        {/* filters */}
         <div className="mb-12">
-          {/* Mobile Filter */}
+          {/* mobile */}
           <div className="md:hidden">
             <div className="flex gap-3 overflow-x-auto pb-4 px-4 -mx-4 scrollbar-hide">
-              {categories.map((category) => (
+              {categories.map((c) => (
                 <button
-                  key={category}
-                  onClick={() => setActiveCategory(category)}
+                  key={c}
+                  onClick={() => setActiveCategory(c)}
                   className={`flex-shrink-0 px-6 py-3 rounded-full font-medium text-sm whitespace-nowrap transition-all duration-200 ${
-                    activeCategory === category
+                    activeCategory === c
                       ? "bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-md"
                       : "bg-white text-gray-700 hover:bg-gray-50 border border-gray-200 hover:border-blue-300"
                   }`}
                   style={{ minWidth: "120px" }}
                 >
-                  {category}
+                  {c}
                 </button>
               ))}
             </div>
           </div>
 
-          {/* Desktop Filter */}
+          {/* desktop */}
           <div className="hidden md:flex justify-center flex-wrap gap-2">
-            {categories.map((category) => (
+            {categories.map((c) => (
               <button
-                key={category}
-                onClick={() => setActiveCategory(category)}
+                key={c}
+                onClick={() => setActiveCategory(c)}
                 className={`px-6 py-3 rounded-full font-medium transition-all duration-200 whitespace-nowrap ${
-                  activeCategory === category
+                  activeCategory === c
                     ? "bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-md transform scale-105"
                     : "bg-white text-gray-700 hover:bg-gray-50 border border-gray-200 hover:border-blue-300 shadow-sm hover:shadow-md"
                 }`}
               >
-                {category}
+                {c}
               </button>
             ))}
           </div>
         </div>
 
-        {/* Optimized Image Grid */}
-        <motion.div
-          key={activeCategory} // Force re-mount for smooth category transitions
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6"
-          style={{
-            transform: "translateZ(0)",
-            WebkitTransform: "translateZ(0)",
-          }}
-        >
-          {filteredImages.map((imageSrc, index) => (
-            <ImageCard
-              key={`${activeCategory}-${imageSrc}-${index}`}
-              imageSrc={imageSrc}
-              index={index}
-              activeCategory={activeCategory}
-              onClick={() => setSelectedImg(imageSrc)}
-            />
-          ))}
-        </motion.div>
+        {/* slider nav */}
+        {totalPages > 1 && (
+          <div className="flex items-center justify-between mb-6 max-w-md mx-auto">
+            <button
+              onClick={prevPage}
+              aria-label="Previous"
+              className="p-2 rounded-full bg-white shadow hover:bg-gray-100"
+            >
+              ◀
+            </button>
+            <span className="text-sm text-gray-600">
+              {page + 1}/{totalPages}
+            </span>
+            <button
+              onClick={nextPage}
+              aria-label="Next"
+              className="p-2 rounded-full bg-white shadow hover:bg-gray-100"
+            >
+              ▶
+            </button>
+          </div>
+        )}
 
-        {/* Empty State */}
+        {/* slides */}
+        <AnimatePresence mode="wait" initial={false}>
+          {pages.length > 0 && (
+            <motion.div
+              key={page}
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
+              className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6"
+              style={{ transform: "translateZ(0)" }}
+            >
+              {pages[page]?.map((img: string, i: number) => (
+                <ImageCard
+                  key={`${activeCategory}-${img}-${i}`}
+                  imageSrc={img}
+                  index={i}
+                  activeCategory={activeCategory}
+                  onClick={() => setSelectedImg(img)}
+                />
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* empty state */}
         {filteredImages.length === 0 && (
           <motion.div
             initial={{ opacity: 0 }}
@@ -346,7 +358,7 @@ function SimplifiedGallery() {
         )}
       </div>
 
-      {/* Optimized Image Modal */}
+      {/* modal */}
       <AnimatePresence>
         {selectedImg && (
           <motion.div
@@ -371,10 +383,7 @@ function SimplifiedGallery() {
                 alt="Selected"
                 fill
                 className="w-full h-full object-contain rounded-lg shadow-2xl"
-                style={{
-                  maxHeight: "90vh",
-                  maxWidth: "90vw",
-                }}
+                style={{ maxHeight: "90vh", maxWidth: "90vw" }}
               />
               <button
                 onClick={() => setSelectedImg(null)}

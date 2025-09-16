@@ -674,7 +674,7 @@ const PartnerCollaboration = () => {
                   </motion.button>
                 </Link>
                 <Link
-                  href="https://drive.google.com/file/d/1rQXmwq6LVQaxGlj9yDpcfCskI_H9Oo2r/view?usp=drive_link"
+                  href="https://drive.google.com/file/d/10k-1w7lltuFKSRnzvRBsSN_Mas5K7-6G/view?usp=drive_link"
                   target="_blank"
                 >
                   <motion.button
