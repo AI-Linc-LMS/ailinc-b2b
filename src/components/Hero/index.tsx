@@ -4,9 +4,9 @@ import { motion, Variants } from "framer-motion";
 import { useState, useRef, useEffect } from "react";
 import { AWSLogo } from "../../../public/icons/AWSLogo";
 import { GoogleLogo } from "../../../public/icons/GoogleLogo";
-import { IBMLogo } from "../../../public/icons/IBMLogo";
 import { MicrosoftLogo } from "../../../public/icons/MicrosoftLogo";
-import { OracleLogo } from "../../../public/icons/OracleLogo";
+import { SalesforceLogo } from "../../../public/icons/SalesForceLogo";
+import { ZapierLogo } from "../../../public/icons/ZapierLogo";
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -175,6 +175,8 @@ function Hero() {
     { Logo: MicrosoftLogo, name: "Microsoft" },
     { Logo: AWSLogo, name: "AWS" },
     { Logo: GoogleLogo, name: "Google" },
+    { Logo: SalesforceLogo, name: "Salesforce" },
+    { Logo: ZapierLogo, name: "Zapier" },
   ];
 
   return (
@@ -357,7 +359,7 @@ function Hero() {
             </motion.p>
           </motion.div>
 
-          {/* Trust Badge */}
+          {/* Trust Badge - Updated */}
           <motion.div variants={fadeInUpVariants}>
             <motion.p
               ref={trustRef}
@@ -378,13 +380,13 @@ function Hero() {
                 color: isHoveringTrust ? "transparent" : "#2563EB",
               }}
             >
-              Trusted by 1000+ Colleges | 1M+ Students
+              Trusted by 1000+ Organizations | 1M+ Students
             </motion.p>
           </motion.div>
 
-          {/* Partner Logos - Updated for single line on mobile */}
+          {/* Partner Logos - Updated with 5 logos */}
           <motion.div
-            className="inline-flex flex-nowrap items-center justify-center gap-2 sm:gap-3 md:gap-4 lg:gap-6 px-3 sm:px-4 md:px-6 py-3 md:py-4 bg-gray-50 rounded-2xl shadow-sm border border-gray-100 overflow-hidden"
+            className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 md:gap-4 lg:gap-6 px-3 sm:px-4 md:px-6 py-3 md:py-4 bg-gray-50 rounded-2xl shadow-sm border border-gray-100 max-w-5xl mx-auto"
             variants={fadeInUpVariants}
             whileHover={{
               scale: 1.02,
@@ -400,37 +402,36 @@ function Hero() {
             transition={{ delay: 0.5, duration: 0.6 }}
           >
             {/* Static label */}
-            <span className="text-xs sm:text-sm font-semibold text-gray-600 whitespace-nowrap">
+            <span className="text-xs sm:text-sm font-semibold text-gray-600 whitespace-nowrap w-full sm:w-auto text-center sm:text-left mb-2 sm:mb-0">
               Powered by
             </span>
-
             {/* Animated logos */}
-            {partnerLogos.map(({ Logo, name }, index) => (
-              <motion.div
-                key={name}
-                className="flex items-center px-1 sm:px-2 py-1 opacity-70 hover:opacity-100 transition-opacity cursor-pointer"
-                variants={logoVariants}
-                whileHover={{
-                  scale: 1.1,
-                  y: -3,
-                  transition: {
-                    type: "spring",
-                    bounce: 0.6,
-                    duration: 0.2,
-                  },
-                }}
-                initial="hidden"
-                animate="visible"
-                transition={{ delay: 1 + index * 0.1 }}
-              >
-                <Logo className="h-4 w-4 sm:h-5 sm:w-5" />
-                <span className="ml-1 sm:ml-2 text-xs sm:text-sm font-semibold text-gray-700 whitespace-nowrap">
-                  {name}
-                </span>
-              </motion.div>
-            ))}
-
-            {/* "for startups" text */}
+            <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 md:gap-4">
+              {partnerLogos.map(({ Logo, name }, index) => (
+                <motion.div
+                  key={name}
+                  className="flex items-center px-1 sm:px-2 py-1 opacity-70 hover:opacity-100 transition-opacity cursor-pointer"
+                  variants={logoVariants}
+                  whileHover={{
+                    scale: 1.1,
+                    y: -3,
+                    transition: {
+                      type: "spring",
+                      bounce: 0.6,
+                      duration: 0.2,
+                    },
+                  }}
+                  initial="hidden"
+                  animate="visible"
+                  transition={{ delay: 1 + index * 0.1 }}
+                >
+                  <Logo className="h-4 w-4 sm:h-5 sm:w-5" />
+                  <span className="ml-1 sm:ml-2 text-xs sm:text-sm font-semibold text-gray-700 whitespace-nowrap">
+                    {name}
+                  </span>
+                </motion.div>
+              ))}
+            </div>
             <span className="text-xs sm:text-sm font-semibold text-gray-600 whitespace-nowrap">
               for startups
             </span>

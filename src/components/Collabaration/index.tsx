@@ -78,10 +78,10 @@ const PartnerCollaboration = () => {
         "Certificate programs",
       ],
       features: [
-        "🎯 Tailored Learning Paths",
-        "📊 Real-time Analytics",
-        "🏆 Industry Certifications",
-        "👥 Team Management Tools",
+        "Tailored Learning Paths",
+        "Real-time Analytics",
+        "Industry Certifications",
+        "Team Management Tools",
       ],
       cta: "Become a Corporate Partner",
       color: "from-blue-600 to-indigo-700",
@@ -124,10 +124,10 @@ const PartnerCollaboration = () => {
         "Academic licensing rates",
       ],
       features: [
-        "🎓 Faculty Development",
-        "💼 Placement Support",
-        "📚 Curriculum Integration",
-        "🔬 Research Collaboration",
+        "Faculty Development",
+        "Placement Support",
+        "Curriculum Integration",
+        "Research Collaboration",
       ],
       cta: "Join Academic Network",
       color: "from-purple-600 to-pink-600",
@@ -164,10 +164,10 @@ const PartnerCollaboration = () => {
         "Co-marketing opportunities",
       ],
       features: [
-        "⚡ API Integration",
-        "🏷️ White-label Options",
-        "💰 Revenue Sharing",
-        "🔧 Technical Support",
+        "API Integration",
+        "White-label Options",
+        "Revenue Sharing",
+        "Technical Support",
       ],
       cta: "Explore Tech Partnership",
       color: "from-green-600 to-teal-600",
@@ -673,32 +673,36 @@ const PartnerCollaboration = () => {
                     </motion.svg>
                   </motion.button>
                 </Link>
-
-                <motion.button
-                  whileHover={{
-                    scale: 1.05,
-                    backgroundColor: "rgba(255, 255, 255, 0.1)",
-                  }}
-                  whileTap={{ scale: 0.95 }}
-                  className="px-8 py-4 border-2 border-white/30 text-white rounded-xl font-bold text-base hover:bg-white/10 transition-all duration-300 inline-flex items-center justify-center"
+                <Link
+                  href="https://drive.google.com/file/d/1rQXmwq6LVQaxGlj9yDpcfCskI_H9Oo2r/view?usp=drive_link"
+                  target="_blank"
                 >
-                  <span>Download Partnership Guide</span>
-                  <motion.svg
-                    className="w-5 h-5 ml-2"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    whileHover={{ y: 2 }}
-                    transition={{ duration: 0.2 }}
+                  <motion.button
+                    whileHover={{
+                      scale: 1.05,
+                      backgroundColor: "rgba(255, 255, 255, 0.1)",
+                    }}
+                    whileTap={{ scale: 0.95 }}
+                    className="px-8 py-4 border-2 border-white/30 text-white rounded-xl font-bold text-base hover:bg-white/10 transition-all duration-300 inline-flex items-center justify-center cursor-pointer"
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                    />
-                  </motion.svg>
-                </motion.button>
+                    <span>Download Partnership Guide</span>
+                    <motion.svg
+                      className="w-5 h-5 ml-2"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      whileHover={{ y: 2 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                      />
+                    </motion.svg>
+                  </motion.button>
+                </Link>
               </div>
             </div>
           </motion.div>

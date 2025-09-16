@@ -159,31 +159,6 @@ const CourseCard = ({
         </div>
       </motion.div>
 
-      {/* Next Up Section */}
-      <motion.div
-        className={`bg-${accentColor}-50 border border-${accentColor}-200 rounded-lg p-4 mb-6`}
-        initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ delay: 0.6 }}
-      >
-        <div className="flex items-center justify-between mb-2">
-          <span className={`text-sm font-medium text-${accentColor}-800`}>
-            Next Up
-          </span>
-          <span className={`text-sm font-medium text-${accentColor}-700`}>
-            {duration}
-          </span>
-        </div>
-        <div className="flex items-center">
-          <div
-            className={`w-2 h-2 bg-${accentColor}-500 rounded-full mr-3`}
-          ></div>
-          <h4 className={`text-sm font-semibold text-${accentColor}-900`}>
-            {nextLesson}
-          </h4>
-        </div>
-      </motion.div>
-
       {/* CTA Button */}
       <motion.a
         href="#contact"

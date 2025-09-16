@@ -285,12 +285,9 @@ const WhiteLabelMockup = () => (
     transition={{ duration: 0.8, delay: 0.2 }}
     className="relative"
   >
-    {/* Mobile App Screen */}
     <div className="relative w-48 h-80 mx-auto">
-      {/* Phone Frame */}
       <div className="absolute inset-0 bg-gradient-to-br from-gray-800 to-black rounded-[2.5rem] p-2 shadow-2xl transform rotate-6">
         <div className="w-full h-full bg-white rounded-[2rem] overflow-hidden">
-          {/* Status Bar */}
           <div className="h-8 bg-blue-600 flex items-center justify-between px-4">
             <div className="text-white text-xs font-medium">AI Linc</div>
             <div className="flex space-x-1">
@@ -299,8 +296,6 @@ const WhiteLabelMockup = () => (
               <div className="w-1 h-1 bg-white rounded-full"></div>
             </div>
           </div>
-
-          {/* App Content */}
           <div className="p-4 space-y-3">
             <div className="h-12 bg-gradient-to-r from-blue-100 to-purple-100 rounded-lg flex items-center px-3">
               <div className="w-6 h-6 bg-blue-500 rounded mr-2"></div>
@@ -315,8 +310,6 @@ const WhiteLabelMockup = () => (
           </div>
         </div>
       </div>
-
-      {/* Floating Elements */}
       <motion.div
         animate={{ y: [0, -10, 0] }}
         transition={{ duration: 10, repeat: Infinity }}
@@ -324,7 +317,6 @@ const WhiteLabelMockup = () => (
       >
         <Icons.GraduationCap className="w-6 h-6 text-white" />
       </motion.div>
-
       <motion.div
         animate={{ y: [0, 10, 0] }}
         transition={{ duration: 10, repeat: Infinity }}
@@ -343,12 +335,9 @@ const SkillDevMockup = () => (
     transition={{ duration: 0.8, delay: 0.2 }}
     className="relative"
   >
-    {/* Dashboard Screen */}
     <div className="relative w-64 h-40 mx-auto">
-      {/* Laptop Frame */}
       <div className="absolute inset-0 bg-gradient-to-br from-gray-300 to-gray-400 rounded-t-lg shadow-2xl">
         <div className="w-full h-full bg-white rounded-t-lg p-3 overflow-hidden">
-          {/* Browser Bar */}
           <div className="h-6 bg-gray-100 rounded-t flex items-center px-2 mb-2">
             <div className="flex space-x-1">
               <div className="w-2 h-2 bg-red-400 rounded-full"></div>
@@ -357,13 +346,8 @@ const SkillDevMockup = () => (
             </div>
             <div className="ml-4 text-xs text-gray-500">Course Dashboard</div>
           </div>
-
-          {/* Dashboard Content */}
           <div className="space-y-2">
-            {/* Header */}
             <div className="h-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded"></div>
-
-            {/* Course Cards */}
             <div className="grid grid-cols-3 gap-1">
               <div className="h-12 bg-blue-100 rounded p-1">
                 <div className="w-full h-3 bg-blue-200 rounded mb-1"></div>
@@ -381,8 +365,6 @@ const SkillDevMockup = () => (
           </div>
         </div>
       </div>
-
-      {/* Certification Badges */}
       <motion.div
         animate={{ rotate: [0, 5, -5, 0] }}
         transition={{ duration: 4, repeat: Infinity }}
@@ -390,7 +372,6 @@ const SkillDevMockup = () => (
       >
         <Icons.Building className="w-6 h-6 text-white" />
       </motion.div>
-
       <motion.div
         animate={{ rotate: [0, -5, 5, 0] }}
         transition={{ duration: 3.5, repeat: Infinity }}
@@ -398,7 +379,6 @@ const SkillDevMockup = () => (
       >
         <Icons.Star className="w-5 h-5 text-white" />
       </motion.div>
-
       <motion.div
         animate={{ scale: [1, 1.1, 1] }}
         transition={{ duration: 2, repeat: Infinity }}
@@ -417,21 +397,15 @@ const TransformMockup = () => (
     transition={{ duration: 0.8, delay: 0.2 }}
     className="relative"
   >
-    {/* Analytics Dashboard */}
     <div className="relative w-56 h-36 mx-auto">
-      {/* Screen Frame */}
       <div className="absolute inset-0 bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg shadow-2xl p-2">
         <div className="w-full h-full bg-white rounded-lg overflow-hidden">
-          {/* Header */}
           <div className="h-8 bg-gradient-to-r from-purple-600 to-blue-600 flex items-center px-3">
             <div className="text-white text-xs font-semibold">
               Transformation Analytics
             </div>
           </div>
-
-          {/* Analytics Content */}
           <div className="p-3 space-y-2">
-            {/* Progress Bars */}
             <div className="space-y-1">
               <div className="flex items-center">
                 <div className="w-16 h-2 bg-gray-200 rounded-full overflow-hidden">
@@ -446,8 +420,6 @@ const TransformMockup = () => (
                 <div className="ml-2 text-xs text-gray-600">Placements</div>
               </div>
             </div>
-
-            {/* Chart Area */}
             <div className="h-12 bg-gradient-to-br from-green-50 to-blue-50 rounded flex items-end justify-center space-x-1 p-2">
               <div className="w-2 h-4 bg-green-400 rounded-t"></div>
               <div className="w-2 h-6 bg-blue-400 rounded-t"></div>
@@ -457,8 +429,6 @@ const TransformMockup = () => (
           </div>
         </div>
       </div>
-
-      {/* Floating Achievement Icons */}
       <motion.div
         animate={{ y: [0, -8, 0] }}
         transition={{ duration: 10, repeat: Infinity }}
@@ -466,7 +436,6 @@ const TransformMockup = () => (
       >
         <Icons.Trophy className="w-5 h-5 text-white" />
       </motion.div>
-
       <motion.div
         animate={{ x: [0, 5, 0] }}
         transition={{ duration: 10, repeat: Infinity }}
@@ -474,7 +443,6 @@ const TransformMockup = () => (
       >
         <Icons.Rocket className="w-4 h-4 text-white" />
       </motion.div>
-
       <motion.div
         animate={{ rotate: [0, 180, 360] }}
         transition={{ duration: 10, repeat: Infinity }}
@@ -486,6 +454,7 @@ const TransformMockup = () => (
   </motion.div>
 );
 
+// Updated tabs configuration with your exact content requirements
 const tabs: Tab[] = [
   {
     id: "white",
@@ -500,56 +469,79 @@ const tabs: Tab[] = [
       },
       {
         title: "Zero Setup Cost",
-        text: "Fully ready in  days.",
+        text: "Fully ready in less than 7 days.",
       },
       {
         title: "100% Custom Branding",
-        text: "Your name, logo and colours.",
+        text: "Your institution's name, logo, and colors.",
+      },
+      {
+        title: "Data Privacy & Security",
+        text: "ISO-grade encryption ensured.",
+      },
+      {
+        title: "Scalable Platform",
+        text: "Support 10–100,000+ students without issues.",
       },
     ],
   },
   {
     id: "skill",
     nav: "AI Skill Development",
-    cta: "See Curriculum",
+    cta: "Connect with us now",
     mockup: <SkillDevMockup />,
     items: [
       {
         title: "200+ Hours Free Courses",
-        text: "Foundational AI tracks.",
+        text: "Foundational AI courses available.",
       },
       {
-        title: "Microsoft, AWS & Google Certs",
-        text: "Premium badges.",
+        title: "Premium Certifications",
+        text: "From Microsoft, AWS & Google.",
         hover: "scCertTrack",
       },
       {
-        title: "90% Student Engagement",
-        text: "Across partner campuses.",
+        title: "University Integration",
+        text: "Credit-based electives for curriculum.",
+      },
+      {
+        title: "NAAC Score Improvement",
+        text: "Up to 0.6 uplift in partner universities.",
+      },
+      {
+        title: "Faculty Training",
+        text: "Exclusive workshops & CPD points.",
       },
     ],
   },
   {
     id: "transform",
-    nav: "Institutional Transformation",
-    cta: "Start Transformation",
+    nav: "Our Role",
+    cta: "Connect with us now",
     mockup: <TransformMockup />,
     items: [
-      { title: "+0.6 NAAC Score", text: "Typical uplift." },
       {
-        title: "35% Placement Growth",
-        text: "Within one year.",
+        title: "Bridge Technology Gap",
+        text: "Between business needs and AI technology.",
       },
       {
-        title: "100% Digital Records",
-        text: "Faculty & placements.",
+        title: "Seamless AI Integration",
+        text: "Help organizations adopt AI seamlessly.",
+      },
+      {
+        title: "Simple & Effective",
+        text: "Making AI adoption fast and effective.",
         hover: "scFlow",
+      },
+      {
+        title: "Complete Support",
+        text: "Right tools, guidance, and support.",
       },
     ],
   },
 ];
 
-// Creative Hover Card Components with Standard Icons
+// Creative Hover Card Components
 const WhiteLabelHoverCard = ({
   position,
 }: {
@@ -594,12 +586,12 @@ const WhiteLabelHoverCard = ({
         },
         {
           icon: Icons.Robot,
-          name: "AI Reports",
+          name: "AI Generated Placement Report",
           color: "from-indigo-500 to-purple-500",
         },
         {
           icon: Icons.TrendingUp,
-          name: "Auto Reports",
+          name: "Automated Report",
           color: "from-teal-500 to-cyan-500",
         },
         {
@@ -609,7 +601,7 @@ const WhiteLabelHoverCard = ({
         },
         {
           icon: Icons.Mail,
-          name: "Bulk Email",
+          name: "Bulk Email Communication",
           color: "from-amber-500 to-orange-500",
         },
       ].map((feature, index) => (
@@ -698,15 +690,13 @@ const SkillDevHoverCard = ({
           transition={{ delay: index * 0.2, duration: 0.4 }}
           className="flex items-center p-3 rounded-xl border border-gray-100 hover:shadow-md transition-shadow"
         >
-          <div
-            className={`w-12 h-12 rounded-lg bg-gradient-to-br ${partner.color} flex items-center justify-center text-white text-xl mr-3`}
-          >
+          <div className="w-12 h-12 rounded-lg bg-white flex items-center justify-center text-white text-xl mr-3 shadow-sm">
             {partner?.icon}
           </div>
           <div className="flex-1">
             <div className="font-semibold text-gray-800">{partner.name}</div>
             <div className="text-xs text-gray-500">
-              {partner.certs.join(" - ")}
+              {partner.certs.join(" • ")}
             </div>
           </div>
           <motion.div
@@ -767,24 +757,24 @@ const TransformHoverCard = ({
       {[
         {
           step: 1,
-          title: "Campus Digitalization",
-          icon: Icons.Computer,
+          title: "Faster AI adoption",
+          icon: Icons.Rocket,
           color: "from-blue-500 to-cyan-500",
-          desc: "Complete digital infrastructure",
+          desc: "Accelerated implementation timeline",
         },
         {
           step: 2,
-          title: "Accreditation Boost",
-          icon: Icons.Trophy,
+          title: "Cost-effective solutions",
+          icon: Icons.TrendingUp,
           color: "from-purple-500 to-pink-500",
-          desc: "NAAC score improvement",
+          desc: "Optimized budget utilization",
         },
         {
           step: 3,
-          title: "Placement Success",
-          icon: Icons.Rocket,
+          title: "Reduced complexity",
+          icon: Icons.Computer,
           color: "from-green-500 to-emerald-500",
-          desc: "Enhanced job outcomes",
+          desc: "Simplified integration process",
         },
       ].map((step, index) => (
         <div key={step.step}>
@@ -824,7 +814,6 @@ const TransformHoverCard = ({
             </div>
           </motion.div>
 
-          {/* Arrow connector */}
           {index < 2 && (
             <motion.div
               initial={{ opacity: 0, scaleY: 0 }}
@@ -890,8 +879,8 @@ export default function Services() {
   // Helper function to get initials from nav string
   const getInitials = (t: string) => {
     const normalized = t.trim().toLowerCase();
-    console.log(normalized);
     if (normalized === "ai skill development") return "AI";
+    if (normalized === "our role") return "OR";
 
     return t
       .split(" ")
@@ -1232,7 +1221,6 @@ export default function Services() {
       </div>
 
       {/* --------- Content Panel --------- */}
-
       <AnimatePresence mode="wait">
         <motion.div
           key={activeIndex}
@@ -1243,7 +1231,7 @@ export default function Services() {
           transition={{ duration: 0.6, ease: "easeInOut" }}
           className="mx-auto flex max-w-6xl flex-col items-center gap-5 sm:gap-8 md:gap-16 lg:flex-row"
         >
-          {/* LEFT â€“ steps */}
+          {/* LEFT — steps */}
           <div className="flex-1 space-y-4 md:space-y-6 w-full">
             <motion.h3
               initial={{ opacity: 0, x: -30 }}
@@ -1312,7 +1300,6 @@ export default function Services() {
                 )}
 
                 {/* Creative Hover Cards - With Dynamic Positioning */}
-
                 <AnimatePresence>
                   {hoveredItem === i && item.hover && (
                     <>
@@ -1348,10 +1335,10 @@ export default function Services() {
                             <div>Student Dashboard</div>
                             <div>Community</div>
                             <div>Job Board</div>
-                            <div>AI Reports</div>
-                            <div>Auto Reports</div>
+                            <div>AI Generated Placement Report</div>
+                            <div>Automated Report</div>
                             <div>Live Classes</div>
-                            <div>Bulk Email</div>
+                            <div>Bulk Email Communication</div>
                           </div>
                         </div>
                       )}
@@ -1377,9 +1364,9 @@ export default function Services() {
                             Transformation Flow:
                           </h5>
                           <div className="space-y-1 text-xs">
-                            <div>1. Campus Digitalization</div>
-                            <div>2. Accreditation Boost</div>
-                            <div>3. Placement Success</div>
+                            <div>1. Faster AI adoption</div>
+                            <div>2. Cost-effective solutions</div>
+                            <div>3. Reduced complexity</div>
                           </div>
                         </div>
                       )}
@@ -1388,8 +1375,13 @@ export default function Services() {
                 )}
               </motion.div>
             ))}
-            <Link href="/#contact" passHref>
-              <motion.button
+
+            {/* Updated CTA Button with proper links */}
+            {currentTab.cta === "Explore the App" ? (
+              <motion.a
+                href="https://app.ailinc.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.8 }}
@@ -1400,14 +1392,32 @@ export default function Services() {
                 onTouchEnd={handleHoverEnd}
                 onMouseEnter={handleHoverStart}
                 onMouseLeave={handleHoverEnd}
-                className="mt-6 md:mt-8 w-full sm:w-auto rounded-md bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-3 font-semibold text-white hover:shadow-lg transition-all duration-300 cursor-pointer text-sm md:text-base"
+                className="mt-6 md:mt-8 w-full sm:w-auto rounded-md bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-3 font-semibold text-white hover:shadow-lg transition-all duration-300 cursor-pointer text-sm md:text-base block text-center"
               >
                 {currentTab.cta}
-              </motion.button>
-            </Link>
+              </motion.a>
+            ) : (
+              <Link href="/#contact" passHref>
+                <motion.button
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.8 }}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={handleButtonClick}
+                  onTouchStart={handleHoverStart}
+                  onTouchEnd={handleHoverEnd}
+                  onMouseEnter={handleHoverStart}
+                  onMouseLeave={handleHoverEnd}
+                  className="mt-6 md:mt-8 w-full sm:w-auto rounded-md bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-3 font-semibold text-white hover:shadow-lg transition-all duration-300 cursor-pointer text-sm md:text-base block text-center"
+                >
+                  {currentTab.cta}
+                </motion.button>
+              </Link>
+            )}
           </div>
 
-          {/* RIGHT â€“ 3D Mockups */}
+          {/* RIGHT — 3D Mockups */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
