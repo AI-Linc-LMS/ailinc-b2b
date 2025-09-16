@@ -332,6 +332,7 @@ const UpdatedCourseCard = ({
           ?.toLowerCase()
           ?.split(" ")
           ?.join("-")}`}
+        target="_blank"
         className="block w-full bg-gray-900 hover:bg-gray-800 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 shadow-md hover:shadow-lg text-center text-sm"
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
