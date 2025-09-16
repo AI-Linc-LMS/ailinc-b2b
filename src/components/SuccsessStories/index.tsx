@@ -89,7 +89,7 @@ const successStories = [
   },
   {
     id: 4,
-    organization: "Sreenidhi Institute of Science & Technology",
+    organization: "(SNIST) Sreenidhi Institute of Science & Technology",
     quote:
       "Workshop conducted by AI Linc's Founder & CEO - Shubham Lal was really helpful for the students.",
     author: "Head, Department of CSE",
@@ -111,7 +111,7 @@ const successStories = [
   },
   {
     id: 5,
-    organization: "Dayananda Sagar Academy of Technology & Management",
+    organization: "(DSATM) Dayananda Sagar Academy of Technology & Management",
     quote:
       "Guest lecture by AI Linc's CMO – Poorva Shrivastava, along with integrated internship opportunities, was highly valuable for our students.",
     author: "Faculty Feedback",
