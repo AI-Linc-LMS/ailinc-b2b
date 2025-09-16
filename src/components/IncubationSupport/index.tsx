@@ -8,7 +8,6 @@ const IncubationSupport = () => {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
   const [activeSlide, setActiveSlide] = useState(0);
-  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -79,19 +78,14 @@ const IncubationSupport = () => {
         "Transform student ideas into viable startups with comprehensive entrepreneurship programs, mentorship, and AI-powered business development tools.",
       illustration: (
         <motion.div
-          className="w-full h-full "
+          className="w-full h-full"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.5 }}
           whileHover={{ scale: 1 }}
           style={{ filter: "hue-rotate(0deg)" }}
         >
-          <Image
-            src="/images/studentIcon.jpg"
-            alt="funding"
-            fill
-            className="object-cover"
-          />
+          <Image src="/pitchdeck/1.jpg" alt="funding" fill />
         </motion.div>
       ),
       features: [
@@ -117,12 +111,7 @@ const IncubationSupport = () => {
           whileHover={{ scale: 1 }}
           style={{ filter: "hue-rotate(0deg)" }}
         >
-          <Image
-            src="/images/mentorIcon.jpg"
-            alt="funding"
-            fill
-            className="object-cover"
-          />
+          <Image src="/pitchdeck/2.jpg" alt="funding" fill />
         </motion.div>
       ),
       features: [
@@ -148,12 +137,7 @@ const IncubationSupport = () => {
           whileHover={{ scale: 1 }}
           style={{ filter: "hue-rotate(0deg)" }}
         >
-          <Image
-            src="/images/investor.jpg"
-            alt="funding"
-            fill
-            className="object-cover"
-          />
+          <Image src="/pitchdeck/3.jpg" alt="funding" fill />
         </motion.div>
       ),
       features: [
@@ -179,12 +163,7 @@ const IncubationSupport = () => {
           whileHover={{ scale: 1 }}
           style={{ filter: "hue-rotate(0deg)" }}
         >
-          <Image
-            src="/images/pitchdeck.jpg"
-            alt="funding"
-            fill
-            className="object-cover"
-          />
+          <Image src="/pitchdeck/4.jpg" alt="funding" fill />
         </motion.div>
       ),
       features: [
