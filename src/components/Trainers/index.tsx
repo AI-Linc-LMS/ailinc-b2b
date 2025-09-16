@@ -1,5 +1,5 @@
 // components/TopTrainers.tsx
-import { useRef, useEffect, useState } from "react";
+import { useRef, useState } from "react";
 import { motion, useInView, Variants } from "framer-motion";
 import Image from "next/image";
 import { MicrosoftLogo } from "../../../public/icons/MicrosoftLogo";
@@ -34,7 +34,7 @@ const trainers = [
     id: 2,
     name: "Yamini Bandi",
     title: "SDE-2 & ML Engineer",
-    experience: "12 years",
+    experience: "5 years",
     photo: "/trainers/yamini_bandi.jpg",
     companies: [{ name: "Amazon", Logo: AmazonLogo }],
     specialization: "ML Engineer",
@@ -57,7 +57,7 @@ const trainers = [
     id: 3,
     name: "Divyansh Dubey",
     title: "Gen AI Expert",
-    experience: "10 years",
+    experience: "7 years",
     photo: "/trainers/Divyansh_dubey.jpg",
     companies: [{ name: "Google", Logo: GoogleLogo }],
     specialization: "Prompt & GenAI Expert",
@@ -79,7 +79,7 @@ const trainers = [
     id: 4,
     name: "Abirami Sukumari",
     title: "Staff Developer Advocate",
-    experience: "15 years",
+    experience: "20 years",
     photo: "/trainers/Abirami_sukumari.jpg",
     companies: [{ name: "Google", Logo: GoogleLogo }],
     specialization: "Cloud AI and Databases",
