@@ -5,7 +5,7 @@ import { useState, useRef, useEffect } from "react";
 import { AWSLogo } from "../../../public/icons/AWSLogo";
 import { GoogleLogo } from "../../../public/icons/GoogleLogo";
 import { MicrosoftLogo } from "../../../public/icons/MicrosoftLogo";
-import { SalesforceLogo } from "../../../public/icons/SalesForceLogo";
+// import { SalesforceLogo } from "../../../public/icons/SalesForceLogo";
 import { ZapierLogo } from "../../../public/icons/ZapierLogo";
 
 const containerVariants: Variants = {
@@ -175,7 +175,7 @@ function Hero() {
     { Logo: MicrosoftLogo, name: "Microsoft" },
     { Logo: AWSLogo, name: "AWS" },
     { Logo: GoogleLogo, name: "Google" },
-    { Logo: SalesforceLogo, name: "Salesforce" },
+    // { Logo: SalesforceLogo, name: "Salesforce" },
     { Logo: ZapierLogo, name: "Zapier" },
   ];
 
