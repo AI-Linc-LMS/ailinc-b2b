@@ -2,6 +2,7 @@
 import { useRef, useState, useEffect, ReactNode } from "react";
 import { motion, useInView, Variants, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import { MicrosoftLogo } from "../../../public/icons/MicrosoftLogo";
 
 type Story = {
   id: number;
@@ -12,12 +13,13 @@ type Story = {
   certifiedLabel: string;
   growth: number;
   growthLabel: string;
-  icon: ReactNode; // Assuming it's a function that returns a React element
+  icon: ReactNode;
   bgGradient: string;
   certifiedMax: number;
   growthMax: number;
 };
-// Success stories data array (keeping your existing data)
+
+// Updated success stories data array with new organizations
 const successStories = [
   {
     id: 1,
@@ -85,9 +87,90 @@ const successStories = [
     certifiedMax: 1500,
     growthMax: 100,
   },
+  {
+    id: 4,
+    organization: "Sreenidhi Institute of Science & Technology",
+    quote:
+      "Workshop conducted by AI Linc's Founder & CEO - Shubham Lal was really helpful for the students.",
+    author: "Head, Department of CSE",
+    certified: 4500,
+    certifiedLabel: "certified",
+    growth: 65,
+    growthLabel: "internship conversions",
+    icon: (
+      <Image
+        src="/images/snist.jpg"
+        alt="Sreenidhi Institute"
+        fill
+        className="object-cover rounded-lg"
+      />
+    ),
+    bgGradient: "from-indigo-500 to-indigo-600",
+    certifiedMax: 5000,
+    growthMax: 80,
+  },
+  {
+    id: 5,
+    organization: "Dayananda Sagar Academy of Technology & Management",
+    quote:
+      "Guest lecture by AI Linc's CMO – Poorva Shrivastava, along with integrated internship opportunities, was highly valuable for our students.",
+    author: "Faculty Feedback",
+    certified: 3500,
+    certifiedLabel: "students engaged",
+    growth: 75,
+    growthLabel: "skill improvement",
+    icon: (
+      <Image
+        src="/images/dayanand.png"
+        alt="DSATM"
+        fill
+        className="object-cover rounded-lg"
+      />
+    ),
+    bgGradient: "from-cyan-500 to-cyan-600",
+    certifiedMax: 4000,
+    growthMax: 90,
+  },
+  {
+    id: 6,
+    organization: "Microsoft",
+    quote:
+      "Sessions on Agentic AI by AI Linc's Founder & CEO – Shubham Lal were insightful and future-ready.",
+    author: "Event Team",
+    certified: 500,
+    certifiedLabel: "professionals trained",
+    growth: 95,
+    growthLabel: "satisfaction rate",
+    icon: <MicrosoftLogo />,
+    bgGradient: "from-blue-500 to-blue-600",
+    certifiedMax: 1000,
+    growthMax: 100,
+  },
+  {
+    id: 7,
+    organization: "Amity University",
+    quote:
+      "Session on Prompt Engineering delivered by AI Linc was extremely engaging and practical for our students.",
+    author: "Department Feedback",
+    certified: 2800,
+    certifiedLabel: "students trained",
+    growth: 85,
+    growthLabel: "engagement rate",
+    icon: (
+      <Image
+        src="/images/amity.png"
+        alt="Amity University"
+        fill
+        className="object-cover rounded-lg"
+      />
+    ),
+    bgGradient: "from-orange-500 to-orange-600",
+    certifiedMax: 3200,
+    growthMax: 100,
+  },
 ];
 
-// Navigation Button Component
+// Navigation Button Component (keeping your existing one)
 const CarouselButton = ({
   direction,
   onClick,
@@ -131,7 +214,7 @@ const CarouselButton = ({
   </motion.button>
 );
 
-// Carousel Indicators
+// Carousel Indicators (keeping your existing one)
 const CarouselIndicators = ({
   total,
   current,
@@ -158,7 +241,89 @@ const CarouselIndicators = ({
   </div>
 );
 
-// Single Story Card Component - Fixed sizing
+// NEW: Creative Circular Statistics Component
+const CircularStatistic = ({
+  value,
+  label,
+  color,
+  delay = 0,
+  isGrowth = false,
+}: {
+  value: number;
+  label: string;
+  color: string;
+  delay?: number;
+  isGrowth?: boolean;
+}) => (
+  <motion.div
+    className="relative"
+    initial={{ opacity: 0, scale: 0.8 }}
+    animate={{ opacity: 1, scale: 1 }}
+    transition={{
+      duration: 0.6,
+      delay: delay,
+      type: "spring",
+      bounce: 0.3,
+    }}
+    whileHover={{
+      scale: 1.05,
+      transition: { duration: 0.2 },
+    }}
+  >
+    {/* Outer glow effect */}
+    <div
+      className={`absolute inset-0 rounded-full bg-gradient-to-r ${color} opacity-20 blur-xl`}
+    />
+
+    {/* Main circle */}
+    <div
+      className={`relative w-28 h-28 md:w-32 md:h-32 rounded-full bg-gradient-to-br ${color} shadow-2xl flex flex-col items-center justify-center text-white overflow-hidden`}
+    >
+      {/* Subtle inner highlight */}
+      <div className="absolute top-2 left-2 w-6 h-6 bg-white opacity-20 rounded-full blur-sm" />
+
+      {/* Value */}
+      <motion.div
+        className="text-xl md:text-2xl font-bold leading-none mb-1"
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: delay + 0.3 }}
+      >
+        {value.toLocaleString()}
+        {isGrowth && !label.includes("NAAC") && !label.includes("uplift")
+          ? "%"
+          : ""}
+        {!isGrowth ? "+" : ""}
+      </motion.div>
+
+      {/* Label */}
+      <motion.div
+        className="text-xs md:text-sm font-medium text-center leading-tight opacity-90 px-2"
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: delay + 0.5 }}
+      >
+        {label}
+      </motion.div>
+
+      {/* Animated border pulse */}
+      <motion.div
+        className="absolute inset-0 rounded-full border-2 border-white opacity-30"
+        animate={{
+          scale: [1, 1.1, 1],
+          opacity: [0.3, 0.1, 0.3],
+        }}
+        transition={{
+          duration: 2,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+    </div>
+  </motion.div>
+);
+
+// Updated Story Card Component with new circular statistics
 const StoryCard = ({ story, index }: { story: Story; index: number }) => (
   <motion.div
     whileHover={{
@@ -170,10 +335,10 @@ const StoryCard = ({ story, index }: { story: Story; index: number }) => (
     style={{
       backfaceVisibility: "hidden",
       WebkitBackfaceVisibility: "hidden",
-      height: "520px", // Fixed height for consistency
+      height: "480px", // Reduced height since we removed some elements
     }}
   >
-    {/* Card Header - Reduced spacing */}
+    {/* Card Header */}
     <div className="flex items-center mb-4">
       <div className="relative w-12 h-12 rounded-xl overflow-hidden mr-3 shadow-sm group-hover:shadow-md transition-shadow duration-200 flex-shrink-0">
         {typeof story.icon !== "string" && (
@@ -199,89 +364,54 @@ const StoryCard = ({ story, index }: { story: Story; index: number }) => (
       </div>
     </div>
 
-    {/* Quote - Fixed height */}
-    <div className="mb-4" style={{ height: "120px" }}>
+    {/* Quote */}
+    <div className="mb-6" style={{ height: "100px" }}>
       <blockquote className="text-gray-700 text-base leading-relaxed italic group-hover:text-gray-800 transition-colors duration-200 line-clamp-4">
         &quot;{story.quote}&quot;
       </blockquote>
     </div>
 
-    {/* Statistics - Compact spacing */}
-    <div className="grid grid-cols-2 gap-4 pt-4 border-t border-gray-100 flex-grow">
-      <div className="text-center space-y-2">
-        <motion.div
-          className="text-2xl font-bold text-gray-900"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 + index * 0.1 }}
-        >
-          {story.certified.toLocaleString()}+
-        </motion.div>
-        <div className="text-xs text-gray-500 uppercase tracking-wide">
-          {story.certifiedLabel}
-        </div>
-        <AnimatedProgressBar
+    {/* NEW: Circular Statistics Design */}
+    <div className="flex-grow flex items-center justify-center">
+      <div className="flex items-center justify-center gap-6 md:gap-8">
+        {/* Green Circle - Certified */}
+        <CircularStatistic
           value={story.certified}
-          maxValue={story.certifiedMax}
-          color={story.bgGradient}
-          delay={0.8 + index * 0.1}
+          label={story.certifiedLabel}
+          color="from-emerald-500 to-green-600"
+          delay={0.5 + index * 0.1}
+          isGrowth={false}
+        />
+
+        {/* Blue Circle - Growth */}
+        <CircularStatistic
+          value={story.growth}
+          label={story.growthLabel}
+          color="from-blue-500 to-indigo-600"
+          delay={0.7 + index * 0.1}
+          isGrowth={true}
         />
       </div>
-
-      <div className="text-center space-y-2">
-        <motion.div
-          className="text-2xl font-bold text-gray-900"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.7 + index * 0.1 }}
-        >
-          {story.growth}
-          {story.growthLabel.includes("NAAC") ? "" : "%"}
-        </motion.div>
-        <div className="text-xs text-gray-500 uppercase tracking-wide">
-          {story.growthLabel}
-        </div>
-        <div className="flex justify-center">
-          <AnimatedCircularProgress
-            value={story.growth}
-            maxValue={story.growthMax}
-            color={story.bgGradient}
-            delay={1 + index * 0.1}
-          />
-        </div>
-      </div>
     </div>
 
-    {/* Bar Chart - Compact */}
-    <div className="mt-4 pt-3 border-t border-gray-50">
-      <div className="text-center text-xs text-gray-400 mb-2">
-        Performance Overview
-      </div>
-      <div className="grid grid-cols-2 gap-3">
-        <div className="text-center">
-          <AnimatedBarChart
-            value={story.certified}
-            maxValue={story.certifiedMax}
-            color="from-blue-400 to-blue-600"
-            delay={1.2 + index * 0.1}
-          />
-          <div className="text-xs text-gray-400 mt-1">Students</div>
-        </div>
-        <div className="text-center">
-          <AnimatedBarChart
-            value={story.growth}
-            maxValue={story.growthMax}
-            color="from-green-400 to-green-600"
-            delay={1.4 + index * 0.1}
-          />
-          <div className="text-xs text-gray-400 mt-1">Growth</div>
-        </div>
-      </div>
-    </div>
+    {/* Connecting line between circles */}
+    <div
+      className="absolute"
+      style={{
+        top: "75%",
+        left: "50%",
+        transform: "translateX(-50%)",
+        width: "60px",
+        height: "2px",
+        background:
+          "linear-gradient(to right, rgba(16, 185, 129, 0.3), rgba(59, 130, 246, 0.3))",
+        zIndex: 0,
+      }}
+    />
   </motion.div>
 );
 
-// Animated components with smaller sizes
+// Keep all your existing animated components unchanged
 const AnimatedProgressBar = ({
   value,
   maxValue,
@@ -411,6 +541,7 @@ const AnimatedBarChart = ({
   );
 };
 
+// Main SuccessStories component (keeping your existing structure)
 const SuccessStories = () => {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
@@ -560,9 +691,9 @@ const SuccessStories = () => {
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
           >
-            {/* Carousel Wrapper - Fixed container size */}
+            {/* Carousel Wrapper */}
             <div className="overflow-hidden rounded-2xl px-8 md:px-16">
-              <div className="relative" style={{ height: "540px" }}>
+              <div className="relative" style={{ height: "500px" }}>
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentIndex}
@@ -606,12 +737,12 @@ const SuccessStories = () => {
             onSelect={goToSlide}
           />
 
-          {/* Overall Stats - keeping your existing section */}
+          {/* Overall Stats - Updated with new circular design */}
           <motion.div
             variants={itemVariants}
             className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-3xl p-8 md:p-12 hover:from-blue-100 hover:to-purple-100 transition-all duration-300"
           >
-            <div className="text-center mb-8">
+            <div className="text-center mb-12">
               <h3 className="text-2xl font-bold text-gray-900 mb-2">
                 Total Impact Across All Partners
               </h3>
@@ -620,68 +751,30 @@ const SuccessStories = () => {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="text-center">
-                <motion.div
-                  className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ delay: 1.2 }}
-                >
-                  6,200+
-                </motion.div>
-                <div className="text-gray-600 font-semibold mb-4">
-                  Students Certified
-                </div>
-                <AnimatedProgressBar
-                  value={6200}
-                  maxValue={7000}
-                  color="from-blue-600 to-purple-600"
-                  delay={1.5}
-                />
-              </div>
+            <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
+              <CircularStatistic
+                value={17000}
+                label="Students Certified"
+                color="from-emerald-500 to-green-600"
+                delay={1.2}
+                isGrowth={false}
+              />
 
-              <div className="text-center">
-                <motion.div
-                  className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent mb-2"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ delay: 1.4 }}
-                >
-                  52%
-                </motion.div>
-                <div className="text-gray-600 font-semibold mb-4">
-                  Avg. Placement Growth
-                </div>
-                <div className="flex justify-center">
-                  <AnimatedCircularProgress
-                    value={52}
-                    maxValue={100}
-                    color="from-green-600 to-blue-600"
-                    delay={1.7}
-                  />
-                </div>
-              </div>
+              <CircularStatistic
+                value={59}
+                label="Avg. Placement Growth"
+                color="from-blue-500 to-indigo-600"
+                delay={1.4}
+                isGrowth={true}
+              />
 
-              <div className="text-center">
-                <motion.div
-                  className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-2"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ delay: 1.6 }}
-                >
-                  0.5
-                </motion.div>
-                <div className="text-gray-600 font-semibold mb-4">
-                  Avg. NAAC Uplift
-                </div>
-                <AnimatedBarChart
-                  value={0.5}
-                  maxValue={1}
-                  color="from-purple-600 to-pink-600"
-                  delay={1.9}
-                />
-              </div>
+              <CircularStatistic
+                value={0.5}
+                label="Avg. NAAC Uplift"
+                color="from-purple-500 to-pink-600"
+                delay={1.6}
+                isGrowth={true}
+              />
             </div>
           </motion.div>
         </motion.div>

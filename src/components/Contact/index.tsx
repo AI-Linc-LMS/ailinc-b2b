@@ -1,93 +1,127 @@
-import React, { useState } from "react";
-import { motion, Variants } from "framer-motion";
+"use client";
 
-// --- Types ---
-type FormData = {
+import { useState, useRef, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+
+// Types
+interface FormData {
   name: string;
   institution: string;
   email: string;
+  countryCode: string;
   phone: string;
   message: string;
-};
+}
 
-type FormErrors = Partial<Record<keyof FormData, string>>;
+interface FormErrors {
+  name?: string;
+  institution?: string;
+  email?: string;
+  phone?: string;
+}
 
-// --- Animation Variants ---
-const containerVariants: Variants = {
+// Country codes array
+const countryCodes = [
+  { code: "+1", country: "US", name: "United States", flag: "🇺🇸" },
+  { code: "+91", country: "IN", name: "India", flag: "🇮🇳" },
+  { code: "+44", country: "GB", name: "United Kingdom", flag: "🇬🇧" },
+  { code: "+33", country: "FR", name: "France", flag: "🇫🇷" },
+  { code: "+49", country: "DE", name: "Germany", flag: "🇩🇪" },
+  { code: "+81", country: "JP", name: "Japan", flag: "🇯🇵" },
+  { code: "+86", country: "CN", name: "China", flag: "🇨🇳" },
+  { code: "+7", country: "RU", name: "Russia", flag: "🇷🇺" },
+  { code: "+61", country: "AU", name: "Australia", flag: "🇦🇺" },
+  { code: "+55", country: "BR", name: "Brazil", flag: "🇧🇷" },
+  { code: "+34", country: "ES", name: "Spain", flag: "🇪🇸" },
+  { code: "+39", country: "IT", name: "Italy", flag: "🇮🇹" },
+  { code: "+31", country: "NL", name: "Netherlands", flag: "🇳🇱" },
+  { code: "+41", country: "CH", name: "Switzerland", flag: "🇨🇭" },
+  { code: "+46", country: "SE", name: "Sweden", flag: "🇸🇪" },
+  { code: "+47", country: "NO", name: "Norway", flag: "🇳🇴" },
+  { code: "+45", country: "DK", name: "Denmark", flag: "🇩🇰" },
+  { code: "+358", country: "FI", name: "Finland", flag: "🇫🇮" },
+  { code: "+32", country: "BE", name: "Belgium", flag: "🇧🇪" },
+  { code: "+43", country: "AT", name: "Austria", flag: "🇦🇹" },
+];
+
+// Animation variants
+const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.2, delayChildren: 0.3 },
+    transition: { staggerChildren: 0.1, delayChildren: 0.2 },
   },
 };
 
-const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { type: "spring", stiffness: 100, damping: 12 },
-  },
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
 };
 
-const formFieldVariants: Variants = {
+const formFieldVariants = {
   hidden: { opacity: 0, x: -20 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: { type: "spring", stiffness: 100 },
-  },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.4 } },
 };
 
-// --- Background Wave Component --- for main deployment
-function ContactWaveBackground() {
-  return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      <motion.svg
-        className="absolute bottom-0 left-0 w-full h-64"
-        viewBox="0 0 1440 320"
-        xmlns="http://www.w3.org/2000/svg"
-        preserveAspectRatio="none"
-      >
-        <motion.path
-          fill="#d4f1f9"
-          animate={{
-            d: [
-              "M0,128L80,144C160,160,320,192,480,186.7C640,181,800,139,960,122.7C1120,107,1280,117,1360,122.7L1440,128L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z",
-              "M0,160L80,154.7C160,149,320,139,480,154.7C640,171,800,213,960,213.3C1120,213,1280,171,1360,149.3L1440,128L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z",
-            ],
-          }}
-          transition={{ duration: 12, repeat: Infinity, repeatType: "mirror" }}
-        />
-      </motion.svg>
-    </div>
-  );
-}
-
-// --- Success Icon Component ---
-function SuccessIcon() {
-  return (
-    <motion.svg
-      className="w-16 h-16 text-green-500 mx-auto mb-4"
+// Success Icon Component
+const SuccessIcon = () => (
+  <div className="mx-auto w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
+    <svg
+      className="w-8 h-8 text-green-600"
       fill="none"
       stroke="currentColor"
       viewBox="0 0 24 24"
-      initial={{ scale: 0 }}
-      animate={{ scale: 1 }}
-      transition={{ type: "spring", stiffness: 200, delay: 0.2 }}
     >
-      <motion.path
+      <path
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth={2}
-        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-        initial={{ pathLength: 0 }}
-        animate={{ pathLength: 1 }}
-        transition={{ duration: 0.8, delay: 0.5 }}
+        d="M5 13l4 4L19 7"
       />
-    </motion.svg>
+    </svg>
+  </div>
+);
+
+// Contact Wave Background Component
+const ContactWaveBackground = () => (
+  <div className="absolute inset-0 overflow-hidden">
+    <svg
+      className="absolute bottom-0 left-0 w-full h-64"
+      viewBox="0 0 1200 120"
+      preserveAspectRatio="none"
+    >
+      <path
+        d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
+        className="fill-blue-100/20"
+      ></path>
+    </svg>
+  </div>
+);
+
+// Phone validation function
+const validatePhoneNumber = (phone: string, countryCode: string): boolean => {
+  const cleanPhone = phone.replace(/\D/g, "");
+
+  const validationRules: {
+    [key: string]: { minLength: number; maxLength: number };
+  } = {
+    "+1": { minLength: 10, maxLength: 10 },
+    "+91": { minLength: 10, maxLength: 10 },
+    "+44": { minLength: 10, maxLength: 11 },
+    "+33": { minLength: 9, maxLength: 10 },
+    "+49": { minLength: 10, maxLength: 12 },
+    "+81": { minLength: 10, maxLength: 11 },
+    "+86": { minLength: 11, maxLength: 11 },
+    "+7": { minLength: 10, maxLength: 10 },
+    "+61": { minLength: 9, maxLength: 9 },
+    "+55": { minLength: 10, maxLength: 11 },
+  };
+
+  const rule = validationRules[countryCode] || { minLength: 7, maxLength: 15 };
+  return (
+    cleanPhone.length >= rule.minLength && cleanPhone.length <= rule.maxLength
   );
-}
+};
 
 // --- Main Contact Component ---
 function ReachOutPage() {
@@ -95,6 +129,7 @@ function ReachOutPage() {
     name: "",
     institution: "",
     email: "",
+    countryCode: "+91",
     phone: "",
     message: "",
   });
@@ -102,17 +137,76 @@ function ReachOutPage() {
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  // Ref for dropdown to handle outside clicks
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Handle outside clicks
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsDropdownOpen(false);
+        setSearchTerm("");
+      }
+    };
+
+    if (isDropdownOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isDropdownOpen]);
+
+  // Filter countries based on search term
+  const filteredCountries = countryCodes.filter(
+    (country) =>
+      country.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      country.code.includes(searchTerm) ||
+      country.country.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
 
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    // Special handling for phone number (only allow digits)
+    if (name === "phone") {
+      const cleanValue = value.replace(/\D/g, "");
+      setFormData((prev) => ({ ...prev, [name]: cleanValue }));
+    } else {
+      setFormData((prev) => ({ ...prev, [name]: value }));
+    }
 
     if (errors[name as keyof FormErrors]) {
       setErrors((prev) => ({ ...prev, [name]: "" }));
     }
+  };
+
+  // Fixed country selection handler
+  const handleCountrySelect = (
+    countryCode: string,
+    event: React.MouseEvent
+  ) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    console.log("Selecting country:", countryCode); // Debug log
+
+    setFormData((prev) => ({
+      ...prev,
+      countryCode: countryCode,
+    }));
+
+    setIsDropdownOpen(false);
+    setSearchTerm("");
   };
 
   const validateForm = (): FormErrors => {
@@ -125,6 +219,14 @@ function ReachOutPage() {
       newErrors.email = "Email is required";
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       newErrors.email = "Email is invalid";
+    }
+
+    // Phone validation
+    if (
+      formData.phone &&
+      !validatePhoneNumber(formData.phone, formData.countryCode)
+    ) {
+      newErrors.phone = "Please enter a valid phone number";
     }
 
     return newErrors;
@@ -142,7 +244,7 @@ function ReachOutPage() {
     setIsSubmitting(true);
 
     try {
-      // Simulate API request
+      console.log("Form data:", formData); // Debug log
       await new Promise((resolve) => setTimeout(resolve, 1500));
       setIsSubmitted(true);
     } catch (error) {
@@ -151,6 +253,10 @@ function ReachOutPage() {
       setIsSubmitting(false);
     }
   };
+
+  const selectedCountry = countryCodes.find(
+    (country) => country.code === formData.countryCode
+  );
 
   return (
     <motion.section
@@ -267,7 +373,7 @@ function ReachOutPage() {
                     )}
                   </motion.div>
 
-                  {/* Phone Field */}
+                  {/* Phone Field with ISD Code Dropdown - FIXED */}
                   <motion.div variants={formFieldVariants}>
                     <label
                       htmlFor="phone"
@@ -275,15 +381,128 @@ function ReachOutPage() {
                     >
                       Phone Number
                     </label>
-                    <input
-                      type="tel"
-                      id="phone"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      placeholder="+91 9876543210"
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
-                    />
+                    <div className="flex relative" ref={dropdownRef}>
+                      {/* Country Code Dropdown */}
+                      <div className="relative">
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            setIsDropdownOpen(!isDropdownOpen);
+                          }}
+                          className="flex items-center px-3 py-3 border border-gray-300 rounded-l-lg bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 min-w-[110px] transition-colors h-[48px]"
+                        >
+                          <span className="text-lg mr-1">
+                            {selectedCountry?.flag}
+                          </span>
+                          <span className="text-sm font-medium mr-1">
+                            {formData.countryCode}
+                          </span>
+                          <svg
+                            className={`h-4 w-4 transition-transform duration-200 ${
+                              isDropdownOpen ? "rotate-180" : ""
+                            }`}
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M19 9l-7 7-7-7"
+                            />
+                          </svg>
+                        </button>
+
+                        {/* Dropdown Menu - FIXED */}
+                        <AnimatePresence>
+                          {isDropdownOpen && (
+                            <motion.div
+                              initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                              animate={{ opacity: 1, y: 0, scale: 1 }}
+                              exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                              transition={{ duration: 0.2 }}
+                              className="absolute z-50 mt-1 w-80 bg-white border border-gray-300 rounded-lg shadow-2xl max-h-64 overflow-hidden"
+                              style={{ zIndex: 9999 }}
+                            >
+                              {/* Search Input */}
+                              <div className="p-3 border-b border-gray-200">
+                                <input
+                                  type="text"
+                                  placeholder="Search countries..."
+                                  value={searchTerm}
+                                  onChange={(e) => {
+                                    e.stopPropagation();
+                                    setSearchTerm(e.target.value);
+                                  }}
+                                  onClick={(e) => e.stopPropagation()}
+                                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                                />
+                              </div>
+
+                              {/* Countries List */}
+                              <div className="overflow-y-auto max-h-48">
+                                {filteredCountries.map((country) => (
+                                  <div
+                                    key={country.code}
+                                    onClick={(e) =>
+                                      handleCountrySelect(country.code, e)
+                                    }
+                                    className="w-full px-4 py-3 text-left hover:bg-blue-50 flex items-center space-x-3 transition-colors duration-150 cursor-pointer"
+                                  >
+                                    <span className="text-lg">
+                                      {country.flag}
+                                    </span>
+                                    <div className="flex-1 min-w-0">
+                                      <div className="flex items-center space-x-2">
+                                        <span className="font-medium text-sm">
+                                          {country.code}
+                                        </span>
+                                        <span className="text-sm text-gray-600 truncate">
+                                          {country.name}
+                                        </span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                ))}
+                                {filteredCountries.length === 0 && (
+                                  <div className="px-4 py-3 text-sm text-gray-500 text-center">
+                                    No countries found
+                                  </div>
+                                )}
+                              </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
+
+                      {/* Phone Number Input */}
+                      <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        placeholder="9876543210"
+                        className={`flex-1 px-4 py-3 border border-l-0 border-gray-300 rounded-r-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors h-[48px] ${
+                          errors.phone
+                            ? "border-red-500 bg-red-50"
+                            : "hover:border-gray-400"
+                        }`}
+                      />
+                    </div>
+                    {errors.phone && (
+                      <p className="mt-1 text-sm text-red-600">
+                        {errors.phone}
+                      </p>
+                    )}
+                    {formData.phone && (
+                      <p className="mt-1 text-sm text-gray-500">
+                        Full number: {formData.countryCode} {formData.phone}
+                      </p>
+                    )}
                   </motion.div>
 
                   {/* Message Field */}
@@ -370,6 +589,7 @@ function ReachOutPage() {
                     name: "",
                     institution: "",
                     email: "",
+                    countryCode: "+91",
                     phone: "",
                     message: "",
                   });

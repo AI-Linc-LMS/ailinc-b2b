@@ -3,7 +3,7 @@ import { useState, useRef, useMemo } from "react";
 import { motion, useInView, Variants } from "framer-motion";
 import Image from "next/image";
 
-// Enhanced news data array - can easily be extended with many more items
+// Enhanced news data array with all requested items
 const newsItems = [
   {
     id: 1,
@@ -16,11 +16,73 @@ const newsItems = [
       "Osmania University's College of Engineering (UCE) has signed an MoA with AI LINC Technologies to upskill students in Artificial Intelligence, Machine Learning, and Data Analytics. The partnership aims to bridge the gap between academia and industry, providing students with practical skills and certifications.",
     link: "https://www.thehansindia.com/amp/telangana/ous-uce-partners-with-ai-linc-to-upskill-students-in-ai-ml-and-data-analytics-1004680",
     imageSrc: "/gallery/1.png",
+    hasReadMore: true,
+  },
+  {
+    id: 2,
+    category: "ACHIEVEMENT",
+    source: "AI Linc",
+    timeToRead: "2 min",
+    title: "AI Linc Successfully Conducts Workshops to Drive AI Awareness",
+    description:
+      "AI Linc has successfully organized comprehensive workshops across multiple educational institutions, focusing on building AI awareness among faculty and students. These interactive sessions demonstrate practical AI applications in education, helping institutions understand the transformative potential of artificial intelligence in modern learning environments.",
+    link: "#",
+    imageSrc: "/gallery/3.png",
+    hasReadMore: false,
+  },
+  {
+    id: 3,
+    category: "PARTNERSHIP",
+    source: "AI Linc News",
+    timeToRead: "4 min",
+    title: "AI for Education – Helping Institutions Adopt AI in Classrooms",
+    description:
+      "AI Linc's revolutionary 'AI for Education' initiative is transforming traditional classrooms by integrating cutting-edge artificial intelligence tools. The program provides comprehensive training for educators, enabling them to leverage AI-powered teaching methodologies that enhance student engagement and improve learning outcomes across diverse academic disciplines.",
+    link: "#",
+    imageSrc: "/gallery/2.png",
+    hasReadMore: false,
+  },
+  {
+    id: 4,
+    category: "PARTNERSHIP",
+    source: "AI Linc Official",
+    timeToRead: "3 min",
+    title:
+      "Collaboration with Universities to Bring AI-Powered Training for Students",
+    description:
+      "AI Linc has forged strategic partnerships with leading universities nationwide to deliver specialized AI-powered training programs. These collaborative initiatives ensure students receive industry-relevant skills in machine learning, data analytics, and artificial intelligence, preparing them for the rapidly evolving technology landscape and future career opportunities.",
+    link: "#",
+    imageSrc: "/gallery/15.png",
+    hasReadMore: false,
+  },
+  {
+    id: 5,
+    category: "EVENT",
+    source: "Microsoft News",
+    timeToRead: "5 min",
+    title: "AI Linc CEO Invited as Guest Speaker at Microsoft",
+    description:
+      "The CEO of AI Linc was honored with an invitation to speak at Microsoft's prestigious technology conference, highlighting innovations in educational AI. The keynote presentation showcased AI Linc's groundbreaking approaches to integrating artificial intelligence in higher education, receiving acclaim from industry leaders and technology experts worldwide.",
+    link: "#",
+    imageSrc: "/gallery/23.png",
+    hasReadMore: false,
+  },
+  {
+    id: 6,
+    category: "UPDATE",
+    source: "AI Linc Blog",
+    timeToRead: "3 min",
+    title: "AI Linc Plans to Integrate 50+ AI Tools into Platform by Next Year",
+    description:
+      "AI Linc announces ambitious expansion plans to integrate over 50 advanced AI tools into its comprehensive platform by 2026. This strategic enhancement will provide educational institutions with an unprecedented suite of artificial intelligence solutions, including automated assessment tools, personalized learning systems, and advanced analytics capabilities.",
+    link: "#",
+    imageSrc: "/gallery/19.png",
+    hasReadMore: false,
   },
 ];
 
 const NewsVideo = () => {
-  const [visibleNewsCount, setVisibleNewsCount] = useState(6); // Show first 6 items initially
+  const [visibleNewsCount, setVisibleNewsCount] = useState(6);
   const [showAllNews, setShowAllNews] = useState(false);
   const sectionRef = useRef(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -280,27 +342,47 @@ const NewsVideo = () => {
                           {item.timeToRead} read
                         </span>
 
-                        <a
-                          href={item.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-purple-600 rounded-full transition-all hover:scale-95 hover:shadow-lg"
-                        >
-                          Read Now
-                          <svg
-                            className="w-4 h-4"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            viewBox="0 0 24 24"
+                        {item.hasReadMore ? (
+                          <a
+                            href={item.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-purple-600 rounded-full transition-all hover:scale-95 hover:shadow-lg"
                           >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="M13 7l5 5m0 0l-5 5m5-5H6"
-                            />
-                          </svg>
-                        </a>
+                            Read More
+                            <svg
+                              className="w-4 h-4"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M13 7l5 5m0 0l-5 5m5-5H6"
+                              />
+                            </svg>
+                          </a>
+                        ) : (
+                          <></>
+                          // <span className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-400 bg-gray-200 rounded-full cursor-not-allowed">
+                          //   Coming Soon
+                          //   <svg
+                          //     className="w-4 h-4"
+                          //     fill="none"
+                          //     stroke="currentColor"
+                          //     strokeWidth="2"
+                          //     viewBox="0 0 24 24"
+                          //   >
+                          //     <path
+                          //       strokeLinecap="round"
+                          //       strokeLinejoin="round"
+                          //       d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                          //     />
+                          //   </svg>
+                          // </span>
+                        )}
                       </div>
                     </div>
                   </motion.div>

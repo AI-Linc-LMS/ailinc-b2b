@@ -54,6 +54,17 @@ const VideoIcon = () => (
   </svg>
 );
 
+// New Icons for Explore Card
+const RocketIcon = () => (
+  <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+    <path
+      fillRule="evenodd"
+      d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z"
+      clipRule="evenodd"
+    />
+  </svg>
+);
+
 // --- Helper function to extract YouTube video ID ---
 const getYouTubeVideoId = (url: string): string => {
   const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
@@ -315,34 +326,12 @@ const UpdatedCourseCard = ({
         </div>
       </motion.div>
 
-      {/* Next Up Section */}
-      <motion.div
-        className={`bg-${accentColor}-50 border border-${accentColor}-200 rounded-lg p-3 mb-6`}
-        initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ delay: 0.6 }}
-      >
-        <div className="flex items-center justify-between mb-2">
-          <span className={`text-sm font-medium text-${accentColor}-800`}>
-            Next Up
-          </span>
-          <span className={`text-sm font-medium text-${accentColor}-700`}>
-            {duration}
-          </span>
-        </div>
-        <div className="flex items-center">
-          <div
-            className={`w-2 h-2 bg-${accentColor}-500 rounded-full mr-3`}
-          ></div>
-          <h4 className={`text-sm font-semibold text-${accentColor}-900`}>
-            {nextLesson}
-          </h4>
-        </div>
-      </motion.div>
-
       {/* CTA Button with Better Colors */}
       <motion.a
-        href="#contact"
+        href={`https://app.ailinc.com/${heading
+          ?.toLowerCase()
+          ?.split(" ")
+          ?.join("-")}`}
         className="block w-full bg-gray-900 hover:bg-gray-800 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 shadow-md hover:shadow-lg text-center text-sm"
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
@@ -398,7 +387,7 @@ function HandsOnLearningSection() {
                     alt={item.title}
                     width={1000}
                     height={1000}
-                    className="w-full h-64 object-cover rounded-t-2xl"
+                    className="w-full h-75 object-cover rounded-t-2xl"
                   />
                   <PlayIcon onClick={() => setSelectedId(item.id)} />
                 </div>
@@ -494,7 +483,7 @@ function HandsOnLearningSection() {
           )}
         </AnimatePresence>
 
-        {/* --- All 4 Free Courses in 2x2 Grid --- */}
+        {/* --- Free Courses Section: Keep 4 cards in 2x2 grid --- */}
         <motion.div variants={itemVariants}>
           <motion.h3
             variants={itemVariants}
@@ -509,8 +498,8 @@ function HandsOnLearningSection() {
             Kickstart your AI & Data journey - No cost, lifetime access
           </motion.p>
 
-          {/* 2x2 Grid for Courses */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 max-w-5xl mx-auto">
+          {/* 2x2 Grid for Free Courses */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16 max-w-5xl mx-auto">
             {freeCourses.map((course, index) => (
               <motion.div
                 key={index}
@@ -536,38 +525,151 @@ function HandsOnLearningSection() {
               </motion.div>
             ))}
           </div>
+        </motion.div>
 
-          {/* Centered Explore CTA */}
-          <motion.div
-            className="flex justify-center"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
-          >
-            <motion.a
-              href="https://app.ailinc.com/courses"
-              target="_blank"
-              rel="noopener noreferrer"
+        {/* --- SEPARATE: Explore All Courses Section --- */}
+        <motion.div
+          variants={itemVariants}
+          className="mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6 }}
+        >
+          <div className="max-w-4xl mx-auto">
+            <motion.div
+              className="bg-gradient-to-br from-purple-600 to-indigo-700 rounded-3xl shadow-2xl p-8 md:p-12 text-white relative overflow-hidden"
               whileHover={{
-                y: -4,
-                boxShadow: "0px 15px 30px rgba(0, 0, 0, 0.15)",
+                y: -6,
+                boxShadow: "0px 25px 50px rgba(147, 51, 234, 0.25)",
               }}
-              className="group flex items-center justify-center text-center px-12 py-6 rounded-2xl border-2 border-dashed border-gray-400 hover:bg-gray-50 hover:border-gray-600 transition-all duration-300"
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
             >
-              <div className="mr-4 text-gray-600 transition-transform group-hover:scale-110">
-                <ArrowRightIcon />
+              {/* Background decorations */}
+              <div className="absolute inset-0 opacity-10">
+                <div className="absolute top-8 right-8 w-32 h-32 border-2 border-white rounded-full" />
+                <div className="absolute bottom-8 left-8 w-24 h-24 bg-white rounded-full" />
+                <div className="absolute top-1/2 left-1/4 w-16 h-16 border-2 border-white transform rotate-45" />
               </div>
-              <span className="text-xl font-bold text-gray-900">
-                Explore All Courses
-              </span>
-            </motion.a>
-          </motion.div>
+
+              <div className="relative z-10 text-center">
+                {/* Icon */}
+                <motion.div
+                  className="inline-flex items-center justify-center w-20 h-20 bg-white/20 backdrop-blur-sm rounded-full mb-8"
+                  animate={{
+                    rotate: [0, 5, -5, 0],
+                    scale: [1, 1.05, 1],
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                >
+                  <RocketIcon />
+                </motion.div>
+
+                {/* Main content */}
+                <motion.h3
+                  className="text-3xl md:text-4xl font-bold mb-4"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2 }}
+                >
+                  Ready for Premium Courses?
+                </motion.h3>
+
+                <motion.p
+                  className="text-xl text-purple-100 mb-8 max-w-2xl mx-auto leading-relaxed"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3 }}
+                >
+                  Unlock advanced AI courses, get personalized mentorship, work
+                  on industry projects, and secure guaranteed placements.
+                </motion.p>
+
+                {/* Features grid */}
+                <motion.div
+                  className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4 }}
+                >
+                  {[
+                    { number: "50+", label: "Premium Courses" },
+                    { number: "1:1", label: "Mentorship" },
+                    { number: "100%", label: "Placement Support" },
+                    { number: "10K+", label: "Success Stories" },
+                  ].map((stat, index) => (
+                    <motion.div
+                      key={index}
+                      className="text-center"
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.5 + index * 0.1 }}
+                    >
+                      <div className="text-2xl md:text-3xl font-bold text-yellow-300 mb-1">
+                        {stat.number}
+                      </div>
+                      <div className="text-sm text-purple-200">
+                        {stat.label}
+                      </div>
+                    </motion.div>
+                  ))}
+                </motion.div>
+
+                {/* CTA Button */}
+                <motion.a
+                  href="https://app.ailinc.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-flex items-center justify-center px-8 py-4 bg-white text-purple-700 font-bold text-lg rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-gray-50"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.6 }}
+                >
+                  <span>Explore All Courses</span>
+                  <motion.div
+                    className="ml-3 group-hover:translate-x-1 transition-transform duration-200"
+                    animate={{ x: [0, 4, 0] }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                  >
+                    <motion.svg
+                      className="ml-2 w-5 h-5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      animate={{ x: [0, 3, 0] }}
+                      transition={{
+                        duration: 1.5,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M13 7l5 5m0 0l-5 5m5-5H6"
+                      />
+                    </motion.svg>
+                  </motion.div>
+                </motion.a>
+              </div>
+            </motion.div>
+          </div>
         </motion.div>
 
         {/* --- Flagship Program CTA --- */}
         <motion.div
           variants={itemVariants}
-          className="mt-24 bg-white p-8 rounded-2xl shadow-lg border border-gray-200 text-center"
+          className="bg-white p-8 rounded-2xl shadow-lg border border-gray-200 text-center"
         >
           <h3 className="text-2xl font-extrabold mb-2 text-gray-900">
             Advance Your Career with Our Flagship Program
