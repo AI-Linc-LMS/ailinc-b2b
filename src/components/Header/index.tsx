@@ -56,11 +56,11 @@ function Header() {
           </div>
 
           <div className="flex items-center space-x-4">
-            <a href="/#contact">
+            <Link href="/#contact">
               <button className="px-6 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full hover:shadow-lg transition-all duration-300 transform hover:scale-95 font-medium tracking-wide">
                 Book A Demo
               </button>
-            </a>
+            </Link>
           </div>
         </div>
       </nav>
