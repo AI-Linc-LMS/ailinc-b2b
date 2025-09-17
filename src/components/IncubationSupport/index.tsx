@@ -451,7 +451,7 @@ const IncubationSupport = () => {
                       animate={{ opacity: 1, scale: 1, rotateY: 0 }}
                       transition={{ delay: 1.0, duration: 1.5 }}
                     >
-                      <div className="w-full max-w-md h-80 bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100 hidden sm:block">
+                      <div className="w-full max-w-md h-80 bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
                         {pitchSlides[activeSlide].illustration}
                       </div>
                     </motion.div>

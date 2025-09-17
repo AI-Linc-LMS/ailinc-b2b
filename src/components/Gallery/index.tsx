@@ -101,7 +101,7 @@ function ImageCard({
         ease: [0.25, 0.4, 0.25, 1],
       }}
       className="group relative rounded-lg overflow-hidden cursor-pointer bg-white shadow-md hover:shadow-lg transition-shadow duration-200 will-change-transform"
-      onClick={onClick}
+      // onClick={onClick}
       style={{ transform: "translateZ(0)", backfaceVisibility: "hidden" }}
     >
       {/* subtle hover tint */}
@@ -148,23 +148,6 @@ function ImageCard({
         />
 
         {/* magnifier icon on hover */}
-        <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center">
-          <div className="bg-white/90 rounded-full p-2 transform group-hover:scale-110 transition-transform duration-200">
-            <svg
-              className="w-4 h-4 text-gray-700"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-              />
-            </svg>
-          </div>
-        </div>
       </div>
     </motion.div>
   );

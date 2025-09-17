@@ -81,7 +81,7 @@ const workshops = [
       "Learn to create stunning, functional websites using Agentic AI, without writing a single line of code.",
     youtubeUrl: "https://youtu.be/6H2vFc8cbqQ?si=Gl_m-Tv3e_6HZWpU",
     videoUrl: "https://www.youtube.com/embed/6H2vFc8cbqQ",
-    bookingLink: "https://ailinc.com/workshop-registration",
+    bookingLink: "/workshop-registration",
   },
   {
     id: "workshop-2",
@@ -90,7 +90,7 @@ const workshops = [
       "A deep dive into industry-leading AI tools like Lovable.ai, Heygen, and Zapier to automate and innovate.",
     youtubeUrl: "https://youtu.be/iWNTkX5P-JI?si=HDHnW7Xix4Cpngo_",
     videoUrl: "https://www.youtube.com/embed/iWNTkX5P-JI",
-    bookingLink: "https://ailinc.com/workshop-registration",
+    bookingLink: "/workshop-registration",
   },
 ];
 
