@@ -9,11 +9,11 @@ function Header() {
       <nav className="relative z-10 px-6 py-4">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div className="flex items-center">
-            <a href="/">
+            <Link href="/" passHref>
               <span className="text-2xl font-semibold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent tracking-tight cursor-pointer">
                 AI Linc
               </span>
-            </a>
+            </Link>
           </div>
 
           <div className="hidden md:flex items-center space-x-8">
@@ -56,11 +56,11 @@ function Header() {
           </div>
 
           <div className="flex items-center space-x-4">
-            <a href="/#contact">
+            <Link href="/#contact">
               <button className="px-6 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full hover:shadow-lg transition-all duration-300 transform hover:scale-95 font-medium tracking-wide">
                 Book A Demo
               </button>
-            </a>
+            </Link>
           </div>
         </div>
       </nav>
