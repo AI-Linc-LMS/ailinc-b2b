@@ -1254,8 +1254,8 @@ export default function SingleWorkshopRegistration() {
                   Registration Successful!
                 </h3>
                 <p className="text-gray-600 mb-6">
-                  You'll receive workshop details via email shortly. We're
-                  excited to see you there!
+                  You&apos;ll receive workshop details via email shortly.
+                  We&apos;re excited to see you there!
                 </p>
                 <div className="space-y-3">
                   <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
