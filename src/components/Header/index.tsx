@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 function Header() {
   return (
     <header className="relative  overflow-hidden">
@@ -15,37 +17,42 @@ function Header() {
           </div>
 
           <div className="hidden md:flex items-center space-x-8">
-            <a
+            <Link
               href="/#services"
               className="text-gray-700 hover:text-blue-600 transition-colors font-medium tracking-wide"
+              passHref
             >
               Services
-            </a>
-            <a
+            </Link>
+            <Link
               href="/#success-stories"
               className="text-gray-700 hover:text-blue-600 transition-colors font-medium tracking-wide"
+              passHref
             >
               Success Stories
-            </a>
-            <a
+            </Link>
+            <Link
               href="/#trainers"
               className="text-gray-700 hover:text-blue-600 transition-colors font-medium tracking-wide"
+              passHref
             >
               Trainers
-            </a>
-            <a
+            </Link>
+            <Link
               href="/#solutions"
               className="text-gray-700 hover:text-blue-600 transition-colors font-medium tracking-wide"
+              passHref
             >
               Solutions
-            </a>
+            </Link>
 
-            <a
+            <Link
               href="/#contact"
               className="text-gray-700 hover:text-blue-600 transition-colors font-medium tracking-wide"
+              passHref
             >
               Contact
-            </a>
+            </Link>
           </div>
 
           <div className="flex items-center space-x-4">
