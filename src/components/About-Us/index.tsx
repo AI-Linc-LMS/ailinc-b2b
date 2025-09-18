@@ -392,7 +392,7 @@ export default function AboutUs() {
   return (
     <main className="relative min-h-screen bg-gradient-to-b from-gray-50 to-white text-gray-900 overflow-hidden">
       {/* Hero Section */}
-      <section className="pt-32 pb-20 relative overflow-hidden">
+      {/* <section className="pt-32 pb-20 relative overflow-hidden">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -413,9 +413,8 @@ export default function AboutUs() {
 
         <div className="absolute top-1/4 left-1/4 size-96 bg-blue-200/20 rounded-full blur-3xl"></div>
         <div className="absolute bottom-1/4 right-1/4 size-96 bg-purple-200/20 rounded-full blur-3xl"></div>
-      </section>
+      </section> */}
 
-      {/* Who We Are Section */}
       {/* Who We Are Section */}
       <section
         className="py-20 relative bg-white overflow-hidden"
