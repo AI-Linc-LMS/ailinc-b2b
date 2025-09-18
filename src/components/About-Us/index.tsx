@@ -1,4 +1,5 @@
 "use client"
+import { useHashNavigation } from "@/hooks/useHashNavigation"
 import { motion } from "framer-motion"
 
 // Custom SVG Icons
@@ -91,7 +92,7 @@ const TeamMemberCard = ({
             src={imageSrc}
             loading="lazy"
             alt={name}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            className=" group-hover:scale-105 transition-transform duration-300"
           />
         </div>
         <div
@@ -129,10 +130,6 @@ const TeamMemberCard = ({
   )
 }
 
-
-
-// Who We Are Section
-export function WhoWeAreSection() {
     const specializations = [
         {
             icon: UsersIcon,
@@ -177,74 +174,9 @@ export function WhoWeAreSection() {
         show: { opacity: 1, y: 0, transition: { duration: 0.6 } },
     }
 
-    return (
-        <section id="who-we-are" className="py-16 sm:py-20 relative overflow-hidden">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-                    <motion.div
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.8 }}
-                        viewport={{ once: true }}
-                        className="lg:col-span-5 space-y-6"
-                    >
-                        <div>
-                            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                                Who We Are
-                            </h2>
-                            <p className="text-xl sm:text-2xl text-gray-700 leading-relaxed">
-                                A consulting-first AI deployment firm — preparing and placing AI talent into roles that demand innovation, execution, and real-world readiness.
-                            </p>
-                        </div>
-                    </motion.div>
 
-                    <motion.div
-                        variants={container}
-                        initial="hidden"
-                        whileInView="show"
-                        viewport={{ once: true }}
-                        className="lg:col-span-7"
-                    >
-                        <div className="space-y-4">
-                            <motion.div variants={item} className="mb-8">
-                                <h3 className="text-2xl font-semibold text-gray-900 mb-6">We specialize in:</h3>
-                            </motion.div>
-
-                            {specializations.map((spec, index) => (
-                                <motion.div key={index} variants={item}>
-                                    <div className="bg-gradient-to-r from-white to-gray-50 backdrop-blur-sm border border-blue-200 rounded-xl group hover:shadow-lg hover:shadow-blue-500/10 hover:border-blue-300 transition-all duration-500 p-6">
-                                        <div className="flex items-start gap-4">
-                                            <div className="flex-shrink-0">
-                                                <div className="size-12 rounded-xl bg-gradient-to-r from-blue-100 to-purple-100 flex items-center justify-center group-hover:from-blue-200 group-hover:to-purple-200 transition-all duration-300">
-                                                    <spec.icon />
-                                                </div>
-                                            </div>
-                                            <div className="flex-1">
-                                                <h4 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors duration-300">
-                                                    {spec.title}
-                                                </h4>
-                                                <p className="text-gray-600 group-hover:text-gray-700 transition-colors duration-300">
-                                                    {spec.description}
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </motion.div>
-                            ))}
-                        </div>
-                    </motion.div>
-                </div>
-            </div>
-
-            <div className="absolute top-1/4 left-1/4 size-96 bg-blue-200/20 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-1/4 right-1/4 size-96 bg-purple-200/20 rounded-full blur-3xl"></div>
-        </section>
-    )
-}
-
-// What We Do Section
-export function WhatWeDoSection() {
-    const coreOfferings = [
+// Who We Are Section
+  const coreOfferings = [
         {
             icon: UsersIcon,
             title: "Talent Deployment",
@@ -275,28 +207,181 @@ export function WhatWeDoSection() {
         }
     ]
 
-    const container = {
-        hidden: { opacity: 0 },
-        show: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.15,
-                delayChildren: 0.3,
-            },
-        },
-    }
+// What We Do Section
 
-    const item = {
-        hidden: { opacity: 0, y: 30 },
-        show: { opacity: 1, y: 0, transition: { duration: 0.8 } },
-    }
+
+// Team Section
+export function TeamSection() {
+    const teamMembers = [
+        {
+            name: "Shubham",
+            role: "Director",
+            description: "Driving AI Linc's vision and strategic growth with innovative leadership.",
+            imageSrc: "/trainers/shubham_lal.jpg",
+            borderColor: "#3B82F6", // Blue-500
+            hoverColor: "#3B82F6"
+        },
+        {
+            name: "Poorva",
+            role: "Director",
+            description: "Pioneering innovative solutions and driving AI Linc's technological advancement.",
+            imageSrc: "/trainers/poorva_image.jpg",
+            borderColor: "#8B5CF6", // Purple-500
+            hoverColor: "#8B5CF6"
+        },
+        {
+            name: "Sandeep",
+            role: "Director",
+            description: "Guiding AI Linc's strategic partnerships and business development.",
+            imageSrc: "/trainers/sandeep.jpeg",
+            borderColor: "#10B981", // Emerald-500
+            hoverColor: "#10B981"
+        }
+    ]
 
     return (
-        <section id="what-we-do" className="py-16 sm:py-20 relative overflow-hidden">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <section className="py-20 relative bg-gradient-to-b from-gray-50/50 to-white">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8 }}
+                    viewport={{ once: true }}
+                    className="text-center mb-16"
+                >
+                    <h2 className="text-4xl sm:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                        Meet Our Leadership
+                    </h2>
+                    <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                        Our experienced team of visionaries and industry experts driving AI Linc&apos;s mission forward
+                    </p>
+                </motion.div>
+
+                <motion.div
+                    variants={container}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ once: true }}
+                    className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-8"
+                >
+                    {teamMembers.map((member, index) => (
+                        <motion.div key={index} variants={item}>
+                            <TeamMemberCard
+                                name={member.name}
+                                role={member.role}
+                                description={member.description}
+                                imageSrc={member.imageSrc}
+                                borderColor={member.borderColor}
+                                hoverColor={member.hoverColor}
+                            />
+                        </motion.div>
+                    ))}
+                </motion.div>
+            </div>
+
+            <div className="absolute top-1/4 left-1/4 size-96 bg-blue-200/15 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-1/4 right-1/4 size-96 bg-purple-200/15 rounded-full blur-3xl"></div>
+        </section>
+    )
+}
+
+// Main About Us Page
+export default function AboutUs() {
+
+    useHashNavigation()
+    
+    return (
+        <main className="relative min-h-screen bg-gradient-to-b from-gray-50 to-white text-gray-900 overflow-hidden">
+            {/* Hero Section */}
+            <section className="pt-32 pb-20 relative overflow-hidden">
+                <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8 }}
+                        className="text-center mb-16"
+                    >
+                        <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-8 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                            About AI Linc
+                        </h1>
+                        <p className="text-xl sm:text-2xl text-gray-600 max-w-5xl mx-auto leading-relaxed">
+                            Bridging the gap between AI talent and transformative opportunities through innovative assessment, upskilling, and deployment solutions.
+                        </p>
+                    </motion.div>
+                </div>
+
+                <div className="absolute top-1/4 left-1/4 size-96 bg-blue-200/20 rounded-full blur-3xl"></div>
+                <div className="absolute bottom-1/4 right-1/4 size-96 bg-purple-200/20 rounded-full blur-3xl"></div>
+            </section>
+
+            {/* Who We Are Section */}
+        <section className="py-20 relative bg-white" id="who-we-are">
+    <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }} // Changed from whileInView to animate
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="lg:col-span-5 space-y-6"
+            >
+                <div>
+                    <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                        Who We Are
+                    </h2>
+                    <p className="text-xl sm:text-2xl text-gray-700 leading-relaxed">
+                        A consulting-first AI deployment firm — preparing and placing AI talent into roles that demand innovation, execution, and real-world readiness.
+                    </p>
+                </div>
+            </motion.div>
+
+            <motion.div
+                variants={container}
+                initial="hidden"
+                animate="show" // Changed from whileInView to animate
+                className="lg:col-span-7"
+            >
+                <div className="space-y-4">
+                    <motion.div variants={item} className="mb-8">
+                        <h3 className="text-2xl font-semibold text-gray-900 mb-6">We specialize in:</h3>
+                    </motion.div>
+
+                    {specializations.map((spec, index) => (
+                        <motion.div key={index} variants={item}>
+                            <div className="bg-gradient-to-r from-white to-gray-50 backdrop-blur-sm border border-blue-200 rounded-xl group hover:shadow-lg hover:shadow-blue-500/10 hover:border-blue-300 transition-all duration-500 p-6">
+                                <div className="flex items-start gap-4">
+                                    <div className="flex-shrink-0">
+                                        <div className="size-12 rounded-xl bg-gradient-to-r from-blue-100 to-purple-100 flex items-center justify-center group-hover:from-blue-200 group-hover:to-purple-200 transition-all duration-300">
+                                            <spec.icon />
+                                        </div>
+                                    </div>
+                                    <div className="flex-1">
+                                        <h4 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors duration-300">
+                                            {spec.title}
+                                        </h4>
+                                        <p className="text-gray-600 group-hover:text-gray-700 transition-colors duration-300">
+                                            {spec.description}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </motion.div>
+                    ))}
+                </div>
+            </motion.div>
+        </div>
+    </div>
+
+    <div className="absolute top-1/4 left-1/4 size-96 bg-blue-200/20 rounded-full blur-3xl"></div>
+    <div className="absolute bottom-1/4 right-1/4 size-96 bg-purple-200/20 rounded-full blur-3xl"></div>
+</section>
+
+
+            {/* What We Do Section */}
+            <section className="py-20 relative bg-gradient-to-b from-gray-50/50 to-white" id="what-we-do">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                   animate={{ opacity: 1, x: 0 }} // Changed from whileInView to animate
                     transition={{ duration: 0.8 }}
                     viewport={{ once: true }}
                     className="text-center mb-12 sm:mb-16"
@@ -312,7 +397,7 @@ export function WhatWeDoSection() {
                 <motion.div
                     variants={container}
                     initial="hidden"
-                    whileInView="show"
+                      animate="show" // Changed from whileInView to animate
                     viewport={{ once: true }}
                     className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mb-12"
                 >
@@ -346,143 +431,7 @@ export function WhatWeDoSection() {
             <div className="absolute top-1/3 left-1/4 size-96 bg-blue-200/15 rounded-full blur-3xl"></div>
             <div className="absolute bottom-1/3 right-1/4 size-96 bg-purple-200/15 rounded-full blur-3xl"></div>
             <div className="absolute top-2/3 right-1/3 size-64 bg-orange-200/15 rounded-full blur-2xl"></div>
-        </section>
-    )
-}
-
-// Team Section
-export function TeamSection() {
-    const teamMembers = [
-        {
-            name: "Shubham",
-            role: "Director",
-            description: "Driving AI Linc's vision and strategic growth with innovative leadership.",
-            imageSrc: "/trainers/shubham_lal.jpg",
-            borderColor: "#3B82F6", // Blue-500
-            hoverColor: "#3B82F6"
-        },
-        {
-            name: "Poorva",
-            role: "Director",
-            description: "Pioneering innovative solutions and driving AI Linc's technological advancement.",
-            imageSrc: "/trainers/poorva_image.jpg",
-            borderColor: "#8B5CF6", // Purple-500
-            hoverColor: "#8B5CF6"
-        },
-        {
-            name: "Sandeep",
-            role: "Director",
-            description: "Guiding AI Linc's strategic partnerships and business development.",
-            imageSrc: "/trainers/sandeep.jpeg",
-            borderColor: "#10B981", // Emerald-500
-            hoverColor: "#10B981"
-        },
-        {
-            name: "Noorman",
-            role: "Chief Marketing Officer",
-            description: "Crafting AI Linc's brand narrative and market positioning.",
-            imageSrc: "/trainers/noorman.jpeg",
-            borderColor: "#EC4899", // Pink-500
-            hoverColor: "#EC4899"
-        }
-    ]
-
-    const container = {
-        hidden: { opacity: 0 },
-        show: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.1,
-                delayChildren: 0.3,
-            },
-        },
-    }
-
-    const item = {
-        hidden: { opacity: 0, y: 20 },
-        show: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-    }
-
-    return (
-        <section className="py-20 relative bg-gradient-to-b from-gray-50/50 to-white">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 }}
-                    viewport={{ once: true }}
-                    className="text-center mb-16"
-                >
-                    <h2 className="text-4xl sm:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                        Meet Our Leadership
-                    </h2>
-                    <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                        Our experienced team of visionaries and industry experts driving AI Linc&apos;s mission forward
-                    </p>
-                </motion.div>
-
-                <motion.div
-                    variants={container}
-                    initial="hidden"
-                    whileInView="show"
-                    viewport={{ once: true }}
-                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
-                >
-                    {teamMembers.map((member, index) => (
-                        <motion.div key={index} variants={item}>
-                            <TeamMemberCard
-                                name={member.name}
-                                role={member.role}
-                                description={member.description}
-                                imageSrc={member.imageSrc}
-                                borderColor={member.borderColor}
-                                hoverColor={member.hoverColor}
-                            />
-                        </motion.div>
-                    ))}
-                </motion.div>
-            </div>
-
-            <div className="absolute top-1/4 left-1/4 size-96 bg-blue-200/15 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-1/4 right-1/4 size-96 bg-purple-200/15 rounded-full blur-3xl"></div>
-        </section>
-    )
-}
-
-// Main About Us Page
-export default function AboutUs() {
-    return (
-        <main className="relative min-h-screen bg-gradient-to-b from-gray-50 to-white text-gray-900 overflow-hidden">
-            {/* Hero Section */}
-            <section className="pt-32 pb-20 relative overflow-hidden">
-                <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8 }}
-                        className="text-center mb-16"
-                    >
-                        <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-8 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                            About AI Linc
-                        </h1>
-                        <p className="text-xl sm:text-2xl text-gray-600 max-w-5xl mx-auto leading-relaxed">
-                            Bridging the gap between AI talent and transformative opportunities through innovative assessment, upskilling, and deployment solutions.
-                        </p>
-                    </motion.div>
-                </div>
-
-                <div className="absolute top-1/4 left-1/4 size-96 bg-blue-200/20 rounded-full blur-3xl"></div>
-                <div className="absolute bottom-1/4 right-1/4 size-96 bg-purple-200/20 rounded-full blur-3xl"></div>
-            </section>
-
-            {/* Who We Are Section */}
-            <section className="py-20 relative bg-white">
-                <WhoWeAreSection />
-            </section>
-
-            {/* What We Do Section */}
-            <section className="py-20 relative bg-gradient-to-b from-gray-50/50 to-white">
-                <WhatWeDoSection />
+    
             </section>
 
             {/* Team Section */}

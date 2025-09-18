@@ -85,8 +85,10 @@ const IncubationSupport = () => {
           whileHover={{ scale: 1 }}
           style={{ filter: "hue-rotate(0deg)" }}
         >
-          <Image src="/pitchdeck/1.jpg" alt="funding" fill className="object-cover"
-            sizes="(max-width: 640px) 320px, 384px" />
+          <Image src="/pitchdeck/1.jpg" alt="funding" fill
+            className="object-center" // Added object-center for better positioning
+            sizes="(max-width: 640px) 280px, (max-width: 768px) 360px, 440px"
+            priority={false} />
         </motion.div>
       ),
       features: [
@@ -112,8 +114,10 @@ const IncubationSupport = () => {
           whileHover={{ scale: 1 }}
           style={{ filter: "hue-rotate(0deg)" }}
         >
-          <Image src="/pitchdeck/2.jpg" alt="funding" fill className="object-cover"
-            sizes="(max-width: 640px) 320px, 384px" />
+          <Image src="/pitchdeck/2.jpg" alt="funding" fill
+            className="object-center" // Added object-center for better positioning
+            sizes="(max-width: 640px) 280px, (max-width: 768px) 360px, 440px"
+            priority={false} />
         </motion.div>
       ),
       features: [
@@ -139,8 +143,10 @@ const IncubationSupport = () => {
           whileHover={{ scale: 1 }}
           style={{ filter: "hue-rotate(0deg)" }}
         >
-          <Image src="/pitchdeck/3.jpg" alt="funding" fill className="object-cover"
-            sizes="(max-width: 640px) 320px, 384px" />
+          <Image src="/pitchdeck/3.jpg" alt="funding" fill
+            className="object-center" // Added object-center for better positioning
+            sizes="(max-width: 640px) 280px, (max-width: 768px) 360px, 440px"
+            priority={false}/>
         </motion.div>
       ),
       features: [
@@ -166,8 +172,10 @@ const IncubationSupport = () => {
           whileHover={{ scale: 1 }}
           style={{ filter: "hue-rotate(0deg)" }}
         >
-          <Image src="/pitchdeck/4.jpg" alt="funding" fill className="object-cover"
-            sizes="(max-width: 640px) 320px, 384px" />
+          <Image src="/pitchdeck/4.jpg" alt="funding" fill
+            className="object-center" // Added object-center for better positioning
+            sizes="(max-width: 640px) 280px, (max-width: 768px) 360px, 440px"
+            priority={false} />
         </motion.div>
       ),
       features: [
@@ -455,8 +463,11 @@ const IncubationSupport = () => {
                       animate={{ opacity: 1, scale: 1, rotateY: 0 }}
                       transition={{ delay: 1.0, duration: 1.5 }}
                     >
-                      <div className="w-full max-w-sm sm:max-w-md h-64 sm:h-80 bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100 relative">
-                        {pitchSlides[activeSlide].illustration}
+                      <div className="w-full max-w-sm sm:max-w-md bg-white rounded-2xl shadow-xl border border-gray-100 relative overflow-hidden">
+                        {/* Fixed aspect ratio container */}
+                        <div className="aspect-[4/3] relative w-full">
+                          {pitchSlides[activeSlide].illustration}
+                        </div>
                       </div>
                     </motion.div>
 
