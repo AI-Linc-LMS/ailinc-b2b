@@ -43,9 +43,9 @@ export default function TermsPage() {
             <section className="space-y-4">
               <h2 className="text-2xl font-bold text-gray-900 mb-4">1. Definitions</h2>
               <p className="text-gray-700 leading-relaxed">
-                For the purpose of these Terms and Conditions, "we", "us", "our" refers to Leapify Technologies Private Limited, 
+                For the purpose of these Terms and Conditions, &quot;we&quot;, &quot;us&quot;, &quot;our&quot; refers to Leapify Technologies Private Limited, 
                 with registered office at Flat No 102, Raghu Ram Enclave Silpa Park, Kondapur, Hyderabad, Telangana 500084. 
-                "You", "your", "user", "visitor" refers to any person who accesses our website or purchases our services.
+                &quot;You&quot;, &quot;your&quot;, &quot;user&quot;, &quot;visitor&quot; refers to any person who accesses our website or purchases our services.
               </p>
             </section>
 
@@ -185,12 +185,13 @@ export default function TermsPage() {
             <p className="text-gray-600 mb-6">
               Have questions about our terms? We&apos;re here to help.
             </p>
-            <a 
+            <Link 
               href="/#contact" 
+              passHref
               className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300"
             >
               Contact Us
-            </a>
+            </Link>
           </div>
         </div>
       </div>

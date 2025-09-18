@@ -89,6 +89,7 @@ const TeamMemberCard = ({
         <div className="w-full h-80 overflow-hidden bg-gray-100">
           <img
             src={imageSrc}
+            loading="lazy"
             alt={name}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
           />
@@ -416,7 +417,7 @@ export function TeamSection() {
                         Meet Our Leadership
                     </h2>
                     <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                        Our experienced team of visionaries and industry experts driving AI Linc's mission forward
+                        Our experienced team of visionaries and industry experts driving AI Linc&apos;s mission forward
                     </p>
                 </motion.div>
 
