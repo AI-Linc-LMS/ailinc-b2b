@@ -382,16 +382,16 @@ function HandsOnLearningSection() {
                 whileHover={{ y: -5 }}
               >
                 {/* YouTube Thumbnail with Play Overlay */}
-                <div className="relative">
-                  <Image
-                    src={thumbnailUrl}
-                    alt={item.title}
-                    width={1000}
-                    height={1000}
-                    className="w-full h-75 object-cover rounded-t-2xl"
-                  />
-                  <PlayIcon onClick={() => setSelectedId(item.id)} />
-                </div>
+                <div className="relative w-full" style={{ aspectRatio: '16/9' }}>
+  <Image
+    src={thumbnailUrl}
+    alt={item.title}
+    width={1000}
+    height={562}
+    className="w-full h-full object-cover rounded-t-2xl"
+  />
+  <PlayIcon onClick={() => setSelectedId(item.id)} />
+</div>
 
                 {/* Content */}
                 <div className="p-6">
