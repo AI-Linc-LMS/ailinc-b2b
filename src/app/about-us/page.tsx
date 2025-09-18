@@ -1,13 +1,13 @@
 "use client";
+import AboutUs from "@/components/About-Us";
 import { Footer } from "@/components/Footer";
 import Header from "@/components/Header";
-import SingleWorkshopRegistration from "@/components/Workshop";
 
-export default function WorkshopRegistrationPage() {
+export default function AboutUsPage() {
   return (
     <div className="relative min-h-screen overflow-x-hidden">
       <Header />
-      <SingleWorkshopRegistration />
+      <AboutUs/>
       <Footer />
     </div>
   );
