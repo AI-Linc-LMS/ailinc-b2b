@@ -85,7 +85,8 @@ const IncubationSupport = () => {
           whileHover={{ scale: 1 }}
           style={{ filter: "hue-rotate(0deg)" }}
         >
-          <Image src="/pitchdeck/1.jpg" alt="funding" fill />
+          <Image src="/pitchdeck/1.jpg" alt="funding" fill className="object-cover"
+            sizes="(max-width: 640px) 320px, 384px" />
         </motion.div>
       ),
       features: [
@@ -111,7 +112,8 @@ const IncubationSupport = () => {
           whileHover={{ scale: 1 }}
           style={{ filter: "hue-rotate(0deg)" }}
         >
-          <Image src="/pitchdeck/2.jpg" alt="funding" fill />
+          <Image src="/pitchdeck/2.jpg" alt="funding" fill className="object-cover"
+            sizes="(max-width: 640px) 320px, 384px" />
         </motion.div>
       ),
       features: [
@@ -137,7 +139,8 @@ const IncubationSupport = () => {
           whileHover={{ scale: 1 }}
           style={{ filter: "hue-rotate(0deg)" }}
         >
-          <Image src="/pitchdeck/3.jpg" alt="funding" fill />
+          <Image src="/pitchdeck/3.jpg" alt="funding" fill className="object-cover"
+            sizes="(max-width: 640px) 320px, 384px" />
         </motion.div>
       ),
       features: [
@@ -163,7 +166,8 @@ const IncubationSupport = () => {
           whileHover={{ scale: 1 }}
           style={{ filter: "hue-rotate(0deg)" }}
         >
-          <Image src="/pitchdeck/4.jpg" alt="funding" fill />
+          <Image src="/pitchdeck/4.jpg" alt="funding" fill className="object-cover"
+            sizes="(max-width: 640px) 320px, 384px" />
         </motion.div>
       ),
       features: [
@@ -451,10 +455,11 @@ const IncubationSupport = () => {
                       animate={{ opacity: 1, scale: 1, rotateY: 0 }}
                       transition={{ delay: 1.0, duration: 1.5 }}
                     >
-                      <div className="w-full max-w-md h-80 bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
+                      <div className="w-full max-w-sm sm:max-w-md h-64 sm:h-80 bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100 relative">
                         {pitchSlides[activeSlide].illustration}
                       </div>
                     </motion.div>
+
                   </motion.div>
                 </AnimatePresence>
               </div>
@@ -493,9 +498,8 @@ const IncubationSupport = () => {
                   {pitchSlides.map((_, idx) => (
                     <motion.button
                       key={idx}
-                      className={`w-3 h-3 rounded-full transition-colors ${
-                        idx === activeSlide ? "bg-blue-600" : "bg-gray-300"
-                      }`}
+                      className={`w-3 h-3 rounded-full transition-colors ${idx === activeSlide ? "bg-blue-600" : "bg-gray-300"
+                        }`}
                       onClick={() => setActiveSlide(idx)}
                       whileHover={{ scale: 1.2 }}
                     />
