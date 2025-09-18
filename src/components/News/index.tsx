@@ -347,6 +347,7 @@ const NewsVideo = () => {
                             href={item.link}
                             target="_blank"
                             rel="noopener noreferrer"
+                            aria-label="News section"
                             className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-purple-600 rounded-full transition-all hover:scale-95 hover:shadow-lg"
                           >
                             Read More

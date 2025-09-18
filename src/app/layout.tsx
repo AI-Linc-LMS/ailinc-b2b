@@ -52,7 +52,6 @@ export default function RootLayout({
           sizes="16x16"
           href="/favicon-16x16.png"
         />
-        <link rel="manifest" href="/app/site.webmanifest" />
       </head>
       <body className={`${poppins.variable} ${jakarta.variable} antialiased`}>
         {children}
