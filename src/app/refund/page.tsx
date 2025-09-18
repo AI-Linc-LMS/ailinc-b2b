@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function RefundPage() {
   return (
     <>
@@ -5,7 +7,7 @@ export default function RefundPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
           {/* Back Button */}
           <div className="mb-8">
-            <a 
+            <Link
               href="/"
               className="inline-flex items-center text-blue-600 hover:text-purple-600 transition-colors duration-300 group"
             >
@@ -23,7 +25,7 @@ export default function RefundPage() {
                 />
               </svg>
               Back to Home
-            </a>
+            </Link>
           </div>
 
           {/* Header */}
@@ -204,12 +206,13 @@ export default function RefundPage() {
             <p className="text-gray-600 mb-6">
               Need help with a cancellation or refund? Our team is here to assist you.
             </p>
-            <a 
+            <Link 
               href="/#contact" 
+              passHref
               className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300"
             >
               Contact Support
-            </a>
+            </Link>
           </div>
         </div>
       </div>

@@ -202,12 +202,13 @@ export default function PrivacyPage() {
             <p className="text-gray-600 mb-6">
               Questions about how we handle your data? We&apos;re transparent and here to help.
             </p>
-            <a 
+            <Link 
               href="/#contact" 
+              passHref
               className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300"
             >
               Contact Us
-            </a>
+            </Link>
           </div>
         </div>
       </div>
