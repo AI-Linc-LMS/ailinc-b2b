@@ -184,7 +184,7 @@ export function Footer() {
                   What We Do
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <button
                   onClick={() => navigateToSection("how-we-do-it")}
                   className="text-gray-600 hover:text-blue-600 transition-colors duration-300 text-left cursor-pointer"
@@ -192,7 +192,7 @@ export function Footer() {
                 >
                   How We Do It
                 </button>
-              </li>
+              </li> */}
               <li>
                 <button
                   onClick={() => navigateToSection("success-stories")}
