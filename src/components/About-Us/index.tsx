@@ -461,9 +461,10 @@ export default function AboutUs() {
                   </p>
                   <div className="p-6 bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl border-l-4 border-blue-500">
                     <p className="text-lg text-gray-700 leading-relaxed italic">
-                      "Our mission is simple: to make AI accessible. Whether
-                      you're just starting your AI journey or looking to scale
-                      up, we guide you every step of the way."
+                      &quot;Our mission is simple: to make AI accessible.
+                      Whether you&apos;re just starting your AI journey or
+                      looking to scale up, we guide you every step of the
+                      way.&quot;
                     </p>
                   </div>
                 </div>
