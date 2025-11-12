@@ -102,7 +102,7 @@ function ImageCard({
         ease: [0.25, 0.4, 0.25, 1],
       }}
       className="group relative rounded-lg overflow-hidden cursor-pointer bg-white shadow-md hover:shadow-lg transition-shadow duration-200 will-change-transform"
-      // onClick={onClick}
+      onClick={onClick}
       style={{ transform: "translateZ(0)", backfaceVisibility: "hidden" }}
     >
       {/* subtle hover tint */}
@@ -198,12 +198,15 @@ function SimplifiedGallery() {
   // keyboard arrows
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
+      if (totalPages === 0) {
+        return;
+      }
       if (e.key === "ArrowRight") nextPage();
       if (e.key === "ArrowLeft") prevPage();
     };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
-  }, [totalPages]);
+  }, [nextPage, prevPage, totalPages]);
 
   return (
     <section className="py-16 bg-gradient-to-br from-gray-200 to-blue-60/30 relative overflow-hidden">

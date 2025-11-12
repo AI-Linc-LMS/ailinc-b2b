@@ -330,6 +330,23 @@ const UpdatedCourseCard = ({
       </motion.div>
 
       {/* CTA Button with Better Colors */}
+      {(nextLesson || duration) && (
+        <div className="mt-4 space-y-1 text-xs text-gray-600">
+          {nextLesson && (
+            <p>
+              <span className="font-semibold text-gray-800">{t("Next")}:</span>{" "}
+              {nextLesson}
+            </p>
+          )}
+          {duration && (
+            <p>
+              <span className="font-semibold text-gray-800">{t("Duration")}:</span>{" "}
+              {duration}
+            </p>
+          )}
+        </div>
+      )}
+
       <motion.a
         href={link}
         target="_blank"

@@ -114,7 +114,7 @@ function Hero() {
 
   const rotatingWords = useMemo(
     () => rotatingWordKeys.map((word) => t(word)),
-    [t, locale, rotatingWordKeys]
+    [t, rotatingWordKeys]
   );
 
   useEffect(() => {

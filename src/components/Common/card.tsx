@@ -10,8 +10,6 @@ interface CourseCardProps {
   progress?: number;
   videosCompleted?: number;
   totalVideos?: number;
-  nextLesson?: string;
-  duration?: string;
   streak?: number;
   badges?: number;
 }
@@ -24,8 +22,6 @@ const CourseCard = ({
   progress = 15,
   videosCompleted = 12,
   totalVideos = 247,
-  nextLesson = "Advanced Dashboard Creation",
-  duration = "12 min",
   streak = 7,
   badges = 3,
 }: CourseCardProps) => {
@@ -99,7 +95,7 @@ const CourseCard = ({
                 strokeWidth="2"
                 fill="transparent"
                 className={`text-${accentColor}-500`}
-                strokeDasharray={circumference}
+                strokeDasharray={strokeDasharray}
                 strokeDashoffset={
                   circumference - (progress / 100) * circumference
                 }

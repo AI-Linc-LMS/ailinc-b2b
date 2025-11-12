@@ -1,5 +1,5 @@
 // components/IncubationSupport.tsx
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useMemo } from "react";
 import { motion, useInView, AnimatePresence, Variants } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -71,138 +71,161 @@ const IncubationSupport = () => {
     videoId: "Ny-qhl4N9dY",
   };
 
-  const pitchSlides = [
-    {
-      id: 1,
-      title: t("Student Entrepreneurship Programs"),
-      subtitle: t("Building Tomorrow's Innovators"),
-      description: t(
-      "Transform student ideas into viable startups with comprehensive entrepreneurship programs, mentorship, and AI-powered business development tools."
-      ),
-      illustration: (
-        <motion.div
-          className="w-full h-full"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.5 }}
-          whileHover={{ scale: 1 }}
-          style={{ filter: "hue-rotate(0deg)" }}
-        >
-          <Image src="/pitchdeck/1.jpg" alt="funding" fill
-            className="object-center" // Added object-center for better positioning
-            sizes="(max-width: 640px) 280px, (max-width: 768px) 360px, 440px"
-            priority={false} />
-        </motion.div>
-      ),
-      features: [
-      t("Business Model Canvas Workshops"),
-      t("AI-Powered Market Research"),
-      t("Product Development Guidance"),
-      t("Go-to-Market Strategy Planning"),
-      ],
-      color: "from-blue-600 to-indigo-700",
-    },
-    {
-      id: 2,
-      title: t("AI Project Mentoring"),
-      subtitle: t("Expert Technical Guidance"),
-      description: t(
-        "Connect students with industry experts for personalized mentoring on AI projects, research initiatives, and technical skill development."
-      ),
-      illustration: (
-        <motion.div
-          className="w-full h-full"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.5 }}
-          whileHover={{ scale: 1 }}
-          style={{ filter: "hue-rotate(0deg)" }}
-        >
-          <Image src="/pitchdeck/2.jpg" alt="funding" fill
-            className="object-center" // Added object-center for better positioning
-            sizes="(max-width: 640px) 280px, (max-width: 768px) 360px, 440px"
-            priority={false} />
-        </motion.div>
-      ),
-      features: [
-      t("One-on-One Technical Sessions"),
-      t("Algorithm Optimization Support"),
-      t("Research Paper Guidance"),
-      t("Industry Best Practices"),
-      ],
-      color: "from-purple-600 to-violet-700",
-    },
-    {
-      id: 3,
-      title: t("Industry Collaborations"),
-      subtitle: t("Strategic Partnership Network"),
-      description: t(
-        "Foster meaningful partnerships between academia and industry to create research opportunities, internships, and startup collaborations."
-      ),
-      illustration: (
-        <motion.div
-          className="w-full h-full"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.5 }}
-          whileHover={{ scale: 1 }}
-          style={{ filter: "hue-rotate(0deg)" }}
-        >
-          <Image src="/pitchdeck/3.jpg" alt="funding" fill
-            className="object-center" // Added object-center for better positioning
-            sizes="(max-width: 640px) 280px, (max-width: 768px) 360px, 440px"
-            priority={false}/>
-        </motion.div>
-      ),
-      features: [
-      t("Corporate Partnership Programs"),
-      t("Joint Research Initiatives"),
-      t("Internship Placement Support"),
-      t("Technology Transfer Assistance"),
-      ],
-      color: "from-emerald-600 to-teal-700",
-    },
-    {
-      id: 4,
-      title: t("Funding & Pitch Training"),
-      subtitle: t("Investment Readiness Program"),
-      description: t(
-        "Prepare students for the investment world with comprehensive pitch training, financial modeling, and investor presentation skills."
-      ),
-      illustration: (
-        <motion.div
-          className="w-full h-full"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.5 }}
-          whileHover={{ scale: 1 }}
-          style={{ filter: "hue-rotate(0deg)" }}
-        >
-          <Image src="/pitchdeck/4.jpg" alt="funding" fill
-            className="object-center" // Added object-center for better positioning
-            sizes="(max-width: 640px) 280px, (max-width: 768px) 360px, 440px"
-            priority={false} />
-        </motion.div>
-      ),
-      features: [
-      t("Pitch Deck Development"),
-      t("Financial Modeling Training"),
-      t("Mock Investor Sessions"),
-      t("Presentation Skills Workshop"),
-      ],
-      color: "from-amber-600 to-orange-700",
-    },
-  ];
+  const pitchSlides = useMemo(
+    () => [
+      {
+        id: 1,
+        title: t("Student Entrepreneurship Programs"),
+        subtitle: t("Building Tomorrow's Innovators"),
+        description: t(
+          "Transform student ideas into viable startups with comprehensive entrepreneurship programs, mentorship, and AI-powered business development tools."
+        ),
+        illustration: (
+          <motion.div
+            className="w-full h-full"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.5 }}
+            whileHover={{ scale: 1 }}
+            style={{ filter: "hue-rotate(0deg)" }}
+          >
+            <Image
+              src="/pitchdeck/1.jpg"
+              alt="funding"
+              fill
+              className="object-center"
+              sizes="(max-width: 640px) 280px, (max-width: 768px) 360px, 440px"
+              priority={false}
+            />
+          </motion.div>
+        ),
+        features: [
+          t("Business Model Canvas Workshops"),
+          t("AI-Powered Market Research"),
+          t("Product Development Guidance"),
+          t("Go-to-Market Strategy Planning"),
+        ],
+        color: "from-blue-600 to-indigo-700",
+      },
+      {
+        id: 2,
+        title: t("AI Project Mentoring"),
+        subtitle: t("Expert Technical Guidance"),
+        description: t(
+          "Connect students with industry experts for personalized mentoring on AI projects, research initiatives, and technical skill development."
+        ),
+        illustration: (
+          <motion.div
+            className="w-full h-full"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.5 }}
+            whileHover={{ scale: 1 }}
+            style={{ filter: "hue-rotate(0deg)" }}
+          >
+            <Image
+              src="/pitchdeck/2.jpg"
+              alt="funding"
+              fill
+              className="object-center"
+              sizes="(max-width: 640px) 280px, (max-width: 768px) 360px, 440px"
+              priority={false}
+            />
+          </motion.div>
+        ),
+        features: [
+          t("One-on-One Technical Sessions"),
+          t("Algorithm Optimization Support"),
+          t("Research Paper Guidance"),
+          t("Industry Best Practices"),
+        ],
+        color: "from-purple-600 to-violet-700",
+      },
+      {
+        id: 3,
+        title: t("Industry Collaborations"),
+        subtitle: t("Strategic Partnership Network"),
+        description: t(
+          "Foster meaningful partnerships between academia and industry to create research opportunities, internships, and startup collaborations."
+        ),
+        illustration: (
+          <motion.div
+            className="w-full h-full"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.5 }}
+            whileHover={{ scale: 1 }}
+            style={{ filter: "hue-rotate(0deg)" }}
+          >
+            <Image
+              src="/pitchdeck/3.jpg"
+              alt="funding"
+              fill
+              className="object-center"
+              sizes="(max-width: 640px) 280px, (max-width: 768px) 360px, 440px"
+              priority={false}
+            />
+          </motion.div>
+        ),
+        features: [
+          t("Corporate Partnership Programs"),
+          t("Joint Research Initiatives"),
+          t("Internship Placement Support"),
+          t("Technology Transfer Assistance"),
+        ],
+        color: "from-emerald-600 to-teal-700",
+      },
+      {
+        id: 4,
+        title: t("Funding & Pitch Training"),
+        subtitle: t("Investment Readiness Program"),
+        description: t(
+          "Prepare students for the investment world with comprehensive pitch training, financial modeling, and investor presentation skills."
+        ),
+        illustration: (
+          <motion.div
+            className="w-full h-full"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.5 }}
+            whileHover={{ scale: 1 }}
+            style={{ filter: "hue-rotate(0deg)" }}
+          >
+            <Image
+              src="/pitchdeck/4.jpg"
+              alt="funding"
+              fill
+              className="object-center"
+              sizes="(max-width: 640px) 280px, (max-width: 768px) 360px, 440px"
+              priority={false}
+            />
+          </motion.div>
+        ),
+        features: [
+          t("Pitch Deck Development"),
+          t("Financial Modeling Training"),
+          t("Mock Investor Sessions"),
+          t("Presentation Skills Workshop"),
+        ],
+        color: "from-amber-600 to-orange-700",
+      },
+    ],
+    [t]
+  );
+
+  const slideCount = pitchSlides.length;
 
   useEffect(() => {
-    if (isInView) {
-      const interval = setInterval(() => {
-        setActiveSlide((prev) => (prev + 1) % pitchSlides.length);
-      }, 45000);
-
-      return () => clearInterval(interval);
+    if (!isInView || slideCount === 0) {
+      return;
     }
-  }, [isInView, pitchSlides]);
+
+    const interval = setInterval(() => {
+      setActiveSlide((prev) => (prev + 1) % slideCount);
+    }, 45000);
+
+    return () => clearInterval(interval);
+  }, [isInView, slideCount]);
 
   return (
     <section

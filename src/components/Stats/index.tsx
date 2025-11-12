@@ -22,14 +22,6 @@ interface StatItem {
   };
 }
 
-interface AccreditationEmployee {
-  name: string;
-  role: string;
-  experience: string;
-  avatar: string;
-  specialization: string;
-}
-
 const stats: StatItem[] = [
   {
     number: 1000,
@@ -417,15 +409,12 @@ function CountUpNumber({
 function Stats() {
   const [isVisible, setIsVisible] = useState(false);
   const [hoveredStat, setHoveredStat] = useState<number | null>(null);
-  const [hoveredAccreditation, setHoveredAccreditation] = useState<
-    string | null
-  >(null);
   const sectionRef = useRef<HTMLElement>(null);
   const t = useTranslation();
 
   // Disable body scroll when any overlay is open
   useEffect(() => {
-    if (hoveredStat !== null || hoveredAccreditation !== null) {
+    if (hoveredStat !== null) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
@@ -434,7 +423,7 @@ function Stats() {
     return () => {
       document.body.style.overflow = "";
     };
-  }, [hoveredStat, hoveredAccreditation]);
+  }, [hoveredStat]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -449,13 +438,14 @@ function Stats() {
       }
     );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
+    const currentSection = sectionRef.current;
+    if (currentSection) {
+      observer.observe(currentSection);
     }
 
     return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
+      if (currentSection) {
+        observer.unobserve(currentSection);
       }
     };
   }, []);

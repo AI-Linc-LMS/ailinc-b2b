@@ -1,6 +1,7 @@
 "use client";
 import { useHashNavigation } from "@/hooks/useHashNavigation";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import Services from "../Services";
 import { useTranslation } from "@/context/LanguageContext";
 
@@ -179,12 +180,14 @@ const TeamMemberCard = ({
     >
       {/* Image */}
       <div className="relative">
-        <div className="w-full h-80 overflow-hidden bg-gray-100">
-          <img
+        <div className="relative w-full h-80 overflow-hidden bg-gray-100">
+          <Image
             src={imageSrc}
-            loading="lazy"
             alt={name}
-            className=" group-hover:scale-105 transition-transform duration-300"
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+            className="object-cover group-hover:scale-105 transition-transform duration-300"
+            loading="lazy"
           />
         </div>
         <div
@@ -222,38 +225,6 @@ const TeamMemberCard = ({
   );
 };
 
-const specializations = [
-  {
-    icon: UsersIcon,
-    title: "AI consulting workforce development",
-    description:
-      "Building teams that understand both AI technology and business applications",
-  },
-  {
-    icon: SearchIcon,
-    title: "Talent sourcing and screening",
-    description:
-      "Identifying and evaluating top AI professionals across diverse skill sets",
-  },
-  {
-    icon: TrendingUpIcon,
-    title: "Outcome-aligned upskilling",
-    description: "Training programs designed for measurable career advancement",
-  },
-  {
-    icon: BriefcaseIcon,
-    title: "Flexible engagement models (FT/PT/freelance/contract)",
-    description:
-      "Matching talent to opportunities that fit their career goals and lifestyle",
-  },
-  {
-    icon: RocketIcon,
-    title: "Entrepreneurial enablement",
-    description:
-      "Supporting AI professionals in launching their own ventures and startups",
-  },
-];
-
 const container = {
   hidden: { opacity: 0 },
   show: {
@@ -269,44 +240,6 @@ const item = {
   hidden: { opacity: 0, y: 20 },
   show: { opacity: 1, y: 0, transition: { duration: 0.6 } },
 };
-
-// Who We Are Section
-const coreOfferings = [
-  {
-    icon: UsersIcon,
-    title: "Talent Deployment",
-    description: "Into full-time, freelance, or consulting roles",
-    details:
-      "We connect AI professionals with opportunities that match their expertise and career goals, whether they're seeking permanent positions, flexible freelance work, or high-impact consulting engagements.",
-    color: "from-blue-500 to-blue-600",
-  },
-  {
-    icon: Building2Icon,
-    title: "AI Consulting Teams",
-    description: "For startups and enterprises",
-    details:
-      "We assemble specialized AI consulting teams tailored to your organization's needs, providing expertise in strategy, implementation, and optimization of AI solutions.",
-    color: "from-purple-500 to-purple-600",
-  },
-  {
-    icon: UserCheckIcon,
-    title: "Recruitment Enablement",
-    description: "Skill-based screening + job matching",
-    details:
-      "Our advanced screening process evaluates technical skills, cultural fit, and project experience to ensure perfect matches between talent and opportunities.",
-    color: "from-blue-500 to-purple-600",
-  },
-  {
-    icon: LightbulbIcon,
-    title: "Startup Support",
-    description: "Incubation, advisory, and resources",
-    details:
-      "We provide comprehensive support for AI-driven startups, including mentorship, strategic guidance, technical resources, and access to our network of investors and partners.",
-    color: "from-orange-500 to-red-500",
-  },
-];
-
-// What We Do Section
 
 // Team Section
 export function TeamSection() {

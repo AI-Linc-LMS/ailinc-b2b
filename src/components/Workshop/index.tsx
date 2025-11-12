@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect, useRef, useMemo } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import { toast, Toaster } from "sonner";
 import Image from "next/image";
 import { AmazonLogo } from "../../../public/icons/AmazonLogo";
@@ -477,7 +477,6 @@ function WhoIsThisWorkshopForSection({
 export default function SingleWorkshopRegistration() {
   const sectionRef = useRef(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
   const t = useTranslation();
 
   const [showSuccessModal, setShowSuccessModal] = useState(false);
