@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef, useMemo, useEffect } from "react";
+import React, { useState, useRef, useMemo, useEffect, useCallback } from "react";
 import { motion, AnimatePresence, useInView, Variants } from "framer-motion";
 import Image from "next/image";
 import { chunkArray } from "@/chunkArray";
@@ -192,8 +192,14 @@ function SimplifiedGallery() {
   useEffect(() => setPage(0), [activeCategory]);
 
   const totalPages = pages.length;
-  const nextPage = () => setPage((p) => (p + 1) % totalPages);
-  const prevPage = () => setPage((p) => (p - 1 + totalPages) % totalPages);
+  const nextPage = useCallback(() => {
+    if (totalPages === 0) return;
+    setPage((p) => (p + 1) % totalPages);
+  }, [totalPages]);
+  const prevPage = useCallback(() => {
+    if (totalPages === 0) return;
+    setPage((p) => (p - 1 + totalPages) % totalPages);
+  }, [totalPages]);
 
   // keyboard arrows
   useEffect(() => {
