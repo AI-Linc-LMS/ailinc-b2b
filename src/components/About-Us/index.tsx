@@ -2,6 +2,7 @@
 import { useHashNavigation } from "@/hooks/useHashNavigation";
 import { motion } from "framer-motion";
 import Services from "../Services";
+import { useTranslation } from "@/context/LanguageContext";
 
 // Custom SVG Icons
 // Fixed Icons with proper coloring
@@ -161,6 +162,7 @@ const TeamMemberCard = ({
   borderColor: string;
   hoverColor: string;
 }) => {
+  const t = useTranslation();
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -203,10 +205,10 @@ const TeamMemberCard = ({
             className="font-semibold text-sm mb-3 transition-colors truncate"
             style={{ color: borderColor }}
           >
-            {role}
+            {t(role)}
           </p>
           <p className="text-gray-600 transition-colors line-clamp-3 text-sm text-center">
-            {description}
+            {t(description)}
           </p>
         </div>
       </div>
@@ -308,6 +310,7 @@ const coreOfferings = [
 
 // Team Section
 export function TeamSection() {
+  const t = useTranslation();
   const teamMembers = [
     {
       name: "Shubham",
@@ -349,11 +352,12 @@ export function TeamSection() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl sm:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-            Meet Our Leadership
+            {t("Meet Our Leadership")}
           </h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Our experienced team of visionaries and industry experts driving AI
-            Linc&apos;s mission forward
+            {t(
+              "Our experienced team of visionaries and industry experts driving AI Linc's mission forward"
+            )}
           </p>
         </motion.div>
 
@@ -388,6 +392,7 @@ export function TeamSection() {
 // Main About Us Page
 export default function AboutUs() {
   useHashNavigation();
+  const t = useTranslation();
 
   return (
     <main className="relative min-h-screen bg-gradient-to-b from-gray-50 to-white text-gray-900 overflow-hidden">
@@ -430,7 +435,7 @@ export default function AboutUs() {
               className="text-center mb-16"
             >
               <h2 className="text-4xl sm:text-5xl lg:text-4xl font-bold mb-8 bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
-                Who We Are
+                {t("Who We Are")}
               </h2>
             </motion.div>
 
@@ -445,25 +450,28 @@ export default function AboutUs() {
               >
                 <div className="space-y-6">
                   <p className="text-xl sm:text-2xl text-gray-700 leading-relaxed font-light">
-                    At AI Linc, we are passionate about{" "}
+                    {t("At AI Linc, we are passionate about")}{" "}
                     <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent font-semibold">
-                      connecting businesses
+                      {t("connecting businesses")}
                     </span>{" "}
-                    with the power of artificial intelligence.
+                    {t("with the power of artificial intelligence.")}
                   </p>
                   <p className="text-lg text-gray-600 leading-relaxed">
-                    We build smart, reliable solutions that help companies solve
-                    real problems —{" "}
+                    {t(
+                      "We build smart, reliable solutions that help companies solve real problems —"
+                    )}
+                    {" "}
                     <span className="text-gray-800 font-medium">
-                      faster, smarter, and with less effort.
+                      {t("faster, smarter, and with less effort.")}
                     </span>
                   </p>
                   <div className="p-6 bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl border-l-4 border-blue-500">
                     <p className="text-lg text-gray-700 leading-relaxed italic">
-                      &quot;Our mission is simple: to make AI accessible.
-                      Whether you&apos;re just starting your AI journey or
-                      looking to scale up, we guide you every step of the
-                      way.&quot;
+                      &quot;
+                      {t(
+                        "Our mission is simple: to make AI accessible. Whether you're just starting your AI journey or looking to scale up, we guide you every step of the way."
+                      )}
+                      &quot;
                     </p>
                   </div>
                 </div>
@@ -477,7 +485,7 @@ export default function AboutUs() {
                 className="space-y-6"
               >
                 <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-8">
-                  We believe in:
+                  {t("We believe in:")}
                 </h3>
 
                 <div className="space-y-4">
@@ -588,10 +596,10 @@ export default function AboutUs() {
                           </div>
                           <div className="flex-1">
                             <h4 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors duration-300">
-                              {belief.title}
+                              {t(belief.title)}
                             </h4>
                             <p className="text-gray-600 group-hover:text-gray-700 transition-colors duration-300 text-sm leading-relaxed">
-                              {belief.description}
+                              {t(belief.description)}
                             </p>
                           </div>
                         </div>
@@ -610,11 +618,12 @@ export default function AboutUs() {
               className="text-center mt-16"
             >
               <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                We design solutions that are both{" "}
+                {t("We design solutions that are both")}{" "}
                 <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent font-semibold">
-                  cutting-edge and easy to use
+                  {t("cutting-edge and easy to use")}
                 </span>
-                , because AI should help people — not complicate things.
+                {", "}
+                {t("because AI should help people — not complicate things.")}
               </p>
             </motion.div>
           </div>
@@ -660,35 +669,4 @@ export default function AboutUs() {
                             <div className="bg-gradient-to-b from-white to-gray-50/50 backdrop-blur-sm border border-gray-200 rounded-xl group hover:shadow-xl hover:shadow-blue-500/10 hover:border-blue-300 transition-all duration-500 h-full">
                                 <div className="p-6 pb-4">
                                     <div className="flex items-center justify-center mb-4">
-                                        <div className={`size-16 rounded-2xl bg-gradient-to-r ${offering.color} bg-opacity-10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
-                                            <offering.icon />
-                                        </div>
-                                    </div>
-                                    <h3 className="text-xl font-bold text-center text-gray-900 group-hover:text-blue-600 transition-colors duration-300 mb-2">
-                                        {offering.title}
-                                    </h3>
-                                    <p className="text-center text-blue-600 font-medium text-sm mb-4">
-                                        {offering.description}
-                                    </p>
-                                </div>
-                                <div className="px-6 pb-6">
-                                    <p className="text-gray-600 text-sm leading-relaxed group-hover:text-gray-700 transition-colors duration-300">
-                                        {offering.details}
-                                    </p>
-                                </div>
-                            </div>
-                        </motion.div>
-                    ))}
-                </motion.div>
-            </div> */}
-        {/* 
-            <div className="absolute top-1/3 left-1/4 size-96 bg-blue-200/15 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-1/3 right-1/4 size-96 bg-purple-200/15 rounded-full blur-3xl"></div>
-            <div className="absolute top-2/3 right-1/3 size-64 bg-orange-200/15 rounded-full blur-2xl"></div> */}
-      </section>
-
-      {/* Team Section */}
-      <TeamSection />
-    </main>
-  );
-}
+                                        <div className={`size-16 rounded-2xl bg-gradient-to-r ${offering.color} bg-opacity-10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300`

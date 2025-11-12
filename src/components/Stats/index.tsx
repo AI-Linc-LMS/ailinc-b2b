@@ -5,6 +5,7 @@ import { useEffect, useState, useRef } from "react";
 import { MicrosoftLogo } from "../../../public/icons/MicrosoftLogo";
 import { GoogleLogo } from "../../../public/icons/GoogleLogo";
 import { AWSLogo } from "../../../public/icons/AWSLogo";
+import { useTranslation } from "@/context/LanguageContext";
 
 interface StatItem {
   number: number;
@@ -33,7 +34,7 @@ const stats: StatItem[] = [
   {
     number: 1000,
     suffix: "+",
-    label: "Organisations",
+    label: "Organizations",
     description: "Trusted by leading institutions",
     hoverData: {
       title: "Partner Institutions",
@@ -420,6 +421,7 @@ function Stats() {
     string | null
   >(null);
   const sectionRef = useRef<HTMLElement>(null);
+  const t = useTranslation();
 
   // Disable body scroll when any overlay is open
   useEffect(() => {
@@ -513,9 +515,9 @@ function Stats() {
               className="text-4xl md:text-5xl font-semibold text-gray-900 mb-4 tracking-tight"
               variants={headingVariants}
             >
-              Our Impact in{" "}
+              {t("Our Impact in")} {" "}
               <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                Numbers
+                {t("Numbers")}
               </span>
             </motion.h2>
 
@@ -524,8 +526,9 @@ function Stats() {
               variants={headingVariants}
               transition={{ delay: 0.2 }}
             >
-              Transforming education through AI-powered solutions and measurable
-              results
+              {t(
+                "Transforming education through AI-powered solutions and measurable results"
+              )}
             </motion.p>
 
             {/* Clickability Hint */}
@@ -548,7 +551,7 @@ function Stats() {
                   d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"
                 />
               </svg>
-              Click on any card to explore details
+              {t("Click on any card to explore details")}
             </motion.p>
           </motion.div>
 
@@ -614,7 +617,7 @@ function Stats() {
                   animate={{ opacity: isVisible ? 1 : 0 }}
                   transition={{ delay: 0.5 + index * 0.1 }}
                 >
-                  {stat.label}
+                  {t(stat.label)}
                 </motion.h3>
                 <motion.p
                   className="text-xs md:text-sm text-gray-600 font-light flex-shrink-0 group-hover:text-gray-700 transition-colors duration-300"
@@ -622,7 +625,7 @@ function Stats() {
                   animate={{ opacity: isVisible ? 1 : 0 }}
                   transition={{ delay: 0.7 + index * 0.1 }}
                 >
-                  {stat.description}
+                  {stat.description ? t(stat.description) : null}
                 </motion.p>
               </motion.div>
             ))}
@@ -648,11 +651,7 @@ function Stats() {
               }}
             >
               <span className="text-lg md:text-xl font-semibold text-gray-800 tracking-wide">
-                Get{" "}
-                <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                  industry certifications{" "}
-                </span>
-                from
+                {t("Get industry certifications from")}
               </span>
 
               {accreditations.map((accreditation, index) => (
@@ -863,7 +862,7 @@ function Stats() {
               </motion.div>
 
               <span className="text-lg font-medium text-gray-800 tracking-wide relative z-10">
-                Driving Digital Transformation in Education
+                {t("Driving Digital Transformation in Education")}
               </span>
             </motion.div>
           </motion.div>
@@ -874,7 +873,17 @@ function Stats() {
       <AnimatePresence>
         {hoveredStat !== null && stats[hoveredStat]?.hoverData && (
           <StatHoverOverlay
-            stat={stats[hoveredStat]}
+            stat={{
+              ...stats[hoveredStat],
+              hoverData: stats[hoveredStat].hoverData
+                ? {
+                    ...stats[hoveredStat].hoverData,
+                    title: t(stats[hoveredStat].hoverData?.title ?? ""),
+                institutions:
+                  stats[hoveredStat].hoverData?.institutions ?? [],
+                  }
+                : undefined,
+            }}
             onClose={() => setHoveredStat(null)}
           />
         )}

@@ -3,6 +3,7 @@ import Link from "next/link"
 import { motion } from "framer-motion"
 import { useRouter, usePathname } from "next/navigation"
 import { useLenis } from "@/hooks/use-lenis"
+import { useTranslation } from "@/context/LanguageContext"
 
 // Custom SVG Components with corrected colors
 const LinkedInIcon = () => (
@@ -52,6 +53,7 @@ export function Footer() {
   const { scrollTo } = useLenis()
   const router = useRouter()
   const pathname = usePathname()
+  const t = useTranslation()
 
   // Function to handle navigation to sections
   const navigateToSection = (sectionId: string, duration: number = 1.5) => {
@@ -112,25 +114,27 @@ export function Footer() {
             <motion.div variants={item} className="space-y-6">
               <Link href="/">
               <div className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                AI Linc
+                {t("AI Linc")}
               </div>
               </Link>
               <p className="text-lg text-gray-600 leading-relaxed max-w-md">
-                Bridging the gap between AI talent and opportunity. We assess, elevate, and deploy professionals into high-impact AI roles.
+                {t("Bridging the gap between AI talent and opportunity. We assess, elevate, and deploy professionals into high-impact AI roles.")}
               </p>
             </motion.div>
 
             {/* Contact Information */}
             <motion.div variants={item} className="space-y-6">
-              <h3 className="text-xl font-semibold text-gray-900 mb-6">Get in Touch</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-6">{t("Get in Touch")}</h3>
               <div className="space-y-4">
                 <div className="flex items-start space-x-4">
                   <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-r from-blue-100 to-purple-100 rounded-full flex items-center justify-center">
                     <MapPinIcon />
                   </div>
                   <div>
-                    <p className="font-semibold text-gray-900">India Office</p>
-                    <p className="text-gray-600 text-sm">8-2-418, Meenakshi House, Rd No 7, Banjara Hills, Hyderabad, 500034</p>
+                    <p className="font-semibold text-gray-900">{t("India Office")}</p>
+                    <p className="text-gray-600 text-sm">
+                      {t("8-2-418, Meenakshi House, Rd No 7, Banjara Hills, Hyderabad, 500034")}
+                    </p>
                   </div>
                 </div>
                 <div className="flex items-center space-x-4">
@@ -164,7 +168,7 @@ export function Footer() {
         >
           {/* About AI Linc */}
           <motion.div variants={item} className="lg:col-span-3 space-y-4">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">About AI Linc</h3>
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">{t("About AI Linc")}</h3>
             <ul className="space-y-3 text-sm">
               <li>
                 <Link
@@ -172,7 +176,7 @@ export function Footer() {
                   className="text-gray-600 hover:text-blue-600 transition-colors duration-300"
                   passHref
                 >
-                  Who We Are
+                  {t("Who We Are")}
                 </Link>
               </li>
               <li>
@@ -181,7 +185,7 @@ export function Footer() {
                   className="text-gray-600 hover:text-blue-600 transition-colors duration-300"
                   passHref
                 >
-                  What We Do
+                  {t("What We Do")}
                 </Link>
               </li>
               {/* <li>
@@ -199,7 +203,7 @@ export function Footer() {
                   className="text-gray-600 hover:text-blue-600 transition-colors duration-300 text-left cursor-pointer"
                   type="button"
                 >
-                  Success Stories
+                  {t("Success Stories")}
                 </button>
               </li>
             </ul>
@@ -210,7 +214,7 @@ export function Footer() {
             variants={item}
             className="lg:col-span-6 space-y-6"
           >
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Find Us</h3>
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">{t("Find Us")}</h3>
             <div className="rounded-2xl overflow-hidden shadow-lg border border-gray-200 h-64">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3807.221425951885!2d78.44666109999999!3d17.404840899999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb973c1c841c2b%3A0x7b36f821a0ce9047!2sAI%20Linc!5e0!3m2!1sen!2sin!4v1757737590720!5m2!1sen!2sin"
@@ -219,14 +223,14 @@ export function Footer() {
                 loading="lazy"
                 allowFullScreen
                 referrerPolicy="no-referrer-when-downgrade"
-                title="AI Linc Office Location"
+                title={t("AI Linc Office Location")}
                 className="border-0"
               />
             </div>
           </motion.div>
           {/* Newsletter & Social */}
           <motion.div variants={item} className="lg:col-span-3 space-y-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Stay Connected</h3>
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">{t("Stay Connected")}</h3>
 
             {/* Social Links */}
             <div className="space-y-3">
@@ -235,30 +239,30 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full flex items-center justify-start p-3 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition-all duration-300 group"
-                aria-label="Visit AI Linc on LinkedIn"
+                aria-label={t("Visit AI Linc on LinkedIn")}
               >
                 <LinkedInIcon />
-                <span className="ml-3">LinkedIn</span>
+                <span className="ml-3">{t("LinkedIn")}</span>
               </a>
               <a
                 href="https://www.youtube.com/@AILinc772"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full flex items-center justify-start p-3 rounded-lg hover:bg-red-50 hover:text-red-600 transition-all duration-300 group"
-                aria-label="Visit AI Linc on YouTube"
+                aria-label={t("Visit AI Linc on YouTube")}
               >
                 <YouTubeIcon />
-                <span className="ml-3">YouTube</span>
+                <span className="ml-3">{t("YouTube")}</span>
               </a>
               <a
                 href="https://www.instagram.com/ai_lincc/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full flex items-center justify-start p-3 rounded-lg hover:bg-pink-50 hover:text-pink-600 transition-all duration-300 group"
-                aria-label="Visit AI Linc on Instagram"
+                aria-label={t("Visit AI Linc on Instagram")}
               >
                 <InstagramIcon />
-                <span className="ml-3">Instagram</span>
+                <span className="ml-3">{t("Instagram")}</span>
               </a>
             </div>
 
@@ -267,24 +271,24 @@ export function Footer() {
             <div className="mt-8">
               <div className="flex items-center mb-3 text-blue-600">
                 <SendIcon />
-                <span className="ml-2 font-semibold text-gray-900">Newsletter</span>
+                <span className="ml-2 font-semibold text-gray-900">{t("Newsletter")}</span>
               </div>
               <p className="text-sm text-gray-600 mb-4">
-                Get the latest AI insights and opportunities
+                {t("Get the latest AI insights and opportunities")}
               </p>
               <form className="space-y-3" onSubmit={(e) => e.preventDefault()}>
                 <input
                   type="email"
-                  placeholder="Enter your email"
+                  placeholder={t("Enter your email")}
                   required
                   className="w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-300"
-                  aria-label="Email address for newsletter subscription"
+                  aria-label={t("Email address for newsletter subscription")}
                 />
                 <button
                   type="submit"
                   className="w-full px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                 >
-                  Subscribe
+                  {t("Subscribe")}
                 </button>
               </form>
             </div>
@@ -308,11 +312,11 @@ export function Footer() {
           viewport={{ once: true }}
           className="flex flex-col lg:flex-row justify-between items-center text-gray-600 text-sm space-y-4 lg:space-y-0"
         >
-          <p>&copy; {new Date().getFullYear()} AI LINC. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} AI LINC. {t("All rights reserved.")}</p>
           <div className="flex flex-wrap justify-center lg:justify-end gap-x-6 gap-y-2">
-            <Link href="/terms" className="hover:text-blue-600 transition-colors">Terms</Link>
-            <Link href="/privacy" className="hover:text-blue-600 transition-colors">Privacy</Link>
-            <Link href="/refund" className="hover:text-blue-600 transition-colors">Refunds</Link>
+            <Link href="/terms" className="hover:text-blue-600 transition-colors">{t("Terms")}</Link>
+            <Link href="/privacy" className="hover:text-blue-600 transition-colors">{t("Privacy")}</Link>
+            <Link href="/refund" className="hover:text-blue-600 transition-colors">{t("Refunds")}</Link>
 
           </div>
         </motion.div>

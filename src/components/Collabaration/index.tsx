@@ -2,10 +2,12 @@
 import { useRef } from "react";
 import { motion, useInView, Variants } from "framer-motion";
 import Link from "next/link";
+import { useTranslation } from "@/context/LanguageContext";
 
 const PartnerCollaboration = () => {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+  const t = useTranslation();
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -49,10 +51,11 @@ const PartnerCollaboration = () => {
   const partnershipModels = [
     {
       id: 1,
-      title: "Corporate Training Partners",
-      subtitle: "Enterprise Learning Solutions",
-      description:
-        "Transform your workforce with AI Linc's comprehensive training programs. Perfect for companies looking to upskill employees in cutting-edge technologies.",
+      title: t("Corporate Training Partners"),
+      subtitle: t("Enterprise Learning Solutions"),
+      description: t(
+        "Transform your workforce with AI Linc's comprehensive training programs. Perfect for companies looking to upskill employees in cutting-edge technologies."
+      ),
       icon: (
         <motion.svg
           className="w-16 h-16 text-blue-600"
@@ -71,28 +74,29 @@ const PartnerCollaboration = () => {
         </motion.svg>
       ),
       benefits: [
-        "Custom curriculum development",
-        "Dedicated success manager",
-        "Bulk enrollment discounts",
-        "Progress tracking & analytics",
-        "Certificate programs",
+        t("Custom curriculum development"),
+        t("Dedicated success manager"),
+        t("Bulk enrollment discounts"),
+        t("Progress tracking & analytics"),
+        t("Certificate programs"),
       ],
       features: [
-        "Tailored Learning Paths",
-        "Real-time Analytics",
-        "Industry Certifications",
-        "Team Management Tools",
+        t("Tailored Learning Paths"),
+        t("Real-time Analytics"),
+        t("Industry Certifications"),
+        t("Team Management Tools"),
       ],
-      cta: "Become a Corporate Partner",
+      cta: t("Become a Corporate Partner"),
       color: "from-blue-600 to-indigo-700",
       bgPattern: "corporate",
     },
     {
       id: 2,
-      title: "Educational Institution Partners",
-      subtitle: "Academic Excellence Program",
-      description:
-        "Integrate AI Linc's industry-relevant curriculum into your academic programs. Enhance student outcomes with practical, job-ready skills.",
+      title: t("Educational Institution Partners"),
+      subtitle: t("Academic Excellence Program"),
+      description: t(
+        "Integrate AI Linc's industry-relevant curriculum into your academic programs. Enhance student outcomes with practical, job-ready skills."
+      ),
       icon: (
         <motion.svg
           className="w-16 h-16 text-purple-600"
@@ -112,33 +116,34 @@ const PartnerCollaboration = () => {
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth={2}
-            d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"
+            d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01-.665-6.479L12 14z"
           />
         </motion.svg>
       ),
       benefits: [
-        "Faculty training & certification",
-        "Student placement assistance",
-        "Curriculum integration support",
-        "Research collaboration opportunities",
-        "Academic licensing rates",
+        t("Faculty training & certification"),
+        t("Student placement assistance"),
+        t("Curriculum integration support"),
+        t("Research collaboration opportunities"),
+        t("Academic licensing rates"),
       ],
       features: [
-        "Faculty Development",
-        "Placement Support",
-        "Curriculum Integration",
-        "Research Collaboration",
+        t("Faculty Development"),
+        t("Placement Support"),
+        t("Curriculum Integration"),
+        t("Research Collaboration"),
       ],
-      cta: "Join Academic Network",
+      cta: t("Join Academic Network"),
       color: "from-purple-600 to-pink-600",
       bgPattern: "academic",
     },
     {
       id: 3,
-      title: "Technology Integration Partners",
-      subtitle: "Platform & API Partnerships",
-      description:
-        "Integrate AI Linc's learning solutions into your platform or offer white-label training programs to your customers.",
+      title: t("Technology Integration Partners"),
+      subtitle: t("Platform & API Partnerships"),
+      description: t(
+        "Integrate AI Linc's learning solutions into your platform or offer white-label training programs to your customers."
+      ),
       icon: (
         <motion.svg
           className="w-16 h-16 text-green-600"
@@ -157,19 +162,19 @@ const PartnerCollaboration = () => {
         </motion.svg>
       ),
       benefits: [
-        "API access & documentation",
-        "White-label solutions",
-        "Revenue sharing models",
-        "Technical support & integration",
-        "Co-marketing opportunities",
+        t("API access & documentation"),
+        t("White-label solutions"),
+        t("Revenue sharing models"),
+        t("Technical support & integration"),
+        t("Co-marketing opportunities"),
       ],
       features: [
-        "API Integration",
-        "White-label Options",
-        "Revenue Sharing",
-        "Technical Support",
+        t("API Integration"),
+        t("White-label Options"),
+        t("Revenue Sharing"),
+        t("Technical Support"),
       ],
-      cta: "Explore Tech Partnership",
+      cta: t("Explore Tech Partnership"),
       color: "from-green-600 to-teal-600",
       bgPattern: "tech",
     },
@@ -258,7 +263,7 @@ const PartnerCollaboration = () => {
                 </svg>
               </motion.div>
               <span className="text-sm font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent tracking-wide">
-                COLLABORATION OPPORTUNITIES
+                {t("Collaboration Opportunities")}
               </span>
             </motion.div>
 
@@ -273,7 +278,7 @@ const PartnerCollaboration = () => {
               }}
             >
               <span className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-                Partner with AI Linc
+                {t("Partner with AI Linc")}
               </span>
               <br />
               <motion.span
@@ -281,7 +286,7 @@ const PartnerCollaboration = () => {
                 animate={isInView ? { opacity: 1, x: 0 } : {}}
                 transition={{ delay: 0.8, duration: 0.8 }}
               >
-                and Transform Education
+                {t("and Transform Education")}
               </motion.span>
             </motion.h2>
 
@@ -291,10 +296,9 @@ const PartnerCollaboration = () => {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.6, duration: 0.8 }}
             >
-              Join forces with AI Linc to deliver world-class technology
-              education. Whether you&apos;re a corporation, educational
-              institution, or technology company, we have the perfect
-              partnership model for you.
+              {t(
+                "Join forces with AI Linc to deliver world-class technology education. Whether you're a corporation, educational institution, or technology company, we have the perfect partnership model for you."
+              )}
             </motion.p>
           </motion.div>
 
@@ -381,7 +385,7 @@ const PartnerCollaboration = () => {
                     transition={{ delay: 0.6 }}
                   >
                     <p className="text-xs text-gray-500 mb-3 text-center font-semibold tracking-wide">
-                      KEY FEATURES
+                      {t("Key Features")}
                     </p>
                     <div className="grid grid-cols-2 gap-2">
                       {model.features.map((feature, idx) => (
@@ -409,7 +413,7 @@ const PartnerCollaboration = () => {
                     transition={{ delay: 0.7 }}
                   >
                     <p className="text-xs text-gray-500 mb-3 text-center font-semibold tracking-wide">
-                      PARTNERSHIP BENEFITS
+                      {t("Partnership Benefits")}
                     </p>
                     <div className="space-y-2">
                       {model.benefits.slice(0, 3).map((benefit, idx) => (
@@ -433,7 +437,7 @@ const PartnerCollaboration = () => {
                       ))}
                       {model.benefits.length > 3 && (
                         <div className="text-xs text-gray-400 text-center">
-                          +{model.benefits.length - 3} more benefits
+                          +{model.benefits.length - 3} {t("more benefits")}
                         </div>
                       )}
                     </div>
@@ -489,7 +493,7 @@ const PartnerCollaboration = () => {
                 animate={isInView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ delay: 0.8, duration: 0.8 }}
               >
-                How It Works
+                {t("How It Works")}
               </motion.h3>
               <motion.p
                 className="text-base text-gray-600 max-w-2xl mx-auto"
@@ -497,8 +501,9 @@ const PartnerCollaboration = () => {
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: 1, duration: 0.6 }}
               >
-                Our streamlined partnership process gets you started quickly and
-                efficiently
+                {t(
+                  "Our streamlined partnership process gets you started quickly and efficiently"
+                )}
               </motion.p>
             </div>
 
@@ -506,9 +511,10 @@ const PartnerCollaboration = () => {
               {[
                 {
                   step: "01",
-                  title: "Apply & Connect",
-                  description:
-                    "Submit your partnership application and connect with our dedicated partnership team.",
+                  title: t("Apply & Connect"),
+                  description: t(
+                    "Submit your partnership application and connect with our dedicated partnership team."
+                  ),
                   icon: (
                     <svg
                       className="w-12 h-12 text-indigo-600"
@@ -527,9 +533,10 @@ const PartnerCollaboration = () => {
                 },
                 {
                   step: "02",
-                  title: "Collaborate & Plan",
-                  description:
-                    "Work together to define partnership goals, requirements, and implementation timeline.",
+                  title: t("Collaborate & Plan"),
+                  description: t(
+                    "Work together to define partnership goals, requirements, and implementation timeline."
+                  ),
                   icon: (
                     <svg
                       className="w-12 h-12 text-purple-600"
@@ -548,9 +555,10 @@ const PartnerCollaboration = () => {
                 },
                 {
                   step: "03",
-                  title: "Launch & Grow",
-                  description:
-                    "Go live with your partnership program and scale together with ongoing support.",
+                  title: t("Launch & Grow"),
+                  description: t(
+                    "Go live with your partnership program and scale together with ongoing support."
+                  ),
                   icon: (
                     <svg
                       className="w-12 h-12 text-pink-600"
@@ -633,7 +641,7 @@ const PartnerCollaboration = () => {
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: 1.2 }}
               >
-                Ready to Partner with Us?
+                {t("Ready to Partner with Us?")}
               </motion.h3>
               <motion.p
                 className="text-base text-indigo-100 mb-8 max-w-2xl mx-auto"
@@ -641,8 +649,9 @@ const PartnerCollaboration = () => {
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: 1.4 }}
               >
-                Let&apos;s discuss how we can work together to deliver
-                exceptional learning experiences and drive mutual growth.
+                {t(
+                  "Let's discuss how we can work together to deliver exceptional learning experiences and drive mutual growth."
+                )}
               </motion.p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -655,7 +664,7 @@ const PartnerCollaboration = () => {
                     whileTap={{ scale: 0.95 }}
                     className="px-8 py-4 bg-white text-indigo-600 rounded-xl font-bold text-base shadow-lg hover:shadow-xl transition-all duration-300 inline-flex items-center justify-center group"
                   >
-                    <span>Schedule a Partnership Call</span>
+                    <span>{t("Schedule a Partnership Call")}</span>
                     <motion.svg
                       className="w-5 h-5 ml-2"
                       fill="none"
@@ -685,7 +694,7 @@ const PartnerCollaboration = () => {
                     whileTap={{ scale: 0.95 }}
                     className="px-8 py-4 border-2 border-white/30 text-white rounded-xl font-bold text-base hover:bg-white/10 transition-all duration-300 inline-flex items-center justify-center cursor-pointer"
                   >
-                    <span>Download Partnership Guide</span>
+                    <span>{t("Download Partnership Guide")}</span>
                     <motion.svg
                       className="w-5 h-5 ml-2"
                       fill="none"

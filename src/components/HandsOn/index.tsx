@@ -1,7 +1,8 @@
+"use client";
+
 import React, { useState } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import Image from "next/image";
-import CourseCard from "../Common/card";
 import SQLIcon from "../../../public/icons/SqlIcon";
 import ExcelIcon from "../../../public/icons/ExcelIcon";
 import TableauIcon from "../../../public/icons/TableauIcon";
@@ -9,11 +10,10 @@ import AgenticAIIcon from "../../../public/icons/AgenticIcon";
 import { PlayIcon } from "../../../public/icons/PlayIcon";
 import ExternalLinkIcon from "../../../public/icons/ExternalLinkIcon";
 import { CloseIcon } from "../../../public/icons/CloseIcon";
-import { ArrowRightIcon } from "../../../public/icons/ArrowRightIcon";
 import { MicrosoftLogo } from "../../../public/icons/MicrosoftLogo";
 import { IBMLogo } from "../../../public/icons/IBMLogo";
-import { CiscoLogo } from "../../../public/icons/CiscoLogo";
 import { GoogleLogo } from "../../../public/icons/GoogleLogo";
+import { useTranslation } from "@/context/LanguageContext";
 
 // --- SVG Icons for Stats ---
 const FireIcon = () => (
@@ -176,6 +176,7 @@ const UpdatedCourseCard = ({
   duration = "12 min",
   streak = 7,
   badges = 3,
+  link = "#",
 }: {
   heading: string;
   text: string;
@@ -188,8 +189,10 @@ const UpdatedCourseCard = ({
   duration?: string;
   streak?: number;
   badges?: number;
+  link?: string;
 }) => {
   const circumference = 2 * Math.PI * 14;
+  const t = useTranslation();
 
   return (
     <motion.div
@@ -288,10 +291,10 @@ const UpdatedCourseCard = ({
           {/* Progress Info */}
           <div>
             <h3 className="text-sm font-semibold text-gray-800 mb-1">
-              Course Progress
+              {t("Course Progress")}
             </h3>
             <p className="text-xs text-gray-600">
-              {videosCompleted}/{totalVideos} videos
+              {videosCompleted}/{totalVideos} {t("videos")}
             </p>
           </div>
         </div>
@@ -299,9 +302,9 @@ const UpdatedCourseCard = ({
         {/* Stats with Better Aligned SVG Icons */}
         <div className="flex space-x-4">
           {[
-            { value: streak, label: "Days", icon: <FireIcon /> },
-            { value: badges, label: "Badges", icon: <BadgeIcon /> },
-            { value: videosCompleted, label: "Videos", icon: <VideoIcon /> },
+            { value: streak, label: t("Days"), icon: <FireIcon /> },
+            { value: badges, label: t("Badges"), icon: <BadgeIcon /> },
+            { value: videosCompleted, label: t("Videos"), icon: <VideoIcon /> },
           ].map((stat, index) => (
             <motion.div
               key={stat.label}
@@ -328,10 +331,7 @@ const UpdatedCourseCard = ({
 
       {/* CTA Button with Better Colors */}
       <motion.a
-        href={`https://app.ailinc.com/${heading
-          ?.toLowerCase()
-          ?.split(" ")
-          ?.join("-")}`}
+        href={link}
         target="_blank"
         className="block w-full bg-gray-900 hover:bg-gray-800 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 shadow-md hover:shadow-lg text-center text-sm"
         whileHover={{ scale: 1.02 }}
@@ -340,7 +340,7 @@ const UpdatedCourseCard = ({
         animate={{ opacity: 1 }}
         transition={{ delay: 0.7 }}
       >
-        Enroll Now
+        {t("Enroll Now")}
       </motion.a>
     </motion.div>
   );
@@ -349,6 +349,21 @@ const UpdatedCourseCard = ({
 // --- Main Component ---
 function HandsOnLearningSection() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  const t = useTranslation();
+
+  const localizedWorkshops = workshops.map((item) => ({
+    ...item,
+    title: t(item.title),
+    description: t(item.description),
+  }));
+
+  const localizedFreeCourses = freeCourses.map((course) => ({
+    ...course,
+    title: t(course.title),
+    description: t(course.description),
+    nextLesson: t(course.nextLesson),
+    duration: t(course.duration),
+  }));
 
   return (
     <motion.section
@@ -361,16 +376,16 @@ function HandsOnLearningSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div variants={itemVariants} className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900">
-            Hands-On Learning with{" "}
+            {t("Hands-On Learning with")} {" "}
             <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-              Real-World Outcomes
+              {t("Real-World Outcomes")}
             </span>
           </h2>
         </motion.div>
 
-        {/* --- Workshops Section (unchanged) --- */}
+        {/* --- Workshops Section --- */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 mb-20">
-          {workshops.map((item) => {
+          {localizedWorkshops.map((item) => {
             const videoId = getYouTubeVideoId(item.youtubeUrl);
             const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
 
@@ -382,16 +397,16 @@ function HandsOnLearningSection() {
                 whileHover={{ y: -5 }}
               >
                 {/* YouTube Thumbnail with Play Overlay */}
-                <div className="relative w-full" style={{ aspectRatio: '16/9' }}>
-  <Image
-    src={thumbnailUrl}
-    alt={item.title}
-    width={1000}
-    height={562}
-    className="w-full h-full object-cover rounded-t-2xl"
-  />
-  <PlayIcon onClick={() => setSelectedId(item.id)} />
-</div>
+                <div className="relative w-full" style={{ aspectRatio: "16/9" }}>
+                  <Image
+                    src={thumbnailUrl}
+                    alt={item.title}
+                    width={1000}
+                    height={562}
+                    className="w-full h-full object-cover rounded-t-2xl"
+                  />
+                  <PlayIcon onClick={() => setSelectedId(item.id)} />
+                </div>
 
                 {/* Content */}
                 <div className="p-6">
@@ -409,7 +424,7 @@ function HandsOnLearningSection() {
                       rel="noopener noreferrer"
                       className="flex items-center justify-center px-4 py-2 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition-colors"
                     >
-                      Watch on YouTube
+                      {t("Watch on YouTube")}
                       <ExternalLinkIcon />
                     </a>
                     <a
@@ -418,7 +433,7 @@ function HandsOnLearningSection() {
                       rel="noopener noreferrer"
                       className="flex items-center justify-center px-4 py-2 bg-gray-900 hover:bg-gray-800 text-white font-semibold rounded-lg transition-all"
                     >
-                      Book Your Slot
+                      {t("Book Your Slot")}
                     </a>
                   </div>
                 </div>
@@ -427,7 +442,7 @@ function HandsOnLearningSection() {
           })}
         </div>
 
-        {/* Inline Video Player Modal (unchanged) */}
+        {/* Inline Video Player Modal */}
         <AnimatePresence>
           {selectedId && (
             <motion.div
@@ -437,7 +452,7 @@ function HandsOnLearningSection() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
             >
-              {workshops
+              {localizedWorkshops
                 .filter((item) => item.id === selectedId)
                 .map((item) => (
                   <motion.div
@@ -475,7 +490,7 @@ function HandsOnLearningSection() {
                         rel="noopener noreferrer"
                         className="block w-full text-center bg-gray-900 hover:bg-gray-800 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition-all duration-300"
                       >
-                        Book Your Slot
+                        {t("Book Your Slot")}
                       </a>
                     </div>
                   </motion.div>
@@ -484,24 +499,24 @@ function HandsOnLearningSection() {
           )}
         </AnimatePresence>
 
-        {/* --- Free Courses Section: Keep 4 cards in 2x2 grid --- */}
+        {/* --- Free Courses Section --- */}
         <motion.div variants={itemVariants}>
           <motion.h3
             variants={itemVariants}
             className="text-4xl font-bold text-gray-800 mb-2 text-center"
           >
-            Start with Our Free Courses
+            {t("Start with Our Free Courses")}
           </motion.h3>
           <motion.p
             variants={itemVariants}
             className="text-center text-gray-600 mb-12 text-lg font-semibold"
           >
-            Kickstart your AI & Data journey - No cost, lifetime access
+            {t("Kickstart your AI & Data journey - No cost, lifetime access")}
           </motion.p>
 
           {/* 2x2 Grid for Free Courses */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16 max-w-5xl mx-auto">
-            {freeCourses.map((course, index) => (
+            {localizedFreeCourses.map((course, index) => (
               <motion.div
                 key={index}
                 variants={itemVariants}
@@ -522,13 +537,14 @@ function HandsOnLearningSection() {
                   duration={course.duration}
                   streak={Math.floor(Math.random() * 10) + 1}
                   badges={Math.floor(Math.random() * 5) + 1}
+                  link={course.link}
                 />
               </motion.div>
             ))}
           </div>
         </motion.div>
 
-        {/* --- SEPARATE: Explore All Courses Section --- */}
+        {/* --- Explore All Courses Section --- */}
         <motion.div
           variants={itemVariants}
           className="mb-16"
@@ -576,7 +592,7 @@ function HandsOnLearningSection() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2 }}
                 >
-                  Ready for Premium Courses?
+                  {t("Ready for Premium Courses?")}
                 </motion.h3>
 
                 <motion.p
@@ -585,8 +601,9 @@ function HandsOnLearningSection() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3 }}
                 >
-                  Unlock advanced AI courses, get personalized mentorship, work
-                  on industry projects, and secure guaranteed placements.
+                  {t(
+                    "Unlock advanced AI courses, get personalized mentorship, work on industry projects, and secure guaranteed placements."
+                  )}
                 </motion.p>
 
                 {/* Features grid */}
@@ -596,12 +613,7 @@ function HandsOnLearningSection() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4 }}
                 >
-                  {[
-                    { number: "50+", label: "Premium Courses" },
-                    { number: "1:1", label: "Mentorship" },
-                    { number: "100+", label: "Industry Projects" },
-                    { number: "10K+", label: "Success Stories" },
-                  ].map((stat, index) => (
+                  {["50+", "1:1", "100+", "10K+"].map((number, index) => (
                     <motion.div
                       key={index}
                       className="text-center"
@@ -610,10 +622,15 @@ function HandsOnLearningSection() {
                       transition={{ delay: 0.5 + index * 0.1 }}
                     >
                       <div className="text-2xl md:text-3xl font-bold text-yellow-300 mb-1">
-                        {stat.number}
+                        {number}
                       </div>
                       <div className="text-sm text-purple-200">
-                        {stat.label}
+                        {t([
+                          "Premium Courses",
+                          "Mentorship",
+                          "Industry Projects",
+                          "Success Stories",
+                        ][index])}
                       </div>
                     </motion.div>
                   ))}
@@ -631,7 +648,7 @@ function HandsOnLearningSection() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.6 }}
                 >
-                  <span>Explore All Courses</span>
+                  <span>{t("Explore All Courses")}</span>
                   <motion.div
                     className="ml-3 group-hover:translate-x-1 transition-transform duration-200"
                     animate={{ x: [0, 4, 0] }}
@@ -673,10 +690,10 @@ function HandsOnLearningSection() {
           className="bg-white p-8 rounded-2xl shadow-lg border border-gray-200 text-center"
         >
           <h3 className="text-2xl font-extrabold mb-2 text-gray-900">
-            Advance Your Career with Our Flagship Program
+            {t("Advance Your Career with Our Flagship Program")}
           </h3>
           <p className="text-gray-600 max-w-2xl mx-auto mb-6 font-semibold">
-            Get mentorship, industry projects & guaranteed internships.
+            {t("Get mentorship, industry projects & guaranteed internships.")}
           </p>
           <motion.a
             href="#contact"
@@ -684,7 +701,7 @@ function HandsOnLearningSection() {
             whileTap={{ scale: 0.95 }}
             className="inline-block px-8 py-3 bg-gray-900 hover:bg-gray-800 text-white font-semibold rounded-lg shadow-lg transition"
           >
-            Contact Us to Enroll
+            {t("Contact Us to Enroll")}
           </motion.a>
         </motion.div>
       </div>

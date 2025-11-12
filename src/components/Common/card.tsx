@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { useTranslation } from "@/context/LanguageContext";
 
 interface CourseCardProps {
   heading: string;
@@ -32,6 +33,7 @@ const CourseCard = ({
   const strokeDasharray = `${
     (progress / 100) * circumference
   } ${circumference}`;
+  const t = useTranslation();
 
   return (
     <motion.div
@@ -123,10 +125,10 @@ const CourseCard = ({
           {/* Progress Info */}
           <div>
             <h3 className="text-base font-semibold text-gray-800 mb-1">
-              Course Progress
+              {t("Course Progress")}
             </h3>
             <p className="text-sm text-gray-600">
-              {videosCompleted}/{totalVideos} videos
+              {videosCompleted}/{totalVideos} {t("videos")}
             </p>
           </div>
         </div>
@@ -134,9 +136,9 @@ const CourseCard = ({
         {/* Stats */}
         <div className="flex space-x-4">
           {[
-            { value: streak, label: "Day Streak", icon: "🔥" },
-            { value: badges, label: "Badges", icon: "🏆" },
-            { value: videosCompleted, label: "Videos", icon: "📹" },
+            { value: streak, label: t("Day Streak"), icon: "🔥" },
+            { value: badges, label: t("Badges"), icon: "🏆" },
+            { value: videosCompleted, label: t("Videos"), icon: "📹" },
           ].map((stat, index) => (
             <motion.div
               key={stat.label}
@@ -169,7 +171,7 @@ const CourseCard = ({
         animate={{ opacity: 1 }}
         transition={{ delay: 0.7 }}
       >
-        Enroll Now
+        {t("Enroll Now")}
       </motion.a>
     </motion.div>
   );

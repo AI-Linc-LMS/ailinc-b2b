@@ -5,6 +5,7 @@ import { GoogleLogo } from "../../../public/icons/GoogleLogo";
 import { AWSLogo } from "../../../public/icons/AWSLogo";
 import { MicrosoftLogo } from "../../../public/icons/MicrosoftLogo";
 import Link from "next/link";
+import { useTranslation } from "@/context/LanguageContext";
 
 type Item = {
   title: string;
@@ -16,6 +17,7 @@ type Tab = {
   id: string;
   nav: string;
   cta: string;
+  ctaType: "external" | "contact";
   items: Item[];
   mockup: React.ReactNode;
 };
@@ -460,6 +462,7 @@ const tabs: Tab[] = [
     id: "white",
     nav: "White-Labeled AI App",
     cta: "Explore the App",
+    ctaType: "external",
     mockup: <WhiteLabelMockup />,
     items: [
       {
@@ -489,6 +492,7 @@ const tabs: Tab[] = [
     id: "skill",
     nav: "AI Skill Development",
     cta: "Connect with us now",
+    ctaType: "contact",
     mockup: <SkillDevMockup />,
     items: [
       {
@@ -518,6 +522,7 @@ const tabs: Tab[] = [
     id: "transform",
     nav: "Our Role",
     cta: "Connect with us now",
+    ctaType: "contact",
     mockup: <TransformMockup />,
     items: [
       {
@@ -544,8 +549,10 @@ const tabs: Tab[] = [
 // Creative Hover Card Components
 const WhiteLabelHoverCard = ({
   position,
+  t,
 }: {
   position: { top?: string; bottom?: string };
+  t: (key: string) => string;
 }) => (
   <motion.div
     initial={{ opacity: 0, scale: 0.8, y: 20 }}
@@ -557,9 +564,9 @@ const WhiteLabelHoverCard = ({
   >
     <div className="mb-4">
       <h4 className="text-lg font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-        All Features
+        {t("All Features")}
       </h4>
-      <p className="text-sm text-gray-600">Complete platform overview</p>
+      <p className="text-sm text-gray-600">{t("Complete platform overview")}</p>
     </div>
 
     <div className="grid grid-cols-2 gap-3 mb-4">
@@ -613,7 +620,7 @@ const WhiteLabelHoverCard = ({
           className={`p-3 rounded-xl bg-gradient-to-br ${feature.color} text-white text-center relative overflow-hidden`}
         >
           <feature.icon className="w-8 h-8 mx-auto mb-1" />
-          <div className="text-xs font-medium">{feature.name}</div>
+          <div className="text-xs font-medium">{t(feature.name)}</div>
           <motion.div
             className="absolute inset-0 bg-white/20"
             initial={{ x: "-100%" }}
@@ -636,7 +643,7 @@ const WhiteLabelHoverCard = ({
         className="inline-flex items-center px-3 py-1 bg-gradient-to-r from-blue-100 to-purple-100 rounded-full text-sm font-medium text-blue-700"
       >
         <span className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></span>
-        Ready to Deploy
+        {t("Ready to Deploy")}
       </motion.div>
     </div>
   </motion.div>
@@ -644,8 +651,10 @@ const WhiteLabelHoverCard = ({
 
 const SkillDevHoverCard = ({
   position,
+  t,
 }: {
   position: { top?: string; bottom?: string };
+  t: (key: string) => string;
 }) => (
   <motion.div
     initial={{ opacity: 0, scale: 0.8, y: 20 }}
@@ -657,9 +666,9 @@ const SkillDevHoverCard = ({
   >
     <div className="mb-6">
       <h4 className="text-lg font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-        Certification Partners
+        {t("Certification Partners")}
       </h4>
-      <p className="text-sm text-gray-600">Industry-recognized credentials</p>
+      <p className="text-sm text-gray-600">{t("Industry-recognized credentials")}</p>
     </div>
 
     <div className="space-y-4 mb-6">
@@ -725,7 +734,7 @@ const SkillDevHoverCard = ({
               transition={{ delay: 0.7 + index * 0.1 }}
               className="w-2 h-2 bg-blue-400 rounded-full mr-2"
             />
-            {feature}
+            {t(feature)}
           </motion.div>
         )
       )}
@@ -735,8 +744,10 @@ const SkillDevHoverCard = ({
 
 const TransformHoverCard = ({
   position,
+  t,
 }: {
   position: { top?: string; bottom?: string };
+  t: (key: string) => string;
 }) => (
   <motion.div
     initial={{ opacity: 0, scale: 0.8, y: 20 }}
@@ -748,9 +759,9 @@ const TransformHoverCard = ({
   >
     <div className="mb-6">
       <h4 className="text-lg font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-        Transformation Flow
+        {t("Transformation Flow")}
       </h4>
-      <p className="text-sm text-gray-600">End-to-end institutional upgrade</p>
+      <p className="text-sm text-gray-600">{t("End-to-end institutional upgrade")}</p>
     </div>
 
     <div className="space-y-4">
@@ -800,7 +811,7 @@ const TransformHoverCard = ({
                   transition={{ delay: index * 0.3 + 0.3 }}
                   className="font-semibold text-gray-800 text-sm"
                 >
-                  {step.title}
+                  {t(step.title)}
                 </motion.h5>
                 <motion.p
                   initial={{ opacity: 0 }}
@@ -808,7 +819,7 @@ const TransformHoverCard = ({
                   transition={{ delay: index * 0.3 + 0.4 }}
                   className="text-xs text-gray-500"
                 >
-                  {step.desc}
+                  {t(step.desc)}
                 </motion.p>
               </div>
             </div>
@@ -844,7 +855,7 @@ const TransformHoverCard = ({
       <div className="flex items-center text-sm">
         <span className="text-green-600 mr-2">✨</span>
         <span className="text-gray-700 font-medium">
-          Complete transformation in 12 months
+          {t("Complete transformation in 12 months")}
         </span>
       </div>
     </motion.div>
@@ -864,6 +875,7 @@ export default function Services() {
   const componentRef = useRef<HTMLDivElement>(null);
   const tabRefs = useRef<(HTMLDivElement | null)[]>([]);
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const t = useTranslation();
 
   // Create proper ref object for hover card positioning
   const hoveredRef = useMemo(() => {
@@ -1084,9 +1096,9 @@ export default function Services() {
       `}</style>
 
       <h2 className="mb-8 md:mb-14 text-center text-2xl sm:text-3xl md:text-4xl font-bold">
-        What We Do{" "}
+        {t("What We Do")}{" "}
         <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent italic">
-          at AI Linc
+          {t("at AI Linc")}
         </span>
       </h2>
 
@@ -1179,7 +1191,7 @@ export default function Services() {
                       : "text-gray-500"
                   }`}
                 >
-                  {tab.nav}
+                  {t(tab.nav)}
                 </div>
               </div>
 
@@ -1200,7 +1212,7 @@ export default function Services() {
       <div className="block md:hidden mb-6">
         <div className="text-center">
           <span className="inline-block px-4 py-2 bg-gradient-to-r from-blue-100 to-purple-100 rounded-full text-sm font-medium bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-            {currentTab.nav}
+            {t(currentTab.nav)}
           </span>
         </div>
       </div>
@@ -1216,7 +1228,7 @@ export default function Services() {
           />
         </div>
         <div className="text-center mt-2 text-xs md:text-sm text-gray-600">
-          Step {activeIndex + 1} of {tabs.length}
+          {t("Step")} {activeIndex + 1} {t("of")} {tabs.length}
         </div>
       </div>
 
@@ -1239,7 +1251,7 @@ export default function Services() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 md:mb-8 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent text-center lg:text-left"
             >
-              {currentTab.nav}
+              {t(currentTab.nav)}
             </motion.h3>
 
             {currentTab.items.map((item, i) => (
@@ -1273,10 +1285,10 @@ export default function Services() {
                 </motion.div>
                 <div className="flex-1 min-w-0">
                   <h4 className="text-sm sm:text-base md:text-lg font-semibold leading-tight mb-1">
-                    {item.title}
+                    {t(item.title)}
                   </h4>
                   <p className="text-xs sm:text-sm md:text-base text-gray-600 leading-relaxed">
-                    {item.text}
+                    {t(item.text)}
                   </p>
                 </div>
 
@@ -1304,13 +1316,22 @@ export default function Services() {
                   {hoveredItem === i && item.hover && (
                     <>
                       {activeIndex === 0 && i === 0 && (
-                        <WhiteLabelHoverCard position={hoverCardPosition} />
+                        <WhiteLabelHoverCard
+                          position={hoverCardPosition}
+                          t={t}
+                        />
                       )}
                       {activeIndex === 1 && i === 1 && (
-                        <SkillDevHoverCard position={hoverCardPosition} />
+                        <SkillDevHoverCard
+                          position={hoverCardPosition}
+                          t={t}
+                        />
                       )}
                       {activeIndex === 2 && i === 2 && (
-                        <TransformHoverCard position={hoverCardPosition} />
+                        <TransformHoverCard
+                          position={hoverCardPosition}
+                          t={t}
+                        />
                       )}
                     </>
                   )}
@@ -1328,45 +1349,45 @@ export default function Services() {
                       {activeIndex === 0 && i === 0 && (
                         <div>
                           <h5 className="font-semibold text-blue-600 mb-2">
-                            All Features Available:
+                            {`${t("All Features Available")}:`}
                           </h5>
                           <div className="grid grid-cols-2 gap-2 text-xs">
-                            <div>Course Builder</div>
-                            <div>Student Dashboard</div>
-                            <div>Community</div>
-                            <div>Job Board</div>
-                            <div>AI Generated Placement Report</div>
-                            <div>Automated Report</div>
-                            <div>Live Classes</div>
-                            <div>Bulk Email Communication</div>
+                            <div>{t("Course Builder")}</div>
+                            <div>{t("Student Dashboard")}</div>
+                            <div>{t("Community")}</div>
+                            <div>{t("Job Board")}</div>
+                            <div>{t("AI Generated Placement Report")}</div>
+                            <div>{t("Automated Report")}</div>
+                            <div>{t("Live Classes")}</div>
+                            <div>{t("Bulk Email Communication")}</div>
                           </div>
                         </div>
                       )}
                       {activeIndex === 1 && i === 1 && (
                         <div>
                           <h5 className="font-semibold text-blue-600 mb-2">
-                            Certification Partners:
+                            {`${t("Certification Partners")}:`}
                           </h5>
                           <div className="space-y-1 text-xs">
-                            <div>
-                              - Microsoft (Azure AI, PowerBI, Office 365)
-                            </div>
-                            <div>- Google (Cloud AI, Analytics, Workspace)</div>
-                            <div>
-                              - AWS (Cloud Practitioner, SageMaker, Lambda)
-                            </div>
+                            {[
+                              "- Microsoft (Azure AI, PowerBI, Office 365)",
+                              "- Google (Cloud AI, Analytics, Workspace)",
+                              "- AWS (Cloud Practitioner, SageMaker, Lambda)",
+                            ].map((key) => (
+                              <div key={key}>{t(key)}</div>
+                            ))}
                           </div>
                         </div>
                       )}
                       {activeIndex === 2 && i === 2 && (
                         <div>
                           <h5 className="font-semibold text-blue-600 mb-2">
-                            Transformation Flow:
+                            {`${t("Transformation Flow")}:`}
                           </h5>
                           <div className="space-y-1 text-xs">
-                            <div>1. Faster AI adoption</div>
-                            <div>2. Cost-effective solutions</div>
-                            <div>3. Reduced complexity</div>
+                            <div>{`1. ${t("Faster AI adoption")}`}</div>
+                            <div>{`2. ${t("Cost-effective solutions")}`}</div>
+                            <div>{`3. ${t("Reduced complexity")}`}</div>
                           </div>
                         </div>
                       )}
@@ -1377,7 +1398,7 @@ export default function Services() {
             ))}
 
             {/* Updated CTA Button with proper links */}
-            {currentTab.cta === "Explore the App" ? (
+            {currentTab.ctaType === "external" ? (
               <motion.a
                 href="https://app.ailinc.com"
                 target="_blank"
@@ -1394,7 +1415,7 @@ export default function Services() {
                 onMouseLeave={handleHoverEnd}
                 className="mt-6 md:mt-8 w-full sm:w-auto rounded-md bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-3 font-semibold text-white hover:shadow-lg transition-all duration-300 cursor-pointer text-sm md:text-base block text-center"
               >
-                {currentTab.cta}
+                {t(currentTab.cta)}
               </motion.a>
             ) : (
               <Link href="/#contact" passHref>
@@ -1411,7 +1432,7 @@ export default function Services() {
                   onMouseLeave={handleHoverEnd}
                   className="mt-6 md:mt-8 w-full sm:w-auto rounded-md bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-3 font-semibold text-white hover:shadow-lg transition-all duration-300 cursor-pointer text-sm md:text-base block text-center"
                 >
-                  {currentTab.cta}
+                  {t(currentTab.cta)}
                 </motion.button>
               </Link>
             )}
@@ -1508,9 +1529,7 @@ export default function Services() {
               </motion.span>
             </motion.span>
             <span className="bg-gradient-to-r from-gray-700 to-gray-900 bg-clip-text text-transparent font-medium">
-              AI Linc is the only platform that combines AI-powered apps, skill
-              development, and institutional transformation under one
-              white-labeled solution — built for higher education.
+              {t("AI Linc is the only platform that combines AI-powered apps, skill development, and institutional transformation under one white-labeled solution — built for higher education.")}
             </span>
           </motion.p>
 

@@ -3,11 +3,13 @@ import { useRef, useState, useEffect } from "react";
 import { motion, useInView, AnimatePresence, Variants } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import { useTranslation } from "@/context/LanguageContext";
 
 const IncubationSupport = () => {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
   const [activeSlide, setActiveSlide] = useState(0);
+  const t = useTranslation();
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -62,8 +64,8 @@ const IncubationSupport = () => {
 
   // Video data
   const featuredVideo = {
-    title: "Bill Gates on navigating an AI future",
-    credits: "Credits - CNN",
+    title: t("Bill Gates on navigating an AI future"),
+    credits: t("Credits - CNN"),
     youtubeUrl: "https://youtu.be/Ny-qhl4N9dY?si=q267VRCxsx8-sVRA",
     embedUrl: "https://www.youtube.com/embed/Ny-qhl4N9dY",
     videoId: "Ny-qhl4N9dY",
@@ -72,10 +74,11 @@ const IncubationSupport = () => {
   const pitchSlides = [
     {
       id: 1,
-      title: "Student Entrepreneurship Programs",
-      subtitle: "Building Tomorrow's Innovators",
-      description:
-        "Transform student ideas into viable startups with comprehensive entrepreneurship programs, mentorship, and AI-powered business development tools.",
+      title: t("Student Entrepreneurship Programs"),
+      subtitle: t("Building Tomorrow's Innovators"),
+      description: t(
+      "Transform student ideas into viable startups with comprehensive entrepreneurship programs, mentorship, and AI-powered business development tools."
+      ),
       illustration: (
         <motion.div
           className="w-full h-full"
@@ -92,19 +95,20 @@ const IncubationSupport = () => {
         </motion.div>
       ),
       features: [
-        "Business Model Canvas Workshops",
-        "AI-Powered Market Research",
-        "Product Development Guidance",
-        "Go-to-Market Strategy Planning",
+      t("Business Model Canvas Workshops"),
+      t("AI-Powered Market Research"),
+      t("Product Development Guidance"),
+      t("Go-to-Market Strategy Planning"),
       ],
       color: "from-blue-600 to-indigo-700",
     },
     {
       id: 2,
-      title: "AI Project Mentoring",
-      subtitle: "Expert Technical Guidance",
-      description:
-        "Connect students with industry experts for personalized mentoring on AI projects, research initiatives, and technical skill development.",
+      title: t("AI Project Mentoring"),
+      subtitle: t("Expert Technical Guidance"),
+      description: t(
+        "Connect students with industry experts for personalized mentoring on AI projects, research initiatives, and technical skill development."
+      ),
       illustration: (
         <motion.div
           className="w-full h-full"
@@ -121,19 +125,20 @@ const IncubationSupport = () => {
         </motion.div>
       ),
       features: [
-        "One-on-One Technical Sessions",
-        "Algorithm Optimization Support",
-        "Research Paper Guidance",
-        "Industry Best Practices",
+      t("One-on-One Technical Sessions"),
+      t("Algorithm Optimization Support"),
+      t("Research Paper Guidance"),
+      t("Industry Best Practices"),
       ],
       color: "from-purple-600 to-violet-700",
     },
     {
       id: 3,
-      title: "Industry Collaborations",
-      subtitle: "Strategic Partnership Network",
-      description:
-        "Foster meaningful partnerships between academia and industry to create research opportunities, internships, and startup collaborations.",
+      title: t("Industry Collaborations"),
+      subtitle: t("Strategic Partnership Network"),
+      description: t(
+        "Foster meaningful partnerships between academia and industry to create research opportunities, internships, and startup collaborations."
+      ),
       illustration: (
         <motion.div
           className="w-full h-full"
@@ -150,19 +155,20 @@ const IncubationSupport = () => {
         </motion.div>
       ),
       features: [
-        "Corporate Partnership Programs",
-        "Joint Research Initiatives",
-        "Internship Placement Support",
-        "Technology Transfer Assistance",
+      t("Corporate Partnership Programs"),
+      t("Joint Research Initiatives"),
+      t("Internship Placement Support"),
+      t("Technology Transfer Assistance"),
       ],
       color: "from-emerald-600 to-teal-700",
     },
     {
       id: 4,
-      title: "Funding & Pitch Training",
-      subtitle: "Investment Readiness Program",
-      description:
-        "Prepare students for the investment world with comprehensive pitch training, financial modeling, and investor presentation skills.",
+      title: t("Funding & Pitch Training"),
+      subtitle: t("Investment Readiness Program"),
+      description: t(
+        "Prepare students for the investment world with comprehensive pitch training, financial modeling, and investor presentation skills."
+      ),
       illustration: (
         <motion.div
           className="w-full h-full"
@@ -179,10 +185,10 @@ const IncubationSupport = () => {
         </motion.div>
       ),
       features: [
-        "Pitch Deck Development",
-        "Financial Modeling Training",
-        "Mock Investor Sessions",
-        "Presentation Skills Workshop",
+      t("Pitch Deck Development"),
+      t("Financial Modeling Training"),
+      t("Mock Investor Sessions"),
+      t("Presentation Skills Workshop"),
       ],
       color: "from-amber-600 to-orange-700",
     },
@@ -250,7 +256,7 @@ const IncubationSupport = () => {
                 transition={{ duration: 2, repeat: Infinity }}
               />
               <span className="text-blue-700 text-sm font-bold tracking-wide">
-                LIVE PRESENTATION
+                {t("LIVE PRESENTATION")}
               </span>
             </motion.div>
 
@@ -260,7 +266,7 @@ const IncubationSupport = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.2, delay: 0.4 }}
             >
-              Beyond AI Training:
+              {t("Beyond AI Training:")}
               <br />
               <motion.span
                 className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-800 bg-clip-text text-transparent"
@@ -270,7 +276,7 @@ const IncubationSupport = () => {
                 transition={{ duration: 8, repeat: Infinity }}
                 style={{ backgroundSize: "200% 200%" }}
               >
-                Incubation Support
+                {t("Incubation Support")}
               </motion.span>
             </motion.h2>
 
@@ -280,8 +286,7 @@ const IncubationSupport = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.8 }}
             >
-              We help colleges build startup incubation cells powered by AI
-              tools
+              {t("We help colleges build startup incubation cells powered by AI tools")}
             </motion.p>
           </motion.div>
 
@@ -370,7 +375,7 @@ const IncubationSupport = () => {
                     <div className="w-3 h-3 bg-green-500 rounded-full"></div>
                   </div>
                   <span className="text-gray-600 text-sm font-medium">
-                    AI Linc Incubation Deck
+                    {t("AI Linc Incubation Deck")}
                   </span>
                 </div>
                 <div className="text-gray-500 text-sm">
@@ -400,7 +405,7 @@ const IncubationSupport = () => {
                         <div
                           className={`inline-block px-4 py-2 bg-gradient-to-r ${pitchSlides[activeSlide].color} rounded-lg text-white text-sm font-bold mb-4`}
                         >
-                          SOLUTION #{activeSlide + 1}
+                          {t("SOLUTION")} #{activeSlide + 1}
                         </div>
                         <h3 className="text-3xl md:text-4xl font-black text-gray-900 leading-tight mb-3">
                           {pitchSlides[activeSlide].title}
@@ -422,7 +427,7 @@ const IncubationSupport = () => {
                         transition={{ delay: 1.4, duration: 1.0 }}
                       >
                         <h4 className="text-gray-900 font-bold text-lg mb-4">
-                          Key Features:
+                          {t("Key Features:")}
                         </h4>
                         <div className="grid grid-cols-1 gap-3">
                           {pitchSlides[activeSlide].features.map(
@@ -447,7 +452,7 @@ const IncubationSupport = () => {
                                   }}
                                 />
                                 <span className="text-gray-700 font-medium">
-                                  {feature}
+                                  {t(feature)}
                                 </span>
                               </motion.div>
                             )
@@ -501,7 +506,7 @@ const IncubationSupport = () => {
                       d="M15 19l-7-7 7-7"
                     />
                   </svg>
-                  <span className="text-sm font-medium">Previous</span>
+                  <span className="text-sm font-medium">{t("Previous")}</span>
                 </motion.button>
 
                 {/* Progress Dots */}
@@ -525,7 +530,7 @@ const IncubationSupport = () => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <span className="text-sm font-medium">Next</span>
+                  <span className="text-sm font-medium">{t("Next")}</span>
                   <svg
                     className="w-4 h-4"
                     fill="none"
@@ -564,7 +569,7 @@ const IncubationSupport = () => {
                 whileTap={{ scale: 0.95 }}
                 className="px-12 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-bold text-lg shadow-xl transition-all duration-300 inline-flex items-center space-x-3 cursor-pointer"
               >
-                <span>Launch Your Incubation Program</span>
+                <span>{t("Launch Your Incubation Program")}</span>
                 <motion.svg
                   className="w-5 h-5"
                   fill="none"
