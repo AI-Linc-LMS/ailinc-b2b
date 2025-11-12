@@ -8,6 +8,7 @@ import Hero from "@/components/Hero";
 import Stats from "@/components/Stats";
 import LoadingScreen from "@/components/LoadingScreen";
 import Services from "@/components/Services";
+import { useTranslation } from "@/context/LanguageContext";
 
 // Lazy load heavy components for better performance
 const NewsVideo = lazy(() => import("@/components/News"));
@@ -29,6 +30,7 @@ const SectionLoader = () => (
 export default function Home() {
   const [loading, setLoading] = useState(true);
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const t = useTranslation();
 
   const handleLoadingFinish = () => {
     setLoading(false);
@@ -201,7 +203,7 @@ export default function Home() {
               scale: 0.95,
               transition: { duration: 0.1 },
             }}
-            aria-label="Scroll to top"
+            aria-label={t("Scroll to top")}
           >
             {/* Simplified arrow icon - no animation to reduce CPU load */}
             <svg
@@ -221,7 +223,7 @@ export default function Home() {
 
             {/* Tooltip with pointer events disabled for better performance */}
             <div className="absolute bottom-full right-0 mb-2 px-3 py-1 bg-gray-800 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap pointer-events-none">
-              Back to top
+              {t("Back to top")}
               <div className="absolute top-full right-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-800"></div>
             </div>
           </motion.button>

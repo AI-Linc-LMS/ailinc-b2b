@@ -1,12 +1,13 @@
 "use client";
 
 import { motion, Variants } from "framer-motion";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
 import { AWSLogo } from "../../../public/icons/AWSLogo";
 import { GoogleLogo } from "../../../public/icons/GoogleLogo";
 import { MicrosoftLogo } from "../../../public/icons/MicrosoftLogo";
 // import { SalesforceLogo } from "../../../public/icons/SalesForceLogo";
 import { ZapierLogo } from "../../../public/icons/ZapierLogo";
+import { useLanguage, useTranslation } from "@/context/LanguageContext";
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -86,6 +87,8 @@ function Hero() {
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [isHoveringDescription, setIsHoveringDescription] = useState(false);
   const [isHoveringTrust, setIsHoveringTrust] = useState(false);
+  const { locale } = useLanguage();
+  const t = useTranslation();
 
   const [headingMousePos, setHeadingMousePos] = useState({
     x: "50%",
@@ -97,25 +100,30 @@ function Hero() {
   });
   const [trustMousePos, setTrustMousePos] = useState({ x: "50%", y: "50%" });
 
-  const rotatingWords = [
-    "Education",
-    "Enterprises",
-    "Creators",
-    "Startups",
-    "Institutions",
-    "Organizations",
-  ];
+  const rotatingWordKeys = useMemo(
+    () => [
+      "Education",
+      "Enterprises",
+      "Creators",
+      "Startups",
+      "Institutions",
+      "Organizations",
+    ],
+    []
+  );
 
-  // Rotate words every 2 seconds
+  const rotatingWords = useMemo(
+    () => rotatingWordKeys.map((word) => t(word)),
+    [t, rotatingWordKeys]
+  );
+
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentWordIndex(
-        (prevIndex) => (prevIndex + 1) % rotatingWords.length
-      );
+      setCurrentWordIndex((prevIndex) => (prevIndex + 1) % rotatingWords.length);
     }, 2000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [rotatingWords.length]);
 
   const headingRef = useRef<HTMLHeadingElement>(null);
   const descriptionRef = useRef<HTMLParagraphElement>(null);
@@ -312,12 +320,10 @@ function Hero() {
                 color: isHoveringHeading ? "transparent" : "#111827",
               }}
             >
-              <span className="block w-full text-center">
-                AI-Powered Platform for
-              </span>
+              <span className="block w-full text-center">{t("AI-Powered Platform for")}</span>
               <span className="block w-full text-center relative min-h-[1.2em]">
                 <motion.span
-                  key={currentWordIndex}
+                  key={`${locale}-${currentWordIndex}`}
                   variants={wordRotateVariants}
                   initial="enter"
                   animate="center"
@@ -352,10 +358,9 @@ function Hero() {
                 color: isHoveringDescription ? "transparent" : "#4B5563",
               }}
             >
-              We help colleges and organizations with a 100% white-labeled AI
-              app, integrated AI courses, and full institutional support — from
-              digitalization to faculty training and placements — making every
-              institution future-ready.
+              {t(
+                "We help colleges and organizations with a 100% white-labeled AI app, integrated AI courses, and full institutional support — from digitalization to faculty training and placements — making every institution future-ready."
+              )}
             </motion.p>
           </motion.div>
 
@@ -380,7 +385,7 @@ function Hero() {
                 color: isHoveringTrust ? "transparent" : "#2563EB",
               }}
             >
-              Trusted by 1000+ Organizations | 1M+ Students
+              {t("Trusted by 1000+ Organizations | 1M+ Students")}
             </motion.p>
           </motion.div>
 
@@ -403,7 +408,7 @@ function Hero() {
           >
             {/* Static label */}
             <span className="text-xs sm:text-sm font-semibold text-gray-600 whitespace-nowrap w-full sm:w-auto text-center sm:text-left mb-2 sm:mb-0">
-              Powered by
+              {t("Powered by")}
             </span>
             {/* Animated logos */}
             <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 md:gap-4">
@@ -433,7 +438,7 @@ function Hero() {
               ))}
             </div>
             <span className="text-xs sm:text-sm font-semibold text-gray-600 whitespace-nowrap">
-              for startups
+              {t("for startups")}
             </span>
           </motion.div>
 
@@ -457,7 +462,7 @@ function Hero() {
               />
               <a href="#contact">
                 <span className="relative z-10 flex items-center">
-                  Book A Demo
+                  {t("Book A Demo")}
                   <motion.svg
                     className="ml-2 w-5 h-5"
                     fill="none"

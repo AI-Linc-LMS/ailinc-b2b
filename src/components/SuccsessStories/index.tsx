@@ -1,8 +1,9 @@
 // components/SuccessStories.tsx
-import { useRef, useState, useEffect, ReactNode } from "react";
+import { useRef, useState, useEffect, ReactNode, useMemo } from "react";
 import { motion, useInView, Variants, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { MicrosoftLogo } from "../../../public/icons/MicrosoftLogo";
+import { useTranslation } from "@/context/LanguageContext";
 
 type Story = {
   id: number;
@@ -20,7 +21,7 @@ type Story = {
 };
 
 // Updated success stories data array with new organizations
-const successStories = [
+const successStoriesData = [
   {
     id: 1,
     organization: "Osmania University",
@@ -179,40 +180,45 @@ const CarouselButton = ({
   direction: "prev" | "next";
   onClick: () => void;
   disabled: boolean;
-}) => (
-  <motion.button
-    onClick={onClick}
-    disabled={disabled}
-    className={`absolute top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center text-gray-600 hover:text-blue-600 disabled:opacity-50 disabled:cursor-not-allowed ${
-      direction === "prev" ? "-left-6 md:-left-8" : "-right-6 md:-right-8"
-    }`}
-    whileHover={{ scale: disabled ? 1 : 1.05 }}
-    whileTap={{ scale: disabled ? 1 : 0.95 }}
-  >
-    <svg
-      className="w-6 h-6"
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
+}) => {
+  const t = useTranslation();
+
+  return (
+    <motion.button
+      onClick={onClick}
+      disabled={disabled}
+      aria-label={direction === "prev" ? t("Previous") : t("Next")}
+      className={`absolute top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center text-gray-600 hover:text-blue-600 disabled:opacity-50 disabled:cursor-not-allowed ${
+        direction === "prev" ? "-left-6 md:-left-8" : "-right-6 md:-right-8"
+      }`}
+      whileHover={{ scale: disabled ? 1 : 1.05 }}
+      whileTap={{ scale: disabled ? 1 : 0.95 }}
     >
-      {direction === "prev" ? (
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M15 19l-7-7 7-7"
-        />
-      ) : (
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M9 5l7 7-7 7"
-        />
-      )}
-    </svg>
-  </motion.button>
-);
+      <svg
+        className="w-6 h-6"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        {direction === "prev" ? (
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M15 19l-7-7 7-7"
+          />
+        ) : (
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M9 5l7 7-7 7"
+          />
+        )}
+      </svg>
+    </motion.button>
+  );
+};
 
 // Carousel Indicators (keeping your existing one)
 const CarouselIndicators = ({
@@ -411,140 +417,21 @@ const StoryCard = ({ story, index }: { story: Story; index: number }) => (
   </motion.div>
 );
 
-// Keep all your existing animated components unchanged
-const AnimatedProgressBar = ({
-  value,
-  maxValue,
-  color,
-  delay = 0,
-}: {
-  value: number;
-  maxValue: number;
-  color: string;
-  delay?: number;
-}) => {
-  const percentage = (value / maxValue) * 100;
-
-  return (
-    <div className="w-full">
-      <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
-        <motion.div
-          className={`h-full bg-gradient-to-r ${color} rounded-full will-change-transform`}
-          initial={{ width: 0 }}
-          animate={{ width: `${percentage}%` }}
-          transition={{
-            duration: 1.2,
-            delay: delay,
-            ease: "easeOut",
-          }}
-          style={{
-            backfaceVisibility: "hidden",
-            WebkitBackfaceVisibility: "hidden",
-          }}
-        />
-      </div>
-    </div>
-  );
-};
-
-const AnimatedCircularProgress = ({
-  value,
-  maxValue,
-  color,
-  delay = 0,
-}: {
-  value: number;
-  maxValue: number;
-  color: string;
-  delay?: number;
-}) => {
-  const percentage = (value / maxValue) * 100;
-  const circumference = 2 * Math.PI * 16;
-  const strokeDashoffset = circumference - (percentage / 100) * circumference;
-
-  return (
-    <div className="relative w-12 h-12">
-      <svg className="w-full h-full transform -rotate-90" viewBox="0 0 40 40">
-        <circle
-          cx="20"
-          cy="20"
-          r="16"
-          stroke="#e5e7eb"
-          strokeWidth="3"
-          fill="none"
-        />
-        <motion.circle
-          cx="20"
-          cy="20"
-          r="16"
-          stroke="url(#gradient)"
-          strokeWidth="3"
-          fill="none"
-          strokeLinecap="round"
-          strokeDasharray={circumference}
-          initial={{ strokeDashoffset: circumference }}
-          animate={{ strokeDashoffset: strokeDashoffset }}
-          transition={{
-            duration: 1.2,
-            delay: delay,
-            ease: "easeOut",
-          }}
-        />
-        <defs>
-          <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#3b82f6" />
-            <stop offset="100%" stopColor="#8b5cf6" />
-          </linearGradient>
-        </defs>
-      </svg>
-      <div className="absolute inset-0 flex items-center justify-center">
-        <motion.span
-          className="text-xs font-bold text-gray-700"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: delay + 0.5 }}
-        >
-          {Math.round(percentage)}%
-        </motion.span>
-      </div>
-    </div>
-  );
-};
-
-const AnimatedBarChart = ({
-  value,
-  maxValue,
-  color,
-  delay = 0,
-}: {
-  value: number;
-  maxValue: number;
-  color: string;
-  delay?: number;
-}) => {
-  const percentage = (value / maxValue) * 100;
-
-  return (
-    <div className="flex items-end justify-center h-10 w-full">
-      <motion.div
-        className={`bg-gradient-to-t ${color} rounded-t-lg`}
-        style={{ width: "40%" }}
-        initial={{ height: 0 }}
-        animate={{ height: `${percentage}%` }}
-        transition={{
-          duration: 1.2,
-          delay: delay,
-          ease: "easeOut",
-        }}
-      />
-    </div>
-  );
-};
-
 // Main SuccessStories component (keeping your existing structure)
 const SuccessStories = () => {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+  const t = useTranslation();
+
+  const localizedStories = useMemo(() => {
+    return successStoriesData.map((story) => ({
+      ...story,
+      quote: t(story.quote),
+      author: t(story.author),
+      certifiedLabel: t(story.certifiedLabel),
+      growthLabel: t(story.growthLabel),
+    }));
+  }, [t]);
 
   // Carousel state
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -565,7 +452,7 @@ const SuccessStories = () => {
 
   // Calculate cards per view and total pages
   const cardsPerView = isMobile ? 1 : 2;
-  const totalPages = Math.ceil(successStories.length / cardsPerView);
+  const totalPages = Math.ceil(localizedStories.length / cardsPerView);
 
   // Auto-play functionality
   useEffect(() => {
@@ -598,7 +485,7 @@ const SuccessStories = () => {
   // Get current cards to display
   const getCurrentCards = () => {
     const startIndex = currentIndex * cardsPerView;
-    return successStories.slice(startIndex, startIndex + cardsPerView);
+    return localizedStories.slice(startIndex, startIndex + cardsPerView);
   };
 
   // Animation variants
@@ -675,13 +562,12 @@ const SuccessStories = () => {
           {/* Section Header */}
           <motion.div variants={itemVariants} className="text-center">
             <h2 className="text-4xl md:text-5xl font-semibold text-gray-900 mb-4 tracking-tight">
-              Success{" "}
               <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                Stories
+                {t("Success Stories")}
               </span>
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Real transformations from our education partners across India
+              {t("Real transformations from our education partners across India")}
             </p>
           </motion.div>
 
@@ -744,17 +630,17 @@ const SuccessStories = () => {
           >
             <div className="text-center mb-12">
               <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                Total Impact Across All Partners
+                {t("Total Impact Across All Partners")}
               </h3>
               <p className="text-gray-600">
-                Combined results from AI Linc implementations
+                {t("Combined results from AI Linc implementations")}
               </p>
             </div>
 
             <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
               <CircularStatistic
                 value={17000}
-                label="Students Certified"
+                label={t("Students Certified")}
                 color="from-emerald-500 to-green-600"
                 delay={1.2}
                 isGrowth={false}
@@ -762,7 +648,7 @@ const SuccessStories = () => {
 
               <CircularStatistic
                 value={59}
-                label="Avg. Placement Growth"
+                label={t("Avg. Placement Growth")}
                 color="from-blue-500 to-indigo-600"
                 delay={1.4}
                 isGrowth={true}
@@ -770,7 +656,7 @@ const SuccessStories = () => {
 
               <CircularStatistic
                 value={0.5}
-                label="Avg. NAAC Uplift"
+                label={t("Avg. NAAC Uplift")}
                 color="from-purple-500 to-pink-600"
                 delay={1.6}
                 isGrowth={true}

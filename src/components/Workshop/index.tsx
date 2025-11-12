@@ -1,11 +1,12 @@
 "use client";
 import { useState, useEffect, useRef, useMemo } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import { toast, Toaster } from "sonner";
 import Image from "next/image";
 import { AmazonLogo } from "../../../public/icons/AmazonLogo";
 import { GoogleLogo } from "../../../public/icons/GoogleLogo";
 import { MicrosoftLogo } from "../../../public/icons/MicrosoftLogo";
+import { useTranslation } from "@/context/LanguageContext";
 
 interface LearningItem {
   title: string;
@@ -224,6 +225,7 @@ const PhoneInput = ({
   required = false,
   placeholder = "Enter phone number",
 }: PhoneInputProps) => {
+  const t = useTranslation();
   const [selectedCountry, setSelectedCountry] = useState(COUNTRIES[0]);
   const [searchQuery, setSearchQuery] = useState("");
   const [isOpen, setIsOpen] = useState(false);
@@ -286,7 +288,7 @@ const PhoneInput = ({
                   <SearchIcon />
                   <input
                     type="text"
-                    placeholder="Search countries..."
+                    placeholder={t("Search countries...")}
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className="pl-10 w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -312,7 +314,7 @@ const PhoneInput = ({
                   ))}
                   {filteredCountries.length === 0 && (
                     <div className="text-center py-4 text-gray-500 text-sm">
-                      No countries found
+                      {t("No countries found")}
                     </div>
                   )}
                 </div>
@@ -338,7 +340,7 @@ const PhoneInput = ({
             value={localValue}
             onChange={handlePhoneChange}
             className="w-full px-3 py-3 bg-white border border-gray-300 rounded-md text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent h-12"
-            placeholder={placeholder}
+            placeholder={t(placeholder)}
           />
         </div>
       </div>
@@ -346,7 +348,7 @@ const PhoneInput = ({
       {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
 
       <p className="text-xs text-gray-600">
-        Selected: {selectedCountry.flag} {selectedCountry.name} (
+        {t("Selected")}: {selectedCountry.flag} {selectedCountry.name} (
         {selectedCountry.dialCode})
       </p>
     </div>
@@ -361,6 +363,7 @@ interface WhoIsThisWorkshopForSectionProps {
 function WhoIsThisWorkshopForSection({
   onRegistrationClick,
 }: WhoIsThisWorkshopForSectionProps) {
+  const t = useTranslation();
   const targetAudience = [
     {
       icon: "👔",
@@ -398,7 +401,7 @@ function WhoIsThisWorkshopForSection({
         className="text-center"
       >
         <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-12">
-          Who is This Webinar For?
+          {t("Who is This Webinar For?")}
         </h2>
         <div className="grid md:grid-cols-2 gap-6 mb-8">
           {targetAudience.map((audience, index) => (
@@ -414,10 +417,10 @@ function WhoIsThisWorkshopForSection({
                 <div className="text-3xl flex-shrink-0">{audience.icon}</div>
                 <div className="text-left">
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                    {audience.title}
+                    {t(audience.title)}
                   </h3>
                   <p className="text-gray-600 text-sm leading-relaxed">
-                    {audience.description}
+                    {t(audience.description)}
                   </p>
                 </div>
               </div>
@@ -434,10 +437,10 @@ function WhoIsThisWorkshopForSection({
           <div className="flex flex-col items-center gap-4">
             <div className="text-4xl">👥</div>
             <h3 className="text-xl font-semibold text-gray-900">
-              Anyone Curious :
+              {t("Anyone Curious :")}
             </h3>
             <p className="text-gray-700 text-center max-w-2xl">
-              Explore the exciting world of AI & Machine Learning and its future
+              {t("Explore the exciting world of AI & Machine Learning and its future")}
             </p>
           </div>
         </motion.div>
@@ -452,16 +455,17 @@ function WhoIsThisWorkshopForSection({
             onClick={onRegistrationClick}
             className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-semibold py-4 px-8 rounded-lg text-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl w-full md:w-auto min-w-[300px]"
           >
-            I Am Interested, Register Now
+            {t("I Am Interested, Register Now")}
           </button>
 
           <div className="text-center">
             <p className="text-xl font-bold text-gray-900">
-              Join for Rs{" "}
-              <span className="line-through text-gray-500">999</span> FREE
+              {t("Join for Rs")}{" "}
+              <span className="line-through text-gray-500">999</span>{" "}
+              {t("FREE")}
             </p>
             <p className="text-sm text-gray-600">
-              For the first 1000 registrations only
+              {t("For the first 1000 registrations only")}
             </p>
           </div>
         </motion.div>
@@ -473,7 +477,7 @@ function WhoIsThisWorkshopForSection({
 export default function SingleWorkshopRegistration() {
   const sectionRef = useRef(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+  const t = useTranslation();
 
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [seatsLeft, setSeatsLeft] = useState(30);
@@ -546,11 +550,11 @@ export default function SingleWorkshopRegistration() {
     // Validate phone number
     const numberPart = phoneNumber.replace(/^\+\d+\s*/, "").replace(/\D/g, "");
     if (numberPart.length === 0) {
-      setPhoneError("Phone number is required");
+      setPhoneError(t("Phone number is required"));
     } else if (numberPart.length < 7) {
-      setPhoneError("Phone number is too short");
+      setPhoneError(t("Phone number is too short"));
     } else if (numberPart.length > 15) {
-      setPhoneError("Phone number is too long");
+      setPhoneError(t("Phone number is too long"));
     } else {
       setPhoneError("");
     }
@@ -562,7 +566,7 @@ export default function SingleWorkshopRegistration() {
       .replace(/^\+\d+\s*/, "")
       .replace(/\D/g, "");
     if (numberPart.length < 7 || numberPart.length > 15) {
-      setPhoneError("Please enter a valid phone number");
+      setPhoneError(t("Please enter a valid phone number"));
       return;
     }
 
@@ -584,14 +588,14 @@ export default function SingleWorkshopRegistration() {
 
       if (!response.ok) {
         if (response.status === 400) {
-          toast.error("You are already registered");
+          toast.error(t("You are already registered"));
           return;
         }
-        throw new Error(data.message || "Registration failed");
+        throw new Error(data.message || t("Registration failed"));
       }
 
       setShowSuccessModal(true);
-      toast.success("Registration successful! Check your email for details.");
+      toast.success(t("Registration successful! Check your email for details."));
       setSeatsLeft((prev) => prev - 1);
 
       // Reset form
@@ -612,7 +616,7 @@ export default function SingleWorkshopRegistration() {
       toast.error(
         error instanceof Error
           ? error.message
-          : "Registration failed. Please try again."
+          : t("Registration failed. Please try again.")
       );
     } finally {
       setIsLoading(false);
@@ -625,8 +629,10 @@ export default function SingleWorkshopRegistration() {
   };
 
   // What You Will Learn Component
-  const WhatYouWillLearnSection = () => (
-    <div className="mb-16 px-4 md:px-0" ref={containerRef}>
+  const WhatYouWillLearnSection = () => {
+    const t = useTranslation();
+    return (
+      <div className="mb-16 px-4 md:px-0" ref={containerRef}>
       <div className="text-center mb-12">
         <motion.h2
           className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-gray-900"
@@ -634,7 +640,7 @@ export default function SingleWorkshopRegistration() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          What will you learn
+          {t("What will you learn")}
         </motion.h2>
         <motion.p
           className="text-xl md:text-2xl lg:text-3xl font-semibold text-gray-900 mb-8"
@@ -642,7 +648,7 @@ export default function SingleWorkshopRegistration() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
         >
-          in this workshop?
+          {t("in this workshop?")}
         </motion.p>
         <motion.div
           className="mb-8"
@@ -651,7 +657,7 @@ export default function SingleWorkshopRegistration() {
           transition={{ duration: 0.5, delay: 0.2 }}
         >
           <p className="text-sm text-gray-600">
-            *Recording of This Session Will Not Be Provided
+            {t("*Recording of This Session Will Not Be Provided")}
           </p>
         </motion.div>
       </div>
@@ -699,10 +705,10 @@ export default function SingleWorkshopRegistration() {
                     <div className="flex items-center gap-3 mb-3">
                       <span className="text-xl md:text-2xl">{item.icon}</span>
                       <h4 className="text-base md:text-lg font-bold text-gray-900">
-                        {item.title}
+                        {t(item.title)}
                       </h4>
                     </div>
-                    <p className="text-gray-600 text-sm">{item.description}</p>
+                    <p className="text-gray-600 text-sm">{t(item.description)}</p>
                   </motion.div>
                 </div>
 
@@ -722,37 +728,40 @@ export default function SingleWorkshopRegistration() {
       >
         <div className="text-center md:text-left mb-4 md:mb-0">
           <div className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
-            FREE
+            {t("FREE")}
             <span className="text-lg text-gray-500 line-through ml-2">
               ₹499
             </span>
-            <span className="text-lg text-blue-600 ml-2">100% OFF</span>
+            <span className="text-lg text-blue-600 ml-2">{t("100% OFF")}</span>
           </div>
         </div>
         <div className="flex items-center gap-4">
           <div className="bg-blue-600 text-white px-3 py-1 rounded-full text-sm">
-            {seatsLeft} Seats Left!
+            {seatsLeft} {t("Seats Left!")}
           </div>
           <button
             onClick={scrollToRegistration}
             className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition-colors duration-300"
           >
-            Enroll Now
+            {t("Enroll Now")}
           </button>
         </div>
       </motion.div>
     </div>
-  );
+    );
+  };
 
   // Speakers Section Component
 
-  const SpeakersSection = () => (
-    <div className="mb-12">
+  const SpeakersSection = () => {
+    const t = useTranslation();
+    return (
+      <div className="mb-12">
       <div className="text-center mb-12">
         <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">
-          Meet your Mentors
+          {t("Meet your Mentors")}
         </h2>
-        <p className="text-xl text-gray-600">Experts from the Industry</p>
+        <p className="text-xl text-gray-600">{t("Experts from the Industry")}</p>
       </div>
 
       {/* Featured Speaker - Shubham Lal */}
@@ -779,7 +788,7 @@ export default function SingleWorkshopRegistration() {
 
             {/* Role at Microsoft */}
             <div className="flex items-center justify-center lg:justify-start gap-3 mb-6">
-              <p className="text-xl text-gray-700">SDE II at</p>
+              <p className="text-xl text-gray-700">{t("SDE II at")}</p>
               <MicrosoftLogo className="w-6 h-6 text-blue-600" />
               <span className="text-lg font-semibold text-gray-700">
                 Microsoft
@@ -791,7 +800,7 @@ export default function SingleWorkshopRegistration() {
               <div className="flex items-start gap-3">
                 <span className="text-blue-500 font-bold text-lg">•</span>
                 <p className="text-gray-700">
-                  Working at the cutting edge of AI and full‑stack engineering
+                  {t("Working at the cutting edge of AI and full-stack engineering")}
                 </p>
               </div>
 
@@ -799,10 +808,9 @@ export default function SingleWorkshopRegistration() {
                 <span className="text-blue-500 font-bold text-lg">•</span>
                 <p className="text-gray-700">
                   <strong className="text-gray-900">
-                    Founder & CEO of AILinc
+                    {t("Founder & CEO of AILinc")}
                   </strong>{" "}
-                  – Elevating AI education for students and professionals across
-                  the globe
+                  {t("– Elevating AI education for students and professionals across the globe")}
                 </p>
               </div>
 
@@ -810,30 +818,17 @@ export default function SingleWorkshopRegistration() {
                 <span className="text-blue-500 font-bold text-lg">•</span>
                 <p className="text-gray-700">
                   <strong className="text-gray-900">
-                    Speaker at 300+ events
+                    {t("Speaker at 300+ events")}
                   </strong>{" "}
-                  – from colleges to community forums, inspiring over 10,000+
-                  learners on AI, Data Science, and Soft Skills
+                  {t("– from colleges to community forums, inspiring over 10,000+ learners on AI, Data Science, and Soft Skills")}
                 </p>
               </div>
 
               <div className="flex items-start gap-3">
                 <span className="text-blue-500 font-bold text-lg">•</span>
                 <p className="text-gray-700">
-                  <strong className="text-gray-900">Trainer & Mentor</strong> –
-                  Delivered live AI sessions and soft‑skills workshops to 1,000s
-                  of undergraduates and working professionals
-                </p>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <span className="text-blue-500 font-bold text-lg">•</span>
-                <p className="text-gray-700">
-                  <strong className="text-gray-900">
-                    Projects & Focus Areas:
-                  </strong>{" "}
-                  Building AI‑driven tools, full-stack apps, prompt engineering,
-                  and responsible AI curriculums for learners and institutions
+                  <strong className="text-gray-900">{t("Trainer & Mentor")}</strong>{" "}
+                  {t("– Delivered live AI sessions and soft-skills workshops to thousands of undergraduates and working professionals")}
                 </p>
               </div>
 
@@ -841,10 +836,19 @@ export default function SingleWorkshopRegistration() {
                 <span className="text-blue-500 font-bold text-lg">•</span>
                 <p className="text-gray-700">
                   <strong className="text-gray-900">
-                    Advocates hands‑on learning
+                    {t("Projects & Focus Areas:")}
                   </strong>{" "}
-                  with real-world use cases for HR, hiring and personal growth
-                  using AI platforms like ChatGPT, AutoML, and more
+                  {t("Building AI-driven tools, full-stack apps, prompt engineering, and responsible AI curriculums for learners and institutions")}
+                </p>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <span className="text-blue-500 font-bold text-lg">•</span>
+                <p className="text-gray-700">
+                  <strong className="text-gray-900">
+                    {t("Advocates hands-on learning")}
+                  </strong>{" "}
+                  {t("with real-world use cases for HR, hiring, and personal growth using AI platforms like ChatGPT, AutoML, and more")}
                 </p>
               </div>
             </div>
@@ -858,7 +862,7 @@ export default function SingleWorkshopRegistration() {
                 className="inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 py-3 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl font-semibold"
               >
                 <LinkedInIcon />
-                <span>Connect on LinkedIn</span>
+                <span>{t("Connect on LinkedIn")}</span>
               </a>
             </div>
           </div>
@@ -882,7 +886,7 @@ export default function SingleWorkshopRegistration() {
               Yamini Bandi
             </h3>
             <p className="text-gray-600 mb-4 flex items-center gap-2">
-              SDE at <AmazonLogo className="w-6 h-6" />
+              {t("SDE at")} <AmazonLogo className="w-6 h-6" />
             </p>
             <a
               href="https://www.linkedin.com/in/yaminibandi/"
@@ -891,7 +895,7 @@ export default function SingleWorkshopRegistration() {
               className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 transition-colors"
             >
               <LinkedInIcon />
-              <span>Connect</span>
+              <span>{t("Connect")}</span>
             </a>
           </div>
         </div>
@@ -911,7 +915,7 @@ export default function SingleWorkshopRegistration() {
               Divyansh Dubey
             </h3>
             <p className="text-gray-600 mb-4 flex items-center gap-2">
-              Gen AI at <GoogleLogo className="w-11 h-6" />
+              {t("Gen AI at")} <GoogleLogo className="w-11 h-6" />
             </p>
             <a
               href="https://www.linkedin.com/in/divyansh-dubey/"
@@ -920,7 +924,7 @@ export default function SingleWorkshopRegistration() {
               className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 transition-colors"
             >
               <LinkedInIcon />
-              <span>Connect</span>
+              <span>{t("Connect")}</span>
             </a>
           </div>
         </div>
@@ -939,7 +943,7 @@ export default function SingleWorkshopRegistration() {
             <h3 className="text-xl font-bold text-blue-600 mb-2 mt-4">
               Poorva Shrivastava
             </h3>
-            <p className="text-gray-600 mb-4">CMO at AI Linc</p>
+            <p className="text-gray-600 mb-4">{t("CMO at AI Linc")}</p>
             <a
               href="https://www.linkedin.com/in/poorva-shrivastava-ceo/"
               target="_blank"
@@ -947,13 +951,14 @@ export default function SingleWorkshopRegistration() {
               className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 transition-colors"
             >
               <LinkedInIcon />
-              <span>Connect</span>
+              <span>{t("Connect")}</span>
             </a>
           </div>
         </div>
       </div>
     </div>
-  );
+    );
+  };
 
   return (
     <div
@@ -990,50 +995,50 @@ export default function SingleWorkshopRegistration() {
             <div className="inline-flex items-center px-4 py-2 bg-red-100 border border-red-300 rounded-full mb-6">
               <span className="text-2xl mr-2">👥</span>
               <span className="text-red-700 font-semibold">
-                Only {seatsLeft} seats left!
+                {t("Only")} {seatsLeft} {t("seats left!")}
               </span>
             </div>
 
             <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              {workshopData.title}
+              {t(workshopData.title)}
             </h1>
 
             <p className="text-xl md:text-2xl text-gray-700 mb-8 max-w-3xl mx-auto">
-              {workshopData.subtitle}
+              {t(workshopData.subtitle)}
             </p>
 
             {/* Workshop Details Cards */}
             <div className="grid md:grid-cols-4 gap-4 mb-8 max-w-4xl mx-auto">
               <div className="bg-white/70 backdrop-blur-sm border border-gray-200 rounded-lg p-4 shadow-sm">
                 <CalendarIcon />
-                <div className="text-sm text-gray-600">Date</div>
+                <div className="text-sm text-gray-600">{t("Date")}</div>
                 <div className="font-semibold text-gray-900">
-                  {workshopData.date}
+                  {t(workshopData.date)}
                 </div>
               </div>
               <div className="bg-white/70 backdrop-blur-sm border border-gray-200 rounded-lg p-4 shadow-sm">
                 <ClockIcon />
-                <div className="text-sm text-gray-600">Duration</div>
+                <div className="text-sm text-gray-600">{t("Duration")}</div>
                 <div className="font-semibold text-gray-900">
-                  {workshopData.duration}
+                  {t(workshopData.duration)}
                 </div>
               </div>
               <div className="bg-white/70 backdrop-blur-sm border border-gray-200 rounded-lg p-4 shadow-sm">
                 <MapPinIcon />
-                <div className="text-sm text-gray-600">Mode</div>
+                <div className="text-sm text-gray-600">{t("Mode")}</div>
                 <div className="font-semibold text-gray-900">
-                  {workshopData.mode}
+                  {t(workshopData.mode)}
                 </div>
               </div>
               <div className="bg-white/70 backdrop-blur-sm border border-gray-200 rounded-lg p-4 shadow-sm">
                 <StarIcon />
-                <div className="text-sm text-gray-600">Price</div>
+                <div className="text-sm text-gray-600">{t("Price")}</div>
                 <div className="font-semibold text-gray-900">
                   <span className="line-through text-gray-500 mr-2">
-                    {workshopData.originalPrice}
+                    {t(workshopData.originalPrice)}
                   </span>
                   <span className="text-green-600">
-                    {workshopData.currentPrice}
+                    {t(workshopData.currentPrice)}
                   </span>
                 </div>
               </div>
@@ -1044,7 +1049,7 @@ export default function SingleWorkshopRegistration() {
               onClick={scrollToRegistration}
               className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold py-4 px-8 rounded-lg text-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl mb-12"
             >
-              Secure Your FREE Spot Now
+              {t("Secure Your FREE Spot Now")}
             </button>
 
             {/* Video Section */}
@@ -1076,10 +1081,10 @@ export default function SingleWorkshopRegistration() {
             <div className="max-w-2xl mx-auto mt-16">
               <div className="text-center mb-8">
                 <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
-                  Reserve Your Free Seat
+                  {t("Reserve Your Free Seat")}
                 </h2>
                 <p className="text-gray-700">
-                  Limited seats available - Register now to secure your spot!
+                  {t("Limited seats available - Register now to secure your spot!")}
                 </p>
               </div>
               <div
@@ -1089,7 +1094,7 @@ export default function SingleWorkshopRegistration() {
                 <div className="p-6">
                   {seatsLeft <= 5 && (
                     <p className="text-red-600 font-bold mb-4">
-                      Only {seatsLeft} FREE seats left!
+                      {t("Only")} {seatsLeft} {t("FREE seats left!")}
                     </p>
                   )}
                   <form
@@ -1101,7 +1106,7 @@ export default function SingleWorkshopRegistration() {
                         htmlFor="name"
                         className="block text-sm font-medium mb-2 text-gray-900"
                       >
-                        Full Name <span className="text-red-500">*</span>
+                        {t("Full Name")} <span className="text-red-500">*</span>
                       </label>
                       <input
                         id="name"
@@ -1110,7 +1115,7 @@ export default function SingleWorkshopRegistration() {
                         value={formData.name}
                         onChange={handleInputChange}
                         className="w-full px-3 py-3 bg-white border border-gray-300 rounded-md text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        placeholder="Enter your full name"
+                        placeholder={t("Enter your full name")}
                       />
                     </div>
 
@@ -1119,7 +1124,7 @@ export default function SingleWorkshopRegistration() {
                         htmlFor="email"
                         className="block text-sm font-medium mb-2 text-gray-900"
                       >
-                        Email Address <span className="text-red-500">*</span>
+                        {t("Email Address")} <span className="text-red-500">*</span>
                       </label>
                       <input
                         id="email"
@@ -1128,13 +1133,13 @@ export default function SingleWorkshopRegistration() {
                         value={formData.email}
                         onChange={handleInputChange}
                         className="w-full px-3 py-3 bg-white border border-gray-300 rounded-md text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        placeholder="Enter your email address"
+                        placeholder={t("Enter your email address")}
                       />
                     </div>
 
                     <div>
                       <label className="block text-sm font-medium mb-2 text-gray-900">
-                        Phone Number <span className="text-red-500">*</span>
+                        {t("Phone Number")} <span className="text-red-500">*</span>
                       </label>
                       <PhoneInput
                         value={formData.phone_number}
@@ -1150,7 +1155,7 @@ export default function SingleWorkshopRegistration() {
                         htmlFor="currentProfile"
                         className="block text-sm font-medium mb-2 text-gray-900"
                       >
-                        Current Profile <span className="text-red-500">*</span>
+                        {t("Current Profile")} <span className="text-red-500">*</span>
                       </label>
                       <select
                         id="currentProfile"
@@ -1160,31 +1165,31 @@ export default function SingleWorkshopRegistration() {
                         required
                       >
                         <option value="" className="bg-white text-gray-500">
-                          Select your current profile
+                          {t("Select your current profile")}
                         </option>
                         <option
                           value="working-professional"
                           className="bg-white text-gray-900"
                         >
-                          Working Professional
+                          {t("Working Professional")}
                         </option>
                         <option
                           value="student"
                           className="bg-white text-gray-900"
                         >
-                          Student
+                          {t("Student")}
                         </option>
                         <option
                           value="graduated-looking-job"
                           className="bg-white text-gray-900"
                         >
-                          Graduated and looking for a job
+                          {t("Graduated and looking for a job")}
                         </option>
                         <option
                           value="career-break"
                           className="bg-white text-gray-900"
                         >
-                          On Career Break
+                          {t("On Career Break")}
                         </option>
                       </select>
                     </div>
@@ -1194,7 +1199,7 @@ export default function SingleWorkshopRegistration() {
                         htmlFor="referal_code"
                         className="block text-sm font-medium mb-2 text-gray-900"
                       >
-                        Referral Code (Optional)
+                        {t("Referral Code (Optional)")}
                       </label>
                       <input
                         id="referal_code"
@@ -1203,11 +1208,11 @@ export default function SingleWorkshopRegistration() {
                         onChange={handleInputChange}
                         disabled={isReferralFromUrl}
                         className="w-full px-3 py-3 bg-white border border-gray-300 rounded-md text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-100"
-                        placeholder="Enter referral code if you have one"
+                        placeholder={t("Enter referral code if you have one")}
                       />
                       {isReferralFromUrl && (
                         <p className="text-xs text-blue-600 mt-1">
-                          Referral code applied from URL
+                          {t("Referral code applied from URL")}
                         </p>
                       )}
                     </div>
@@ -1220,16 +1225,15 @@ export default function SingleWorkshopRegistration() {
                       {isLoading ? (
                         <div className="flex items-center justify-center gap-2">
                           <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
-                          Registering...
+                          {t("Registering...")}
                         </div>
                       ) : (
-                        "Register Now - FREE"
+                        t("Register Now - FREE")
                       )}
                     </button>
 
                     <p className="text-xs text-gray-600 text-center mt-2">
-                      By registering, you agree to receive workshop updates via
-                      email and SMS
+                      {t("By registering, you agree to receive workshop updates via email and SMS")}
                     </p>
                   </form>
                 </div>
@@ -1251,26 +1255,25 @@ export default function SingleWorkshopRegistration() {
                   <CheckCircleIcon />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                  Registration Successful!
+                  {t("Registration Successful!")}
                 </h3>
                 <p className="text-gray-600 mb-6">
-                  You&apos;ll receive workshop details via email shortly.
-                  We&apos;re excited to see you there!
+                  {t("You'll receive workshop details via email shortly. We're excited to see you there!")}
                 </p>
                 <div className="space-y-3">
                   <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
                     <p className="text-sm text-blue-700 font-semibold">
-                      📅 {workshopData.date}
+                      📅 {t(workshopData.date)}
                     </p>
                     <p className="text-sm text-gray-700">
-                      🕘 {workshopData.time}
+                      🕘 {t(workshopData.time)}
                     </p>
                   </div>
                   <button
                     onClick={() => setShowSuccessModal(false)}
                     className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors"
                   >
-                    Great, Thanks!
+                    {t("Great, Thanks!")}
                   </button>
                 </div>
               </div>
@@ -1282,14 +1285,16 @@ export default function SingleWorkshopRegistration() {
         <div className="fixed bottom-0 left-0 right-0 bg-gradient-to-r from-blue-600 to-purple-600 p-4 z-40 md:hidden shadow-lg">
           <div className="flex items-center justify-between max-w-sm mx-auto">
             <div className="text-white">
-              <div className="font-bold">FREE Workshop</div>
-              <div className="text-sm opacity-90">{seatsLeft} seats left</div>
+              <div className="font-bold">{t("FREE Workshop")}</div>
+              <div className="text-sm opacity-90">
+                {seatsLeft} {t("seats left")}
+              </div>
             </div>
             <button
               onClick={scrollToRegistration}
               className="bg-white text-blue-600 hover:bg-gray-100 font-semibold py-2 px-4 rounded-lg transition-colors"
             >
-              Register Now
+              {t("Register Now")}
             </button>
           </div>
         </div>

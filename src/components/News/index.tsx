@@ -2,9 +2,10 @@
 import { useState, useRef, useMemo } from "react";
 import { motion, useInView, Variants } from "framer-motion";
 import Image from "next/image";
+import { useTranslation } from "@/context/LanguageContext";
 
 // Enhanced news data array with all requested items
-const newsItems = [
+const newsItemsData = [
   {
     id: 1,
     category: "NEWS",
@@ -87,11 +88,22 @@ const NewsVideo = () => {
   const sectionRef = useRef(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+  const t = useTranslation();
 
   // Memoized filtered news for performance
+  const localizedNews = useMemo(() => {
+    return newsItemsData.map((item) => ({
+      ...item,
+      title: t(item.title),
+      description: t(item.description),
+    }));
+  }, [t]);
+
   const displayedNews = useMemo(() => {
-    return showAllNews ? newsItems : newsItems.slice(0, visibleNewsCount);
-  }, [showAllNews, visibleNewsCount]);
+    return showAllNews
+      ? localizedNews
+      : localizedNews.slice(0, visibleNewsCount);
+  }, [showAllNews, visibleNewsCount, localizedNews]);
 
   // Scroll navigation functions
   const scrollLeft = () => {
@@ -107,8 +119,8 @@ const NewsVideo = () => {
   };
 
   const loadMoreNews = () => {
-    if (visibleNewsCount < newsItems.length) {
-      setVisibleNewsCount((prev) => Math.min(prev + 3, newsItems.length));
+    if (visibleNewsCount < newsItemsData.length) {
+      setVisibleNewsCount((prev) => Math.min(prev + 3, newsItemsData.length));
     } else {
       setShowAllNews(true);
     }
@@ -208,13 +220,13 @@ const NewsVideo = () => {
                 📰
               </motion.span>
               <span className="text-sm font-semibold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                Latest Updates
+                {t("Latest Updates")}
               </span>
             </motion.div>
             <motion.h2 className="text-4xl md:text-5xl font-semibold text-gray-900 mb-4 tracking-tight">
-              Making{" "}
+              {t("Making")}{" "}
               <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent inline">
-                Headlines
+                {t("Headlines")}
               </span>
             </motion.h2>
           </motion.div>
@@ -228,11 +240,11 @@ const NewsVideo = () => {
           >
             {/* Header and Controls */}
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 px-4">
-              <h2 className="text-3xl font-bold text-gray-900">Latest News</h2>
+              <h2 className="text-3xl font-bold text-gray-900">{t("Latest News")}</h2>
 
               <div className="flex items-center space-x-4">
                 <span className="text-sm text-gray-500">
-                  {displayedNews.length} of {newsItems.length}
+                  {displayedNews.length} {t("of")} {newsItemsData.length}
                 </span>
                 <div className="hidden md:flex space-x-2">
                   <button
@@ -305,7 +317,7 @@ const NewsVideo = () => {
                             item.category
                           )}`}
                         >
-                          {item.category}
+                          {t(item.category)}
                         </span>
                       </div>
                       <div className="absolute top-4 right-4">
@@ -318,10 +330,10 @@ const NewsVideo = () => {
                     {/* Content */}
                     <div className="p-5">
                       <h3 className="text-lg font-semibold text-gray-900 leading-snug line-clamp-2 mb-2">
-                        {item.title}
+                        {t(item.title)}
                       </h3>
                       <p className="text-sm text-gray-600 line-clamp-3 mb-4">
-                        {item.description}
+                        {t(item.description)}
                       </p>
 
                       <div className="flex items-center justify-between">
@@ -339,7 +351,7 @@ const NewsVideo = () => {
                               d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
                             />
                           </svg>
-                          {item.timeToRead} read
+                          {t(item.timeToRead)} {t("read")}
                         </span>
 
                         {item.hasReadMore ? (
@@ -347,10 +359,10 @@ const NewsVideo = () => {
                             href={item.link}
                             target="_blank"
                             rel="noopener noreferrer"
-                            aria-label="News section"
+                            aria-label={t("News section")}
                             className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-purple-600 rounded-full transition-all hover:scale-95 hover:shadow-lg"
                           >
-                            Read More
+                            {t("Read More")}
                             <svg
                               className="w-4 h-4"
                               fill="none"
@@ -391,7 +403,7 @@ const NewsVideo = () => {
               </div>
 
               {/* Load More Button */}
-              {!showAllNews && visibleNewsCount < newsItems.length && (
+              {!showAllNews && visibleNewsCount < newsItemsData.length && (
                 <div className="flex justify-center mt-8">
                   <motion.button
                     onClick={loadMoreNews}
@@ -399,7 +411,7 @@ const NewsVideo = () => {
                     whileTap={{ scale: 0.95 }}
                     className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full font-medium shadow-md hover:shadow-xl transition-all"
                   >
-                    Load More ({newsItems.length - visibleNewsCount} remaining)
+                    {`${t("Load More")} (${newsItemsData.length - visibleNewsCount} ${t("remaining")})`}
                   </motion.button>
                 </div>
               )}
@@ -414,16 +426,16 @@ const NewsVideo = () => {
             {/* Video Content - Updated with your requested content */}
             <motion.div variants={itemVariants} className="space-y-6">
               <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 leading-tight">
-                See{" "}
+                {t("See")}{" "}
                 <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                   AI Linc{" "}
                 </span>
-                in Action
+                {t("in Action")}
               </h3>
               <p className="text-gray-600 text-lg">
-                Watch our comprehensive product demo to understand how AI Linc
-                transforms educational institutions with cutting-edge AI and ML
-                solutions.
+                {t(
+                  "Watch our comprehensive product demo to understand how AI Linc transforms educational institutions with cutting-edge AI and ML solutions."
+                )}
               </p>
 
               {/* What You'll See Section - Enhanced with Motion */}
@@ -463,7 +475,7 @@ const NewsVideo = () => {
                       />
                     </svg>
                   </motion.span>
-                  What You&apos;ll See:
+                  {t("What You'll See:")}
                 </motion.h4>
                 <div className="space-y-3">
                   {[
@@ -491,7 +503,7 @@ const NewsVideo = () => {
                         whileHover={{ scale: 1.5 }}
                       />
                       <span className="text-gray-700 text-sm group-hover:text-gray-900 transition-colors duration-200">
-                        {item}
+                        {t(item)}
                       </span>
                     </motion.div>
                   ))}
@@ -532,7 +544,7 @@ const NewsVideo = () => {
                       />
                     </svg>
                   </motion.span>
-                  Key Benefits:
+                  {t("Key Benefits:")}
                 </motion.h4>
                 <div className="space-y-3">
                   {[
@@ -563,7 +575,7 @@ const NewsVideo = () => {
                         ✓
                       </motion.span>
                       <span className="text-green-50 text-sm font-medium group-hover:text-white transition-colors duration-200">
-                        {benefit}
+                        {t(benefit)}
                       </span>
                     </motion.div>
                   ))}
@@ -637,7 +649,7 @@ const NewsVideo = () => {
                 transition={{ delay: 1, duration: 0.4 }}
                 className="absolute top-4 left-4 bg-black bg-opacity-70 text-white px-3 py-1 rounded-full text-xs font-medium"
               >
-                Demo
+                {t("Demo")}
               </motion.div>
             </motion.div>
           </motion.div>

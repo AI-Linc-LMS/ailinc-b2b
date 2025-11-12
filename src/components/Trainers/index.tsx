@@ -1,13 +1,14 @@
 // components/TopTrainersHero.tsx
-import { useRef } from "react";
+import { useMemo, useRef } from "react";
 import { motion, useInView, Variants } from "framer-motion";
 import Image from "next/image";
 import { MicrosoftLogo } from "../../../public/icons/MicrosoftLogo";
 import { GoogleLogo } from "../../../public/icons/GoogleLogo";
 import { AmazonLogo } from "../../../public/icons/AmazonLogo";
+import { useTranslation } from "@/context/LanguageContext";
 
 // Trainers data array
-const trainers = [
+const trainersData = [
   {
     id: 1,
     name: "Shubham Lal",
@@ -69,6 +70,18 @@ const trainers = [
 const TopTrainersHero = () => {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+  const t = useTranslation();
+
+  const localizedTrainers = useMemo(() => {
+    return trainersData.map((trainer) => ({
+      ...trainer,
+      title: t(trainer.title),
+      experience: t(trainer.experience),
+      specialization: t(trainer.specialization),
+      achievements: t(trainer.achievements),
+      location: t(trainer.location),
+    }));
+  }, [t]);
 
   // Animation variants
   const containerVariants: Variants = {
@@ -150,7 +163,7 @@ const TopTrainersHero = () => {
                 </svg>
               </div>
               <span className="text-sm font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent tracking-wide">
-                TOP TRAINERS AT AI LINC
+                {t("TOP TRAINERS AT AI LINC")}
               </span>
             </motion.div>
 
@@ -160,12 +173,12 @@ const TopTrainersHero = () => {
               animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
               transition={{ delay: 0.4, duration: 0.6, ease: "easeOut" }}
             >
-              Get trained from the{" "}
+              {t("Get trained from the")}{" "}
               <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent">
-                top 1% Instructors
+                {t("top 1% Instructors")}
               </span>
               <br />
-              from MAANG companies
+              {t("from MAANG companies")}
             </motion.h1>
 
             <motion.p
@@ -174,9 +187,9 @@ const TopTrainersHero = () => {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.6, duration: 0.6 }}
             >
-              Learn from industry experts with proven track records at the
-              world&apos;s leading technology companies. Experience personalized
-              mentorship that transforms careers.
+              {t(
+                "Learn from industry experts with proven track records at the world's leading technology companies. Experience personalized mentorship that transforms careers."
+              )}
             </motion.p>
 
             {/* Company Logos */}
@@ -187,7 +200,7 @@ const TopTrainersHero = () => {
               transition={{ delay: 0.8, duration: 0.6 }}
             >
               <span className="text-base font-semibold text-gray-500">
-                Our trainers work at:
+                {t("Our trainers work at:")}
               </span>
               <div className="flex items-center space-x-4">
                 {[MicrosoftLogo, GoogleLogo, AmazonLogo].map((Logo, index) => (
@@ -211,9 +224,9 @@ const TopTrainersHero = () => {
           >
             <div className="text-center mb-8">
               <h2 className="text-2xl md:text-3xl font-black text-gray-900 mb-4">
-                Why Choose Our{" "}
+                {t("Why Choose Our")}{" "}
                 <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                  Elite Training Team
+                  {t("Elite Training Team")}
                 </span>
               </h2>
             </div>
@@ -228,10 +241,14 @@ const TopTrainersHero = () => {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
                       </svg>
                     </div>
-                    <h3 className="text-lg font-bold text-gray-900">Global MAANG Expertise</h3>
+                    <h3 className="text-lg font-bold text-gray-900">
+                      {t("Global MAANG Expertise")}
+                    </h3>
                   </div>
                   <p className="text-gray-600 text-left md:text-left leading-relaxed">
-                    Our trainers are certified professionals from leading tech giants like <strong>Microsoft, Google, Amazon, and Oracle</strong> with <strong>8-15 years</strong> of Fortune 500 experience. <strong>90%</strong> hold multiple international certifications (AWS, Azure, Salesforce, AI/ML).
+                    {t(
+                      "Our trainers are certified professionals from leading tech giants like Microsoft, Google, Amazon, and Oracle with 8-15 years of Fortune 500 experience. 90% hold multiple international certifications (AWS, Azure, Salesforce, AI/ML)."
+                    )}
                   </p>
                 </div>
 
@@ -242,10 +259,14 @@ const TopTrainersHero = () => {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                       </svg>
                     </div>
-                    <h3 className="text-lg font-bold text-gray-900">Personalized & Global</h3>
+                    <h3 className="text-lg font-bold text-gray-900">
+                      {t("Personalized & Global")}
+                    </h3>
                   </div>
                   <p className="text-gray-600 text-left md:text-left leading-relaxed">
-                    Experience <strong>hands-on guidance, real-time doubt solving, and career mentoring</strong> from tutors across India, US, UK, and Middle East. Our placement-oriented approach ensures content directly matches <strong>industry job requirements</strong>.
+                    {t(
+                      "Experience hands-on guidance, real-time doubt solving, and career mentoring from tutors across India, US, UK, and Middle East. Our placement-oriented approach ensures content directly matches industry job requirements."
+                    )}
                   </p>
                 </div>
               </div>
@@ -256,19 +277,19 @@ const TopTrainersHero = () => {
           <motion.div variants={itemVariants} className="space-y-8">
             <div className="text-center">
               <h2 className="text-2xl md:text-3xl font-black text-gray-900 mb-4">
-                Meet Our{" "}
+                {t("Meet Our")}{" "}
                 <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                  MAANG Experts
+                  {t("MAANG Experts")}
                 </span>
               </h2>
               <p className="text-base text-gray-600 max-w-2xl mx-auto">
-                Learn directly from professionals who have built products used by millions
+                {t("Learn directly from professionals who have built products used by millions")}
               </p>
             </div>
 
             {/* Trainers Row with LinkedIn */}
             <div className="flex flex-wrap justify-center items-start gap-8 md:gap-12">
-              {trainers.map((trainer, index) => (
+              {localizedTrainers.map((trainer, index) => (
                 <motion.div
                   key={trainer.id}
                   className="flex flex-col items-center group max-w-xs"
@@ -318,7 +339,7 @@ const TopTrainersHero = () => {
                         {trainer.rating}
                       </span>
                       <span className="text-xs text-gray-500 ml-1">
-                        ({trainer.studentsmentored}+ students)
+                        ({trainer.studentsmentored}+ {t("students")})
                       </span>
                     </div>
                   </div>
@@ -329,7 +350,7 @@ const TopTrainersHero = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center w-10 h-10 bg-gradient-to-r from-blue-600 to-blue-700 rounded-full hover:from-blue-700 hover:to-blue-800 transition-all duration-200 shadow-lg group-hover:scale-110 group-hover:shadow-xl"
-                    title={`View ${trainer.name}'s LinkedIn Profile`}
+                    title={t("View LinkedIn Profile")}
                   >
                     <svg
                       className="w-5 h-5 text-white"
@@ -342,7 +363,7 @@ const TopTrainersHero = () => {
 
                   {/* Connect Text */}
                   <p className="text-xs text-gray-500 mt-2 font-medium">
-                    Connect on LinkedIn
+                    {t("Connect on LinkedIn")}
                   </p>
                 </motion.div>
               ))}
@@ -351,10 +372,11 @@ const TopTrainersHero = () => {
             {/* Quick Stats */}
             <div className="text-center bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-6">
               <p className="text-sm text-gray-600 mb-2">
-                <strong>Combined Experience:</strong> 40+ years at top tech companies
+                <strong>{t("Combined Experience:")}</strong> {t("40+ years at top tech companies")}
               </p>
               <p className="text-sm text-gray-600">
-                <strong>Students Mentored:</strong> 8,000+ professionals trained • <strong>Average Rating:</strong> 4.8/5 ⭐
+                <strong>{t("Students Mentored:")}</strong> {t("8,000+ professionals trained")} •{" "}
+                <strong>{t("Average Rating:")}</strong> {t("4.8/5 ⭐")}
               </p>
             </div>
           </motion.div>
@@ -367,10 +389,10 @@ const TopTrainersHero = () => {
             <div className="relative z-10">
               <div className="text-center mb-8">
                 <h3 className="text-2xl md:text-3xl font-black mb-3">
-                  Our Training Impact
+                  {t("Our Training Impact")}
                 </h3>
                 <p className="text-base text-blue-100">
-                  Results that demonstrate our commitment to excellence
+                  {t("Results that demonstrate our commitment to excellence")}
                 </p>
               </div>
 
@@ -378,7 +400,7 @@ const TopTrainersHero = () => {
                 {[
                   {
                     number: "100+",
-                    label: "Certified Trainers",
+                    label: t("Certified Trainers"),
                     icon: (
                       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
@@ -387,7 +409,7 @@ const TopTrainersHero = () => {
                   },
                   {
                     number: "1,000+",
-                    label: "Average Students per Trainer",
+                    label: t("Average Students per Trainer"),
                     icon: (
                       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5 9 5z" />
@@ -397,7 +419,7 @@ const TopTrainersHero = () => {
                   },
                   {
                     number: "95%",
-                    label: "Student Satisfaction Rate",
+                    label: t("Student Satisfaction Rate"),
                     icon: (
                       <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
                         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.518 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />

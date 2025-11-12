@@ -2,6 +2,7 @@
 
 import { motion, Variants } from "framer-motion";
 import { useEffect } from "react";
+import { useTranslation } from "@/context/LanguageContext";
 
 // Properly typed variants
 const dotVariants: Variants = {
@@ -84,6 +85,8 @@ interface LoadingScreenProps {
 }
 
 export default function LoadingScreen({ onFinish }: LoadingScreenProps) {
+  const t = useTranslation();
+
   useEffect(() => {
     // Simulate loading time - you can replace with actual loading logic
     const timer = setTimeout(() => {
@@ -176,7 +179,7 @@ export default function LoadingScreen({ onFinish }: LoadingScreenProps) {
         initial="hidden"
         animate="visible"
       >
-        <span className="text-gray-600 text-lg">Initializing AI Linc</span>
+        <span className="text-gray-600 text-lg">{t("Initializing AI Linc")}</span>
         <div className="flex space-x-1">
           {[0, 1, 2].map((index) => (
             <motion.span

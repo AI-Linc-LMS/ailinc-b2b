@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useState, useRef, useMemo, useEffect } from "react";
+import React, { useState, useRef, useMemo, useEffect, useCallback } from "react";
 import { motion, AnimatePresence, useInView, Variants } from "framer-motion";
 import Image from "next/image";
 import { chunkArray } from "@/chunkArray";
+import { useTranslation } from "@/context/LanguageContext";
 
 // ---------- Data ----------
 const galleryData = {
@@ -101,7 +102,7 @@ function ImageCard({
         ease: [0.25, 0.4, 0.25, 1],
       }}
       className="group relative rounded-lg overflow-hidden cursor-pointer bg-white shadow-md hover:shadow-lg transition-shadow duration-200 will-change-transform"
-      // onClick={onClick}
+      onClick={onClick}
       style={{ transform: "translateZ(0)", backfaceVisibility: "hidden" }}
     >
       {/* subtle hover tint */}
@@ -176,6 +177,7 @@ function SimplifiedGallery() {
   const [activeCategory, setActiveCategory] = useState("All");
   const [selectedImg, setSelectedImg] = useState<string | null>(null);
   const [page, setPage] = useState(0);
+  const t = useTranslation();
 
   // all images for current category
   const filteredImages = useMemo(() => {
@@ -190,18 +192,27 @@ function SimplifiedGallery() {
   useEffect(() => setPage(0), [activeCategory]);
 
   const totalPages = pages.length;
-  const nextPage = () => setPage((p) => (p + 1) % totalPages);
-  const prevPage = () => setPage((p) => (p - 1 + totalPages) % totalPages);
+  const nextPage = useCallback(() => {
+    if (totalPages === 0) return;
+    setPage((p) => (p + 1) % totalPages);
+  }, [totalPages]);
+  const prevPage = useCallback(() => {
+    if (totalPages === 0) return;
+    setPage((p) => (p - 1 + totalPages) % totalPages);
+  }, [totalPages]);
 
   // keyboard arrows
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
+      if (totalPages === 0) {
+        return;
+      }
       if (e.key === "ArrowRight") nextPage();
       if (e.key === "ArrowLeft") prevPage();
     };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
-  }, [totalPages]);
+  }, [nextPage, prevPage, totalPages]);
 
   return (
     <section className="py-16 bg-gradient-to-br from-gray-200 to-blue-60/30 relative overflow-hidden">
@@ -217,11 +228,12 @@ function SimplifiedGallery() {
           className="text-center mb-12"
         >
           <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-3 bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-800 bg-clip-text text-transparent">
-            Gallery
+            {t("Gallery")}
           </h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            Capturing moments of transformation, learning, and success across
-            our partner institutions.
+            {t(
+              "Capturing moments of transformation, learning, and success across our partner institutions."
+            )}
           </p>
         </motion.div>
 
@@ -241,7 +253,7 @@ function SimplifiedGallery() {
                   }`}
                   style={{ minWidth: "120px" }}
                 >
-                  {c}
+                  {t(c)}
                 </button>
               ))}
             </div>
@@ -259,7 +271,7 @@ function SimplifiedGallery() {
                     : "bg-white text-gray-700 hover:bg-gray-50 border border-gray-200 hover:border-blue-300 shadow-sm hover:shadow-md"
                 }`}
               >
-                {c}
+                {t(c)}
               </button>
             ))}
           </div>
@@ -270,7 +282,7 @@ function SimplifiedGallery() {
           <div className="flex items-center justify-between mb-6 max-w-md mx-auto">
             <button
               onClick={prevPage}
-              aria-label="Previous"
+              aria-label={t("Previous")}
               className="p-2 rounded-full bg-white shadow hover:bg-gray-100"
             >
               ◀
@@ -280,7 +292,7 @@ function SimplifiedGallery() {
             </span>
             <button
               onClick={nextPage}
-              aria-label="Next"
+              aria-label={t("Next")}
               className="p-2 rounded-full bg-white shadow hover:bg-gray-100"
             >
               ▶
@@ -305,7 +317,7 @@ function SimplifiedGallery() {
                   key={`${activeCategory}-${img}-${i}`}
                   imageSrc={img}
                   index={i}
-                  activeCategory={activeCategory}
+                  activeCategory={t(activeCategory)}
                   onClick={() => setSelectedImg(img)}
                 />
               ))}
@@ -336,7 +348,7 @@ function SimplifiedGallery() {
                 />
               </svg>
             </div>
-            <p className="text-gray-500">No images found for this category.</p>
+            <p className="text-gray-500">{t("No images found for this category.")}</p>
           </motion.div>
         )}
       </div>
@@ -363,7 +375,7 @@ function SimplifiedGallery() {
             >
               <Image
                 src={selectedImg}
-                alt="Selected"
+                alt={t("Selected image")}
                 fill
                 className="w-full h-full object-contain rounded-lg shadow-2xl"
                 style={{ maxHeight: "90vh", maxWidth: "90vw" }}
