@@ -641,32 +641,7 @@ export default function AboutUs() {
       {/* What We Do Section */}
       <section id="what-we-do">
         <Services />
-        {/* <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                   animate={{ opacity: 1, x: 0 }} // Changed from whileInView to animate
-                    transition={{ duration: 0.8 }}
-                    viewport={{ once: true }}
-                    className="text-center mb-12 sm:mb-16"
-                >
-                    <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                        What We Do
-                    </h2>
-                    <p className="text-xl sm:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                        We bridge the gap between exceptional AI talent and transformative opportunities
-                    </p>
-                </motion.div>
-
-                <motion.div
-                    variants={container}
-                    initial="hidden"
-                      animate="show" // Changed from whileInView to animate
-                    viewport={{ once: true }}
-                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mb-12"
-                >
-                    {coreOfferings.map((offering, index) => (
-                        <motion.div key={index} variants={item}>
-                            <div className="bg-gradient-to-b from-white to-gray-50/50 backdrop-blur-sm border border-gray-200 rounded-xl group hover:shadow-xl hover:shadow-blue-500/10 hover:border-blue-300 transition-all duration-500 h-full">
-                                <div className="p-6 pb-4">
-                                    <div className="flex items-center justify-center mb-4">
-                                        <div className={`size-16 rounded-2xl bg-gradient-to-r ${offering.color} bg-opacity-10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300`
+      </section>
+    </main>
+  );
+}
