@@ -260,6 +260,7 @@ const baseTranslations: TranslationMap = {
   "Trust": "Trust",
   "Talent Deployment": "Talent Deployment",
   "Talent sourcing and screening": "Talent sourcing and screening",
+  "Loading map...": "Loading map...",
   "MEET OUR TEAM & PROMOTERS": "MEET OUR TEAM & PROMOTERS",
   "The people shaping": "The people shaping",
   "across learning, partnerships, and community": "across learning, partnerships, and community",

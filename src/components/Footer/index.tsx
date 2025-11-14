@@ -2,8 +2,11 @@
 import Link from "next/link"
 import { motion } from "framer-motion"
 import { useRouter, usePathname } from "next/navigation"
-import { useCallback, useEffect, useRef, useState } from "react"
-import { ComposableMap, Geographies, Geography, Marker, ZoomableGroup } from "react-simple-maps"
+import { useCallback, useEffect, useMemo, useRef, useState } from "react"
+import { geoMercator, geoPath } from "d3-geo"
+import type { Feature, FeatureCollection, GeoJsonProperties, Geometry } from "geojson"
+import { feature as topojsonFeature } from "topojson-client"
+import type { Topology } from "topojson-specification"
 import { useLenis } from "@/hooks/use-lenis"
 import { useTranslation } from "@/context/LanguageContext"
 
@@ -88,6 +91,8 @@ const parseLocationName = (name: string) => {
 }
 
 const FALLBACK_ZOOM_BOUNDS = { min: 0.8, max: 4.2 }
+const FALLBACK_SVG_SIZE = { width: 800, height: 400 }
+type CountryFeature = Feature<Geometry, GeoJsonProperties>
 
 const officeLocations: OfficeLocation[] = [
   {
@@ -137,16 +142,28 @@ export function Footer() {
     coordinates: [0, 15],
     zoom: 1.35,
   })
+  const [geographies, setGeographies] = useState<CountryFeature[]>([])
+  const [isLoadingFallbackMap, setIsLoadingFallbackMap] = useState(false)
   const [selectedLocationId, setSelectedLocationId] = useState<string>(officeLocations[0]?.id ?? "")
   const [mapError, setMapError] = useState<string | null>(null)
   const mapContainerRef = useRef<HTMLDivElement | null>(null)
   const mapInstanceRef = useRef<google.maps.Map | null>(null)
   const markersRef = useRef<google.maps.Marker[]>([])
+  const fallbackPanRef = useRef<{ x: number; y: number } | null>(null)
   const mapsApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY
   const shouldUseGoogleMap = Boolean(mapsApiKey)
   const displayedLocation =
     hoveredLocation ?? officeLocations.find((location) => location.id === selectedLocationId) ?? null
   const formattedDisplay = displayedLocation ? parseLocationName(displayedLocation.name) : null
+  const projection = useMemo(
+    () =>
+      geoMercator()
+        .scale(150 * fallbackView.zoom)
+        .translate([FALLBACK_SVG_SIZE.width / 2, FALLBACK_SVG_SIZE.height / 2])
+        .center(fallbackView.coordinates),
+    [fallbackView]
+  )
+  const pathGenerator = useMemo(() => geoPath(projection), [projection])
 
   const openLocationInMaps = useCallback((mapsUrl: string) => {
     if (typeof window === "undefined") return
@@ -169,6 +186,56 @@ export function Footer() {
     },
     [openLocationInMaps, shouldUseGoogleMap]
   )
+
+  const handleFallbackWheel = useCallback(
+    (event: React.WheelEvent<SVGSVGElement>) => {
+      if (shouldUseGoogleMap) return
+      event.preventDefault()
+      setFallbackView((prev) => {
+        const zoomFactor = event.deltaY > 0 ? 0.9 : 1.1
+        const nextZoom = Math.min(
+          FALLBACK_ZOOM_BOUNDS.max,
+          Math.max(FALLBACK_ZOOM_BOUNDS.min, prev.zoom * zoomFactor)
+        )
+        return { ...prev, zoom: nextZoom }
+      })
+    },
+    [shouldUseGoogleMap]
+  )
+
+  const handleFallbackPointerDown = useCallback(
+    (event: React.PointerEvent<SVGSVGElement>) => {
+      if (shouldUseGoogleMap) return
+      fallbackPanRef.current = { x: event.clientX, y: event.clientY }
+      event.currentTarget.setPointerCapture(event.pointerId)
+    },
+    [shouldUseGoogleMap]
+  )
+
+  const handleFallbackPointerMove = useCallback(
+    (event: React.PointerEvent<SVGSVGElement>) => {
+      if (shouldUseGoogleMap || !fallbackPanRef.current) return
+      event.preventDefault()
+      const dx = event.clientX - fallbackPanRef.current.x
+      const dy = event.clientY - fallbackPanRef.current.y
+      fallbackPanRef.current = { x: event.clientX, y: event.clientY }
+      setFallbackView((prev) => {
+        const lngDelta = (dx / FALLBACK_SVG_SIZE.width) * (360 / prev.zoom)
+        const latDelta = (dy / FALLBACK_SVG_SIZE.height) * (180 / prev.zoom)
+        const nextLng = ((prev.coordinates[0] - lngDelta + 540) % 360) - 180
+        const nextLat = Math.max(-80, Math.min(80, prev.coordinates[1] + latDelta))
+        return { coordinates: [nextLng, nextLat] as [number, number], zoom: prev.zoom }
+      })
+    },
+    [shouldUseGoogleMap]
+  )
+
+  const handleFallbackPointerUp = useCallback((event: React.PointerEvent<SVGSVGElement>) => {
+    if (fallbackPanRef.current) {
+      fallbackPanRef.current = null
+      event.currentTarget.releasePointerCapture(event.pointerId)
+    }
+  }, [])
 
   const initializeMap = useCallback(() => {
     if (typeof window === "undefined") return
@@ -280,6 +347,34 @@ export function Footer() {
       script.removeEventListener("error", handleError)
     }
   }, [initializeMap, mapsApiKey, shouldUseGoogleMap])
+
+  useEffect(() => {
+    if (shouldUseGoogleMap) return
+    let isMounted = true
+    setIsLoadingFallbackMap(true)
+    fetch(geoUrl)
+      .then((response) => response.json())
+      .then((topology: Topology) => {
+        if (!isMounted) return
+        const topologyObjects = topology.objects as Record<string, Topology["objects"][string & keyof Topology["objects"]]>
+        const countriesObject =
+          topologyObjects.countries ?? Object.values(topologyObjects)[0]
+        const geojson = topojsonFeature(topology, countriesObject) as FeatureCollection<
+          Geometry,
+          GeoJsonProperties
+        >
+        setGeographies(geojson.features)
+      })
+      .catch(() => setGeographies([]))
+      .finally(() => {
+        if (isMounted) {
+          setIsLoadingFallbackMap(false)
+        }
+      })
+    return () => {
+      isMounted = false
+    }
+  }, [shouldUseGoogleMap])
 
   useEffect(() => {
     if (!shouldUseGoogleMap || !mapInstanceRef.current) return
@@ -495,93 +590,82 @@ export function Footer() {
                   )}
                 </>
               ) : (
-                <div className="h-full w-full" role="img" aria-label={t("Fallback world map showing AI Linc locations")}>
-                  <ComposableMap projectionConfig={{ scale: 170 }}>
-                    <ZoomableGroup
-                      zoom={fallbackView.zoom}
-                      center={fallbackView.coordinates}
-                      minZoom={FALLBACK_ZOOM_BOUNDS.min}
-                      maxZoom={FALLBACK_ZOOM_BOUNDS.max}
-                      translateExtent={[
-                        [-1000, -400],
-                        [1000, 600],
-                      ]}
-                      onMoveEnd={({ coordinates, zoom }) =>
-                        setFallbackView({
-                          coordinates: coordinates as [number, number],
-                          zoom,
-                        })
-                      }
-                    >
-                      <Geographies geography={geoUrl}>
-                        {({ geographies }) =>
-                          geographies.map((geo) => (
-                            <Geography
-                              key={geo.rsmKey}
-                              geography={geo}
-                              fill="#f3f4f6"
-                              stroke="#c7d2fe"
-                              strokeWidth={0.4}
-                              style={{
-                                default: { outline: "none" },
-                                hover: { outline: "none" },
-                                pressed: { outline: "none" },
-                              }}
+                <div className="relative h-full w-full" role="img" aria-label={t("Fallback world map showing AI Linc locations")}>
+                  <svg
+                    viewBox={`0 0 ${FALLBACK_SVG_SIZE.width} ${FALLBACK_SVG_SIZE.height}`}
+                    className="h-full w-full touch-none"
+                    onWheel={handleFallbackWheel}
+                    onPointerDown={handleFallbackPointerDown}
+                    onPointerMove={handleFallbackPointerMove}
+                    onPointerUp={handleFallbackPointerUp}
+                    onPointerLeave={handleFallbackPointerUp}
+                  >
+                    <g>
+                      {geographies.map((geo, index) => (
+                        <path
+                          key={`geo-${index}`}
+                          d={pathGenerator(geo) ?? undefined}
+                          fill="#f3f4f6"
+                          stroke="#c7d2fe"
+                          strokeWidth={0.4}
+                        />
+                      ))}
+                    </g>
+                    {officeLocations.map((location) => {
+                      const projected = projection(location.coordinates)
+                      if (!projected) return null
+                      const [x, y] = projected
+                      const isActive = displayedLocation?.id === location.id
+                      return (
+                        <motion.g
+                          key={location.id}
+                          transform={`translate(${x}, ${y})`}
+                          role="button"
+                          tabIndex={0}
+                          aria-label={`${location.name} — ${location.address}`}
+                          initial={{ scale: 0.8, opacity: 0 }}
+                          animate={{ scale: isActive ? 1.1 : 1, opacity: 1 }}
+                          transition={{ duration: 0.5, ease: "easeOut" }}
+                          onMouseEnter={() => setHoveredLocation(location)}
+                          onMouseLeave={() => setHoveredLocation(null)}
+                          onFocus={() => setHoveredLocation(location)}
+                          onBlur={() => setHoveredLocation(null)}
+                          onClick={() => handleLocationSelect(location, true)}
+                          onKeyDown={(event) => {
+                            if (event.key === "Enter" || event.key === " ") {
+                              event.preventDefault()
+                              handleLocationSelect(location, true)
+                            }
+                          }}
+                          className="cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
+                        >
+                          {isActive && (
+                            <motion.circle
+                              r={12}
+                              stroke="rgba(234,67,53,0.45)"
+                              strokeWidth={2}
+                              fill="transparent"
+                              animate={{ scale: [1, 1.8, 1], opacity: [0.4, 0, 0.4] }}
+                              transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
                             />
-                          ))
-                        }
-                      </Geographies>
-                      {officeLocations.map((location) => {
-                        const isActive = displayedLocation?.id === location.id
-                        return (
-                          <Marker key={location.id} coordinates={location.coordinates}>
-                            <motion.g
-                              role="button"
-                              tabIndex={0}
-                              aria-label={`${location.name} — ${location.address}`}
-                              initial={{ scale: 0.8, opacity: 0 }}
-                              animate={{
-                                scale: isActive ? 1.1 : 1,
-                                opacity: 1,
-                              }}
-                              transition={{ duration: 0.5, ease: "easeOut" }}
-                              onMouseEnter={() => setHoveredLocation(location)}
-                              onMouseLeave={() => setHoveredLocation(null)}
-                              onFocus={() => setHoveredLocation(location)}
-                              onBlur={() => setHoveredLocation(null)}
-                              onClick={() => handleLocationSelect(location, true)}
-                              onKeyDown={(event) => {
-                                if (event.key === "Enter" || event.key === " ") {
-                                  event.preventDefault()
-                                  handleLocationSelect(location, true)
-                                }
-                              }}
-                              className="cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
-                            >
-                              {isActive && (
-                                <motion.circle
-                                  r={12}
-                                  stroke="rgba(234,67,53,0.45)"
-                                  strokeWidth={2}
-                                  fill="transparent"
-                                  animate={{ scale: [1, 1.8, 1], opacity: [0.4, 0, 0.4] }}
-                                  transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
-                                />
-                              )}
-                              <path
-                                d={GOOGLE_PIN_PATH}
-                                fill="#EA4335"
-                                stroke="#ffffff"
-                                strokeWidth={1}
-                                transform="translate(-12,-24) scale(0.8)"
-                              />
-                              <circle r={2.2} fill="#ffffff" />
-                            </motion.g>
-                          </Marker>
-                        )
-                      })}
-                    </ZoomableGroup>
-                  </ComposableMap>
+                          )}
+                          <path
+                            d={GOOGLE_PIN_PATH}
+                            fill="#EA4335"
+                            stroke="#ffffff"
+                            strokeWidth={1}
+                            transform="translate(-12,-24) scale(0.8)"
+                          />
+                          <circle r={2.2} fill="#ffffff" />
+                        </motion.g>
+                      )
+                    })}
+                  </svg>
+                  {isLoadingFallbackMap && (
+                    <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-white/70 text-sm font-semibold text-gray-600">
+                      {t("Loading map...")}
+                    </div>
+                  )}
                 </div>
               )}
             </div>
