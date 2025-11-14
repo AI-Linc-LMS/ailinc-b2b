@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Poppins, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "@/context/LanguageContext";
+import ChatWidget from "@/components/Chatbot/ChatWidget";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -55,7 +56,10 @@ export default function RootLayout({
         />
       </head>
       <body className={`${poppins.variable} ${jakarta.variable} antialiased`}>
-        <LanguageProvider>{children}</LanguageProvider>
+        <LanguageProvider>
+          {children}
+          <ChatWidget />
+        </LanguageProvider>
       </body>
     </html>
   );

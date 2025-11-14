@@ -5,6 +5,7 @@ const nextConfig: NextConfig = {
   images: {
     domains: ["img.youtube.com"],
   },
+  outputFileTracingRoot: __dirname,
 };
 
 export default nextConfig;

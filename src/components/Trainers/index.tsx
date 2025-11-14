@@ -7,6 +7,14 @@ import { GoogleLogo } from "../../../public/icons/GoogleLogo";
 import { AmazonLogo } from "../../../public/icons/AmazonLogo";
 import { useTranslation } from "@/context/LanguageContext";
 
+const getInitials = (fullName: string) =>
+  fullName
+    .split(" ")
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0]?.toUpperCase() ?? "")
+    .join("");
+
 // Trainers data array
 const trainersData = [
   {
@@ -65,6 +73,216 @@ const trainersData = [
     location: "Bengaluru, India",
     achievements: "22 years of experience with Fortune 500 companies",
   },
+  {
+    id: 5,
+    name: "Raghav Nakra",
+    title: "",
+    experience: "",
+    photo: "/team/raghav_nakra.jpg",
+    companies: [],
+    specialization: "",
+    studentsmentored: null,
+    rating: null,
+    location: "",
+    linkedin: "https://www.linkedin.com/in/raghav-nakra/",
+    achievements: "",
+  },
+  {
+    id: 6,
+    name: "Mahesh Yerra",
+    title: "",
+    experience: "",
+    photo: "/team/mahesh_yerra.jpg",
+    companies: [],
+    specialization: "",
+    studentsmentored: null,
+    rating: null,
+    location: "",
+    linkedin: "https://www.linkedin.com/in/mahesh1133/",
+    achievements: "",
+  },
+  {
+    id: 7,
+    name: "Shivam Jindal",
+    title: "",
+    experience: "",
+    photo: "/team/shivam_jindal.jpg",
+    companies: [],
+    specialization: "",
+    studentsmentored: null,
+    rating: null,
+    location: "",
+    linkedin: "https://www.linkedin.com/in/shivam-jindal/",
+    achievements: "",
+  },
+  {
+    id: 8,
+    name: "Ananth Kumar Vasamsetti",
+    title: "",
+    experience: "",
+    photo: "/team/ananth_kumar.jpg",
+    companies: [],
+    specialization: "",
+    studentsmentored: null,
+    rating: null,
+    location: "",
+    linkedin: "https://www.linkedin.com/in/ananth-kumar-vasamsetti-60bb7392/",
+    achievements: "",
+  },
+  {
+    id: 9,
+    name: "Rahul Mohan",
+    title: "",
+    experience: "",
+    photo: "/team/rahul_mohan.jpg",
+    companies: [],
+    specialization: "",
+    studentsmentored: null,
+    rating: null,
+    location: "",
+    linkedin: "https://www.linkedin.com/in/rahul-mohan-4a6610a8/",
+    achievements: "",
+  },
+  {
+    id: 10,
+    name: "Sourov Roy",
+    title: "",
+    experience: "",
+    photo: "/team/sourov_roy.jpg",
+    companies: [],
+    specialization: "",
+    studentsmentored: null,
+    rating: null,
+    location: "",
+    linkedin: "https://www.linkedin.com/in/sourovroy-ai/",
+    achievements: "",
+  },
+  {
+    id: 11,
+    name: "Shreyansh Sinha",
+    title: "",
+    experience: "",
+    photo: "/team/shreyansh_sinha.jpg",
+    companies: [],
+    specialization: "",
+    studentsmentored: null,
+    rating: null,
+    location: "",
+    linkedin: "https://www.linkedin.com/in/shreyansh-sinha-2b47a2188/",
+    achievements: "",
+  },
+  {
+    id: 12,
+    name: "Vivek Ananth",
+    title: "",
+    experience: "",
+    photo: "/team/vivek_ananth.jpg",
+    companies: [],
+    specialization: "",
+    studentsmentored: null,
+    rating: null,
+    location: "",
+    linkedin: "https://www.linkedin.com/in/avivek5692/",
+    achievements: "",
+  },
+  {
+    id: 13,
+    name: "Shahar Banu",
+    title: "",
+    experience: "",
+    photo: "/team/shahar_banu.jpg",
+    companies: [],
+    specialization: "",
+    studentsmentored: null,
+    rating: null,
+    location: "",
+    linkedin: "https://www.linkedin.com/in/shaharbanu/",
+    achievements: "",
+  },
+  {
+    id: 14,
+    name: "Ajeya B Jois",
+    title: "",
+    experience: "",
+    photo: "/team/ajeya_b_jois.jpg",
+    companies: [],
+    specialization: "",
+    studentsmentored: null,
+    rating: null,
+    location: "",
+    linkedin: "https://www.linkedin.com/in/ajeyabjois/",
+    achievements: "",
+  },
+  {
+    id: 15,
+    name: "Yash Mittal",
+    title: "",
+    experience: "",
+    photo: "/team/yash_mittal.jpg",
+    companies: [],
+    specialization: "",
+    studentsmentored: null,
+    rating: null,
+    location: "",
+    linkedin: "https://www.linkedin.com/in/yashmittal00/",
+    achievements: "",
+  },
+  {
+    id: 16,
+    name: "Gaddam Mallesham",
+    title: "",
+    experience: "",
+    photo: "/team/gaddam_mallesham.jpg",
+    companies: [],
+    specialization: "",
+    studentsmentored: null,
+    rating: null,
+    location: "",
+    linkedin: "https://www.linkedin.com/in/gaddam-mallesham-ba760117a?utm_source=share_via&utm_content=profile&utm_medium=member_android",
+    achievements: "",
+  },
+  {
+    id: 17,
+    name: "Dr. Srinivas Kaveti",
+    title: "",
+    experience: "",
+    photo: "/team/srinivas_kaveti.jpg",
+    companies: [],
+    specialization: "",
+    studentsmentored: null,
+    rating: null,
+    location: "",
+    linkedin: "https://www.linkedin.com/in/dr-srinivas-kaveti?utm_source=share_via&utm_content=profile&utm_medium=member_android",
+    achievements: "",
+  },
+  {
+    id: 18,
+    name: "Nomaan Abdul Majeed",
+    title: "CMO International",
+    experience: "",
+    photo: "/team/nomaan_abdul_majeed.jpg",
+    companies: [],
+    specialization: "",
+    studentsmentored: null,
+    rating: null,
+    location: "",
+    linkedin: "https://www.linkedin.com/in/nomaan-abdul-majeed-7051645?utm_source=share_via&utm_content=profile&utm_medium=member_android",
+    achievements: "",
+  },
+  {
+    id: 19,
+    name: "Ganesh Rayala",
+    title: "",
+    experience: "",
+    photo: "/team/ganesh_rayala.jpg",
+    companies: [],
+    specialization: "",
+    studentsmentored: null,
+    rating: null,
+    location: "",
+    linkedin: "https://www.linkedin.com/in/ganesh-rayala-4ab96a7?utm_source=share_via&utm_content=profile&utm_medium=member_android",
+    achievements: "",
+  },
 ];
 
 const TopTrainersHero = () => {
@@ -75,13 +293,34 @@ const TopTrainersHero = () => {
   const localizedTrainers = useMemo(() => {
     return trainersData.map((trainer) => ({
       ...trainer,
-      title: t(trainer.title),
-      experience: t(trainer.experience),
-      specialization: t(trainer.specialization),
-      achievements: t(trainer.achievements),
-      location: t(trainer.location),
+      title: trainer.title ? t(trainer.title) : "",
+      experience: trainer.experience ? t(trainer.experience) : "",
+      specialization: trainer.specialization ? t(trainer.specialization) : "",
+      achievements: trainer.achievements ? t(trainer.achievements) : "",
+      location: trainer.location ? t(trainer.location) : "",
     }));
   }, [t]);
+
+  const coreMembers = useMemo(
+    () => localizedTrainers.filter((trainer) => (trainer.companies?.length ?? 0) > 0),
+    [localizedTrainers]
+  );
+
+  const promoterMembers = useMemo(
+    () => localizedTrainers.filter((trainer) => (trainer.companies?.length ?? 0) === 0),
+    [localizedTrainers]
+  );
+
+  const highlightedLeaderIds = useMemo(() => new Set([16, 17, 18, 19]), []);
+  const highlightedLeaders = useMemo(
+    () => promoterMembers.filter((member) => highlightedLeaderIds.has(member.id)),
+    [promoterMembers, highlightedLeaderIds]
+  );
+  const otherPromoters = useMemo(
+    () => promoterMembers.filter((member) => !highlightedLeaderIds.has(member.id)),
+    [promoterMembers, highlightedLeaderIds]
+  );
+  const totalPromoters = promoterMembers.length;
 
   // Animation variants
   const containerVariants: Variants = {
@@ -154,16 +393,12 @@ const TopTrainersHero = () => {
               transition={{ duration: 0.3 }}
             >
               <div className="w-6 h-6 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3 flex items-center justify-center shadow-md">
-                <svg
-                  className="w-3 h-3 text-white"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
+                <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                 </svg>
               </div>
               <span className="text-sm font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent tracking-wide">
-                {t("TOP TRAINERS AT AI LINC")}
+                {t("MEET OUR TEAM & PROMOTERS")}
               </span>
             </motion.div>
 
@@ -173,12 +408,12 @@ const TopTrainersHero = () => {
               animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
               transition={{ delay: 0.4, duration: 0.6, ease: "easeOut" }}
             >
-              {t("Get trained from the")}{" "}
+              {t("The people shaping")}{" "}
               <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent">
-                {t("top 1% Instructors")}
+                {t("AI Linc")}
               </span>
               <br />
-              {t("from MAANG companies")}
+              {t("across learning, partnerships, and community")}
             </motion.h1>
 
             <motion.p
@@ -188,7 +423,7 @@ const TopTrainersHero = () => {
               transition={{ delay: 0.6, duration: 0.6 }}
             >
               {t(
-                "Learn from industry experts with proven track records at the world's leading technology companies. Experience personalized mentorship that transforms careers."
+                "Meet the leaders, instructors, and promoters who bring MAANG experience, program excellence, and global partnerships to every learner journey."
               )}
             </motion.p>
 
@@ -273,110 +508,263 @@ const TopTrainersHero = () => {
             </div>
           </motion.div>
 
-          {/* Enhanced Trainers Showcase with LinkedIn */}
-          <motion.div variants={itemVariants} className="space-y-8">
-            <div className="text-center">
-              <h2 className="text-2xl md:text-3xl font-black text-gray-900 mb-4">
-                {t("Meet Our")}{" "}
-                <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                  {t("MAANG Experts")}
-                </span>
+          {/* Team & Promoters Showcase */}
+          <motion.div variants={itemVariants} className="space-y-12" id="promoters">
+            <div className="text-center space-y-3">
+              <p className="inline-flex items-center rounded-full border border-blue-200/40 bg-white px-4 py-1 text-xs font-semibold uppercase tracking-[0.4em] text-blue-600">
+                {t("Core Team")}
+              </p>
+              <h2 className="text-2xl md:text-3xl font-black text-gray-900">
+                {t("Hands-on leaders mentoring every cohort")}
               </h2>
-              <p className="text-base text-gray-600 max-w-2xl mx-auto">
-                {t("Learn directly from professionals who have built products used by millions")}
+              <p className="text-base text-gray-600 max-w-3xl mx-auto">
+                {t("Industry practitioners from Microsoft, Google, and Amazon who design and deliver our flagship experiences.")}
               </p>
             </div>
 
-            {/* Trainers Row with LinkedIn */}
-            <div className="flex flex-wrap justify-center items-start gap-8 md:gap-12">
-              {localizedTrainers.map((trainer, index) => (
-                <motion.div
-                  key={trainer.id}
-                  className="flex flex-col items-center group max-w-xs"
-                  whileHover={{ scale: 1.05, y: -4 }}
-                  transition={{ duration: 0.3 }}
+            <div className="grid gap-6 md:grid-cols-2">
+              {coreMembers.map((member, index) => (
+                <motion.article
+                  key={member.id}
+                  className="rounded-3xl border border-white/60 bg-white/90 p-6 shadow-xl backdrop-blur-sm transition hover:-translate-y-1"
                   initial={{ opacity: 0, y: 30 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  style={{ transitionDelay: `${index * 0.1}s` }}
+                  transition={{ delay: index * 0.08 }}
                 >
-                  {/* Trainer Photo */}
-                  <div className="relative w-20 h-20 mb-4">
-                    <div className="w-full h-full rounded-full bg-gradient-to-r from-blue-600 to-purple-600 p-0.5">
-                      <div className="w-full h-full rounded-full overflow-hidden">
-                        <Image
-                          src={trainer.photo}
-                          alt={trainer.name}
-                          width={80}
-                          height={80}
-                          className="w-full h-full object-cover"
-                        />
+                  <div className="flex items-center gap-4">
+                    <div className="relative h-20 w-20">
+                      <div className="h-full w-full rounded-2xl bg-gradient-to-r from-blue-600 to-purple-600 p-0.5">
+                        <div className="h-full w-full rounded-2xl overflow-hidden bg-slate-100">
+                          {member.photo ? (
+                            <Image
+                              src={member.photo}
+                              alt={member.name}
+                              width={80}
+                              height={80}
+                              className="h-full w-full object-cover"
+                            />
+                          ) : (
+                            <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-indigo-500 to-purple-500 text-lg font-semibold text-white">
+                              {getInitials(member.name)}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                      {member.companies[0] && (
+                        <div className="absolute -bottom-1 -right-1 rounded-full bg-white p-1 shadow-lg">
+                          {renderCompanyLogo(member.companies[0], "w-5 h-5")}
+                        </div>
+                      )}
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold text-gray-900">{member.name}</h3>
+                      <p className="text-sm font-semibold text-blue-600">
+                        {[member.title, member.experience].filter(Boolean).join(" • ")}
+                      </p>
+                      {member.location && <p className="text-xs text-gray-500">{member.location}</p>}
+                    </div>
+                  </div>
+
+                  {member.specialization && (
+                    <p className="mt-4 text-sm text-gray-700">{member.specialization}</p>
+                  )}
+                  {member.achievements && (
+                    <p className="mt-2 text-xs text-gray-500">{member.achievements}</p>
+                  )}
+
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {member.companies.map((company) => (
+                      <span
+                        key={company.name}
+                        className="inline-flex items-center gap-1 rounded-full border border-indigo-100 bg-indigo-50/70 px-3 py-1 text-xs font-semibold text-indigo-700"
+                      >
+                        {renderCompanyLogo(company, "w-4 h-4")}
+                        {company.name}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="mt-6 flex items-center justify-between text-xs font-semibold uppercase tracking-[0.28em] text-gray-400">
+                    {member.rating && member.studentsmentored ? (
+                      <span>
+                        ⭐ {member.rating} • {member.studentsmentored}+ {t("mentees")}
+                      </span>
+                    ) : (
+                      <span>{t("Core mentor")}</span>
+                    )}
+                    <a
+                      href={member.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center rounded-full bg-gradient-to-r from-blue-600 to-blue-700 px-3 py-1.5 text-white hover:from-blue-700 hover:to-blue-800"
+                      title={t("View LinkedIn Profile")}
+                    >
+                      <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                      </svg>
+                    </a>
+                  </div>
+                </motion.article>
+              ))}
+            </div>
+
+            {highlightedLeaders.length > 0 && (
+              <div className="space-y-6">
+                <div className="text-center space-y-3">
+                  <p className="inline-flex items-center rounded-full border border-fuchsia-200/60 bg-white px-4 py-1 text-xs font-semibold uppercase tracking-[0.4em] text-fuchsia-700">
+                    {t("Strategic Council")}
+                  </p>
+                  <h2 className="text-2xl md:text-3xl font-black text-gray-900">
+                    {t("Promoters & senior advisors steering AI Linc globally")}
+                  </h2>
+                </div>
+
+                <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                  {highlightedLeaders.map((leader, index) => (
+                    <motion.article
+                      key={leader.id}
+                      className="rounded-3xl border border-fuchsia-100 bg-gradient-to-br from-purple-600/10 via-white to-indigo-600/10 p-5 shadow-lg hover:-translate-y-1 transition"
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={isInView ? { opacity: 1, y: 0 } : {}}
+                      transition={{ delay: 0.1 + index * 0.05 }}
+                    >
+                      <div className="flex items-center gap-4">
+                        <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-500 p-0.5">
+                          <div className="h-full w-full rounded-2xl overflow-hidden bg-slate-100">
+                            {leader.photo ? (
+                              <Image
+                                src={leader.photo}
+                                alt={leader.name}
+                                width={64}
+                                height={64}
+                                className="h-full w-full object-cover"
+                              />
+                            ) : (
+                              <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-indigo-400 to-purple-400 text-base font-semibold text-white">
+                                {getInitials(leader.name)}
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                        <div>
+                          <h3 className="text-lg font-semibold text-gray-900">{leader.name}</h3>
+                          {leader.title && (
+                            <p className="text-sm font-medium text-fuchsia-700">{leader.title}</p>
+                          )}
+                          {leader.location && (
+                            <p className="text-xs uppercase tracking-[0.3em] text-gray-400">{leader.location}</p>
+                          )}
+                        </div>
+                      </div>
+
+                      <p className="mt-4 text-sm text-gray-600">
+                        {t("Guides international outreach, enterprise partnerships, and executive relationships.")}
+                      </p>
+
+                      <div className="mt-4 flex flex-wrap gap-2">
+                        {leader.title?.toLowerCase().includes("cmo") && (
+                          <span className="inline-flex items-center gap-1 rounded-full bg-white/50 px-3 py-1 text-xs font-semibold text-fuchsia-700">
+                            ✦ {t("CMO International")}
+                          </span>
+                        )}
+                        {leader.location && (
+                          <span className="inline-flex items-center gap-1 rounded-full bg-white/50 px-3 py-1 text-xs font-semibold text-indigo-700">
+                            🌐 {leader.location}
+                          </span>
+                        )}
+                      </div>
+
+                      <div className="mt-6 flex justify-end">
+                        <a
+                          href={leader.linkedin}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 rounded-full border border-indigo-100 px-3 py-1.5 text-xs font-semibold text-indigo-600 hover:bg-indigo-50"
+                        >
+                          <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                          </svg>
+                          {t("LinkedIn")}
+                        </a>
+                      </div>
+                    </motion.article>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            <div className="text-center space-y-3">
+              <p className="inline-flex items-center rounded-full border border-purple-200/40 bg-white px-4 py-1 text-xs font-semibold uppercase tracking-[0.4em] text-purple-600">
+                {t("Meet Our Team Members")}
+              </p>
+              <h2 className="text-2xl md:text-3xl font-black text-gray-900">
+                {t("Strategists & champions behind AI Linc")}
+              </h2>
+            </div>
+
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {otherPromoters.map((promoter, index) => (
+                <motion.article
+                  key={promoter.id}
+                  className="rounded-3xl border border-gray-100 bg-gradient-to-br from-white via-indigo-50/40 to-purple-50/40 p-5 shadow-md hover:shadow-xl transition"
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ delay: 0.15 + index * 0.05 }}
+                >
+                  <div className="flex items-center gap-4">
+                    <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-500 p-0.5">
+                      <div className="h-full w-full rounded-2xl overflow-hidden bg-slate-100">
+                        {promoter.photo ? (
+                          <Image
+                            src={promoter.photo}
+                            alt={promoter.name}
+                            width={64}
+                            height={64}
+                            className="h-full w-full object-cover"
+                          />
+                        ) : (
+                          <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-indigo-400 to-purple-400 text-base font-semibold text-white">
+                            {getInitials(promoter.name)}
+                          </div>
+                        )}
                       </div>
                     </div>
-                    
-                    {/* Company Logo Badge */}
-                    <div className="absolute -bottom-0.5 -right-0.5">
-                      {trainer.companies[0] && (
-                        <div className="bg-white rounded-full p-0.5 shadow-lg border border-gray-200">
-                          {renderCompanyLogo(trainer.companies[0], "w-5 h-5")}
-                        </div>
+                    <div>
+                      <h3 className="text-lg font-semibold text-gray-900">{promoter.name}</h3>
+                      {promoter.location && (
+                        <p className="text-xs uppercase tracking-[0.3em] text-gray-400">{promoter.location}</p>
                       )}
                     </div>
                   </div>
 
-                  <div className="text-center mb-3">
-                    <h3 className="text-base font-bold text-gray-900 mb-1">
-                      {trainer.name}
-                    </h3>
-                    <p className="text-sm text-blue-600 font-semibold mb-1">
-                      {trainer.companies[0]?.name} • {trainer.experience}
-                    </p>
-                    <p className="text-xs text-gray-500 mb-2">
-                      {trainer.location}
-                    </p>
-                    <div className="flex items-center justify-center mb-3">
-                      <span className="text-yellow-500 text-sm">⭐</span>
-                      <span className="text-sm font-bold text-gray-700 ml-1">
-                        {trainer.rating}
-                      </span>
-                      <span className="text-xs text-gray-500 ml-1">
-                        ({trainer.studentsmentored}+ {t("students")})
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* LinkedIn Link */}
-                  <a
-                    href={trainer.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center w-10 h-10 bg-gradient-to-r from-blue-600 to-blue-700 rounded-full hover:from-blue-700 hover:to-blue-800 transition-all duration-200 shadow-lg group-hover:scale-110 group-hover:shadow-xl"
-                    title={t("View LinkedIn Profile")}
-                  >
-                    <svg
-                      className="w-5 h-5 text-white"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                    </svg>
-                  </a>
-
-                  {/* Connect Text */}
-                  <p className="text-xs text-gray-500 mt-2 font-medium">
-                    {t("Connect on LinkedIn")}
+                  <p className="mt-4 text-sm text-gray-600">
+                    {t("Drives strategic alliances, talent networks, and program excellence worldwide.")}
                   </p>
-                </motion.div>
+
+                  <div className="mt-6 flex items-center justify-between">
+                    <a
+                      href={promoter.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 rounded-full border border-indigo-100 px-3 py-1.5 text-xs font-semibold text-indigo-600 hover:bg-indigo-50"
+                    >
+                      <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                      </svg>
+                      {t("LinkedIn")}
+                    </a>
+                  </div>
+                </motion.article>
               ))}
             </div>
 
-            {/* Quick Stats */}
             <div className="text-center bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-6">
               <p className="text-sm text-gray-600 mb-2">
                 <strong>{t("Combined Experience:")}</strong> {t("40+ years at top tech companies")}
               </p>
               <p className="text-sm text-gray-600">
                 <strong>{t("Students Mentored:")}</strong> {t("8,000+ professionals trained")} •{" "}
-                <strong>{t("Average Rating:")}</strong> {t("4.8/5 ⭐")}
+                <strong>{t("Promoters:")}</strong> {totalPromoters} {t("leaders across USA, Canada, UK, UAE, India")}
               </p>
             </div>
           </motion.div>

@@ -2,8 +2,16 @@
 import Link from "next/link"
 import { motion } from "framer-motion"
 import { useRouter, usePathname } from "next/navigation"
+import { useCallback, useEffect, useRef, useState } from "react"
+import { ComposableMap, Geographies, Geography, Marker, ZoomableGroup } from "react-simple-maps"
 import { useLenis } from "@/hooks/use-lenis"
 import { useTranslation } from "@/context/LanguageContext"
+
+declare global {
+  interface Window {
+    google?: typeof google
+  }
+}
 
 // Custom SVG Components with corrected colors
 const LinkedInIcon = () => (
@@ -57,13 +65,233 @@ const SendIcon = () => (
       d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
     />
   </svg>
-);
+)
+
+type OfficeLocation = {
+  id: string
+  name: string
+  address: string
+  coordinates: [number, number]
+  mapsUrl: string
+}
+
+const geoUrl = "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json"
+const GOOGLE_PIN_PATH =
+  "M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 10.5A3.5 3.5 0 1115.5 9 3.5 3.5 0 0112 12.5z"
+
+const parseLocationName = (name: string) => {
+  const [region, city] = name.split("—").map((part) => part.trim())
+  return {
+    region: region || name,
+    city: city || region || name,
+  }
+}
+
+const FALLBACK_ZOOM_BOUNDS = { min: 0.8, max: 4.2 }
+
+const officeLocations: OfficeLocation[] = [
+  {
+    id: "usa",
+    name: "USA — New York",
+    address: "225 West, 14 Penn Plaza, Suite 9-40, 34th Street, New York, NY 10122",
+    coordinates: [-73.9916, 40.7508],
+    mapsUrl: "https://www.google.com/maps/search/?api=1&query=225+W+34th+St,+New+York,+NY+10122",
+  },
+  {
+    id: "canada",
+    name: "Canada — Mississauga",
+    address: "1065 Canadian Place Suite 201, Mississauga, Ontario, L4W 0C2",
+    coordinates: [-79.628, 43.6307],
+    mapsUrl: "https://www.google.com/maps/search/?api=1&query=1065+Canadian+Place+Suite+201,+Mississauga,+ON+L4W+0C2",
+  },
+  {
+    id: "uk",
+    name: "UK — Ilford",
+    address: "559 High Road, Ilford, Essex IG1 1TZ • Tel: 0208 478 5599 • DX: 8904 Ilford",
+    coordinates: [0.0692, 51.5587],
+    mapsUrl: "https://www.google.com/maps/search/?api=1&query=559+High+Road,+Ilford,+IG1+1TZ",
+  },
+  {
+    id: "dubai",
+    name: "UAE — Ras Al Khaimah",
+    address: "Gandhi Law and Business Associates, Villa 43, South Dath, Ras Al Khaimah • Mobile: +971 52 477 6774",
+    coordinates: [55.9763, 25.6741],
+    mapsUrl: "https://www.google.com/maps/search/?api=1&query=Villa+43,+South+Dath,+Ras+Al+Khaimah",
+  },
+  {
+    id: "hyderabad",
+    name: "India — Hyderabad",
+    address: "Flat No. 602, Mount Nasir Apartment, Saifabad, Hyderabad-500004",
+    coordinates: [78.4691, 17.406],
+    mapsUrl: "https://www.google.com/maps/search/?api=1&query=Mount+Nasir+Apartment,+Saifabad,+Hyderabad+500004",
+  },
+]
 
 export function Footer() {
   const { scrollTo } = useLenis();
   const router = useRouter();
   const pathname = usePathname();
   const t = useTranslation();
+  const [hoveredLocation, setHoveredLocation] = useState<OfficeLocation | null>(null)
+  const [fallbackView, setFallbackView] = useState<{ coordinates: [number, number]; zoom: number }>({
+    coordinates: [0, 15],
+    zoom: 1.35,
+  })
+  const [selectedLocationId, setSelectedLocationId] = useState<string>(officeLocations[0]?.id ?? "")
+  const [mapError, setMapError] = useState<string | null>(null)
+  const mapContainerRef = useRef<HTMLDivElement | null>(null)
+  const mapInstanceRef = useRef<google.maps.Map | null>(null)
+  const markersRef = useRef<google.maps.Marker[]>([])
+  const mapsApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY
+  const shouldUseGoogleMap = Boolean(mapsApiKey)
+  const displayedLocation =
+    hoveredLocation ?? officeLocations.find((location) => location.id === selectedLocationId) ?? null
+  const formattedDisplay = displayedLocation ? parseLocationName(displayedLocation.name) : null
+
+  const openLocationInMaps = useCallback((mapsUrl: string) => {
+    if (typeof window === "undefined") return
+    window.open(mapsUrl, "_blank", "noopener,noreferrer")
+  }, [])
+
+  const handleLocationSelect = useCallback(
+    (location: OfficeLocation, openDirections = false) => {
+      setSelectedLocationId(location.id)
+      setHoveredLocation(null)
+      if (!shouldUseGoogleMap) {
+        setFallbackView({
+          coordinates: location.coordinates,
+          zoom: Math.min(3.2, FALLBACK_ZOOM_BOUNDS.max),
+        })
+      }
+      if (openDirections) {
+        openLocationInMaps(location.mapsUrl)
+      }
+    },
+    [openLocationInMaps, shouldUseGoogleMap]
+  )
+
+  const initializeMap = useCallback(() => {
+    if (typeof window === "undefined") return
+    if (!window.google?.maps) return
+    if (!mapContainerRef.current || mapInstanceRef.current) return
+
+    const googleMaps = window.google.maps
+    const map = new googleMaps.Map(mapContainerRef.current, {
+      zoom: 2.5,
+      minZoom: 1.5,
+      center: { lat: 20, lng: 0 },
+      streetViewControl: false,
+      mapTypeControl: false,
+      fullscreenControl: false,
+      zoomControl: true,
+      backgroundColor: "#eef2ff",
+      styles: [
+        {
+          featureType: "all",
+          elementType: "geometry",
+          stylers: [{ color: "#eef2ff" }],
+        },
+        {
+          featureType: "water",
+          elementType: "geometry.fill",
+          stylers: [{ color: "#dbeafe" }],
+        },
+        {
+          featureType: "landscape",
+          elementType: "labels",
+          stylers: [{ visibility: "off" }],
+        },
+        {
+          featureType: "administrative",
+          elementType: "labels",
+          stylers: [{ visibility: "off" }],
+        },
+      ],
+    })
+
+    markersRef.current = officeLocations.map((location) => {
+      const [lng, lat] = location.coordinates
+      const marker = new googleMaps.Marker({
+        position: { lat, lng },
+        map,
+        title: location.name,
+        icon: {
+          path: GOOGLE_PIN_PATH,
+          fillColor: "#EA4335",
+          fillOpacity: 1,
+          strokeColor: "#ffffff",
+          strokeWeight: 1.5,
+          scale: 1,
+          anchor: new googleMaps.Point(12, 24),
+        },
+      })
+
+      marker.addListener("mouseover", () => setHoveredLocation(location))
+      marker.addListener("mouseout", () => setHoveredLocation(null))
+      marker.addListener("click", () => {
+        handleLocationSelect(location, true)
+      })
+
+      return marker
+    })
+
+    mapInstanceRef.current = map
+  }, [handleLocationSelect])
+
+  useEffect(() => {
+    if (!shouldUseGoogleMap || typeof window === "undefined") {
+      return
+    }
+
+    const existingScript = document.getElementById("ailinc-google-maps-script") as HTMLScriptElement | null
+    const handleLoad = () => {
+      initializeMap()
+      setMapError(null)
+    }
+    const handleError = () => {
+      setMapError("Unable to load Google Maps right now. Please try again later.")
+    }
+
+    if (window.google?.maps) {
+      handleLoad()
+      return
+    }
+
+    if (existingScript) {
+      existingScript.addEventListener("load", handleLoad)
+      existingScript.addEventListener("error", handleError)
+      return () => {
+        existingScript.removeEventListener("load", handleLoad)
+        existingScript.removeEventListener("error", handleError)
+      }
+    }
+
+    const script = document.createElement("script")
+    script.id = "ailinc-google-maps-script"
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${mapsApiKey}`
+    script.async = true
+    script.defer = true
+    script.addEventListener("load", handleLoad)
+    script.addEventListener("error", handleError)
+    document.head.appendChild(script)
+
+    return () => {
+      script.removeEventListener("load", handleLoad)
+      script.removeEventListener("error", handleError)
+    }
+  }, [initializeMap, mapsApiKey, shouldUseGoogleMap])
+
+  useEffect(() => {
+    if (!shouldUseGoogleMap || !mapInstanceRef.current) return
+    const focusedLocation = officeLocations.find((location) => location.id === selectedLocationId)
+    if (!focusedLocation) return
+    const [lng, lat] = focusedLocation.coordinates
+    mapInstanceRef.current.panTo({ lat, lng })
+    const currentZoom = mapInstanceRef.current.getZoom() ?? 2
+    if (currentZoom < 3.2) {
+      mapInstanceRef.current.setZoom(3.2)
+    }
+  }, [selectedLocationId, shouldUseGoogleMap])
 
   // Function to handle navigation to sections
   const navigateToSection = (sectionId: string, duration: number = 1.5) => {
@@ -207,23 +435,179 @@ export function Footer() {
             </ul>
           </motion.div>
 
-          {/* Compact Map Section */}
-          <motion.div
-            variants={item}
-            className="lg:col-span-6 space-y-6"
-          >
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">{t("Find Us")}</h3>
-            <div className="rounded-2xl overflow-hidden shadow-lg border border-gray-200 h-64">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3807.221425951885!2d78.44666109999999!3d17.404840899999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb973c1c841c2b%3A0x7b36f821a0ce9047!2sAI%20Linc!5e0!3m2!1sen!2sin!4v1757737590720!5m2!1sen!2sin"
-                width="100%"
-                height="100%"
-                loading="lazy"
-                allowFullScreen
-                referrerPolicy="no-referrer-when-downgrade"
-                title={t("AI Linc Office Location")}
-                className="border-0"
-              />
+          {/* Global Map Section */}
+          <motion.div variants={item} className="lg:col-span-6 space-y-6">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900">{t("Find Us")}</h3>
+                <p className="text-sm text-gray-500">
+                  {t("Tap a marker to open the location in Google Maps.")}
+                </p>
+              </div>
+              <span className="inline-flex items-center rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">
+                {t("Global Presence")}
+              </span>
+            </div>
+            <div className="relative h-[360px] rounded-2xl border border-gray-200 bg-slate-50/80 shadow-lg overflow-hidden">
+              <div
+                className="pointer-events-none absolute left-5 top-5 z-10 max-w-sm rounded-3xl bg-white/90 p-5 shadow-xl ring-1 ring-white/70 backdrop-blur"
+                aria-live="polite"
+              >
+                {displayedLocation ? (
+                  <>
+                    <div className="inline-flex items-center gap-2 rounded-full bg-indigo-50 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.35em] text-indigo-600">
+                      <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_rgba(16,185,129,0.8)]" />
+                      {formattedDisplay?.region}
+                    </div>
+                    <p className="mt-3 text-lg font-semibold text-gray-900">{formattedDisplay?.city}</p>
+                    <p className="mt-1 text-sm text-gray-700 leading-relaxed">{displayedLocation.address}</p>
+                    <p className="mt-3 text-[11px] font-semibold uppercase tracking-[0.35em] text-gray-400">
+                      {t("Hover over pins or use the chips below to preview locations.")}
+                    </p>
+                  </>
+                ) : (
+                  <>
+                    <p className="text-xs font-semibold uppercase tracking-[0.25em] text-gray-500">{t("Global Presence")}</p>
+                    <p className="mt-2 text-sm text-gray-700 leading-relaxed">
+                      Hover or tap a pin to preview our office details anywhere in the world.
+                    </p>
+                  </>
+                )}
+              </div>
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-purple-100/20" />
+              {shouldUseGoogleMap ? (
+                <>
+                  <div
+                    ref={mapContainerRef}
+                    className="h-full w-full"
+                    role="region"
+                    aria-label={t("Global Google Map showing AI Linc locations")}
+                  />
+                  {mapError && (
+                    <div className="absolute inset-0 flex flex-col items-center justify-center bg-white/95 px-6 text-center">
+                      <p className="text-sm font-semibold text-gray-900">{mapError}</p>
+                      <p className="mt-2 text-sm text-gray-600">
+                        {mapsApiKey
+                          ? "Please refresh the page or try again later."
+                          : "Add NEXT_PUBLIC_GOOGLE_MAPS_API_KEY to enable this map."}
+                      </p>
+                    </div>
+                  )}
+                </>
+              ) : (
+                <div className="h-full w-full" role="img" aria-label={t("Fallback world map showing AI Linc locations")}>
+                  <ComposableMap projectionConfig={{ scale: 170 }}>
+                    <ZoomableGroup
+                      zoom={fallbackView.zoom}
+                      center={fallbackView.coordinates}
+                      minZoom={FALLBACK_ZOOM_BOUNDS.min}
+                      maxZoom={FALLBACK_ZOOM_BOUNDS.max}
+                      translateExtent={[
+                        [-1000, -400],
+                        [1000, 600],
+                      ]}
+                      onMoveEnd={({ coordinates, zoom }) =>
+                        setFallbackView({
+                          coordinates: coordinates as [number, number],
+                          zoom,
+                        })
+                      }
+                    >
+                      <Geographies geography={geoUrl}>
+                        {({ geographies }) =>
+                          geographies.map((geo) => (
+                            <Geography
+                              key={geo.rsmKey}
+                              geography={geo}
+                              fill="#f3f4f6"
+                              stroke="#c7d2fe"
+                              strokeWidth={0.4}
+                              style={{
+                                default: { outline: "none" },
+                                hover: { outline: "none" },
+                                pressed: { outline: "none" },
+                              }}
+                            />
+                          ))
+                        }
+                      </Geographies>
+                      {officeLocations.map((location) => {
+                        const isActive = displayedLocation?.id === location.id
+                        return (
+                          <Marker key={location.id} coordinates={location.coordinates}>
+                            <motion.g
+                              role="button"
+                              tabIndex={0}
+                              aria-label={`${location.name} — ${location.address}`}
+                              initial={{ scale: 0.8, opacity: 0 }}
+                              animate={{
+                                scale: isActive ? 1.1 : 1,
+                                opacity: 1,
+                              }}
+                              transition={{ duration: 0.5, ease: "easeOut" }}
+                              onMouseEnter={() => setHoveredLocation(location)}
+                              onMouseLeave={() => setHoveredLocation(null)}
+                              onFocus={() => setHoveredLocation(location)}
+                              onBlur={() => setHoveredLocation(null)}
+                              onClick={() => handleLocationSelect(location, true)}
+                              onKeyDown={(event) => {
+                                if (event.key === "Enter" || event.key === " ") {
+                                  event.preventDefault()
+                                  handleLocationSelect(location, true)
+                                }
+                              }}
+                              className="cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
+                            >
+                              {isActive && (
+                                <motion.circle
+                                  r={12}
+                                  stroke="rgba(234,67,53,0.45)"
+                                  strokeWidth={2}
+                                  fill="transparent"
+                                  animate={{ scale: [1, 1.8, 1], opacity: [0.4, 0, 0.4] }}
+                                  transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
+                                />
+                              )}
+                              <path
+                                d={GOOGLE_PIN_PATH}
+                                fill="#EA4335"
+                                stroke="#ffffff"
+                                strokeWidth={1}
+                                transform="translate(-12,-24) scale(0.8)"
+                              />
+                              <circle r={2.2} fill="#ffffff" />
+                            </motion.g>
+                          </Marker>
+                        )
+                      })}
+                    </ZoomableGroup>
+                  </ComposableMap>
+                </div>
+              )}
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {officeLocations.map((location) => {
+                const isActive = selectedLocationId === location.id
+                return (
+                  <button
+                    key={location.id}
+                    type="button"
+                    onClick={() => handleLocationSelect(location)}
+                    className={`group inline-flex items-center rounded-full border px-4 py-2 text-sm font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${
+                      isActive
+                        ? "border-indigo-500 bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg"
+                        : "border-gray-200 bg-white text-gray-700 hover:border-indigo-200 hover:bg-indigo-50"
+                    }`}
+                  >
+                    <span
+                      className={`mr-2 h-2 w-2 rounded-full ${
+                        isActive ? "bg-white" : "bg-indigo-500/70 group-hover:bg-indigo-600"
+                      }`}
+                    />
+                    {location.name}
+                  </button>
+                )
+              })}
             </div>
           </motion.div>
           {/* Newsletter & Social */}

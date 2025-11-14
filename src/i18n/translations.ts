@@ -253,11 +253,32 @@ const baseTranslations: TranslationMap = {
   "Sending...": "Sending...",
   "Services": "Services",
   "Solutions": "Solutions",
+  "Meet Our Team": "Meet Our Team",
+  "Promoters": "Promoters",
   "Start with Our Free Courses": "Start with Our Free Courses",
   "Stay Connected": "Stay Connected",
   "Trust": "Trust",
   "Talent Deployment": "Talent Deployment",
   "Talent sourcing and screening": "Talent sourcing and screening",
+  "MEET OUR TEAM & PROMOTERS": "MEET OUR TEAM & PROMOTERS",
+  "The people shaping": "The people shaping",
+  "across learning, partnerships, and community": "across learning, partnerships, and community",
+  "Meet the leaders, instructors, and promoters who bring MAANG experience, program excellence, and global partnerships to every learner journey.":
+    "Meet the leaders, instructors, and promoters who bring MAANG experience, program excellence, and global partnerships to every learner journey.",
+  "Core Team": "Core Team",
+  "Hands-on leaders mentoring every cohort": "Hands-on leaders mentoring every cohort",
+  "Industry practitioners from Microsoft, Google, and Amazon who design and deliver our flagship experiences.":
+    "Industry practitioners from Microsoft, Google, and Amazon who design and deliver our flagship experiences.",
+  "Strategic Council": "Strategic Council",
+  "Promoters & senior advisors steering AI Linc globally": "Promoters & senior advisors steering AI Linc globally",
+  "Guides international outreach, enterprise partnerships, and executive relationships.":
+    "Guides international outreach, enterprise partnerships, and executive relationships.",
+  "CMO International": "CMO International",
+  "Meet Our Team Members": "Meet Our Team Members",
+  "Strategists & champions behind AI Linc": "Strategists & champions behind AI Linc",
+  "Drives strategic alliances, talent networks, and program excellence worldwide.":
+    "Drives strategic alliances, talent networks, and program excellence worldwide.",
+  "leaders across USA, Canada, UK, UAE, India": "leaders across USA, Canada, UK, UAE, India",
   "Language": "Language",
   "LinkedIn": "LinkedIn",
   "YouTube": "YouTube",
@@ -914,6 +935,27 @@ const frOverrides: TranslationMap = {
   "All rights reserved.": "Tous droits réservés.",
   "Delivering tools that actually work in real business settings":
     "Fournir des outils qui fonctionnent réellement dans les environnements professionnels",
+  "Meet Our Team": "Rencontrez notre équipe",
+  "Promoters": "Promoteurs",
+  "MEET OUR TEAM & PROMOTERS": "RENCONTREZ NOTRE ÉQUIPE ET NOS PROMOTEURS",
+  "The people shaping": "Les personnes qui façonnent",
+  "across learning, partnerships, and community": "l'apprentissage, les partenariats et la communauté",
+  "Meet the leaders, instructors, and promoters who bring MAANG experience, program excellence, and global partnerships to every learner journey.":
+    "Rencontrez les dirigeants, formateurs et promoteurs qui apportent l'expérience MAANG, l'excellence des programmes et des partenariats mondiaux à chaque parcours apprenant.",
+  "Core Team": "Équipe principale",
+  "Hands-on leaders mentoring every cohort": "Des leaders de terrain qui mentorent chaque cohorte",
+  "Industry practitioners from Microsoft, Google, and Amazon who design and deliver our flagship experiences.":
+    "Des professionnels issus de Microsoft, Google et Amazon qui conçoivent et animent nos expériences phares.",
+  "Strategic Council": "Conseil stratégique",
+  "Promoters & senior advisors steering AI Linc globally": "Promoteurs et conseillers seniors qui pilotent AI Linc à l'échelle mondiale",
+  "Guides international outreach, enterprise partnerships, and executive relationships.":
+    "Guident le rayonnement international, les partenariats d'entreprise et les relations exécutives.",
+  "CMO International": "CMO International",
+  "Meet Our Team Members": "Rencontrez les membres de notre équipe",
+  "Strategists & champions behind AI Linc": "Stratèges et acteurs clés derrière AI Linc",
+  "Drives strategic alliances, talent networks, and program excellence worldwide.":
+    "Soutiennent les alliances stratégiques, les réseaux de talents et l'excellence des programmes dans le monde entier.",
+  "leaders across USA, Canada, UK, UAE, India": "leaders aux États-Unis, au Canada, au Royaume-Uni, aux Émirats arabes unis et en Inde",
   "Director": "Directeur",
   "Discover who we are, what we do, and how we're helping institutions adopt AI solutions with ease.":
     "Découvrez qui nous sommes, ce que nous faisons et comment nous aidons les institutions à adopter l’AI en toute simplicité.",
@@ -1785,6 +1827,27 @@ const arOverrides: TranslationMap = {
   "All rights reserved.": "جميع الحقوق محفوظة.",
   "Delivering tools that actually work in real business settings":
     "تقديم أدوات تعمل فعليًا في البيئات العملية",
+  "Meet Our Team": "تعرّف على فريقنا",
+  "Promoters": "الداعمون",
+  "MEET OUR TEAM & PROMOTERS": "تعرّف على فريقنا والداعمين",
+  "The people shaping": "الجهات التي تصوغ",
+  "across learning, partnerships, and community": "عبر التعلّم والشراكات والمجتمع",
+  "Meet the leaders, instructors, and promoters who bring MAANG experience, program excellence, and global partnerships to every learner journey.":
+    "تعرّف على القادة والمدرّسين والداعمين الذين يجلبون خبرة شركات MAANG، وتميّز البرامج، والشراكات العالمية لكل رحلة تعلّم.",
+  "Core Team": "الفريق الأساسي",
+  "Hands-on leaders mentoring every cohort": "قادة عمليّون يرعون كل دفعة",
+  "Industry practitioners from Microsoft, Google, and Amazon who design and deliver our flagship experiences.":
+    "مهنيون من Microsoft وGoogle وAmazon يصمّمون ويقدّمون تجاربنا الرائدة.",
+  "Strategic Council": "المجلس الاستراتيجي",
+  "Promoters & senior advisors steering AI Linc globally": "الداعمون والمستشارون الكبار الذين يقودون AI Linc عالمياً",
+  "Guides international outreach, enterprise partnerships, and executive relationships.":
+    "يقودون التواصل الدولي والشراكات المؤسسية والعلاقات التنفيذية.",
+  "CMO International": "الرئيس التنفيذي للتسويق الدولي",
+  "Meet Our Team Members": "تعرّف على أعضاء فريقنا",
+  "Strategists & champions behind AI Linc": "الاستراتيجيون والداعمون الذين يقفون خلف AI Linc",
+  "Drives strategic alliances, talent networks, and program excellence worldwide.":
+    "يدعمون التحالفات الاستراتيجية وشبكات المواهب وتميّز البرامج حول العالم.",
+  "leaders across USA, Canada, UK, UAE, India": "قادة في الولايات المتحدة وكندا والمملكة المتحدة والإمارات والهند",
   "Director": "مدير",
   "Driving AI Linc's vision and strategic growth with innovative leadership.":
     "قيادة رؤية AI Linc ونموها الاستراتيجي من خلال قيادة مبتكرة.",
@@ -2657,6 +2720,27 @@ const hiOverrides: TranslationMap = {
   "All rights reserved.": "सर्वाधिकार सुरक्षित।",
   "Delivering tools that actually work in real business settings":
     "ऐसे उपकरण उपलब्ध कराना जो वास्तविक व्यावसायिक परिदृश्यों में सचमुच काम करें",
+  "Meet Our Team": "हमारी टीम से मिलें",
+  "Promoters": "प्रमोटर्स",
+  "MEET OUR TEAM & PROMOTERS": "हमारी टीम और प्रमोटर्स से मिलें",
+  "The people shaping": "वे लोग जो आकार दे रहे हैं",
+  "across learning, partnerships, and community": "सीखने, साझेदारियों और समुदाय में",
+  "Meet the leaders, instructors, and promoters who bring MAANG experience, program excellence, and global partnerships to every learner journey.":
+    "उन नेताओं, प्रशिक्षकों और प्रमोटर्स से मिलें जो प्रत्येक शिक्षार्थी की यात्रा में MAANG अनुभव, प्रोग्राम उत्कृष्टता और वैश्विक साझेदारियाँ लाते हैं।",
+  "Core Team": "कोर टीम",
+  "Hands-on leaders mentoring every cohort": "प्रत्येक बैच का मार्गदर्शन करने वाले अनुभवी नेता",
+  "Industry practitioners from Microsoft, Google, and Amazon who design and deliver our flagship experiences.":
+    "Microsoft, Google और Amazon के इंडस्ट्री प्रैक्टिशनर्स जो हमारे प्रमुख अनुभवों को डिज़ाइन और संचालित करते हैं।",
+  "Strategic Council": "स्ट्रैटेजिक काउंसिल",
+  "Promoters & senior advisors steering AI Linc globally": "AI Linc को वैश्विक स्तर पर दिशा देने वाले प्रमोटर्स और वरिष्ठ सलाहकार",
+  "Guides international outreach, enterprise partnerships, and executive relationships.":
+    "अंतरराष्ट्रीय आउटरीच, एंटरप्राइज साझेदारियों और एग्जीक्यूटिव रिलेशनशिप का नेतृत्व करते हैं।",
+  "CMO International": "सीएमओ इंटरनेशनल",
+  "Meet Our Team Members": "हमारी टीम के सदस्यों से मिलें",
+  "Strategists & champions behind AI Linc": "AI Linc के पीछे रणनीतिकार और चैंपियंस",
+  "Drives strategic alliances, talent networks, and program excellence worldwide.":
+    "विश्व भर में रणनीतिक गठबंधनों, टैलेंट नेटवर्क और प्रोग्राम उत्कृष्टता को आगे बढ़ाते हैं।",
+  "leaders across USA, Canada, UK, UAE, India": "संयुक्त राज्य, कनाडा, यूके, यूएई और भारत के नेता",
   "Director": "निदेशक",
   "Driving AI Linc's vision and strategic growth with innovative leadership.":
     "नवोन्मेषी नेतृत्व के साथ AI Linc की दृष्टि और रणनीतिक वृद्धि को आगे बढ़ाना।",
