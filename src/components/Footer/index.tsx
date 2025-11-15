@@ -155,6 +155,8 @@ export function Footer() {
   const displayedLocation =
     hoveredLocation ?? officeLocations.find((location) => location.id === selectedLocationId) ?? null
   const formattedDisplay = displayedLocation ? parseLocationName(displayedLocation.name) : null
+  const primaryLocations = officeLocations.slice(0, 3)
+  const secondaryLocations = officeLocations.slice(3)
   const projection = useMemo(
     () =>
       geoMercator()
@@ -545,20 +547,17 @@ export function Footer() {
             </div>
             <div className="relative h-[360px] rounded-2xl border border-gray-200 bg-slate-50/80 shadow-lg overflow-hidden">
               <div
-                className="pointer-events-none absolute left-5 top-5 z-10 max-w-sm rounded-3xl bg-white/90 p-5 shadow-xl ring-1 ring-white/70 backdrop-blur"
+                className="pointer-events-none absolute left-4 top-4 z-10 w-[220px] rounded-2xl bg-white/90 px-4 py-3 shadow-xl ring-1 ring-white/70 backdrop-blur sm:w-[260px] sm:px-5 sm:py-4"
                 aria-live="polite"
               >
                 {displayedLocation ? (
                   <>
-                    <div className="inline-flex items-center gap-2 rounded-full bg-indigo-50 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.35em] text-indigo-600">
+                    <div className="inline-flex items-center gap-2 rounded-full bg-indigo-50 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.35em] text-indigo-600">
                       <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_rgba(16,185,129,0.8)]" />
                       {formattedDisplay?.region}
                     </div>
-                    <p className="mt-3 text-lg font-semibold text-gray-900">{formattedDisplay?.city}</p>
-                    <p className="mt-1 text-sm text-gray-700 leading-relaxed">{displayedLocation.address}</p>
-                    <p className="mt-3 text-[11px] font-semibold uppercase tracking-[0.35em] text-gray-400">
-                      {t("Hover over pins or use the chips below to preview locations.")}
-                    </p>
+                    <p className="mt-2 text-base font-semibold text-gray-900">{formattedDisplay?.city}</p>
+                    <p className="mt-1 text-xs text-gray-700 leading-relaxed">{displayedLocation.address}</p>
                   </>
                 ) : (
                   <>
@@ -669,29 +668,57 @@ export function Footer() {
                 </div>
               )}
             </div>
-            <div className="flex flex-wrap gap-2">
-              {officeLocations.map((location) => {
-                const isActive = selectedLocationId === location.id
-                return (
-                  <button
-                    key={location.id}
-                    type="button"
-                    onClick={() => handleLocationSelect(location)}
-                    className={`group inline-flex items-center rounded-full border px-4 py-2 text-sm font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${
-                      isActive
-                        ? "border-indigo-500 bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg"
-                        : "border-gray-200 bg-white text-gray-700 hover:border-indigo-200 hover:bg-indigo-50"
-                    }`}
-                  >
-                    <span
-                      className={`mr-2 h-2 w-2 rounded-full ${
-                        isActive ? "bg-white" : "bg-indigo-500/70 group-hover:bg-indigo-600"
+            <div className="flex flex-col items-center gap-3">
+              <div className="flex flex-wrap justify-center gap-3">
+                {primaryLocations.map((location) => {
+                  const isActive = selectedLocationId === location.id
+                  return (
+                    <button
+                      key={location.id}
+                      type="button"
+                      onClick={() => handleLocationSelect(location)}
+                      className={`flex min-w-[180px] max-w-xs flex-1 items-center justify-center rounded-full border px-4 py-2 text-sm font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${
+                        isActive
+                          ? "border-indigo-500 bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg"
+                          : "border-gray-200 bg-white text-gray-700 hover:border-indigo-200 hover:bg-indigo-50"
                       }`}
-                    />
-                    {location.name}
-                  </button>
-                )
-              })}
+                    >
+                      <span
+                        className={`mr-2 h-2 w-2 rounded-full ${
+                          isActive ? "bg-white" : "bg-indigo-500/70 group-hover:bg-indigo-600"
+                        }`}
+                      />
+                      {location.name}
+                    </button>
+                  )
+                })}
+              </div>
+              {secondaryLocations.length > 0 && (
+                <div className="flex flex-wrap justify-center gap-3">
+                  {secondaryLocations.map((location) => {
+                    const isActive = selectedLocationId === location.id
+                    return (
+                      <button
+                        key={location.id}
+                        type="button"
+                        onClick={() => handleLocationSelect(location)}
+                        className={`flex min-w-[180px] max-w-xs flex-1 items-center justify-center rounded-full border px-4 py-2 text-sm font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${
+                          isActive
+                            ? "border-indigo-500 bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg"
+                            : "border-gray-200 bg-white text-gray-700 hover:border-indigo-200 hover:bg-indigo-50"
+                        }`}
+                      >
+                        <span
+                          className={`mr-2 h-2 w-2 rounded-full ${
+                            isActive ? "bg-white" : "bg-indigo-500/70 group-hover:bg-indigo-600"
+                          }`}
+                        />
+                        {location.name}
+                      </button>
+                    )
+                  })}
+                </div>
+              )}
             </div>
           </motion.div>
           {/* Newsletter & Social */}

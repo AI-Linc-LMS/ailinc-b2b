@@ -506,9 +506,6 @@ const ChatWidget = () => {
         className="group relative flex items-center justify-center rounded-full bg-gradient-to-r from-indigo-600 via-purple-600 to-blue-600 p-4 text-white shadow-2xl transition hover:shadow-[0_20px_45px_rgba(79,70,229,0.45)] focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
         aria-label={isOpen ? "Close AI assistant chat" : "Open AI assistant chat"}
       >
-        <span className="absolute -top-3 right-0 rounded-full bg-white px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-indigo-600 shadow-lg">
-          {isLoading ? "Typing" : "Chat"}
-        </span>
         <svg className="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path
             strokeLinecap="round"
