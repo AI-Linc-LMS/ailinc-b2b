@@ -228,6 +228,20 @@ const trainersData = [
     achievements: "",
   },
   {
+    id: 20,
+    name: "Sandeep Volam",
+    title: "Chairman and Managing Director",
+    experience: "",
+    photo: "/team/sandeep_volam.jpg",
+    companies: [],
+    specialization: "",
+    studentsmentored: null,
+    rating: null,
+    location: "",
+    linkedin: "https://www.linkedin.com/in/sandeep-volam-6237893?utm_source=share_via&utm_content=profile&utm_medium=member_android",
+    achievements: "",
+  },
+  {
     id: 16,
     name: "Gaddam Mallesham",
     title: "",
@@ -311,10 +325,15 @@ const TopTrainersHero = () => {
     [localizedTrainers]
   );
 
-  const highlightedLeaderIds = useMemo(() => new Set([16, 17, 18, 19]), []);
+  const highlightedLeaderOrder = useMemo(() => [20, 18, 16, 17, 19], []);
+  const highlightedLeaderIds = useMemo(() => new Set(highlightedLeaderOrder), [highlightedLeaderOrder]);
   const highlightedLeaders = useMemo(
-    () => promoterMembers.filter((member) => highlightedLeaderIds.has(member.id)),
-    [promoterMembers, highlightedLeaderIds]
+    () =>
+      highlightedLeaderOrder.flatMap((id) => {
+        const member = promoterMembers.find((promoter) => promoter.id === id);
+        return member ? [member] : [];
+      }),
+    [promoterMembers, highlightedLeaderOrder]
   );
   const otherPromoters = useMemo(
     () => promoterMembers.filter((member) => !highlightedLeaderIds.has(member.id)),
@@ -609,7 +628,7 @@ const TopTrainersHero = () => {
             </div>
 
             {highlightedLeaders.length > 0 && (
-              <div className="space-y-6">
+              <div className="space-y-8">
                 <div className="text-center space-y-3">
                   <p className="inline-flex items-center rounded-full border border-fuchsia-200/60 bg-white px-4 py-1 text-xs font-semibold uppercase tracking-[0.4em] text-fuchsia-700">
                     {t("Strategic Council")}
@@ -619,76 +638,157 @@ const TopTrainersHero = () => {
                   </h2>
                 </div>
 
-                <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                  {highlightedLeaders.map((leader, index) => (
-                    <motion.article
-                      key={leader.id}
-                      className="rounded-3xl border border-fuchsia-100 bg-gradient-to-br from-purple-600/10 via-white to-indigo-600/10 p-5 shadow-lg hover:-translate-y-1 transition"
-                      initial={{ opacity: 0, y: 30 }}
-                      animate={isInView ? { opacity: 1, y: 0 } : {}}
-                      transition={{ delay: 0.1 + index * 0.05 }}
-                    >
-                      <div className="flex items-center gap-4">
-                        <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-500 p-0.5">
-                          <div className="h-full w-full rounded-2xl overflow-hidden bg-slate-100">
-                            {leader.photo ? (
-                              <Image
-                                src={leader.photo}
-                                alt={leader.name}
-                                width={64}
-                                height={64}
-                                className="h-full w-full object-cover"
-                              />
-                            ) : (
-                              <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-indigo-400 to-purple-400 text-base font-semibold text-white">
-                                {getInitials(leader.name)}
-                              </div>
+                <div className="flex flex-col items-center gap-6">
+                  <div className="flex flex-wrap justify-center gap-6">
+                    {highlightedLeaders.slice(0, 3).map((leader, index) => (
+                      <motion.article
+                        key={leader.id}
+                        className="relative mx-auto w-full max-w-sm overflow-hidden rounded-[30px] border border-fuchsia-200/60 bg-white/80 p-6 shadow-[0_20px_45px_rgba(79,70,229,0.08)] backdrop-blur-sm transition hover:-translate-y-1 hover:shadow-[0_35px_60px_rgba(79,70,229,0.18)]"
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={isInView ? { opacity: 1, y: 0 } : {}}
+                        transition={{ delay: 0.12 + index * 0.05 }}
+                      >
+                        <div className="absolute inset-0 bg-gradient-to-br from-fuchsia-500/5 via-transparent to-indigo-500/10 opacity-0 transition group-hover:opacity-100" />
+                        <div className="relative flex items-start gap-4">
+                          <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-500 p-0.5 shadow-lg ring-4 ring-white/60">
+                            <div className="h-full w-full rounded-2xl overflow-hidden bg-slate-100">
+                              {leader.photo ? (
+                                <Image
+                                  src={leader.photo}
+                                  alt={leader.name}
+                                  width={64}
+                                  height={64}
+                                  className="h-full w-full object-cover"
+                                />
+                              ) : (
+                                <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-indigo-400 to-purple-400 text-base font-semibold text-white">
+                                  {getInitials(leader.name)}
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                          <div>
+                            <h3 className="text-lg font-semibold text-gray-900">{leader.name}</h3>
+                            {leader.title && (
+                              <p className="text-sm font-medium text-fuchsia-700">{leader.title}</p>
+                            )}
+                            {leader.location && (
+                              <p className="text-xs uppercase tracking-[0.3em] text-gray-400">{leader.location}</p>
                             )}
                           </div>
                         </div>
-                        <div>
-                          <h3 className="text-lg font-semibold text-gray-900">{leader.name}</h3>
-                          {leader.title && (
-                            <p className="text-sm font-medium text-fuchsia-700">{leader.title}</p>
+
+                        <p className="relative mt-4 text-sm text-gray-600">
+                          {t("Guides international outreach, enterprise partnerships, and executive relationships.")}
+                        </p>
+
+                        <div className="relative mt-4 flex flex-wrap gap-2">
+                          {leader.title?.toLowerCase().includes("cmo") && (
+                            <span className="inline-flex items-center gap-1 rounded-full bg-fuchsia-50 px-3 py-1 text-xs font-semibold text-fuchsia-700">
+                              ✦ {t("CMO International")}
+                            </span>
                           )}
                           {leader.location && (
-                            <p className="text-xs uppercase tracking-[0.3em] text-gray-400">{leader.location}</p>
+                            <span className="inline-flex items-center gap-1 rounded-full bg-indigo-50 px-3 py-1 text-xs font-semibold text-indigo-700">
+                              🌐 {leader.location}
+                            </span>
                           )}
                         </div>
-                      </div>
 
-                      <p className="mt-4 text-sm text-gray-600">
-                        {t("Guides international outreach, enterprise partnerships, and executive relationships.")}
-                      </p>
-
-                      <div className="mt-4 flex flex-wrap gap-2">
-                        {leader.title?.toLowerCase().includes("cmo") && (
-                          <span className="inline-flex items-center gap-1 rounded-full bg-white/50 px-3 py-1 text-xs font-semibold text-fuchsia-700">
-                            ✦ {t("CMO International")}
+                        <div className="relative mt-6 flex justify-between items-center border-t border-fuchsia-100/60 pt-4">
+                          <span className="text-[10px] font-semibold uppercase tracking-[0.4em] text-gray-400">
+                            {t("Strategic Lead")}
                           </span>
-                        )}
-                        {leader.location && (
-                          <span className="inline-flex items-center gap-1 rounded-full bg-white/50 px-3 py-1 text-xs font-semibold text-indigo-700">
-                            🌐 {leader.location}
-                          </span>
-                        )}
-                      </div>
+                          <a
+                            href={leader.linkedin}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 rounded-full border border-indigo-100 px-3 py-1.5 text-xs font-semibold text-indigo-600 hover:bg-indigo-50"
+                          >
+                            <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+                              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                            </svg>
+                            {t("LinkedIn")}
+                          </a>
+                        </div>
+                      </motion.article>
+                    ))}
+                  </div>
+                  <div className="flex flex-wrap justify-center gap-6">
+                    {highlightedLeaders.slice(3).map((leader, index) => (
+                      <motion.article
+                        key={leader.id}
+                        className="relative mx-auto w-full max-w-sm overflow-hidden rounded-[30px] border border-fuchsia-200/60 bg-white/80 p-6 shadow-[0_20px_45px_rgba(79,70,229,0.08)] backdrop-blur-sm transition hover:-translate-y-1 hover:shadow-[0_35px_60px_rgba(79,70,229,0.18)]"
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={isInView ? { opacity: 1, y: 0 } : {}}
+                        transition={{ delay: 0.22 + index * 0.05 }}
+                      >
+                        <div className="absolute inset-0 bg-gradient-to-br from-fuchsia-500/5 via-transparent to-indigo-500/10 opacity-0 transition group-hover:opacity-100" />
+                        <div className="relative flex items-start gap-4">
+                          <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-500 p-0.5 shadow-lg ring-4 ring-white/60">
+                            <div className="h-full w-full rounded-2xl overflow-hidden bg-slate-100">
+                              {leader.photo ? (
+                                <Image
+                                  src={leader.photo}
+                                  alt={leader.name}
+                                  width={64}
+                                  height={64}
+                                  className="h-full w-full object-cover"
+                                />
+                              ) : (
+                                <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-indigo-400 to-purple-400 text-base font-semibold text-white">
+                                  {getInitials(leader.name)}
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                          <div>
+                            <h3 className="text-lg font-semibold text-gray-900">{leader.name}</h3>
+                            {leader.title && (
+                              <p className="text-sm font-medium text-fuchsia-700">{leader.title}</p>
+                            )}
+                            {leader.location && (
+                              <p className="text-xs uppercase tracking-[0.3em] text-gray-400">{leader.location}</p>
+                            )}
+                          </div>
+                        </div>
 
-                      <div className="mt-6 flex justify-end">
-                        <a
-                          href={leader.linkedin}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-2 rounded-full border border-indigo-100 px-3 py-1.5 text-xs font-semibold text-indigo-600 hover:bg-indigo-50"
-                        >
-                          <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                          </svg>
-                          {t("LinkedIn")}
-                        </a>
-                      </div>
-                    </motion.article>
-                  ))}
+                        <p className="relative mt-4 text-sm text-gray-600">
+                          {t("Guides international outreach, enterprise partnerships, and executive relationships.")}
+                        </p>
+
+                        <div className="relative mt-4 flex flex-wrap gap-2">
+                          {leader.title?.toLowerCase().includes("cmo") && (
+                            <span className="inline-flex items-center gap-1 rounded-full bg-fuchsia-50 px-3 py-1 text-xs font-semibold text-fuchsia-700">
+                              ✦ {t("CMO International")}
+                            </span>
+                          )}
+                          {leader.location && (
+                            <span className="inline-flex items-center gap-1 rounded-full bg-indigo-50 px-3 py-1 text-xs font-semibold text-indigo-700">
+                              🌐 {leader.location}
+                            </span>
+                          )}
+                        </div>
+
+                        <div className="relative mt-6 flex justify-between items-center border-t border-fuchsia-100/60 pt-4">
+                          <span className="text-[10px] font-semibold uppercase tracking-[0.4em] text-gray-400">
+                            {t("Strategic Lead")}
+                          </span>
+                          <a
+                            href={leader.linkedin}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 rounded-full border border-indigo-100 px-3 py-1.5 text-xs font-semibold text-indigo-600 hover:bg-indigo-50"
+                          >
+                            <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+                              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455व6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564व11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729व20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                            </svg>
+                            {t("LinkedIn")}
+                          </a>
+                        </div>
+                      </motion.article>
+                    ))}
+                  </div>
                 </div>
               </div>
             )}
@@ -702,11 +802,11 @@ const TopTrainersHero = () => {
               </h2>
             </div>
 
-            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="flex flex-wrap justify-center gap-6">
               {otherPromoters.map((promoter, index) => (
                 <motion.article
                   key={promoter.id}
-                  className="rounded-3xl border border-gray-100 bg-gradient-to-br from-white via-indigo-50/40 to-purple-50/40 p-5 shadow-md hover:shadow-xl transition"
+                  className="w-full max-w-sm rounded-3xl border border-gray-100 bg-gradient-to-br from-white via-indigo-50/40 to-purple-50/40 p-5 shadow-md hover:shadow-xl transition"
                   initial={{ opacity: 0, y: 30 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ delay: 0.15 + index * 0.05 }}
