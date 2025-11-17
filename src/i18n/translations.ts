@@ -266,6 +266,11 @@ const baseTranslations: TranslationMap = {
   "across learning, partnerships, and community": "across learning, partnerships, and community",
   "Meet the leaders, instructors, and promoters who bring MAANG experience, program excellence, and global partnerships to every learner journey.":
     "Meet the leaders, instructors, and promoters who bring MAANG experience, program excellence, and global partnerships to every learner journey.",
+  "Leaders and promoters steering AI Linc globally": "Leaders and promoters steering AI Linc globally",
+  "Visionary Leadership": "Visionary Leadership",
+  "Senior advisors": "Senior advisors",
+  "Meet our core members": "Meet our core members",
+  "Team Member": "Team Member",
   "Core Team": "Core Team",
   "Hands-on leaders mentoring every cohort": "Hands-on leaders mentoring every cohort",
   "Industry practitioners from Microsoft, Google, and Amazon who design and deliver our flagship experiences.":
@@ -280,6 +285,8 @@ const baseTranslations: TranslationMap = {
   "Drives strategic alliances, talent networks, and program excellence worldwide.":
     "Drives strategic alliances, talent networks, and program excellence worldwide.",
   "leaders across USA, Canada, UK, UAE, India": "leaders across USA, Canada, UK, UAE, India",
+  "Team Members:": "Team Members:",
+  "strategists and champions": "strategists and champions",
   "Language": "Language",
   "LinkedIn": "LinkedIn",
   "YouTube": "YouTube",
@@ -943,6 +950,11 @@ const frOverrides: TranslationMap = {
   "across learning, partnerships, and community": "l'apprentissage, les partenariats et la communauté",
   "Meet the leaders, instructors, and promoters who bring MAANG experience, program excellence, and global partnerships to every learner journey.":
     "Rencontrez les dirigeants, formateurs et promoteurs qui apportent l'expérience MAANG, l'excellence des programmes et des partenariats mondiaux à chaque parcours apprenant.",
+  "Leaders and promoters steering AI Linc globally": "Dirigeants et promoteurs qui pilotent AI Linc à l'échelle mondiale",
+  "Visionary Leadership": "Leadership visionnaire",
+  "Senior advisors": "Conseillers seniors",
+  "Meet our core members": "Rencontrez nos membres principaux",
+  "Team Member": "Membre de l'équipe",
   "Core Team": "Équipe principale",
   "Hands-on leaders mentoring every cohort": "Des leaders de terrain qui mentorent chaque cohorte",
   "Industry practitioners from Microsoft, Google, and Amazon who design and deliver our flagship experiences.":
@@ -957,6 +969,8 @@ const frOverrides: TranslationMap = {
   "Drives strategic alliances, talent networks, and program excellence worldwide.":
     "Soutiennent les alliances stratégiques, les réseaux de talents et l'excellence des programmes dans le monde entier.",
   "leaders across USA, Canada, UK, UAE, India": "leaders aux États-Unis, au Canada, au Royaume-Uni, aux Émirats arabes unis et en Inde",
+  "Team Members:": "Membres de l'équipe :",
+  "strategists and champions": "stratèges et acteurs clés",
   "Director": "Directeur",
   "Discover who we are, what we do, and how we're helping institutions adopt AI solutions with ease.":
     "Découvrez qui nous sommes, ce que nous faisons et comment nous aidons les institutions à adopter l’AI en toute simplicité.",
@@ -1835,6 +1849,11 @@ const arOverrides: TranslationMap = {
   "across learning, partnerships, and community": "عبر التعلّم والشراكات والمجتمع",
   "Meet the leaders, instructors, and promoters who bring MAANG experience, program excellence, and global partnerships to every learner journey.":
     "تعرّف على القادة والمدرّسين والداعمين الذين يجلبون خبرة شركات MAANG، وتميّز البرامج، والشراكات العالمية لكل رحلة تعلّم.",
+  "Leaders and promoters steering AI Linc globally": "القادة والداعمون الذين يقودون AI Linc عالمياً",
+  "Visionary Leadership": "القيادة الرؤيوية",
+  "Senior advisors": "المستشارون الكبار",
+  "Meet our core members": "تعرّف على أعضاء فريقنا الأساسيين",
+  "Team Member": "عضو الفريق",
   "Core Team": "الفريق الأساسي",
   "Hands-on leaders mentoring every cohort": "قادة عمليّون يرعون كل دفعة",
   "Industry practitioners from Microsoft, Google, and Amazon who design and deliver our flagship experiences.":
@@ -1849,6 +1868,8 @@ const arOverrides: TranslationMap = {
   "Drives strategic alliances, talent networks, and program excellence worldwide.":
     "يدعمون التحالفات الاستراتيجية وشبكات المواهب وتميّز البرامج حول العالم.",
   "leaders across USA, Canada, UK, UAE, India": "قادة في الولايات المتحدة وكندا والمملكة المتحدة والإمارات والهند",
+  "Team Members:": "أعضاء الفريق:",
+  "strategists and champions": "استراتيجيون وداعمون",
   "Director": "مدير",
   "Driving AI Linc's vision and strategic growth with innovative leadership.":
     "قيادة رؤية AI Linc ونموها الاستراتيجي من خلال قيادة مبتكرة.",
@@ -2728,6 +2749,11 @@ const hiOverrides: TranslationMap = {
   "across learning, partnerships, and community": "सीखने, साझेदारियों और समुदाय में",
   "Meet the leaders, instructors, and promoters who bring MAANG experience, program excellence, and global partnerships to every learner journey.":
     "उन नेताओं, प्रशिक्षकों और प्रमोटर्स से मिलें जो प्रत्येक शिक्षार्थी की यात्रा में MAANG अनुभव, प्रोग्राम उत्कृष्टता और वैश्विक साझेदारियाँ लाते हैं।",
+  "Leaders and promoters steering AI Linc globally": "AI Linc को वैश्विक स्तर पर दिशा देने वाले नेता और प्रमोटर्स",
+  "Visionary Leadership": "दूरदर्शी नेतृत्व",
+  "Senior advisors": "वरिष्ठ सलाहकार",
+  "Meet our core members": "हमारे मुख्य सदस्यों से मिलें",
+  "Team Member": "टीम सदस्य",
   "Core Team": "कोर टीम",
   "Hands-on leaders mentoring every cohort": "प्रत्येक बैच का मार्गदर्शन करने वाले अनुभवी नेता",
   "Industry practitioners from Microsoft, Google, and Amazon who design and deliver our flagship experiences.":
@@ -2742,6 +2768,8 @@ const hiOverrides: TranslationMap = {
   "Drives strategic alliances, talent networks, and program excellence worldwide.":
     "विश्व भर में रणनीतिक गठबंधनों, टैलेंट नेटवर्क और प्रोग्राम उत्कृष्टता को आगे बढ़ाते हैं।",
   "leaders across USA, Canada, UK, UAE, India": "संयुक्त राज्य, कनाडा, यूके, यूएई और भारत के नेता",
+  "Team Members:": "टीम के सदस्य:",
+  "strategists and champions": "रणनीतिकार और चैंपियंस",
   "Director": "निदेशक",
   "Driving AI Linc's vision and strategic growth with innovative leadership.":
     "नवोन्मेषी नेतृत्व के साथ AI Linc की दृष्टि और रणनीतिक वृद्धि को आगे बढ़ाना।",
