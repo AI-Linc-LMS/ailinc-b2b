@@ -15,6 +15,7 @@ const NewsVideo = lazy(() => import("@/components/News"));
 const SuccessStories = lazy(() => import("@/components/SuccsessStories"));
 const TopTrainers = lazy(() => import("@/components/Trainers"));
 const PartnerCollaboration = lazy(() => import("@/components/Collabaration"));
+const FranchiseSection = lazy(() => import("@/components/Franchise"));
 const IncubationSupport = lazy(() => import("@/components/IncubationSupport"));
 const HandsOnLearningSection = lazy(() => import("@/components/HandsOn"));
 const GallerySection = lazy(() => import("@/components/Gallery"));
@@ -154,6 +155,10 @@ export default function Home() {
 
               <Suspense fallback={<SectionLoader />}>
                 <PartnerCollaboration />
+              </Suspense>
+
+              <Suspense fallback={<SectionLoader />}>
+                <FranchiseSection />
               </Suspense>
 
               <Suspense fallback={<SectionLoader />}>
