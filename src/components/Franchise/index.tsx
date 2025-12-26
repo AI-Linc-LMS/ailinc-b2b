@@ -262,7 +262,7 @@ const FranchiseSection = () => {
                     <span className="font-semibold">Guntuka Shekhar Reddy</span>
                   </p>
                   <a
-                    href="tel:+919949036209"
+                    href="tel:+918977936209"
                     className="flex items-center justify-center text-sm text-gray-700 hover:text-orange-600 transition-colors cursor-pointer"
                   >
                     <svg
@@ -417,7 +417,7 @@ const FranchiseSection = () => {
                     <span className="font-semibold">Glocal</span>
                   </p>
                   <a
-                    href="tel:+919949036209"
+                    href="tel:+918977936209"
                     className="flex items-center justify-center text-sm text-gray-700 hover:text-amber-600 transition-colors cursor-pointer"
                   >
                     <svg
@@ -483,4 +483,3 @@ const FranchiseSection = () => {
 };
 
 export default FranchiseSection;
-
