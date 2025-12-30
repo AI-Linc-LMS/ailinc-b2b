@@ -201,10 +201,10 @@ const FranchiseSection = () => {
                     >
                       <Image
                         src="/images/sheaker-reddy.jpeg"
-                        alt="Guntuka Shekhar Reddy"
-                        width={80}
-                        height={80}
-                        className="w-full h-full object-cover"
+                        alt="Guntuka Sekhar Reddy"
+                        width={100}
+                        height={100}
+                        className="object-cover"
                       />
                     </motion.div>
                   </div>
@@ -226,7 +226,7 @@ const FranchiseSection = () => {
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.4 }}
                   >
-                    {t("Guntuka Shekhar Reddy")}
+                    {t("Guntuka Sekhar Reddy")}
                   </motion.p>
                   <motion.p
                     className="text-xs text-gray-500 mb-4"
@@ -259,7 +259,7 @@ const FranchiseSection = () => {
                     {t("Contact Information")}
                   </p>
                   <p className="text-xs text-gray-700 text-center mb-2">
-                    <span className="font-semibold">Guntuka Shekhar Reddy</span>
+                    <span className="font-semibold">Guntuka Sekhar Reddy</span>
                   </p>
                   <a
                     href="tel:+918977936209"
