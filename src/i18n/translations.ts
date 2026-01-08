@@ -280,6 +280,24 @@ const baseTranslations: TranslationMap = {
   "Guides international outreach, enterprise partnerships, and executive relationships.":
     "Guides international outreach, enterprise partnerships, and executive relationships.",
   "CMO International": "CMO International",
+  "Strategic Lead": "Strategic Lead",
+  "Franchise Opportunities": "Franchise Opportunities",
+  "Franchise Operations": "Franchise Operations",
+  "Guntuka Sekhar Reddy": "Guntuka Sekhar Reddy",
+  "Authorized Partner": "Authorized Partner",
+  "Contact Franchise Operations": "Contact Franchise Operations",
+  "Contact Glocal": "Contact Glocal",
+  "Authorized Partner - Glocal": "Authorized Partner - Glocal",
+  "Franchise, Business Development & Collaborations": "Franchise, Business Development & Collaborations",
+  "Expand your business with AI Linc's proven franchise model. Join our network and bring world-class AI education to your region.":
+    "Expand your business with AI Linc's proven franchise model. Join our network and bring world-class AI education to your region.",
+  "Expand your business with AI Linc's proven franchise model. Join our network and bring world-class AI education to your region with comprehensive support and training.":
+    "Expand your business with AI Linc's proven franchise model. Join our network and bring world-class AI education to your region with comprehensive support and training.",
+  "Glocal is our authorized partner for franchise operations, business development, and strategic collaborations. Partner with Glocal to explore franchise opportunities and grow your business with AI Linc.":
+    "Glocal is our authorized partner for franchise operations, business development, and strategic collaborations. Partner with Glocal to explore franchise opportunities and grow your business with AI Linc.",
+  "Developer at Microsoft | Founder AILinc": "Developer at Microsoft | Founder AILinc",
+  "Chairman and Managing Director AI Linc Technologies Pvt Ltd": "Chairman and Managing Director AI Linc Technologies Pvt Ltd",
+  "Director of Business Development and Franchise Operations at AILinc": "Director of Business Development and Franchise Operations at AILinc",
   "Meet Our Team Members": "Meet Our Team Members",
   "Strategists & champions behind AI Linc": "Strategists & champions behind AI Linc",
   "Drives strategic alliances, talent networks, and program excellence worldwide.":
@@ -964,6 +982,24 @@ const frOverrides: TranslationMap = {
   "Guides international outreach, enterprise partnerships, and executive relationships.":
     "Guident le rayonnement international, les partenariats d'entreprise et les relations exécutives.",
   "CMO International": "CMO International",
+  "Strategic Lead": "Dirigeant stratégique",
+  "Franchise Opportunities": "Opportunités de franchise",
+  "Franchise Operations": "Opérations de franchise",
+  "Guntuka Sekhar Reddy": "Guntuka Sekhar Reddy",
+  "Authorized Partner": "Partenaire autorisé",
+  "Contact Franchise Operations": "Contacter les opérations de franchise",
+  "Contact Glocal": "Contacter Glocal",
+  "Authorized Partner - Glocal": "Partenaire autorisé - Glocal",
+  "Franchise, Business Development & Collaborations": "Franchise, développement commercial et collaborations",
+  "Expand your business with AI Linc's proven franchise model. Join our network and bring world-class AI education to your region.":
+    "Développez votre entreprise avec le modèle de franchise éprouvé d'AI Linc. Rejoignez notre réseau et apportez une éducation AI de classe mondiale à votre région.",
+  "Expand your business with AI Linc's proven franchise model. Join our network and bring world-class AI education to your region with comprehensive support and training.":
+    "Développez votre entreprise avec le modèle de franchise éprouvé d'AI Linc. Rejoignez notre réseau et apportez une éducation AI de classe mondiale à votre région avec un soutien et une formation complets.",
+  "Glocal is our authorized partner for franchise operations, business development, and strategic collaborations. Partner with Glocal to explore franchise opportunities and grow your business with AI Linc.":
+    "Glocal est notre partenaire autorisé pour les opérations de franchise, le développement commercial et les collaborations stratégiques. Partenaires avec Glocal pour explorer les opportunités de franchise et développer votre entreprise avec AI Linc.",
+  "Developer at Microsoft | Founder AILinc": "Développeur chez Microsoft | Fondateur AILinc",
+  "Chairman and Managing Director AI Linc Technologies Pvt Ltd": "Président et Directeur Général AI Linc Technologies Pvt Ltd",
+  "Director of Business Development and Franchise Operations at AILinc": "Directeur du développement commercial et des opérations de franchise chez AILinc",
   "Meet Our Team Members": "Rencontrez les membres de notre équipe",
   "Strategists & champions behind AI Linc": "Stratèges et acteurs clés derrière AI Linc",
   "Drives strategic alliances, talent networks, and program excellence worldwide.":
@@ -1859,6 +1895,24 @@ const arOverrides: TranslationMap = {
   "Industry practitioners from Microsoft, Google, and Amazon who design and deliver our flagship experiences.":
     "مهنيون من Microsoft وGoogle وAmazon يصمّمون ويقدّمون تجاربنا الرائدة.",
   "Strategic Council": "المجلس الاستراتيجي",
+  "Strategic Lead": "القائد الاستراتيجي",
+  "Franchise Opportunities": "فرص الامتياز التجاري",
+  "Franchise Operations": "عمليات الامتياز التجاري",
+  "Guntuka Sekhar Reddy": "جونتوكا سيكار ريدي",
+  "Authorized Partner": "شريك معتمد",
+  "Contact Franchise Operations": "اتصل بعمليات الامتياز التجاري",
+  "Contact Glocal": "اتصل بـ Glocal",
+  "Authorized Partner - Glocal": "شريك معتمد - Glocal",
+  "Franchise, Business Development & Collaborations": "الامتياز التجاري، تطوير الأعمال والتعاون",
+  "Expand your business with AI Linc's proven franchise model. Join our network and bring world-class AI education to your region.":
+    "وسّع عملك مع نموذج الامتياز التجاري المثبت لـ AI Linc. انضم إلى شبكتنا واجلب تعليم AI عالمي المستوى إلى منطقتك.",
+  "Expand your business with AI Linc's proven franchise model. Join our network and bring world-class AI education to your region with comprehensive support and training.":
+    "وسّع عملك مع نموذج الامتياز التجاري المثبت لـ AI Linc. انضم إلى شبكتنا واجلب تعليم AI عالمي المستوى إلى منطقتك مع الدعم والتدريب الشاملين.",
+  "Glocal is our authorized partner for franchise operations, business development, and strategic collaborations. Partner with Glocal to explore franchise opportunities and grow your business with AI Linc.":
+    "Glocal هو شريكنا المعتمد لعمليات الامتياز التجاري وتطوير الأعمال والتعاون الاستراتيجي. شريك مع Glocal لاستكشاف فرص الامتياز التجاري وتنمية عملك مع AI Linc.",
+  "Developer at Microsoft | Founder AILinc": "مطور في Microsoft | مؤسس AILinc",
+  "Chairman and Managing Director AI Linc Technologies Pvt Ltd": "رئيس ومدير تنفيذي AI Linc Technologies Pvt Ltd",
+  "Director of Business Development and Franchise Operations at AILinc": "مدير تطوير الأعمال وعمليات الامتياز التجاري في AILinc",
   "Promoters & senior advisors steering AI Linc globally": "الداعمون والمستشارون الكبار الذين يقودون AI Linc عالمياً",
   "Guides international outreach, enterprise partnerships, and executive relationships.":
     "يقودون التواصل الدولي والشراكات المؤسسية والعلاقات التنفيذية.",
@@ -2759,6 +2813,24 @@ const hiOverrides: TranslationMap = {
   "Industry practitioners from Microsoft, Google, and Amazon who design and deliver our flagship experiences.":
     "Microsoft, Google और Amazon के इंडस्ट्री प्रैक्टिशनर्स जो हमारे प्रमुख अनुभवों को डिज़ाइन और संचालित करते हैं।",
   "Strategic Council": "स्ट्रैटेजिक काउंसिल",
+  "Strategic Lead": "रणनीतिक नेता",
+  "Franchise Opportunities": "फ्रैंचाइज़ी अवसर",
+  "Franchise Operations": "फ्रैंचाइज़ी संचालन",
+  "Guntuka Sekhar Reddy": "गुंतुका सेखर रेड्डी",
+  "Authorized Partner": "अधिकृत भागीदार",
+  "Contact Franchise Operations": "फ्रैंचाइज़ी संचालन से संपर्क करें",
+  "Contact Glocal": "Glocal से संपर्क करें",
+  "Authorized Partner - Glocal": "अधिकृत भागीदार - Glocal",
+  "Franchise, Business Development & Collaborations": "फ्रैंचाइज़ी, व्यावसायिक विकास और सहयोग",
+  "Expand your business with AI Linc's proven franchise model. Join our network and bring world-class AI education to your region.":
+    "AI Linc के सिद्ध फ्रैंचाइज़ी मॉडल के साथ अपने व्यवसाय का विस्तार करें। हमारे नेटवर्क में शामिल हों और अपने क्षेत्र में विश्व स्तरीय AI शिक्षा लाएँ।",
+  "Expand your business with AI Linc's proven franchise model. Join our network and bring world-class AI education to your region with comprehensive support and training.":
+    "AI Linc के सिद्ध फ्रैंचाइज़ी मॉडल के साथ अपने व्यवसाय का विस्तार करें। हमारे नेटवर्क में शामिल हों और व्यापक सहायता और प्रशिक्षण के साथ अपने क्षेत्र में विश्व स्तरीय AI शिक्षा लाएँ।",
+  "Glocal is our authorized partner for franchise operations, business development, and strategic collaborations. Partner with Glocal to explore franchise opportunities and grow your business with AI Linc.":
+    "Glocal फ्रैंचाइज़ी संचालन, व्यावसायिक विकास और रणनीतिक सहयोग के लिए हमारा अधिकृत भागीदार है। फ्रैंचाइज़ी अवसरों का पता लगाने और AI Linc के साथ अपने व्यवसाय को बढ़ाने के लिए Glocal के साथ साझेदारी करें।",
+  "Developer at Microsoft | Founder AILinc": "Microsoft में डेवलपर | संस्थापक AILinc",
+  "Chairman and Managing Director AI Linc Technologies Pvt Ltd": "अध्यक्ष और प्रबंध निदेशक AI Linc Technologies Pvt Ltd",
+  "Director of Business Development and Franchise Operations at AILinc": "AILinc में व्यावसायिक विकास और फ्रैंचाइज़ी संचालन के निदेशक",
   "Promoters & senior advisors steering AI Linc globally": "AI Linc को वैश्विक स्तर पर दिशा देने वाले प्रमोटर्स और वरिष्ठ सलाहकार",
   "Guides international outreach, enterprise partnerships, and executive relationships.":
     "अंतरराष्ट्रीय आउटरीच, एंटरप्राइज साझेदारियों और एग्जीक्यूटिव रिलेशनशिप का नेतृत्व करते हैं।",

@@ -3,7 +3,6 @@
 import { useRef } from "react";
 import { motion, useInView, Variants } from "framer-motion";
 import Image from "next/image";
-import Link from "next/link";
 import { useTranslation } from "@/context/LanguageContext";
 
 const FranchiseSection = () => {
@@ -200,7 +199,7 @@ const FranchiseSection = () => {
                       transition={{ duration: 0.3 }}
                     >
                       <Image
-                        src="/images/sheaker-reddy.jpeg"
+                        src="/images/sheaker_reddy.jpeg"
                         alt="Guntuka Sekhar Reddy"
                         width={100}
                         height={100}
@@ -297,7 +296,7 @@ const FranchiseSection = () => {
                     whileHover={{ x: "100%" }}
                     transition={{ duration: 0.6 }}
                   />
-                  <Link href="/#contact" passHref>
+                  <a href="https://glocalinfo.in" target="_blank" rel="noopener noreferrer">
                     <span className="relative flex items-center justify-center">
                       {t("Contact Franchise Operations")}
                       <motion.svg
@@ -316,7 +315,7 @@ const FranchiseSection = () => {
                         />
                       </motion.svg>
                     </span>
-                  </Link>
+                  </a>
                 </motion.button>
               </div>
             </motion.div>
@@ -340,28 +339,26 @@ const FranchiseSection = () => {
               />
 
               <div className="relative z-10 flex flex-col h-full">
-                {/* Icon */}
+                {/* Image */}
                 <motion.div
                   className="mb-6 flex justify-center"
                   whileHover={{ scale: 1.05, rotate: 3 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <div className="p-4 bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl shadow-lg group-hover:shadow-xl transition-shadow duration-300">
-                    <motion.svg
-                      className="w-16 h-16 text-amber-600"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      whileHover={{ scale: 1.1, rotate: -5 }}
+                  <div className="p-2 bg-gradient-to-br from-gray-50 to-gray-100 rounded-full shadow-lg group-hover:shadow-xl transition-shadow duration-300">
+                    <motion.div
+                      className="w-20 h-20 rounded-full overflow-hidden border-2 border-amber-200"
+                      whileHover={{ scale: 1.1, rotate: 5 }}
                       transition={{ duration: 0.3 }}
                     >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                      <Image
+                        src="/logo/glocal-logo.png"
+                        alt="Glocal Logo"
+                        width={100}
+                        height={100}
+                        className="object-cover"
                       />
-                    </motion.svg>
+                    </motion.div>
                   </div>
                 </motion.div>
 
@@ -452,7 +449,7 @@ const FranchiseSection = () => {
                     whileHover={{ x: "100%" }}
                     transition={{ duration: 0.6 }}
                   />
-                  <Link href="/#contact" passHref>
+                  <a href="https://glocalinfo.in" target="_blank" rel="noopener noreferrer">
                     <span className="relative flex items-center justify-center">
                       {t("Contact Glocal")}
                       <motion.svg
@@ -471,7 +468,7 @@ const FranchiseSection = () => {
                         />
                       </motion.svg>
                     </span>
-                  </Link>
+                  </a>
                 </motion.button>
               </div>
             </motion.div>

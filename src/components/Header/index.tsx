@@ -69,11 +69,14 @@ function Header() {
                 </svg>
               </span>
             </div>
-            <Link href="/#contact">
-              <button className="transform rounded-full bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-2 text-sm font-medium tracking-wide text-white transition duration-300 hover:scale-95 hover:shadow-lg">
-                {t("Book A Demo")}
-              </button>
-            </Link>
+            <a
+              href="https://calendly.com/korraashwin/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transform rounded-full bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-2 text-sm font-medium tracking-wide text-white transition duration-300 hover:scale-95 hover:shadow-lg inline-block"
+            >
+              {t("Book A Demo")}
+            </a>
           </div>
 
           {/* Mobile controls */}
@@ -147,11 +150,15 @@ function Header() {
               ))}
             </div>
             <div className="border-t border-gray-100 px-6 py-4">
-              <Link href="/#contact" onClick={closeMenu}>
-                <button className="w-full rounded-2xl bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-3 text-sm font-semibold tracking-wide text-white shadow-lg transition hover:shadow-xl">
-                  {t("Book A Demo")}
-                </button>
-              </Link>
+              <a
+                href="https://calendly.com/korraashwin/"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={closeMenu}
+                className="w-full rounded-2xl bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-3 text-sm font-semibold tracking-wide text-white shadow-lg transition hover:shadow-xl inline-block text-center"
+              >
+                {t("Book A Demo")}
+              </a>
             </div>
           </div>
         </div>

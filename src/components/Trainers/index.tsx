@@ -5,6 +5,7 @@ import Image from "next/image";
 import { MicrosoftLogo } from "../../../public/icons/MicrosoftLogo";
 import { GoogleLogo } from "../../../public/icons/GoogleLogo";
 import { AmazonLogo } from "../../../public/icons/AmazonLogo";
+import { AILincLogo } from "../../../public/icons/AILincLogo";
 import { useTranslation } from "@/context/LanguageContext";
 
 const getInitials = (fullName: string) =>
@@ -20,16 +21,16 @@ const trainersData = [
   {
     id: 1,
     name: "Shubham Lal",
-    title: "SDE-2 & Founder",
-    experience: "8 years",
+    title: "Developer at Microsoft | Founder AILinc",
+    experience: "Aided 80+ Ed-Techs in growth\nSpeaker 800+ events, TEDx\nMentor/Trainer to 50,000+\nKeynote speaker at 20+ events",
     photo: "/trainers/shubham_lal.jpg",
-    companies: [{ name: "Microsoft", Logo: MicrosoftLogo }],
-    specialization: "AI Product Developer",
-    studentsmentored: 1200,
+    companies: [{ name: "Microsoft", Logo: MicrosoftLogo }, { name: "AI Linc", Logo: AILincLogo }],
+    specialization: "Full Stack | Data Science | AI | Dev-Ops",
+    studentsmentored: 50000,
     rating: 4.9,
     location: "Hyderabad, India",
     linkedin: "https://www.linkedin.com/in/shubhamlal/",
-    achievements: "Built AI products used by 10M+ users at Microsoft",
+    achievements: "8+ years industry experience\nFull-stack development, Data Science, Dev-Ops, AI\nPublic speaking & mentorship expertise",
   },
   {
     id: 2,
@@ -230,16 +231,16 @@ const trainersData = [
   {
     id: 20,
     name: "Sandeep Volam",
-    title: "Chairman and Managing Director",
-    experience: "Experienced Director associated with 11 companies spanning 14 years (2009–2023).",
+    title: "Chairman and Managing Director AI Linc Technologies Pvt Ltd",
+    experience: "Financial analysis & supply chain management\nTrading Sector analyst\nLegal firm (United States) - 2 years\nAgri company Manager New Business (India) - 4 years",
     photo: "/team/sandeep_volam.jpg",
-    companies: [],
-    specialization: "Diverse experience across Bio-Research, Cleantech, and Integrated Solutions.",
+    companies: [{ name: "AI Linc", Logo: AILincLogo }],
+    specialization: "Financial Analysis | Supply Chain Management | Investment Analysis | Finance Portfolio Management",
     studentsmentored: null,
     rating: null,
     location: "",
     linkedin: "https://www.linkedin.com/in/sandeep-volam-6237893?utm_source=share_via&utm_content=profile&utm_medium=member_android",
-    achievements: "Currently a Director in four companies, including ARUDRA ECO VALLEY PRIVATE LIMITED and LEO HOMESTEAD PRIVATE LIMITED.",
+    achievements: "MBA Finance & Marketing - NYIT, New York, USA\nMasters in International Business Trade - Harvard University\nDirector at 11 companies (2009–2023)",
   },
   {
     id: 16,
@@ -297,6 +298,62 @@ const trainersData = [
     linkedin: "https://www.linkedin.com/in/ganesh-rayala-4ab96a7?utm_source=share_via&utm_content=profile&utm_medium=member_android",
     achievements: "",
   },
+  {
+    id: 21,
+    name: "Dr. Sanjay Kulkarni",
+    title: "Data & AI Transformation Leader",
+    experience: "25+ years",
+    photo: "/team/sanjay_kulkarni.jpeg",
+    companies: [],
+    specialization: "Data & AI Educator",
+    studentsmentored: null,
+    rating: null,
+    location: "",
+    linkedin: "https://www.linkedin.com/in/sanjay1kulkarni/",
+    achievements: "Fortune 500 experience with practical, hands-on training approach",
+  },
+  {
+    id: 22,
+    name: "Anuj Garg",
+    title: "Engineering Manager",
+    experience: "10+ years",
+    photo: "/team/anuj.jpeg",
+    companies: [],
+    specialization: "Full Stack & Cloud Architect",
+    studentsmentored: null,
+    rating: null,
+    location: "",
+    linkedin: "https://www.linkedin.com/in/anuj-garg-8785805b/",
+    achievements: "Gartner | Ex-Adobe, IBM, Allstate",
+  },
+  {
+    id: 23,
+    name: "Rajesh Talreja",
+    title: "Product Development Lead",
+    experience: "13+ years",
+    photo: "/team/rajesh_talreja.jpeg",
+    companies: [],
+    specialization: "Java & Microservices Expert",
+    studentsmentored: null,
+    rating: null,
+    location: "",
+    linkedin: "https://www.linkedin.com/in/rajesh-talreja-91891671/",
+    achievements: "End-to-end product development expertise",
+  },
+  {
+    id: 24,
+    name: "Guntuka Sekhar Reddy",
+    title: "Director of Business Development and Franchise Operations",
+    experience: "26+ years diverse business experience\nLogistics, Agro Products, Real Estate, IT Solutions\nCreating Franchise Structure\nExpanding Business International and PAN India",
+    photo: "/images/sheaker_reddy.jpeg",
+    companies: [{ name: "AI Linc", Logo: AILincLogo }],
+    specialization: "Business Development | Franchise Operations | Strategic Expansion",
+    studentsmentored: null,
+    rating: null,
+    location: "",
+    linkedin: "https://www.linkedin.com/in/guntuka-sekhar-reddy-40465b193/",
+    achievements: "Logistics Business Development & Operations - 10 years (Venkateshwara Goods Carriers)\nAgro Products & Real Estate - 9 years (Avani Bioventures)\nIT Solutions, Franchising & Social Media - 7 years",
+  },
 ];
 
 const TopTrainersHero = () => {
@@ -315,10 +372,10 @@ const TopTrainersHero = () => {
     }));
   }, [t]);
 
-  // Leaders and promoters steering AI Linc globally (2 members)
+  // Leaders and promoters steering AI Linc globally (3 members)
   const leadersAndPromoters = useMemo(
     () => {
-      const leaderIds = [20, 1]; // Sandeep Volam, Shubham Lal
+      const leaderIds = [20, 1, 24]; // Sandeep Volam, Shubham Lal, Guntuka Sekhar Reddy
       return leaderIds
         .map((id) => localizedTrainers.find((trainer) => trainer.id === id))
         .filter((trainer): trainer is typeof localizedTrainers[0] => trainer !== undefined);
@@ -337,10 +394,10 @@ const TopTrainersHero = () => {
     [localizedTrainers]
   );
 
-  // Core members (3 members)
+  // Core members (6 members)
   const coreMembers = useMemo(
     () => {
-      const coreIds = [2, 3, 4]; // Yamini, Divyansh, Abirami
+      const coreIds = [2, 3, 4, 21, 22, 23]; // Yamini, Divyansh, Abirami, Dr. Sanjay Kulkarni, Anuj Garg, Rajesh Talreja
       return coreIds
         .map((id) => localizedTrainers.find((trainer) => trainer.id === id))
         .filter((trainer): trainer is typeof localizedTrainers[0] => trainer !== undefined);
@@ -351,7 +408,7 @@ const TopTrainersHero = () => {
   // Remaining team members (11 members)
   const teamMembers = useMemo(
     () => {
-      const excludedIds = new Set([20, 1, 18, 16, 17, 19, 2, 3, 4]); // All IDs from above sections
+      const excludedIds = new Set([20, 1, 24, 18, 16, 17, 19, 2, 3, 4, 21, 22, 23]); // All IDs from above sections
       return localizedTrainers.filter((trainer) => !excludedIds.has(trainer.id));
     },
     [localizedTrainers]
@@ -557,7 +614,7 @@ const TopTrainersHero = () => {
                   </h2>
                 </div>
 
-                <div className="flex flex-wrap justify-center gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
                   {leadersAndPromoters.map((leader, index) => (
                     <motion.article
                       key={leader.id}
@@ -573,12 +630,12 @@ const TopTrainersHero = () => {
                       {/* Subtle pattern overlay */}
                       <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(circle_at_50%_50%,rgba(139,92,246,0.3),transparent_50%)] bg-[length:40px_40px]" />
                       
-                      {/* Premium gradient overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-br from-fuchsia-500/10 via-purple-500/5 to-indigo-500/10 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                      {/* Premium gradient overlay - removed hover effect */}
+                      <div className="absolute inset-0 bg-gradient-to-br from-fuchsia-500/10 via-purple-500/5 to-indigo-500/10 opacity-0" />
                       
-                      {/* Glowing border effect with multiple layers */}
-                      <div className="absolute -inset-0.5 bg-gradient-to-r from-fuchsia-500 via-purple-500 to-indigo-500 rounded-[32px] opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-30" />
-                      <div className="absolute -inset-1 bg-gradient-to-r from-fuchsia-400/20 via-purple-400/20 to-indigo-400/20 rounded-[32px] opacity-0 blur-2xl transition-opacity duration-700 group-hover:opacity-50" />
+                      {/* Glowing border effect with multiple layers - removed hover effects */}
+                      <div className="absolute -inset-0.5 bg-gradient-to-r from-fuchsia-500 via-purple-500 to-indigo-500 rounded-[32px] opacity-0 blur-xl" />
+                      <div className="absolute -inset-1 bg-gradient-to-r from-fuchsia-400/20 via-purple-400/20 to-indigo-400/20 rounded-[32px] opacity-0 blur-2xl" />
                       
                       {/* Shine effect on hover */}
                       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />
@@ -640,7 +697,7 @@ const TopTrainersHero = () => {
                                 <div className="absolute -bottom-0.5 left-0 right-0 h-0.5 bg-gradient-to-r from-fuchsia-400/50 to-indigo-400/50 rounded-full scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
                               </div>
                             )}
-                            {leader.experience && (
+                            {leader.experience && leader.experience.length < 50 && (
                               <p className="text-sm font-semibold text-gray-600 mb-2 leading-relaxed">{leader.experience}</p>
                             )}
                             {leader.location && (
@@ -654,8 +711,9 @@ const TopTrainersHero = () => {
                           </div>
                         </div>
 
+                        {/* Company tags at top */}
                         {leader.companies && leader.companies.length > 0 && (
-                          <div className="relative mb-6 flex flex-wrap gap-2">
+                          <div className="relative mb-6 flex flex-wrap gap-2 justify-center">
                             {leader.companies.map((company) => (
                               <motion.span
                                 key={company.name}
@@ -670,28 +728,9 @@ const TopTrainersHero = () => {
                           </div>
                         )}
 
-                        {leader.experience && (
-                          <motion.div 
-                            className="relative mb-4 p-4 rounded-xl bg-gradient-to-r from-fuchsia-50/50 to-indigo-50/50 border border-fuchsia-100/50 group-hover:border-fuchsia-200/70 group-hover:shadow-md transition-all duration-300 overflow-hidden"
-                            whileHover={{ scale: 1.02 }}
-                          >
-                            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-fuchsia-400 to-indigo-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                            <div className="flex items-start gap-3">
-                              <div className="flex-shrink-0 mt-0.5">
-                                <svg className="w-4 h-4 text-fuchsia-500 opacity-60 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                              </div>
-                              <p className="text-sm font-semibold text-gray-800 leading-relaxed flex-1">
-                                {leader.experience}
-                              </p>
-                            </div>
-                          </motion.div>
-                        )}
-
                         {leader.specialization && (
-                          <div className="relative mb-4">
-                            <p className="text-sm font-medium text-gray-700 leading-relaxed mb-3 group-hover:text-gray-800 transition-colors">
+                          <div className="relative mb-4 p-3 rounded-xl bg-gradient-to-br from-blue-50/50 to-indigo-50/50 border border-blue-100/40 backdrop-blur-sm">
+                            <p className="text-sm font-semibold text-gray-800 leading-relaxed mb-3 group-hover:text-gray-900 transition-colors">
                               {leader.specialization}
                             </p>
                             <div className="flex flex-wrap gap-2 mt-3">
@@ -737,23 +776,38 @@ const TopTrainersHero = () => {
                           </div>
                         )}
 
+                        {/* Experience section */}
+                        {leader.experience && (
+                          <div className="relative mb-4 p-4 rounded-xl bg-gradient-to-br from-fuchsia-50/60 to-indigo-50/60 border border-fuchsia-100/40 backdrop-blur-sm">
+                            <ul className="space-y-2.5">
+                              {leader.experience.split('\n').filter(item => item.trim()).map((item, idx) => (
+                                <li key={idx} className="text-sm font-semibold text-gray-800 leading-relaxed flex items-start gap-3">
+                                  <span className="text-fuchsia-500 mt-1.5 flex-shrink-0 text-lg">•</span>
+                                  <span className="flex-1">{item.trim()}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+
+                        {/* Achievements section */}
                         {leader.achievements && (
-                          <motion.div 
-                            className="relative mb-6 p-4 rounded-xl bg-gradient-to-r from-amber-50/50 to-yellow-50/50 border border-amber-100/50 group-hover:border-amber-200/70 group-hover:shadow-md transition-all duration-300 overflow-hidden"
-                            whileHover={{ scale: 1.02 }}
-                          >
-                            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-amber-400 to-yellow-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                            <div className="flex items-start gap-3">
-                              <div className="flex-shrink-0 mt-0.5">
-                                <svg className="w-4 h-4 text-amber-600 opacity-70 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                                </svg>
-                              </div>
-                              <p className="text-xs font-medium text-gray-700 leading-relaxed flex-1">
-                                <span className="font-bold text-amber-700">Current Role:</span> {leader.achievements}
-                              </p>
-                            </div>
-                          </motion.div>
+                          <div className="relative mb-6 p-4 rounded-xl bg-gradient-to-br from-amber-50/60 to-yellow-50/60 border border-amber-100/40 backdrop-blur-sm">
+                            <p className="text-xs font-bold text-amber-700 mb-3 flex items-center gap-2">
+                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                              </svg>
+                              Key Highlights:
+                            </p>
+                            <ul className="space-y-2.5">
+                              {leader.achievements.split('\n').filter(item => item.trim()).map((item, idx) => (
+                                <li key={idx} className="text-xs font-medium text-gray-700 leading-relaxed flex items-start gap-3">
+                                  <span className="text-amber-600 mt-1 flex-shrink-0 text-base">•</span>
+                                  <span className="flex-1">{item.trim()}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
                         )}
 
                         <div className="relative flex justify-between items-center border-t-2 border-fuchsia-200/60 pt-5 mt-2">
@@ -1009,10 +1063,17 @@ const TopTrainersHero = () => {
                             </div>
                             <div>
                               <h3 className="text-lg font-bold text-gray-900">{member.name}</h3>
-                              <p className="text-sm font-semibold text-blue-600">
-                                {[member.title, member.experience].filter(Boolean).join(" • ")}
-                              </p>
-                              {member.location && <p className="text-xs text-gray-500">{member.location}</p>}
+                              {member.title && (
+                                <p className="text-sm font-semibold text-blue-600">
+                                  {member.title}
+                                </p>
+                              )}
+                              {member.experience && (
+                                <p className="text-xs font-bold text-amber-600 bg-amber-50 px-2 py-1 rounded-md inline-block mt-1">
+                                  {member.experience} YOE
+                                </p>
+                              )}
+                              {member.location && <p className="text-xs text-gray-500 mt-1">{member.location}</p>}
                     </div>
                   </div>
 
@@ -1096,10 +1157,17 @@ const TopTrainersHero = () => {
                               </div>
                               <div>
                                 <h3 className="text-lg font-bold text-gray-900">{member.name}</h3>
-                                <p className="text-sm font-semibold text-blue-600">
-                                  {[member.title, member.experience].filter(Boolean).join(" • ")}
-                                </p>
-                                {member.location && <p className="text-xs text-gray-500">{member.location}</p>}
+                                {member.title && (
+                                  <p className="text-sm font-semibold text-blue-600">
+                                    {member.title}
+                                  </p>
+                                )}
+                                {member.experience && (
+                                  <p className="text-xs font-bold text-amber-600 bg-amber-50 px-2 py-1 rounded-md inline-block mt-1">
+                                    {member.experience} YOE
+                                  </p>
+                                )}
+                                {member.location && <p className="text-xs text-gray-500 mt-1">{member.location}</p>}
                               </div>
                             </div>
 
